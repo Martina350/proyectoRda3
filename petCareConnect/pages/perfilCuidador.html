@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Perfil de Lucía Fernández, cuidadora de mascotas en Pet CareConnect.">
+    <title>Perfil del Cuidador - Pet CareConnect</title>
+</head>
+<body>
+
+    <header>
+        <span>Pet CareConnect</span>
+
+        <form role="search">
+            <label for="search-sitters">Buscar cuidadores</label>
+            <input type="search" id="search-sitters" name="q" placeholder="Buscar cuidadores...">
+            <button type="submit">Buscar</button>
+        </form>
+
+        <nav aria-label="Navegación principal">
+            <ul>
+                <li><a href="#">Buscar</a></li>
+                <li><a href="#">Mis Reservas</a></li>
+                <li><a href="#">Perfil</a></li>
+            </ul>
+        </nav>
+        
+        <a href="#">Reservar Ahora</a>
+    </header>
+
+    <main>
+
+        <section aria-labelledby="profile-name">
+
+            <p>Cuidadora verificada</p>
+            
+            <h1 id="profile-name">Lucía Fernández</h1>
+            <p>Madrid, Chamberí</p>
+            <p>Calificación: 4.9 (124 reseñas)</p>
+            
+            <ul>
+                <li>Cuidadora verificada</li>
+                <li>Amante de los perros grandes</li>
+                <li>Espacio sin humo</li>
+            </ul>
+        </section>
+
+        <section aria-labelledby="about-title">
+            <h2 id="about-title">Sobre mí</h2>
+            <p>¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención constante y personalizada.</p>
+            <p>Me especializo en perros con ansiedad por separación y gatos que necesitan un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo mientras no estás.</p>
+        </section>
+
+        <section aria-labelledby="environment-title">
+            <h2 id="environment-title">Mi Entorno</h2>
+            <a href="#">Ver todas las fotos</a>
+
+        </section>
+
+        <section aria-labelledby="reviews-title">
+            <h2 id="reviews-title">Reseñas de Usuarios</h2>
+            
+            <form>
+                <label for="review-sort">Ordenar por:</label>
+                <select id="review-sort" name="sort">
+                    <option value="recent">Más recientes</option>
+                    <option value="top">Mejor puntuadas</option>
+                </select>
+            </form>
+
+            <article>
+                <h3>Carlos P.</h3>
+                <p>Hace 2 semanas</p>
+                <p>Valoración: 5 estrellas</p>
+                <p>Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
+            </article>
+
+            <article>
+                <h3>María L.</h3>
+                <p>Hace 1 mes</p>
+                <p>Valoración: 4 estrellas</p>
+                <p>Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos. Repetiré sin duda.</p>
+            </article>
+
+            <button type="button">Leer todas las reseñas</button>
+        </section>
+
+    </main>
+
+    <aside aria-labelledby="booking-title">
+        
+        <section aria-labelledby="booking-title">
+            <h2 id="booking-title">Detalles de la Reserva</h2>
+            <p>Desde 25$ / noche</p>
+            
+            <form action="#" method="POST">
+                <fieldset>
+                    <legend>Configurar reserva</legend>
+                    
+                    <label for="check-in">Entrada</label>
+                    <input type="date" id="check-in" name="check-in" value="2024-10-12" required>
+                    
+                    <label for="check-out">Salida</label>
+                    <input type="date" id="check-out" name="check-out" value="2024-10-15" required>
+                    
+                    <label for="pet-quantity">Mascota</label>
+                    <select id="pet-quantity" name="pet-quantity" required>
+                        <option value="1">1 Perro</option>
+                        <option value="2">2 Perros</option>
+                    </select>
+
+                    <p>25$x 3 noches: 75$</p>
+                    <p>Gastos de gestión: 5$</p>
+                    <p><strong>Total: 80$</strong></p>
+
+                    <button type="submit">Reservar ahora</button>
+                    <p>No se te cobrará nada aún</p>
+                </fieldset>
+            </form>
+        </section>
+
+        <section aria-labelledby="services-details-title">
+            <h2 id="services-details-title">Servicios ofrecidos</h2>
+            
+            <article>
+                <h3>Alojamiento</h3>
+                <p>25$</p>
+                <p>Tu mascota se queda en mi casa a dormir.</p>
+            </article>
+
+            <article>
+                <h3>Cuidado de día</h3>
+                <p>18$</p>
+                <p>Cuidado durante el horario laboral (8h).</p>
+            </article>
+
+            <article>
+                <h3>Paseos</h3>
+                <p>12$</p>
+                <p>Paseo individualizado de 45 min.</p>
+            </article>
+
+        <section aria-labelledby="stats-title">
+            <h2 id="stats-title">Estadísticas del cuidador</h2>
+            <ul>
+                <li><strong>100%</strong> Respuesta</li>
+                <li><strong>2h</strong> Tiempo medio de respuesta</li>
+            </ul>
+        </section>
+        
+    </aside>
+
+    <footer>
+        <h2>Pet CareConnect</h2>
+        <p>2024 Pet CareConnect Inc. Todos los derechos reservados.</p>
+        
+        <nav aria-label="Enlaces legales y de ayuda">
+            <ul>
+                <li><a href="#">Contáctanos</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Términos de Servicio</a></li>
+                <li><a href="#">Preguntas Frecuentes</a></li>
+            </ul>
+        </nav>
+    </footer>
+
+</body>
+</html>
