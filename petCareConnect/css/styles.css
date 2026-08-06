@@ -329,3 +329,268 @@ main.container {
     gap: 0.75rem; 
     flex-wrap: wrap; 
 }
+
+.sidebar-card { 
+    display: flex; 
+    flex-direction: column; 
+    justify-content: space-between; 
+}
+
+.sidebar-header { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    margin-bottom: 1rem; 
+}
+
+.sidebar-header h2 { 
+    font-size: 1.35rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+}
+
+.icon-accent { 
+    color: var(--primary); 
+    font-size: 1.5rem; 
+}
+
+.booking-list { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 0.75rem; 
+}
+
+.booking-item { 
+    display: flex; 
+    align-items: center; 
+    gap: 0.75rem; 
+    padding: 0.75rem; 
+    background: var(--surface-low); 
+    border-radius: var(--radius-lg); 
+    border-color: rgba(197, 197, 211, 0.2); 
+    margin-bottom: 0;
+}
+
+.booking-item:hover { 
+    background: var(--surface-high); 
+}
+
+.booking-avatar-icon { 
+    width: 48px; 
+    height: 48px; 
+    border-radius: 50%; 
+    background: var(--surface-high); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    color: var(--text-muted); 
+    flex-shrink: 0; 
+}
+
+.booking-info { 
+    flex: 1; 
+}
+
+.booking-info h3 { 
+    font-size: 0.95rem; 
+    font-weight: 700; 
+    color: var(--text-main); 
+    margin-bottom: 2px; 
+}
+
+.booking-info p { 
+    font-size: 0.8rem; 
+    color: var(--text-muted); 
+    margin: 0;
+}
+
+.chevron-icon { 
+    color: var(--text-light); 
+    font-size: 1.25rem; 
+}
+
+.services-section {
+    margin-top: 0.5rem;
+}
+
+.section-header { 
+    display: flex; 
+    align-items: baseline; 
+    justify-content: space-between; 
+    margin-bottom: 1.5rem; 
+}
+
+.section-header h2 { 
+    font-size: 1.6rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+}
+
+.see-all-link { 
+    color: var(--primary); 
+    font-size: 0.9rem; 
+    font-weight: 600; 
+}
+
+.see-all-link:hover { 
+    text-decoration: underline; 
+}
+
+.services-grid { 
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); 
+    gap: 1rem; 
+}
+
+.service-card { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    cursor: pointer; 
+    margin-bottom: 0;
+}
+
+.service-card:hover { 
+    transform: translateY(-2px); 
+    box-shadow: var(--shadow-md); 
+    border-color: rgba(0, 35, 111, 0.2); 
+}
+
+.service-icon-wrapper {
+    width: 64px; 
+    height: 64px; 
+    border-radius: 50%; 
+    background: rgba(0, 35, 111, 0.05);
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    margin-bottom: 1rem;
+    color: var(--primary); 
+    transition: var(--transition);
+}
+
+.service-card:hover .service-icon-wrapper { 
+    background: var(--primary); 
+    color: #fff; 
+}
+
+.service-icon-wrapper .material-symbols-outlined { 
+    font-size: 32px; 
+}
+
+.service-card h3 { 
+    font-size: 1rem; 
+    font-weight: 700; 
+    margin-bottom: 0.25rem; 
+}
+
+.service-card p { 
+    font-size: 0.85rem; 
+    color: var(--text-muted); 
+    margin: 0;
+}
+
+.footer { 
+    background: var(--surface-high); 
+    border-top: 1px solid var(--border); 
+    margin-top: auto; 
+    padding: 2.5rem 0; 
+}
+
+.footer-container { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 1.5rem; 
+    align-items: center; 
+}
+
+@media (min-width: 768px) { 
+    .footer-container { 
+        flex-direction: row; 
+        justify-content: space-between; 
+    } 
+}
+
+.footer-brand h2 { 
+    font-size: 1.35rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+}
+
+.footer-brand p { 
+    font-size: 0.875rem; 
+    color: var(--text-muted); 
+}
+
+.footer-nav ul { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 1rem 1.5rem; 
+}
+
+.footer-nav a { 
+    color: var(--text-muted); 
+    font-size: 0.875rem; 
+    font-weight: 500; 
+}
+
+.footer-nav a:hover { 
+    color: var(--primary); 
+    text-decoration: underline; 
+}
+
+.footer-copyright { 
+    font-size: 0.85rem; 
+    color: var(--text-light); 
+}
+
+.mobile-nav {
+    display: flex; 
+    position: fixed; 
+    bottom: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 60px;
+    background: var(--surface); 
+    border-top: 1px solid var(--border); 
+    z-index: 100;
+    justify-content: space-around; 
+    align-items: center; 
+    padding: 0 1rem;
+}
+
+@media (min-width: 768px) { 
+    .mobile-nav { 
+        display: none; 
+    } 
+}
+
+@media (max-width: 767px) {
+    body { 
+        padding-bottom: 60px; 
+    }
+    .main-nav, .search-form { 
+        display: none; 
+    }
+}
+
+.mobile-nav-item {
+    display: flex; 
+    flex-direction: column; 
+    align-items: center;
+    color: var(--text-muted); 
+    font-size: 0.65rem; 
+    font-weight: 600; 
+    text-transform: uppercase; 
+    gap: 2px;
+}
+
+.mobile-nav-item.active { 
+    color: var(--primary); 
+}
+
+.mobile-nav-item .material-symbols-outlined { 
+    font-size: 22px; 
+}
