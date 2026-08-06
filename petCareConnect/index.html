@@ -10,9 +10,9 @@
 
     <header>
 
-        <span>Pet CareConnect</span>
+        <span><a href="index.html">Pet CareConnect</a></span>
 
-        <form role="search">
+        <form role="search" action="pages/buscarCuidadores.html" method="GET">
             <label for="search-sitters">Buscar cuidadores</label>
             <input type="text" id="search-sitters" name="q" placeholder="Buscar cuidadores...">
             <button type="submit">Buscar</button>
@@ -20,13 +20,15 @@
 
         <nav aria-label="Navegación principal">
             <ul>
-                <li><a href="#">Buscar</a></li>
-                <li><a href="#">Mis Reservas</a></li>
-                <li><a href="#">Perfil</a></li>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="pages/buscarCuidadores.html">Buscar</a></li>
+                <li><a href="pages/servicios.html">Servicios</a></li>
+                <li><a href="pages/misReservas.html">Mis Reservas</a></li>
+                <li><a href="pages/login.html">Perfil</a></li>
             </ul>
         </nav>
         
-        <a href="#">Reservar Ahora</a>
+        <a href="pages/buscarCuidadores.html">Reservar Ahora</a>
     </header>
 
 
@@ -38,8 +40,8 @@
             <p>Encuentra los mejores cuidadores certificados en tu zona. Seguridad garantizada en cada paseo y estancia.</p>
             
            
-            <a href="#">Explorar Cuidadores</a>
-            <a href="#">Ver Servicios</a>
+            <a href="pages/buscarCuidadores.html">Explorar Cuidadores</a>
+            <a href="pages/servicios.html">Ver Servicios</a>
         </section>
 
         <aside aria-labelledby="mis-servicios-title">
@@ -56,7 +58,7 @@
                 <p>Mañana - Carlos R.</p>
             </article>
 
-            <a href="#">Ver todo el historial</a>
+            <a href="pages/misReservas.html">Ver todo el historial</a>
         </aside>
 
         <section aria-labelledby="servicios-title">
@@ -102,10 +104,11 @@
 
     <nav aria-label="Navegación móvil">
         <ul>
-            <li><a href="#">Explorar</a></li>
-            <li><a href="#">Reservas</a></li>
-            <li><a href="#">Mascotas</a></li>
-            <li><a href="#">Perfil</a></li>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="pages/buscarCuidadores.html">Explorar</a></li>
+            <li><a href="pages/servicios.html">Servicios</a></li>
+            <li><a href="pages/misReservas.html">Reservas</a></li>
+            <li><a href="pages/login.html">Perfil</a></li>
         </ul>
     </nav>
 </body>
