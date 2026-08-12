@@ -26,20 +26,21 @@
                 </div>
             </form>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="buscarCuidadores.html">Buscar</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="misReservas.html">Mis Reservas</a></li>
-                <li><a href="login.html">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <a href="buscarCuidadores.html">Reservar Ahora</a>
+            <nav aria-label="Navegación principal" class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="misReservas.html" class="nav-link active">Mis Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                </ul>
+            </nav>
+            
+            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+        </div>
     </header>
 
-    <main>
+    <main class="container bookings-main">
 
         <section aria-labelledby="page-title" class="bookings-header-section">
             <h1 id="page-title" class="bookings-title">Mis Reservas</h1>
@@ -197,7 +198,7 @@
         <div class="container footer-container">
             <div class="footer-brand">
                 <h2>Pet CareConnect</h2>
-                <p>2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
+                <p>Cuidando a los que más quieres.</p>
             </div>
 
             <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
@@ -208,42 +209,32 @@
                     <li><a href="#">Preguntas Frecuentes</a></li>
                 </ul>
             </nav>
+
+            <p class="footer-copyright">2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <nav aria-label="Navegación móvil">
-        <ul>
-            <li>
-                <a href="../index.html" class="mobile-nav-item">
-                    <span class="material-symbols-outlined">explore</span>
-                    <span>Inicio</span>
-                </a>
-            </li>
-            <li>
-                <a href="buscarCuidadores.html" class="mobile-nav-item">
-                    <span class="material-symbols-outlined">search</span>
-                    <span>Explorar</span>
-                </a>
-            </li>
-            <li>
-                <a href="servicios.html" class="mobile-nav-item">
-                    <span class="material-symbols-outlined">pets</span>
-                    <span>Servicios</span>
-                </a>
-            </li>
-            <li>
-                <a href="misReservas.html" class="mobile-nav-item active">
-                    <span class="material-symbols-outlined">calendar_month</span>
-                    <span>Reservas</span>
-                </a>
-            </li>
-            <li>
-                <a href="login.html" class="mobile-nav-item">
-                    <span class="material-symbols-outlined">person</span>
-                    <span>Perfil</span>
-                </a>
-            </li>
-        </ul>
+    <nav aria-label="Navegación móvil" class="mobile-nav">
+        <a href="../index.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">explore</span>
+            <span>Inicio</span>
+        </a>
+        <a href="buscarCuidadores.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">search</span>
+            <span>Explorar</span>
+        </a>
+        <a href="servicios.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">pets</span>
+            <span>Servicios</span>
+        </a>
+        <a href="misReservas.html" class="mobile-nav-item active">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span>Reservas</span>
+        </a>
+        <a href="login.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Perfil</span>
+        </a>
     </nav>
 
 </body>
