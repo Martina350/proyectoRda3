@@ -594,3 +594,212 @@ main.container {
 .mobile-nav-item .material-symbols-outlined { 
     font-size: 22px; 
 }
+
+
+/* Estilos Daysi Servicios */
+.services-hero-banner {
+    background-color: var(--surface-low);
+    padding: 3rem 0;
+    margin-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.hero-text-block {
+    max-width: 680px;
+}
+
+.hero-text-block h1 {
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.25;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+}
+
+.hero-text-block p {
+    font-size: 1.1rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+.catalog-section {
+    margin-bottom: 3.5rem;
+}
+
+.catalog-table {
+    width: 100%;
+    border: none !important;
+    border-collapse: collapse;
+    display: block;
+}
+
+.catalog-grid-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.catalog-grid-row {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+    width: 100%;
+}
+
+@media (min-width: 640px) {
+    .catalog-grid-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .catalog-grid-body {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+    }
+    .catalog-grid-row {
+        display: contents;
+    }
+}
+
+.catalog-cell {
+    display: block;
+    width: 100%;
+    padding: 0 !important;
+    border: none !important;
+}
+
+.catalog-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 250px;
+    height: 100%;
+}
+
+.catalog-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 35, 111, 0.2);
+}
+
+.catalog-card-header {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.catalog-card-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.catalog-card-title-row h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.badge-popular {
+    background-color: var(--primary-dark);
+    color: #ffffff;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+}
+
+.catalog-card-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+}
+
+.catalog-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border);
+    margin-top: 1.25rem;
+}
+
+.catalog-price {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.catalog-btn {
+    padding: 0.45rem 1rem;
+    font-size: 0.85rem;
+    border-radius: var(--radius-md);
+}
+
+.guarantees-section {
+    margin-bottom: 3.5rem;
+}
+
+.guarantees-main-title {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+}
+
+.guarantees-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .guarantees-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.guarantee-card {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.guarantee-icon-box {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: rgba(0, 35, 111, 0.06);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.guarantee-icon-box .material-symbols-outlined {
+    font-size: 24px;
+}
+
+.guarantee-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.guarantee-card p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin: 0;
+}
