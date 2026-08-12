@@ -5,118 +5,221 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Gestiona tus citas de cuidado, paseos y reservas para tus mascotas en Pet CareConnect.">
     <title>Mis Reservas - Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
-<body>
+<body class="bookings-page-body">
 
-    <header>
-        <span><a href="../index.html">Pet CareConnect</a></span>
-        <form role="search" action="misReservas.html" method="GET">
-            <label for="search-bookings">Buscar reservas</label>
-            <input type="search" id="search-bookings" name="q" placeholder="Buscar reservas...">
-            <button type="submit">Buscar</button>
-        </form>
+    <header class="navbar">
+        <div class="container navbar-container">
+            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
+            <form role="search" action="misReservas.html" method="GET" class="search-form">
+                <div class="form-group search-group">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <label for="search-bookings" class="sr-only">Buscar reservas</label>
+                    <input type="search" id="search-bookings" name="q" class="search-input" placeholder="Buscar reservas...">
+                    <button type="submit" class="button button-primary sr-only">Buscar</button>
+                </div>
+            </form>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="buscarCuidadores.html">Buscar</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="misReservas.html">Mis Reservas</a></li>
-                <li><a href="login.html">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <a href="buscarCuidadores.html">Reservar Ahora</a>
+            <nav aria-label="Navegación principal" class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="misReservas.html" class="nav-link active">Mis Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                </ul>
+            </nav>
+            
+            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+        </div>
     </header>
 
-    <main>
+    <main class="container bookings-main">
 
-        <section aria-labelledby="page-title">
+        <section aria-labelledby="page-title" class="bookings-page-header">
             <h1 id="page-title">Mis Reservas</h1>
             <p>Gestiona tus citas de cuidado y paseos para tus mascotas.</p>
         </section>
 
-        <section aria-labelledby="activas-title">
-            <h2 id="activas-title">Activas (2)</h2>
+        <div class="bookings-columns-grid">
+            <section aria-labelledby="activas-title" class="booking-column">
+                <div class="booking-column-header">
+                    <h2 id="activas-title" class="booking-column-title">Activas <span class="badge-count badge-count-active">2</span></h2>
+                </div>
 
-            <article>
-                <h3>Paseo Diario</h3>
-                <p>Con Ana Martínez</p>
-                <p><strong>Estado:</strong> En progreso</p>
-                <p><strong>Fecha:</strong> Hoy, 14:00 - 15:00</p>
-                <p><strong>Mascota:</strong> "Bruno" (Beagle)</p>
-                
-                <a href="#">Seguimiento</a>
-                <button type="button">Contacto</button>
-            </article>
+                <div class="booking-cards-list">
+                    <article class="booking-card">
+                        <div class="booking-card-header">
+                            <div class="booking-card-profile">
+                                <div class="booking-avatar-placeholder"></div>
+                                <div class="booking-card-title-group">
+                                    <h3>Paseo Diario</h3>
+                                    <p>Con Ana Martínez</p>
+                                </div>
+                            </div>
+                            <p class="status-pill status-in-progress"><strong>Estado:</strong> En progreso</p>
+                        </div>
 
-            <article>
-                <h3>Peluquería Canina</h3>
-                <p>Spa de Mascotas "Lulú"</p>
-                <p><strong>Estado:</strong> Mañana</p>
-                <p><strong>Fecha:</strong> Mañana, 10:30 AM</p>
-                <p><strong>Mascota:</strong> "Luna" (Persa)</p>
-                
-                <button type="button">Reagendar</button>
-            </article>
-        </section>
-        <section aria-labelledby="pasadas-title">
-            <h2 id="pasadas-title">Pasadas (12)</h2>
+                        <div class="booking-card-details">
+                            <p class="booking-detail-item detail-fecha"><strong>Fecha:</strong> Hoy, 14:00 - 15:00</p>
+                            <p class="booking-detail-item detail-mascota"><strong>Mascota:</strong> "Bruno" (Beagle)</p>
+                        </div>
+                        
+                        <div class="booking-card-actions cols-2">
+                            <a href="#" class="btn-card-outline btn-icon-seguimiento">Seguimiento</a>
+                            <button type="button" class="btn-card-primary btn-icon-contacto">Contacto</button>
+                        </div>
+                    </article>
 
-            <article>
-                <h3>Cuidado en Casa</h3>
-                <p>Con Carlos Ruiz</p>
-                <p><strong>Fecha:</strong> 15 Oct, 2024</p>
-                <p><strong>Calificación:</strong> 5.0 estrellas</p>
-                <p><strong>Estado:</strong> Completada</p>
-                
-                <a href="buscarCuidadores.html">Reservar de nuevo</a>
-            </article>
+                    <article class="booking-card">
+                        <div class="booking-card-header">
+                            <div class="booking-card-profile">
+                                <div class="booking-avatar-placeholder"></div>
+                                <div class="booking-card-title-group">
+                                    <h3>Peluquería Canina</h3>
+                                    <p>Spa de Mascotas "Lulú"</p>
+                                </div>
+                            </div>
+                            <p class="status-pill status-tomorrow"><strong>Estado:</strong> Mañana</p>
+                        </div>
 
-            <article>
-                <h3>Consulta Veterinaria</h3>
-                <p>Clínica San Antón</p>
-                <p><strong>Fecha:</strong> 12 Oct, 2026</p>
-                
-                <a href="#">Ver informe médico</a>
-            </article>
-        </section>
-        <section aria-labelledby="canceladas-title">
-            <h2 id="canceladas-title">Canceladas (1)</h2>
+                        <div class="booking-card-details">
+                            <p class="booking-detail-item detail-fecha"><strong>Fecha:</strong> Mañana, 10:30 AM</p>
+                            <p class="booking-detail-item detail-mascota"><strong>Mascota:</strong> "Luna" (Persa)</p>
+                        </div>
+                        
+                        <div class="booking-card-actions cols-1">
+                            <button type="button" class="btn-card-secondary btn-icon-reagendar">Reagendar</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
 
-            <article>                
-                <h3>Entrenamiento</h3>
-                <p>Club Canino Elite</p>
-                <p><strong>Estado:</strong> Cancelada por el usuario</p>
-                <p><strong>Estaba para:</strong> 20 Oct</p>
-                
-                <a href="#">Detalles del reembolso</a>
-            </article>
-        </section>
+            <section aria-labelledby="pasadas-title" class="booking-column">
+                <div class="booking-column-header">
+                    <h2 id="pasadas-title" class="booking-column-title">Pasadas <span class="badge-count badge-count-past">12</span></h2>
+                </div>
+
+                <div class="booking-cards-list">
+                    <article class="booking-card past-card">
+                        <div class="booking-card-header">
+                            <div class="booking-card-profile">
+                                <div class="booking-avatar-placeholder avatar-grayscale"></div>
+                                <div class="booking-card-title-group">
+                                    <h3>Cuidado en Casa</h3>
+                                    <p>Con Carlos Ruiz</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-card-details">
+                            <p class="booking-detail-item detail-fecha"><strong>Fecha:</strong> 15 Oct, 2024</p>
+                            <p class="booking-detail-item detail-rating"><span class="rating-star"></span><strong class="rating-val">5.0</strong> <span class="status-completada-text">Completada</span></p>
+                            <p class="booking-status-hidden"><strong>Estado:</strong> Completada</p>
+                        </div>
+                        
+                        <div class="booking-card-actions cols-1">
+                            <a href="buscarCuidadores.html" class="btn-card-outline">Reservar de nuevo</a>
+                        </div>
+                    </article>
+
+                    <article class="booking-card past-card">
+                        <div class="booking-card-header">
+                            <div class="booking-card-profile">
+                                <div class="booking-avatar-placeholder avatar-grayscale"></div>
+                                <div class="booking-card-title-group">
+                                    <h3>Consulta Veterinaria</h3>
+                                    <p>Clínica San Antón</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-card-details">
+                            <p class="booking-detail-item detail-fecha"><strong>Fecha:</strong> 12 Oct, 2026</p>
+                        </div>
+                        
+                        <div class="booking-card-actions cols-1">
+                            <a href="#" class="btn-card-outline">Ver informe médico</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section aria-labelledby="canceladas-title" class="booking-column">
+                <div class="booking-column-header">
+                    <h2 id="canceladas-title" class="booking-column-title muted">Canceladas <span class="badge-count badge-count-cancelled">1</span></h2>
+                </div>
+
+                <div class="booking-cards-list">
+                    <article class="booking-card cancelled-card">
+                        <div class="booking-card-header">
+                            <div class="booking-card-profile">
+                                <div class="booking-avatar-placeholder avatar-grayscale"></div>
+                                <div class="booking-card-title-group">
+                                    <h3>Entrenamiento</h3>
+                                    <p>Club Canino Elite</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="booking-card-details">
+                            <p class="booking-detail-item detail-cancelado"><strong>Estado:</strong> Cancelada por el usuario</p>
+                            <p class="booking-detail-item detail-fecha"><strong>Estaba para:</strong> 20 Oct</p>
+                        </div>
+                        
+                        <div class="booking-card-actions cols-1">
+                            <a href="#" class="btn-card-muted">Detalles del reembolso</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
 
     </main>
 
-    <footer>
-        <h2>Pet CareConnect</h2>
-        <p>2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        
-        <nav aria-label="Enlaces legales y de ayuda">
-            <ul>
-                <li><a href="#">Contáctanos</a></li>
-                <li><a href="#">Política de Privacidad</a></li>
-                <li><a href="#">Términos de Servicio</a></li>
-                <li><a href="#">Preguntas Frecuentes</a></li>
-            </ul>
-        </nav>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h2>Pet CareConnect</h2>
+                <p>2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
+            </div>
+            
+            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
+                <ul>
+                    <li><a href="#">Contáctanos</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
 
-    <nav aria-label="Navegación móvil">
+    <nav aria-label="Navegación móvil" class="mobile-nav">
         <ul>
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="buscarCuidadores.html">Explorar</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-            <li><a href="misReservas.html">Reservas</a></li>
-            <li><a href="login.html">Perfil</a></li>
+            <li>
+                <a href="buscarCuidadores.html" class="mobile-nav-item">
+                    <span class="material-symbols-outlined">explore</span>
+                    <span>Explorar</span>
+                </a>
+            </li>
+            <li>
+                <a href="misReservas.html" class="mobile-nav-item active">
+                    <span class="material-symbols-outlined icon-filled">calendar_month</span>
+                    <span>Reservas</span>
+                </a>
+            </li>
+            <li>
+                <a href="login.html" class="mobile-nav-item">
+                    <span class="material-symbols-outlined">person</span>
+                    <span>Perfil</span>
+                </a>
+            </li>
         </ul>
     </nav>
 
