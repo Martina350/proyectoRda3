@@ -21,7 +21,7 @@
                 <div class="form-group search-group">
                     <span class="material-symbols-outlined search-icon">search</span>
                     <label for="location-search" class="sr-only">Buscar por ciudad o código postal</label>
-                    <input type="search" id="location-search" class="search-input" name="location" placeholder="Buscar por ciudad o código postal...">
+                    <input type="search" id="location-search" class="form-control search-input" name="location" placeholder="Buscar por ciudad o código postal...">
                     <button type="submit" class="button button-primary sr-only">Buscar</button>
                 </div>
             </form>
@@ -42,8 +42,8 @@
 
         <section aria-labelledby="main-title" class="search-header-section">
             <div class="search-title-block">
-                <h1 id="main-title">Encuentra el cuidador perfecto</h1>
-                <p>248 cuidadores disponibles en tu zona para cuidar de tu mascota.</p>
+                <h1 id="main-title" class="heading-xl">Encuentra el cuidador perfecto</h1>
+                <p class="text-body text-muted">248 cuidadores disponibles en tu zona para cuidar de tu mascota.</p>
             </div>
 
             <form class="filter-form">
@@ -54,13 +54,13 @@
                         <div class="filter-pill">
                             <span class="material-symbols-outlined filter-icon">calendar_month</span>
                             <label for="filter-date" class="filter-label">Fechas</label>
-                            <input type="date" id="filter-date" class="filter-input" name="date">
+                            <input type="date" id="filter-date" class="form-control filter-input" name="date">
                         </div>
 
                         <div class="filter-pill">
                             <span class="material-symbols-outlined filter-icon">pets</span>
                             <label for="filter-pet-type" class="filter-label">Tipo de Mascota</label>
-                            <select id="filter-pet-type" class="filter-select" name="pet-type">
+                            <select id="filter-pet-type" class="form-control filter-select" name="pet-type">
                                 <option value="">Seleccionar tipo...</option>
                                 <option value="perro">Perro</option>
                                 <option value="gato">Gato</option>
@@ -70,7 +70,7 @@
                         <div class="filter-pill">
                             <span class="material-symbols-outlined filter-icon">payments</span>
                             <label for="filter-price" class="filter-label">Precio</label>
-                            <select id="filter-price" class="filter-select" name="price">
+                            <select id="filter-price" class="form-control filter-select" name="price">
                                 <option value="">Seleccionar precio...</option>
                             </select>
                         </div>
@@ -87,167 +87,152 @@
         <section aria-labelledby="sitters-title" class="sitters-section">
             <h2 id="sitters-title" class="sr-only">Resultados de cuidadores</h2>
 
-            <table border="0" cellpadding="0" cellspacing="0" class="sitters-table">
-                <thead>
-                    <tr class="sr-only">
-                        <th scope="col">Cuidador 1</th>
-                        <th scope="col">Cuidador 2</th>
-                        <th scope="col">Cuidador 3</th>
-                    </tr>
-                </thead>
-                <tbody class="sitters-grid-body">
-                    <tr class="sitters-grid-row">
-                        <td valign="top" class="sitter-cell">
-                            <article class="sitter-card">
-                                <div class="sitter-card-media">
-                                    <button type="button" class="favorite-btn" aria-label="Añadir Elena Martínez a favoritos">
-                                        <span class="material-symbols-outlined favorite-icon">favorite</span>
-                                    </button>
-                                    <span class="verified-badge">VERIFICADO</span>
-                                </div>
+            <div class="sitters-grid">
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Elena Martínez a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                        <span class="verified-badge">VERIFICADO</span>
+                    </div>
 
-                                <div class="sitter-card-content">
-                                    <div class="sitter-header-row">
-                                        <div>
-                                            <h3>Elena Martínez</h3>
-                                            <div class="rating-block">
-                                                <div class="stars">
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                </div>
-                                                <span class="reviews-count">(48 reseñas)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-block">
-                                            <span class="price-val">$15</span>
-                                            <span class="price-unit">por noche</span>
-                                        </div>
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
+                                <h3>Elena Martínez</h3>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
                                     </div>
-
-                                    <p class="sitter-bio">Amante de los perros con 5 años de experiencia en cuidado doméstico y paseos. Especialista en razas grandes.</p>
-                                    
-                                    <div class="availability-block">
-                                        <span class="availability-title">Disponibilidad próxima</span>
-                                        <div class="availability-days">
-                                            <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
-                                            <div class="day-pill"><span class="day-label">X</span></div>
-                                            <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="sitter-card-actions">
-                                        <button type="button" class="button button-primary action-btn">Contactar</button>
-                                        <a href="#" class="button button-outline action-btn">Ver Perfil</a>
-                                    </div>
+                                    <span class="reviews-count">(48 reseñas)</span>
                                 </div>
-                            </article>
-                        </td>
-                        <td valign="top" class="sitter-cell">
-                            <article class="sitter-card">
-                                <div class="sitter-card-media">
-                                    <button type="button" class="favorite-btn" aria-label="Añadir Javier Ruiz a favoritos">
-                                        <span class="material-symbols-outlined favorite-icon">favorite</span>
-                                    </button>
-                                </div>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$15</span>
+                                <span class="price-unit">por noche</span>
+                            </div>
+                        </div>
 
-                                <div class="sitter-card-content">
-                                    <div class="sitter-header-row">
-                                        <div>
-                                            <h3>Javier Ruiz</h3>
-                                            <div class="rating-block">
-                                                <div class="stars">
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon">star_half</span>
-                                                </div>
-                                                <span class="reviews-count">(32 reseñas)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-block">
-                                            <span class="price-val">$12</span>
-                                            <span class="price-unit">por hora</span>
-                                        </div>
-                                    </div>
+                        <p class="sitter-bio">Amante de los perros con 5 años de experiencia en cuidado doméstico y paseos. Especialista en razas grandes.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill"><span class="day-label">X</span></div>
+                                <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
 
-                                    <p class="sitter-bio">Auxiliar técnico veterinario. Ofrezco paseos educativos y administración de medicación si es necesario.</p>
-                                    
-                                    <div class="availability-block">
-                                        <span class="availability-title">Disponibilidad próxima</span>
-                                        <div class="availability-days">
-                                            <div class="day-pill"><span class="day-label">L</span></div>
-                                            <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
-                                            <div class="day-pill"><span class="day-label">J</span></div>
-                                            <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="sitter-card-actions">
-                                        <button type="button" class="button button-primary action-btn">Contactar</button>
-                                        <a href="#" class="button button-outline action-btn">Ver Perfil</a>
-                                    </div>
-                                </div>
-                            </article>
-                        </td>
-                        <td valign="top" class="sitter-cell">
-                            <article class="sitter-card">
-                                <div class="sitter-card-media">
-                                    <button type="button" class="favorite-btn" aria-label="Añadir Sofía Castro a favoritos">
-                                        <span class="material-symbols-outlined favorite-icon">favorite</span>
-                                    </button>
-                                </div>
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Javier Ruiz a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                    </div>
 
-                                <div class="sitter-card-content">
-                                    <div class="sitter-header-row">
-                                        <div>
-                                            <h3>Sofía Castro</h3>
-                                            <div class="rating-block">
-                                                <div class="stars">
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                    <span class="material-symbols-outlined star-icon filled">star</span>
-                                                </div>
-                                                <span class="reviews-count">(112 reseñas)</span>
-                                            </div>
-                                        </div>
-                                        <div class="price-block">
-                                            <span class="price-val">$20</span>
-                                            <span class="price-unit">por noche</span>
-                                        </div>
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
+                                <h3>Javier Ruiz</h3>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon">star_half</span>
                                     </div>
-
-                                    <p class="sitter-bio">Especialista en comportamiento felino. Tu gato se sentirá como en un spa mientras tú no estás.</p>
-                                    
-                                    <div class="availability-block">
-                                        <span class="availability-title">Disponibilidad próxima</span>
-                                        <div class="availability-days">
-                                            <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
-                                            <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="sitter-card-actions">
-                                        <button type="button" class="button button-primary action-btn">Contactar</button>
-                                        <a href="#" class="button button-outline  action-btn">Ver Perfil</a>
-                                    </div>
+                                    <span class="reviews-count">(32 reseñas)</span>
                                 </div>
-                            </article>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$12</span>
+                                <span class="price-unit">por hora</span>
+                            </div>
+                        </div>
+
+                        <p class="sitter-bio">Auxiliar técnico veterinario. Ofrezco paseos educativos y administración de medicación si es necesario.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill"><span class="day-label">L</span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
+                                <div class="day-pill"><span class="day-label">J</span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Sofía Castro a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                    </div>
+
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
+                                <h3>Sofía Castro</h3>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                    </div>
+                                    <span class="reviews-count">(112 reseñas)</span>
+                                </div>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$20</span>
+                                <span class="price-unit">por noche</span>
+                            </div>
+                        </div>
+
+                        <p class="sitter-bio">Especialista en comportamiento felino. Tu gato se sentirá como en un spa mientras tú no estás.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
 
         <nav aria-label="Paginación" class="pagination-nav">
