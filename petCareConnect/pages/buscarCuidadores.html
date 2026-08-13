@@ -5,151 +5,285 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Encuentra al cuidador perfecto para tu mascota en Pet CareConnect.">
     <title>Buscador de Cuidadores | Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
-    <header>
-        <span><a href="../index.html">Pet CareConnect</a></span>
+    <header class="navbar">
+        <div class="container navbar-container">
+            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
 
-        <form role="search" action="buscarCuidadores.html" method="GET">
-            <label for="location-search">Buscar por ciudad o código postal</label>
-            <input type="search" id="location-search" name="location" placeholder="Buscar por ciudad o código postal...">
-            <button type="submit">Buscar</button>
-        </form>
+            <form role="search" class="search-form">
+                <div class="form-group search-group">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <label for="location-search" class="sr-only">Buscar por ciudad o código postal</label>
+                    <input type="search" id="location-search" class="form-control search-input" name="location" placeholder="Buscar por ciudad o código postal...">
+                    <button type="submit" class="button button-primary sr-only">Buscar</button>
+                </div>
+            </form>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="buscarCuidadores.html">Buscar</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="misReservas.html">Mis Reservas</a></li>
-                <li><a href="login.html">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <a href="buscarCuidadores.html">Reservar Ahora</a>
+            <nav aria-label="Navegación principal" class="main-nav">
+                <ul>
+                    <li><a href="buscarCuidadores.html" class="nav-link active">Buscar</a></li>
+                    <li><a href="misReservas.html" class="nav-link">Mis Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                </ul>
+            </nav>
+            
+            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+        </div>
     </header>
 
-    <main>
+    <main class="container">
 
-        <section aria-labelledby="main-title">
-            <h1 id="main-title">Encuentra el cuidador perfecto</h1>
-            <p>248 cuidadores disponibles en tu zona para cuidar de tu mascota.</p>
+        <section aria-labelledby="main-title" class="search-header-section">
+            <div class="search-title-block">
+                <h1 id="main-title" class="heading-xl">Encuentra el cuidador perfecto</h1>
+                <p class="text-body text-muted">248 cuidadores disponibles en tu zona para cuidar de tu mascota.</p>
+            </div>
 
-            <form>
-                <fieldset>
-                    <legend>Filtros de búsqueda</legend>
+            <form class="filter-form">
+                <fieldset class="filter-fieldset">
+                    <legend class="sr-only">Filtros de búsqueda</legend>
                     
-                    <label for="filter-date">Fechas</label>
-                    <input type="date" id="filter-date" name="date">
+                    <div class="filter-pills-row">
+                        <div class="filter-pill">
+                            <span class="material-symbols-outlined filter-icon">calendar_month</span>
+                            <label for="filter-date" class="filter-label">Fechas</label>
+                            <input type="date" id="filter-date" class="form-control filter-input" name="date">
+                        </div>
 
-                    <label for="filter-pet-type">Tipo de Mascota</label>
-                    <select id="filter-pet-type" name="pet-type">
-                        <option value="">Seleccionar tipo...</option>
-                        <option value="perro">Perro</option>
-                        <option value="gato">Gato</option>
-                    </select>
+                        <div class="filter-pill">
+                            <span class="material-symbols-outlined filter-icon">pets</span>
+                            <label for="filter-pet-type" class="filter-label">Tipo de Mascota</label>
+                            <select id="filter-pet-type" class="form-control filter-select" name="pet-type">
+                                <option value="">Seleccionar tipo...</option>
+                                <option value="perro">Perro</option>
+                                <option value="gato">Gato</option>
+                            </select>
+                        </div>
 
-                    <label for="filter-price">Precio</label>
-                    <select id="filter-price" name="price">
-                        <option value="">Seleccionar precio...</option>
-                    </select>
+                        <div class="filter-pill">
+                            <span class="material-symbols-outlined filter-icon">payments</span>
+                            <label for="filter-price" class="filter-label">Precio</label>
+                            <select id="filter-price" class="form-control filter-select" name="price">
+                                <option value="">Seleccionar precio...</option>
+                            </select>
+                        </div>
 
-                    <button type="button">Más filtros</button>
+                        <button type="button" class="button-more-filters">
+                            <span class="material-symbols-outlined">tune</span>
+                            <span>Más filtros</span>
+                        </button>
+                    </div>
                 </fieldset>
             </form>
         </section>
 
-        <section aria-labelledby="sitters-title">
-            <h2 id="sitters-title">Resultados de cuidadores</h2>
+        <section aria-labelledby="sitters-title" class="sitters-section">
+            <h2 id="sitters-title" class="sr-only">Resultados de cuidadores</h2>
 
-            <table border="1" cellpadding="10" cellspacing="0">
-                <thead>
-                    <tr>
-                        <th scope="col">Cuidador 1</th>
-                        <th scope="col">Cuidador 2</th>
-                        <th scope="col">Cuidador 3</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td valign="top">
-                            <article>
-                                <p><strong>Verificado</strong></p>
+            <div class="sitters-grid">
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Elena Martínez a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                        <span class="verified-badge">VERIFICADO</span>
+                    </div>
+
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
                                 <h3>Elena Martínez</h3>
-                                <p>Calificación: 5 estrellas (48 reseñas)</p>
-                                <p><strong>$15</strong> por noche</p>
-                                <p>Amante de los perros con 5 años de experiencia en cuidado doméstico y paseos. Especialista en razas grandes.</p>
-                                
-                                <p><strong>Disponibilidad próxima:</strong> Lunes, Martes, Jueves, Viernes</p>
-                                
-                                <p>
-                                    <button type="button">Contactar</button>
-                                    <a href="perfilCuidador.html">Ver Perfil</a>
-                                    <button type="button" aria-label="Añadir Elena Martínez a favoritos">Favorito</button>
-                                </p>
-                            </article>
-                        </td>
-                        <td valign="top">
-                            <article>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                    </div>
+                                    <span class="reviews-count">(48 reseñas)</span>
+                                </div>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$15</span>
+                                <span class="price-unit">por noche</span>
+                            </div>
+                        </div>
+
+                        <p class="sitter-bio">Amante de los perros con 5 años de experiencia en cuidado doméstico y paseos. Especialista en razas grandes.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill"><span class="day-label">X</span></div>
+                                <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Javier Ruiz a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                    </div>
+
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
                                 <h3>Javier Ruiz</h3>
-                                <p>Calificación: 4.5 estrellas (32 reseñas)</p>
-                                <p><strong>$12</strong> por hora</p>
-                                <p>Auxiliar técnico veterinario. Ofrezco paseos educativos y administración de medicación si es necesario.</p>
-                                
-                                <p><strong>Disponibilidad próxima:</strong> Martes, Miércoles, Viernes</p>
-                                
-                                <p>
-                                    <button type="button">Contactar</button>
-                                    <a href="perfilCuidador.html">Ver Perfil</a>
-                                    <button type="button" aria-label="Añadir Javier Ruiz a favoritos">Favorito</button>
-                                </p>
-                            </article>
-                        </td>
-                        <td valign="top">
-                            <article>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon">star_half</span>
+                                    </div>
+                                    <span class="reviews-count">(32 reseñas)</span>
+                                </div>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$12</span>
+                                <span class="price-unit">por hora</span>
+                            </div>
+                        </div>
+
+                        <p class="sitter-bio">Auxiliar técnico veterinario. Ofrezco paseos educativos y administración de medicación si es necesario.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill"><span class="day-label">L</span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
+                                <div class="day-pill"><span class="day-label">J</span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="card-surface sitter-card">
+                    <div class="sitter-card-media">
+                        <button type="button" class="favorite-btn" aria-label="Añadir Sofía Castro a favoritos">
+                            <span class="material-symbols-outlined favorite-icon">favorite</span>
+                        </button>
+                    </div>
+
+                    <div class="sitter-card-content">
+                        <div class="sitter-header-row">
+                            <div>
                                 <h3>Sofía Castro</h3>
-                                <p>Calificación: 5 estrellas (112 reseñas)</p>
-                                <p><strong>$20</strong> por noche</p>
-                                <p>Especialista en comportamiento felino. Tu gato se sentirá como en un spa mientras tú no estás.</p>
-                                
-                                <p><strong>Disponibilidad próxima:</strong> Lunes, Martes, Miércoles, Jueves, Viernes</p>
-                                
-                                <p>
-                                    <button type="button">Contactar</button>
-                                    <a href="perfilCuidador.html">Ver Perfil</a>
-                                    <button type="button" aria-label="Añadir Sofía Castro a favoritos">Favorito</button>
-                                </p>
-                            </article>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                                <div class="rating-block">
+                                    <div class="stars">
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                        <span class="material-symbols-outlined star-icon filled">star</span>
+                                    </div>
+                                    <span class="reviews-count">(112 reseñas)</span>
+                                </div>
+                            </div>
+                            <div class="price-block">
+                                <span class="price-val">$20</span>
+                                <span class="price-unit">por noche</span>
+                            </div>
+                        </div>
+
+                        <p class="sitter-bio">Especialista en comportamiento felino. Tu gato se sentirá como en un spa mientras tú no estás.</p>
+                        
+                        <div class="availability-block">
+                            <span class="availability-title">Disponibilidad próxima</span>
+                            <div class="availability-days">
+                                <div class="day-pill active"><span class="day-label">L</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">M</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">X</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">J</span><span class="day-dot"></span></div>
+                                <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="sitter-card-actions">
+                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                        </div>
+                    </div>
+                </article>
+            </div>
         </section>
 
-        <nav aria-label="Paginación">
-            <ul>
-                <li><a href="#" aria-label="Página anterior">Anterior</a></li>
-                <li><span>Página 1 de 12</span></li>
-                <li><a href="#" aria-label="Página siguiente">Siguiente</a></li>
+        <nav aria-label="Paginación" class="pagination-nav">
+            <ul class="pagination-list">
+                <li><a href="#" aria-label="Página anterior" class="pagination-btn"><span class="material-symbols-outlined">chevron_left</span></a></li>
+                <li><span class="pagination-info">Página 1 de 12</span></li>
+                <li><a href="#" aria-label="Página siguiente" class="pagination-btn"><span class="material-symbols-outlined">chevron_right</span></a></li>
             </ul>
         </nav>
 
     </main>
 
-    <footer>
-        <h2>Pet CareConnect</h2>
-        <p> 2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h2>PetCareConnect</h2>
+                <p>© 2026 PetCareConnect Inc. Todos los derechos reservados.</p>
+            </div>
 
-        <nav aria-label="Enlaces legales y de ayuda">
-            <ul>
-                <li><a href="#">Contáctanos</a></li>
-                <li><a href="#">Política de Privacidad</a></li>
-                <li><a href="#">Términos de Servicio</a></li>
-                <li><a href="#">Preguntas Frecuentes</a></li>
-            </ul>
-        </nav>
+            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
+                <ul>
+                    <li><a href="#">Contáctanos</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
 
+    <nav aria-label="Navegación móvil" class="mobile-nav">
+        <a href="../index.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">explore</span>
+            <span>Inicio</span>
+        </a>
+        <a href="buscarCuidadores.html" class="mobile-nav-item active">
+            <span class="material-symbols-outlined">search</span>
+            <span>Explorar</span>
+        </a>
+        <a href="servicios.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">pets</span>
+            <span>Servicios</span>
+        </a>
+        <a href="misReservas.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span>Reservas</span>
+        </a>
+        <a href="login.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Perfil</span>
+        </a>
+    </nav>
 </body>
 </html>

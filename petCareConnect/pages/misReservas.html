@@ -5,119 +5,236 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Gestiona tus citas de cuidado, paseos y reservas para tus mascotas en Pet CareConnect.">
     <title>Mis Reservas - Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
-    <header>
-        <span><a href="../index.html">Pet CareConnect</a></span>
-        <form role="search" action="misReservas.html" method="GET">
-            <label for="search-bookings">Buscar reservas</label>
-            <input type="search" id="search-bookings" name="q" placeholder="Buscar reservas...">
-            <button type="submit">Buscar</button>
-        </form>
+    <header class="navbar">
+        <div class="container navbar-container">
+            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="buscarCuidadores.html">Buscar</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="misReservas.html">Mis Reservas</a></li>
-                <li><a href="login.html">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <a href="buscarCuidadores.html">Reservar Ahora</a>
+            <form role="search" action="misReservas.html" method="GET" class="search-form">
+                <div class="form-group search-group">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <label for="search-bookings" class="sr-only">Buscar reservas</label>
+                    <input type="search" id="search-bookings" name="q" placeholder="Buscar reservas..." class="form-control search-input">
+                    <button type="submit" class="button button-primary sr-only">Buscar</button>
+                </div>
+            </form>
+
+            <nav aria-label="Navegación principal" class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="misReservas.html" class="nav-link active">Mis Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                </ul>
+            </nav>
+            
+            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+        </div>
     </header>
 
-    <main>
+    <main class="container bookings-main">
 
-        <section aria-labelledby="page-title">
-            <h1 id="page-title">Mis Reservas</h1>
-            <p>Gestiona tus citas de cuidado y paseos para tus mascotas.</p>
+        <section aria-labelledby="page-title" class="bookings-header-section">
+            <h1 id="page-title" class="bookings-title">Mis Reservas</h1>
+            <p class="bookings-subtitle">Gestiona tus citas de cuidado y paseos para tus mascotas.</p>
         </section>
 
-        <section aria-labelledby="activas-title">
-            <h2 id="activas-title">Activas (2)</h2>
+        <div class="bookings-columns-grid">
+            <!-- COLUMN: ACTIVAS -->
+            <section aria-labelledby="activas-title" class="bookings-column">
+                <div class="column-header">
+                    <h2 id="activas-title" class="column-title">
+                        Activas <span class="badge-count badge-activas">2</span>
+                    </h2>
+                </div>
 
-            <article>
-                <h3>Paseo Diario</h3>
-                <p>Con Ana Martínez</p>
-                <p><strong>Estado:</strong> En progreso</p>
-                <p><strong>Fecha:</strong> Hoy, 14:00 - 15:00</p>
-                <p><strong>Mascota:</strong> "Bruno" (Beagle)</p>
-                
-                <a href="#">Seguimiento</a>
-                <button type="button">Contacto</button>
-            </article>
+                <div class="column-cards">
+                    <article class="card-surface booking-card card-hover-effect">
+                        <div class="card-top-row">
+                            <div class="card-provider-info">
+                                <div class="avatar-circle avatar-walker"></div>
+                                <div class="provider-text">
+                                    <h3 class="card-service-title">Paseo Diario</h3>
+                                    <p class="card-provider-name">Con Ana Martínez</p>
+                                </div>
+                            </div>
+                            <p class="status-badge badge-en-progreso"><strong>Estado:</strong> En progreso</p>
+                        </div>
+                        
+                        <div class="card-details-list">
+                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> Hoy, 14:00 - 15:00</p>
+                            <p class="detail-item detail-mascota"><strong>Mascota:</strong> "Bruno" (Beagle)</p>
+                        </div>
 
-            <article>
-                <h3>Peluquería Canina</h3>
-                <p>Spa de Mascotas "Lulú"</p>
-                <p><strong>Estado:</strong> Mañana</p>
-                <p><strong>Fecha:</strong> Mañana, 10:30 AM</p>
-                <p><strong>Mascota:</strong> "Luna" (Persa)</p>
-                
-                <button type="button">Reagendar</button>
-            </article>
-        </section>
-        <section aria-labelledby="pasadas-title">
-            <h2 id="pasadas-title">Pasadas (12)</h2>
+                        <div class="card-actions-grid two-cols">
+                            <a href="#" class="button button-outline btn-seguimiento">Seguimiento</a>
+                            <button type="button" class="button button-primary btn-contacto">Contacto</button>
+                        </div>
+                    </article>
 
-            <article>
-                <h3>Cuidado en Casa</h3>
-                <p>Con Carlos Ruiz</p>
-                <p><strong>Fecha:</strong> 15 Oct, 2024</p>
-                <p><strong>Calificación:</strong> 5.0 estrellas</p>
-                <p><strong>Estado:</strong> Completada</p>
-                
-                <a href="buscarCuidadores.html">Reservar de nuevo</a>
-            </article>
+                    <article class="card-surface booking-card card-hover-effect">
+                        <div class="card-top-row">
+                            <div class="card-provider-info">
+                                <div class="avatar-circle avatar-grooming"></div>
+                                <div class="provider-text">
+                                    <h3 class="card-service-title">Peluquería Canina</h3>
+                                    <p class="card-provider-name">Spa de Mascotas "Lulú"</p>
+                                </div>
+                            </div>
+                            <p class="status-badge badge-manana"><strong>Estado:</strong> Mañana</p>
+                        </div>
+                        
+                        <div class="card-details-list">
+                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> Mañana, 10:30 AM</p>
+                            <p class="detail-item detail-mascota"><strong>Mascota:</strong> "Luna" (Persa)</p>
+                        </div>
 
-            <article>
-                <h3>Consulta Veterinaria</h3>
-                <p>Clínica San Antón</p>
-                <p><strong>Fecha:</strong> 12 Oct, 2026</p>
-                
-                <a href="#">Ver informe médico</a>
-            </article>
-        </section>
-        <section aria-labelledby="canceladas-title">
-            <h2 id="canceladas-title">Canceladas (1)</h2>
+                        <div class="card-actions-grid full-width">
+                            <button type="button" class="button button-outline btn-reagendar">Reagendar</button>
+                        </div>
+                    </article>
+                </div>
+            </section>
 
-            <article>                
-                <h3>Entrenamiento</h3>
-                <p>Club Canino Elite</p>
-                <p><strong>Estado:</strong> Cancelada por el usuario</p>
-                <p><strong>Estaba para:</strong> 20 Oct</p>
-                
-                <a href="#">Detalles del reembolso</a>
-            </article>
-        </section>
+            <!-- COLUMN: PASADAS -->
+            <section aria-labelledby="pasadas-title" class="bookings-column">
+                <div class="column-header">
+                    <h2 id="pasadas-title" class="column-title">
+                        Pasadas <span class="badge-count badge-pasadas">12</span>
+                    </h2>
+                </div>
+
+                <div class="column-cards">
+                    <article class="card-surface booking-card booking-card-past card-hover-effect">
+                        <div class="card-top-row">
+                            <div class="card-provider-info">
+                                <div class="avatar-circle avatar-sitter grayscale"></div>
+                                <div class="provider-text">
+                                    <h3 class="card-service-title text-muted">Cuidado en Casa</h3>
+                                    <p class="card-provider-name">Con Carlos Ruiz</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-details-list">
+                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> 15 Oct, 2024</p>
+                            <div class="detail-rating-row">
+                                <p class="detail-item detail-rating"><strong>Calificación:</strong> 5.0 estrellas</p>
+                                <p class="detail-item detail-estado-completada"><strong>Estado:</strong> Completada</p>
+                            </div>
+                        </div>
+
+                        <div class="card-actions-grid full-width">
+                            <a href="buscarCuidadores.html" class="button button-outline btn-reservar-nuevo">Reservar de nuevo</a>
+                        </div>
+                    </article>
+
+                    <article class="card-surface booking-card booking-card-past card-hover-effect">
+                        <div class="card-top-row">
+                            <div class="card-provider-info">
+                                <div class="avatar-circle avatar-vet grayscale"></div>
+                                <div class="provider-text">
+                                    <h3 class="card-service-title text-muted">Consulta Veterinaria</h3>
+                                    <p class="card-provider-name">Clínica San Antón</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-details-list">
+                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> 12 Oct, 2026</p>
+                        </div>
+
+                        <div class="card-actions-grid full-width">
+                            <a href="#" class="button button-outline btn-informe">Ver informe médico</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- COLUMN: CANCELADAS -->
+            <section aria-labelledby="canceladas-title" class="bookings-column">
+                <div class="column-header">
+                    <h2 id="canceladas-title" class="column-title column-title-muted">
+                        Canceladas <span class="badge-count badge-canceladas">1</span>
+                    </h2>
+                </div>
+
+                <div class="column-cards">
+                    <article class="card-surface booking-card booking-card-cancelled">
+                        <div class="card-top-row">
+                            <div class="card-provider-info">
+                                <div class="avatar-circle avatar-trainer grayscale"></div>
+                                <div class="provider-text">
+                                    <h3 class="card-service-title text-muted">Entrenamiento</h3>
+                                    <p class="card-provider-name">Club Canino Elite</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="card-details-list">
+                            <p class="detail-item detail-cancelada"><strong>Estado:</strong> Cancelada por el usuario</p>
+                            <p class="detail-item detail-estaba-para"><strong>Estaba para:</strong> 20 Oct</p>
+                        </div>
+
+                        <div class="card-actions-grid full-width">
+                            <a href="#" class="button button-secondary-dim btn-reembolso">Detalles del reembolso</a>
+                        </div>
+                    </article>
+                </div>
+            </section>
+        </div>
 
     </main>
 
-    <footer>
-        <h2>Pet CareConnect</h2>
-        <p>2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        
-        <nav aria-label="Enlaces legales y de ayuda">
-            <ul>
-                <li><a href="#">Contáctanos</a></li>
-                <li><a href="#">Política de Privacidad</a></li>
-                <li><a href="#">Términos de Servicio</a></li>
-                <li><a href="#">Preguntas Frecuentes</a></li>
-            </ul>
-        </nav>
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h2>Pet CareConnect</h2>
+                <p>Cuidando a los que más quieres.</p>
+            </div>
+
+            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
+                <ul>
+                    <li><a href="#">Contáctanos</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+
+            <p class="footer-copyright">2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
+        </div>
     </footer>
 
-    <nav aria-label="Navegación móvil">
-        <ul>
-            <li><a href="../index.html">Inicio</a></li>
-            <li><a href="buscarCuidadores.html">Explorar</a></li>
-            <li><a href="servicios.html">Servicios</a></li>
-            <li><a href="misReservas.html">Reservas</a></li>
-            <li><a href="login.html">Perfil</a></li>
-        </ul>
+    <nav aria-label="Navegación móvil" class="mobile-nav">
+        <a href="../index.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">explore</span>
+            <span>Inicio</span>
+        </a>
+        <a href="buscarCuidadores.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">search</span>
+            <span>Explorar</span>
+        </a>
+        <a href="servicios.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">pets</span>
+            <span>Servicios</span>
+        </a>
+        <a href="misReservas.html" class="mobile-nav-item active">
+            <span class="material-symbols-outlined">calendar_month</span>
+            <span>Reservas</span>
+        </a>
+        <a href="login.html" class="mobile-nav-item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Perfil</span>
+        </a>
     </nav>
 
 </body>
