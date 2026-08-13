@@ -5,165 +5,297 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Perfil de Lucía Fernández, cuidadora de mascotas en Pet CareConnect.">
     <title>Perfil del Cuidador - Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
 
-    <header>
-        <span><a href="../index.html">Pet CareConnect</a></span>
+    <header class="navbar">
+        <div class="container navbar-container">
+            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
 
-        <form role="search" action="buscarCuidadores.html" method="GET">
-            <label for="search-sitters">Buscar cuidadores</label>
-            <input type="search" id="search-sitters" name="q" placeholder="Buscar cuidadores...">
-            <button type="submit">Buscar</button>
-        </form>
+            <form role="search" action="buscarCuidadores.html" method="GET" class="search-form">
+                <div class="form-group search-group">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <label for="search-sitters" class="sr-only">Buscar cuidadores</label>
+                    <input type="search" id="search-sitters" name="q" placeholder="Buscar cuidadores..." class="search-input">
+                    <button type="submit" class="button button-primary sr-only">Buscar</button>
+                </div>
+            </form>
 
-        <nav aria-label="Navegación principal">
-            <ul>
-                <li><a href="../index.html">Inicio</a></li>
-                <li><a href="buscarCuidadores.html">Buscar</a></li>
-                <li><a href="servicios.html">Servicios</a></li>
-                <li><a href="misReservas.html">Mis Reservas</a></li>
-                <li><a href="login.html">Perfil</a></li>
-            </ul>
-        </nav>
-        
-        <a href="buscarCuidadores.html">Reservar Ahora</a>
+            <nav aria-label="Navegación principal" class="main-nav">
+                <ul>
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="misReservas.html" class="nav-link">Mis Reservas</a></li>
+                    <li><a href="login.html" class="nav-link active">Perfil</a></li>
+                </ul>
+            </nav>
+            
+            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+        </div>
     </header>
 
-    <main>
+    <div class="container profile-page-wrapper profile-layout-grid">
+        <main class="profile-main-content">
 
-        <section aria-labelledby="profile-name">
-
-            <p>Cuidadora verificada</p>
-            
-            <h1 id="profile-name">Lucía Fernández</h1>
-            <p>Madrid, Chamberí</p>
-            <p>Calificación: 4.9 (124 reseñas)</p>
-            
-            <ul>
-                <li>Cuidadora verificada</li>
-                <li>Amante de los perros grandes</li>
-                <li>Espacio sin humo</li>
-            </ul>
-        </section>
-
-        <section aria-labelledby="about-title">
-            <h2 id="about-title">Sobre mí</h2>
-            <p>¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención constante y personalizada.</p>
-            <p>Me especializo en perros con ansiedad por separación y gatos que necesitan un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo mientras no estás.</p>
-        </section>
-
-        <section aria-labelledby="environment-title">
-            <h2 id="environment-title">Mi Entorno</h2>
-            <a href="#">Ver todas las fotos</a>
-
-        </section>
-
-        <section aria-labelledby="reviews-title">
-            <h2 id="reviews-title">Reseñas de Usuarios</h2>
-            
-            <form>
-                <label for="review-sort">Ordenar por:</label>
-                <select id="review-sort" name="sort">
-                    <option value="recent">Más recientes</option>
-                    <option value="top">Mejor puntuadas</option>
-                </select>
-            </form>
-
-            <article>
-                <h3>Carlos P.</h3>
-                <p>Hace 2 semanas</p>
-                <p>Valoración: 5 estrellas</p>
-                <p>Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
-            </article>
-
-            <article>
-                <h3>María L.</h3>
-                <p>Hace 1 mes</p>
-                <p>Valoración: 4 estrellas</p>
-                <p>Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos. Repetiré sin duda.</p>
-            </article>
-
-            <button type="button">Leer todas las reseñas</button>
-        </section>
-
-    </main>
-
-    <aside aria-labelledby="booking-title">
-        
-        <section aria-labelledby="booking-title">
-            <h2 id="booking-title">Detalles de la Reserva</h2>
-            <p>Desde 25$ / noche</p>
-            
-            <form action="misReservas.html" method="GET">
-                <fieldset>
-                    <legend>Configurar reserva</legend>
+            <section aria-labelledby="profile-name" class="card-surface card-padding profile-header-card">
+                <div class="profile-header-layout">
+                    <div class="profile-avatar-block">
+                        <div class="profile-avatar-circle">
+                            <span class="material-symbols-outlined avatar-icon">person</span>
+                        </div>
+                        <span class="material-symbols-outlined profile-verified-badge" title="Cuidadora verificada">verified</span>
+                    </div>
                     
-                    <label for="check-in">Entrada</label>
-                    <input type="date" id="check-in" name="check-in" value="2024-10-12" required>
+                    <div class="profile-header-info">
+                        <div class="profile-name-rating-row">
+                            <div>
+                                <h1 id="profile-name" class="profile-name-title">Lucía Fernández</h1>
+                                <p class="profile-location"><span class="material-symbols-outlined icon">location_on</span> Madrid, Chamberí</p>
+                            </div>
+                            <div class="profile-rating-badge">
+                                <span class="material-symbols-outlined star-icon">star</span>
+                                <span class="rating-text">4.9 (124 reseñas)</span>
+                            </div>
+                        </div>
+                        
+                        <p class="sr-only">Cuidadora verificada</p>
+                        
+                        <ul class="profile-tags-list">
+                            <li class="profile-tag-pill">Cuidadora verificada</li>
+                            <li class="profile-tag-pill">Amante de los perros grandes</li>
+                            <li class="profile-tag-pill">Espacio sin humo</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <section aria-labelledby="about-title" class="card-surface card-padding profile-section">
+                <h2 id="about-title" class="profile-section-title mb-md">Sobre mí</h2>
+                <p class="profile-bio-text">¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención constante y personalizada.</p>
+                <p class="profile-bio-text">Me especializo en perros con ansiedad por separación y gatos que necesitan un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo mientras no estás.</p>
+            </section>
+
+            <section aria-labelledby="environment-title" class="card-surface card-padding profile-section">
+                <div class="profile-section-header">
+                    <h2 id="environment-title" class="profile-section-title">Mi Entorno</h2>
+                    <a href="#" class="see-all-link">Ver todas las fotos</a>
+                </div>
+                <div class="environment-grid-placeholder">
+                    <div class="env-placeholder-item env-living"><span class="material-symbols-outlined">deck</span><span class="env-label">Salón amplio</span></div>
+                    <div class="env-placeholder-item env-terrace"><span class="material-symbols-outlined">nature</span><span class="env-label">Terraza</span></div>
+                    <div class="env-placeholder-item env-kitchen"><span class="material-symbols-outlined">soup_kitchen</span><span class="env-label">Zona limpia</span></div>
+                    <div class="env-placeholder-item env-more"><span class="more-count">+8</span></div>
+                </div>
+            </section>
+
+            <section aria-labelledby="reviews-title" class="card-surface card-padding profile-section">
+                <div class="profile-section-header">
+                    <h2 id="reviews-title" class="profile-section-title">Reseñas de Usuarios</h2>
                     
-                    <label for="check-out">Salida</label>
-                    <input type="date" id="check-out" name="check-out" value="2024-10-15" required>
-                    
-                    <label for="pet-quantity">Mascota</label>
-                    <select id="pet-quantity" name="pet-quantity" required>
-                        <option value="1">1 Perro</option>
-                        <option value="2">2 Perros</option>
-                    </select>
+                    <form class="reviews-sort-form">
+                        <label for="review-sort" class="sort-label">Ordenar por:</label>
+                        <select id="review-sort" name="sort" class="sort-select">
+                            <option value="recent">Más recientes</option>
+                            <option value="top">Mejor puntuadas</option>
+                        </select>
+                    </form>
+                </div>
 
-                    <p>25$x 3 noches: 75$</p>
-                    <p>Gastos de gestión: 5$</p>
-                    <p><strong>Total: 80$</strong></p>
+                <div class="reviews-list">
+                    <article class="review-item">
+                        <div class="review-header">
+                            <div class="review-user-info">
+                                <div class="review-avatar avatar-cp">CP</div>
+                                <div>
+                                    <h3 class="review-username">Carlos P.</h3>
+                                    <p class="review-date">Hace 2 semanas</p>
+                                </div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="sr-only">Valoración: 5 estrellas</span>
+                            </div>
+                        </div>
+                        <p class="review-comment">Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
+                    </article>
 
-                    <button type="submit">Reservar ahora</button>
-                    <p>No se te cobrará nada aún</p>
-                </fieldset>
-            </form>
-        </section>
+                    <article class="review-item">
+                        <div class="review-header">
+                            <div class="review-user-info">
+                                <div class="review-avatar avatar-ml">ML</div>
+                                <div>
+                                    <h3 class="review-username">María L.</h3>
+                                    <p class="review-date">Hace 1 mes</p>
+                                </div>
+                            </div>
+                            <div class="review-stars">
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-filled">star</span>
+                                <span class="material-symbols-outlined star-empty">star</span>
+                                <span class="sr-only">Valoración: 4 estrellas</span>
+                            </div>
+                        </div>
+                        <p class="review-comment">Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos. Repetiré sin duda.</p>
+                    </article>
+                </div>
 
-        <section aria-labelledby="services-details-title">
-            <h2 id="services-details-title">Servicios ofrecidos</h2>
+                <button type="button" class="button button-outline read-all-reviews-btn">Leer todas las reseñas</button>
+            </section>
+
+        </main>
+
+        <aside aria-labelledby="booking-title" class="profile-sidebar-content">
             
-            <article>
-                <h3>Alojamiento</h3>
-                <p>25$</p>
-                <p>Tu mascota se queda en mi casa a dormir.</p>
-            </article>
+            <section aria-labelledby="booking-title" class="card-surface card-padding booking-sticky-card">
+                <div class="booking-card-header">
+                    <h2 id="booking-title" class="sr-only">Detalles de la Reserva</h2>
+                    <div class="booking-price-row">
+                        <span class="booking-price-val">desde 25$</span>
+                        <span class="booking-price-unit">/ noche</span>
+                    </div>
+                </div>
+                
+                <form action="misReservas.html" method="GET" class="booking-form">
+                    <fieldset class="booking-fieldset">
+                        <legend class="sr-only">Configurar reserva</legend>
+                        
+                        <div class="booking-inputs-stack">
+                            <div class="booking-input-group">
+                                <div class="input-text-block">
+                                    <label for="check-in" class="input-label">Entrada</label>
+                                    <input type="date" id="check-in" name="check-in" value="2024-10-12" required class="booking-date-input">
+                                </div>
+                                <span class="material-symbols-outlined input-icon">calendar_month</span>
+                            </div>
+                            
+                            <div class="booking-input-group">
+                                <div class="input-text-block">
+                                    <label for="check-out" class="input-label">Salida</label>
+                                    <input type="date" id="check-out" name="check-out" value="2024-10-15" required class="booking-date-input">
+                                </div>
+                                <span class="material-symbols-outlined input-icon">calendar_month</span>
+                            </div>
+                            
+                            <div class="booking-input-group">
+                                <div class="input-text-block">
+                                    <label for="pet-quantity" class="input-label">Mascota</label>
+                                    <select id="pet-quantity" name="pet-quantity" required class="booking-select-input">
+                                        <option value="1">1 Perro</option>
+                                        <option value="2">2 Perros</option>
+                                    </select>
+                                </div>
+                                <span class="material-symbols-outlined input-icon">pets</span>
+                            </div>
+                        </div>
 
-            <article>
-                <h3>Cuidado de día</h3>
-                <p>18$</p>
-                <p>Cuidado durante el horario laboral (8h).</p>
-            </article>
+                        <div class="booking-cost-breakdown">
+                            <div class="cost-row">
+                                <span>25$x 3 noches: 75$</span>
+                            </div>
+                            <div class="cost-row">
+                                <span>Gastos de gestión: 5$</span>
+                            </div>
+                            <div class="cost-row cost-total">
+                                <span>Total: 80$</span>
+                            </div>
+                        </div>
 
-            <article>
-                <h3>Paseos</h3>
-                <p>12$</p>
-                <p>Paseo individualizado de 45 min.</p>
-            </article>
+                        <button type="submit" class="button button-hero-accent booking-submit-btn">Reservar ahora</button>
+                        <p class="booking-guarantee-note">No se te cobrará nada aún</p>
+                    </fieldset>
+                </form>
+            </section>
 
-        <section aria-labelledby="stats-title">
-            <h2 id="stats-title">Estadísticas del cuidador</h2>
-            <ul>
-                <li><strong>100%</strong> Respuesta</li>
-                <li><strong>2h</strong> Tiempo medio de respuesta</li>
-            </ul>
-        </section>
-        
-    </aside>
+            <section aria-labelledby="services-details-title" class="card-surface card-padding services-sidebar-card">
+                <h2 id="services-details-title" class="sidebar-section-title">Servicios ofrecidos</h2>
+                
+                <div class="services-list">
+                    <article class="service-detail-item">
+                        <div class="service-icon-box">
+                            <span class="material-symbols-outlined">home</span>
+                        </div>
+                        <div class="service-text-content">
+                            <div class="service-title-row">
+                                <h3 class="service-name">Alojamiento</h3>
+                                <span class="service-price">25$</span>
+                            </div>
+                            <p class="service-desc">Tu mascota se queda en mi casa a dormir.</p>
+                        </div>
+                    </article>
 
-    <footer>
-        <h2>Pet CareConnect</h2>
-        <p>2024 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        
-        <nav aria-label="Enlaces legales y de ayuda">
-            <ul>
-                <li><a href="#">Contáctanos</a></li>
-                <li><a href="#">Política de Privacidad</a></li>
-                <li><a href="#">Términos de Servicio</a></li>
-                <li><a href="#">Preguntas Frecuentes</a></li>
-            </ul>
-        </nav>
+                    <article class="service-detail-item">
+                        <div class="service-icon-box">
+                            <span class="material-symbols-outlined">wb_sunny</span>
+                        </div>
+                        <div class="service-text-content">
+                            <div class="service-title-row">
+                                <h3 class="service-name">Cuidado de día</h3>
+                                <span class="service-price">18$</span>
+                            </div>
+                            <p class="service-desc">Cuidado durante el horario laboral (8h).</p>
+                        </div>
+                    </article>
+
+                    <article class="service-detail-item">
+                        <div class="service-icon-box">
+                            <span class="material-symbols-outlined">directions_walk</span>
+                        </div>
+                        <div class="service-text-content">
+                            <div class="service-title-row">
+                                <h3 class="service-name">Paseos</h3>
+                                <span class="service-price">12$</span>
+                            </div>
+                            <p class="service-desc">Paseo individualizado de 45 min.</p>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <section aria-labelledby="stats-title" class="stats-sidebar-section">
+                <h2 id="stats-title" class="sr-only">Estadísticas del cuidador</h2>
+                <ul class="stats-grid">
+                    <li class="stat-card">
+                        <span class="stat-value">100%</span>
+                        <span class="stat-label">Respuesta</span>
+                    </li>
+                    <li class="stat-card">
+                        <span class="stat-value">2h</span>
+                        <span class="stat-label">Tiempo medio de respuesta</span>
+                    </li>
+                </ul>
+            </section>
+            
+        </aside>
+    </div>
+
+    <footer class="footer">
+        <div class="container footer-container">
+            <div class="footer-brand">
+                <h2>Pet CareConnect</h2>
+                <p>2024 Pet CareConnect Inc. Todos los derechos reservados.</p>
+            </div>
+
+            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
+                <ul>
+                    <li><a href="#">Contáctanos</a></li>
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                </ul>
+            </nav>
+        </div>
     </footer>
 
 </body>

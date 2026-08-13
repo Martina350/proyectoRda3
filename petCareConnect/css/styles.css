@@ -1917,220 +1917,636 @@ main.container {
     margin: 0;
 }
 
-/* Perfil Cuidador Gabriel */
+/* Estilos Perfil del Cuidador - Daysi y Gabriel */
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: var(--header-h);
+.profile-page-wrapper {
+    flex: 1;
+    padding-top: 2rem;
+    padding-bottom: 3.5rem;
+}
+
+.profile-layout-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    align-items: start;
+}
+
+@media (min-width: 992px) {
+    .profile-layout-grid {
+        grid-template-columns: 8fr 4fr;
+    }
+}
+
+.profile-main-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.profile-sidebar-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+/* Header Card de Perfil */
+.profile-header-card {
+    position: relative;
     background: var(--surface);
-    border-bottom: 1px solid var(--border);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+}
+
+.profile-header-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .profile-header-layout {
+        flex-direction: row;
+        align-items: flex-start;
+    }
+}
+
+.profile-avatar-block {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    flex-shrink: 0;
+}
+
+.profile-avatar-circle {
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-xl);
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    box-shadow: var(--shadow-sm);
+}
+
+.profile-avatar-circle .avatar-icon {
+    font-size: 64px;
+}
+
+.profile-verified-badge {
+    position: absolute;
+    bottom: -6px;
+    right: -6px;
+    background: var(--success-bg, #dcfce7);
+    color: var(--success, #15803d);
+    border: 2px solid var(--surface);
+    border-radius: 50%;
+    font-size: 20px;
+    padding: 2px;
+    font-variation-settings: 'FILL' 1;
+}
+
+.profile-header-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.profile-name-rating-row {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+@media (min-width: 640px) {
+    .profile-name-rating-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
+}
+
+.profile-name-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+    margin: 0;
+}
+
+.profile-location {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+}
+
+.profile-location .icon {
+    color: var(--secondary);
+    font-size: 1.1rem;
+}
+
+.profile-rating-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    background-color: rgba(253, 118, 26, 0.12);
+    padding: 0.35rem 0.75rem;
+    border-radius: 9999px;
+    color: var(--secondary);
+    align-self: flex-start;
+    margin: 0;
+}
+
+.profile-rating-badge .star-icon {
+    font-size: 1.1rem;
+    font-variation-settings: 'FILL' 1;
+}
+
+.profile-rating-badge .rating-text {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.profile-verified-subtext {
+    display: none;
+}
+
+.profile-tags-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.profile-tag-pill {
+    background-color: var(--surface-low);
+    color: var(--text-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.3rem 0.65rem;
+    border-radius: var(--radius-md);
+    border: 1px solid rgba(197, 197, 211, 0.3);
+}
+
+/* Secciones estándar en Perfil */
+.profile-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+}
+
+.profile-section-header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 1rem;
-    z-index: 120;
-}
-
-header > span > a {
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: var(--primary);
-}
-
-header form[role="search"] {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-}
-
-header input[type="search"] {
-    width: 260px;
-    padding: 0.5rem 0.75rem;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--border);
-    background: var(--surface-low);
-    outline: none;
-}
-
-header input[type="search"]:focus {
-    border-color: var(--primary);
-    box-shadow: 0 0 0 4px var(--primary-alpha-subtle);
-}
-
-header nav ul {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
-}
-
-header nav a {
-    color: var(--text-muted);
-    font-weight: 600;
-}
-
-header > a { /* Reservar ahora */
-    background: var(--secondary-bright);
-    color: #fff;
-    padding: 0.5rem 0.9rem;
-    border-radius: var(--radius-md);
-    font-weight: 700;
-    border: none;
-}
-
-
-/* Layout: coloca main y aside en dos columnas sin alterar HTML structure */
-body {
-    display: grid;
-    grid-template-columns: 1fr 360px;
-    gap: 2rem;
-    justify-content: center;
-    padding: 0 1rem 2rem 1rem;
-}
-
-main {
-    grid-column: 1 / 2;
-    margin-top: var(--header-h);
-    width: 100%;
-    max-width: var(--max-width);
-    padding: 2rem 0;
-}
-
-aside {
-    grid-column: 2 / 3;
-    margin-top: calc(var(--header-h) + 8px);
-}
-
-
-@media (max-width: 900px) {
-    body {
-        display: block;
-        padding: 0 0.75rem 2rem 0.75rem;
-    }
-    main { margin-top: calc(var(--header-h) + 0.5rem); padding: 1rem 0; }
-    aside { margin-top: 1rem; }
-    header input[type="search"] { display:none; }
-    header nav ul { display:none; }
-    header > a { display:inline-block; }
-}
-
-/* Perfil header card (primer section dentro de main) */
-main > section:first-of-type {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 1.25rem;
-    box-shadow: var(--shadow-sm);
-}
-
-main > section:first-of-type h1#profile-name {
-    font-size: 1.6rem;
-    color: var(--primary);
-    margin-bottom: 0.25rem;
-}
-
-main > section:first-of-type p {
-    color: var(--text-muted);
-    margin-bottom: 0.5rem;
-}
-
-main > section:first-of-type ul {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-top: 0.75rem;
-}
-
-main > section:first-of-type ul li {
-    background: var(--surface-low);
-    padding: 0.35rem 0.6rem;
-    border-radius: var(--radius-md);
-    border: 1px solid rgba(0,0,0,0.03);
-    color: var(--text-muted);
-    font-weight: 600;
-    font-size: 0.85rem;
-}
-
-/* Left column stack: group sections as cards */
-main > section,
-main > section + section,
-main > section ~ section {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-xl);
-    padding: 1rem;
-    box-shadow: var(--shadow-sm);
-}
-
-.reviews-list article {
     margin-bottom: 1rem;
 }
 
-.reviews-list h3 { margin-bottom: 0.25rem; }
+.profile-section-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
 
-/* If the reviews markup does not have classes, target by heading */
-#reviews-title {
+.profile-bio-text {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
     margin-bottom: 0.75rem;
 }
 
-/* Aside / booking card */
-aside {
+.profile-bio-text:last-child {
+    margin-bottom: 0;
+}
+
+/* Galería Mi Entorno (Bento Grid Placeholder) */
+.environment-grid-placeholder {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+@media (min-width: 640px) {
+    .environment-grid-placeholder {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.env-placeholder-item {
+    aspect-ratio: 1 / 1;
+    border-radius: var(--radius-md);
+    background: var(--surface-low);
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-muted);
+    gap: 0.35rem;
+    transition: var(--transition);
+}
+
+.env-placeholder-item:hover {
+    background: var(--surface-high);
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.env-placeholder-item .material-symbols-outlined {
+    font-size: 28px;
+}
+
+.env-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+.env-placeholder-item.env-more {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.env-placeholder-item.env-more .more-count {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+/* Reseñas de usuarios */
+.reviews-sort-form {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.sort-label {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.sort-select {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-main);
+    outline: none;
+    cursor: pointer;
+}
+
+.reviews-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    margin-top: 1rem;
+    margin-bottom: 1.25rem;
+}
+
+.review-item {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.review-user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.review-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.875rem;
+    font-weight: 700;
+    flex-shrink: 0;
+}
+
+.avatar-cp {
+    background: var(--primary-fixed, #dce1ff);
+    color: var(--primary);
+}
+
+.avatar-ml {
+    background: var(--secondary-fixed, #ffdbca);
+    color: var(--secondary);
+}
+
+.review-username {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.review-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.review-stars {
+    display: flex;
+    color: var(--secondary-bright);
+    gap: 2px;
+}
+
+.review-stars .star-filled {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 1;
+}
+
+.review-stars .star-empty {
+    font-size: 18px;
+    font-variation-settings: 'FILL' 0;
+}
+
+.review-comment {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin: 0;
+}
+
+.read-all-reviews-btn {
+    width: 100%;
+    margin-top: 0.5rem;
+}
+
+/* Sidebar: Card de Reserva Sticky */
+.booking-sticky-card {
+    position: sticky;
+    top: 80px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+}
+
+.booking-price-row {
+    display: flex;
+    align-items: baseline;
+    gap: 0.35rem;
+    margin-bottom: 1rem;
+}
+
+.booking-price-val {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.booking-price-unit {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.booking-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 1rem;
 }
 
-aside section {
+.booking-inputs-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.booking-input-group {
+    background: var(--surface-low);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: var(--transition);
+}
+
+.booking-input-group:focus-within {
+    border-color: var(--primary);
+    background: var(--surface);
+}
+
+.input-text-block {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+
+.input-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.booking-date-input,
+.booking-select-input {
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-main);
+    outline: none;
+    padding: 2px 0;
+    width: 100%;
+}
+
+.booking-input-group .input-icon {
+    color: var(--text-muted);
+    font-size: 20px;
+}
+
+.booking-cost-breakdown {
+    border-top: 1px solid var(--border);
+    padding-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.cost-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.cost-row.cost-total {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-top: 0.25rem;
+}
+
+.booking-submit-btn {
+    width: 100%;
+    padding: 0.85rem 1.25rem;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.booking-guarantee-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin: 0;
+}
+
+/* Sidebar: Servicios Ofrecidos */
+.services-sidebar-card {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 1rem;
-    box-shadow: var(--shadow-sm);
 }
 
-aside form fieldset {
-    border: none;
+.sidebar-section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.services-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.service-detail-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.service-detail-item:hover {
+    background: var(--surface-low);
+}
+
+.service-icon-box {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--primary-fixed, #dce1ff);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.service-icon-box .material-symbols-outlined {
+    font-size: 22px;
+}
+
+.service-text-content {
+    flex: 1;
+}
+
+.service-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.service-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin: 0;
+}
+
+.service-price {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.service-desc {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    margin-top: 2px;
+    line-height: 1.3;
+}
+
+/* Sidebar: Estadísticas */
+.stats-sidebar-section {
+    width: 100%;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+    list-style: none;
     padding: 0;
     margin: 0;
 }
 
-aside button[type="submit"],
-aside button {
-    display: inline-block;
-    width: 100%;
-    background: var(--secondary);
-    color: #fff;
-    padding: 0.85rem 1rem;
+.stat-card {
+    background: var(--surface-high);
+    border: 1px solid var(--border);
     border-radius: var(--radius-xl);
+    padding: 0.85rem;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.stat-value {
+    font-size: 1.4rem;
     font-weight: 700;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 8px 24px rgba(157,67,0,0.12);
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    color: var(--primary);
+    line-height: 1.2;
 }
 
-aside button[type="submit"]:hover { transform: translateY(-2px); opacity: 0.98; }
-
-/* Price header in aside */
-aside h2, aside h3 { color: var(--primary); }
-
-/* Services list in aside */
-aside article { margin-bottom: 0.5rem; }
-
-/* Footer tweaks */
-footer {
-    background: var(--surface-low);
-    border-top: 1px solid var(--border);
-    padding: 1.5rem 1rem;
+.stat-label {
+    font-size: 0.65rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-top: 2px;
 }
 
-/* Utility: small muted text */
-.muted { color: var(--text-muted); }
 
-/* Improve spacing for review blocks if present */
-.review { padding: 0.75rem 0; border-bottom: 1px solid var(--surface-high); }
 
-/* Accessibility focus outlines */
-a:focus, button:focus, input:focus, select:focus { outline: 3px solid var(--primary-alpha); outline-offset: 2px; }
