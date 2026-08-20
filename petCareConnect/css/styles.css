@@ -803,16 +803,21 @@ main.container {
 
 .catalog-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     width: 100%;
 }
 
-.catalog-cell {
-    display: block;
-    width: 100%;
-    padding: 0 !important;
-    border: none !important;
+@media (min-width: 640px) {
+    .catalog-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .catalog-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .catalog-card {
@@ -839,6 +844,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .catalog-card-title-row h3 {
@@ -846,6 +853,8 @@ main.container {
     font-weight: 700;
     color: var(--primary);
     margin: 0;
+    min-width: 0;
+    flex: 1;
 }
 
 .badge-popular {
@@ -868,6 +877,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
     margin-top: 1.25rem;
