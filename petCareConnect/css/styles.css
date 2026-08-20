@@ -1754,6 +1754,7 @@ main.container {
     justify-content: center;
     background-color: var(--bg-main);
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 .login-main-container {
@@ -1814,11 +1815,17 @@ main.container {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.25rem;
     box-shadow: 0 4px 16px rgba(0, 35, 111, 0.05);
     width: 100%;
     margin-top: 1.25rem;
     text-align: left;
+}
+
+@media (min-width: 480px) {
+    .login-card-container {
+        padding: 2rem;
+    }
 }
 
 .login-fieldset {
@@ -1847,6 +1854,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
 }
 
 .forgot-password-link {
