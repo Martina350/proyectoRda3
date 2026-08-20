@@ -1,7 +1,3 @@
-/**
- * Pet CareConnect - Módulo de Autenticación y Gestión de Usuario (Fase D)
- */
-
 const PCC_AUTH = {
     STORAGE_KEYS: {
         USER: 'pcc_user',
@@ -10,12 +6,12 @@ const PCC_AUTH = {
     },
 
     DEFAULT_USER: {
-        name: 'Alejandro Martínez',
-        email: 'alejandro.martinez@ejemplo.com',
-        phone: '+34 612 345 678',
-        location: 'Chamberí, Madrid, España',
-        memberSince: 'Marzo 2024',
-        avatar: 'AM'
+        name: 'Gabriel Flor',
+        email: 'gabriel.flor@gmail.com',
+        phone: '+593 96 931 7653',
+        location: 'Quito, Ecuador',
+        memberSince: 'Julio 2026',
+        avatar: 'GF'
     },
 
     DEFAULT_PETS: [
@@ -55,6 +51,9 @@ const PCC_AUTH = {
             localStorage.setItem(this.STORAGE_KEYS.SESSION, 'true');
         }
 
+        if (window.PCC_LAYOUT) {
+            PCC_LAYOUT.render();
+        }
         this.syncNav();
     },
 
@@ -87,8 +86,8 @@ const PCC_AUTH = {
             user = {
                 name: formattedName,
                 email: email,
-                phone: '+34 600 000 000',
-                location: 'Madrid, España',
+                phone: '+593 96 931 7653',
+                location: 'Quito, Ecuador',
                 memberSince: 'Hoy',
                 avatar: formattedName.substring(0, 2).toUpperCase()
             };
@@ -110,8 +109,8 @@ const PCC_AUTH = {
         const newUser = {
             name: name.trim(),
             email: email.trim().toLowerCase(),
-            phone: phone ? phone.trim() : '+34 600 000 000',
-            location: 'Madrid, España',
+            phone: phone ? phone.trim() : '+593 96 931 7653',
+            location: 'Quito, Ecuador',
             memberSince: '2026',
             avatar: initials
         };
@@ -122,9 +121,12 @@ const PCC_AUTH = {
         return newUser;
     },
 
-    logout() {
+    logout(options = {}) {
         localStorage.setItem(this.STORAGE_KEYS.SESSION, 'false');
         this.syncNav();
+        if (options.redirectTo) {
+            window.location.href = options.redirectTo;
+        }
     },
 
     getPets() {

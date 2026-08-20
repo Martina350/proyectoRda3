@@ -11,36 +11,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/styles.css">
     <script src="js/toast.js" defer></script>
+    <script src="js/layout.js" defer></script>
     <script src="js/auth.js" defer></script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container navbar-container">
-            <span class="brand-logo"><a href="index.html" class="brand-name">Pet CareConnect</a></span>
-
-            <form role="search" action="pages/buscarCuidadores.html" method="GET" class="search-form">
-                <div class="form-group search-group">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <label for="search-sitters" class="sr-only">Buscar cuidadores</label>
-                    <input type="text" id="search-sitters" class="search-input" name="q" placeholder="Buscar cuidadores...">
-                    <button type="submit" class="button button-primary sr-only">Buscar</button>
-                </div>
-            </form>
-
-            <nav aria-label="Navegación principal" class="main-nav">
-                <ul>
-                    <li><a href="index.html" class="nav-link active">Inicio</a></li>
-                    <li><a href="pages/buscarCuidadores.html" class="nav-link">Buscar</a></li>
-                    <li><a href="pages/servicios.html" class="nav-link">Servicios</a></li>
-                    <li><a href="pages/misReservas.html" class="nav-link">Reservas</a></li>
-                    <li><a href="pages/login.html" class="nav-link">Iniciar sesión</a></li>
-                </ul>
-            </nav>
-            
-            <a href="pages/buscarCuidadores.html?intent=reservar" class="button button-accent">Reservar ahora</a>
-        </div>
-    </header>
+    <div id="site-header"></div>
 
     <main class="container">
 
@@ -72,7 +48,7 @@
                                 <span class="material-symbols-outlined">directions_walk</span>
                             </div>
                             <div class="booking-info">
-                                <h3>Paseo con Max</h3>
+                                <h3>Paseo con Bruno</h3>
                                 <p>Hoy, 14:30 - Laura S.</p>
                             </div>
                             <span class="badge badge-success">Activo</span>
@@ -138,47 +114,8 @@
 
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <h2>Pet CareConnect</h2>
-                <p>Cuidando a los que más quieres.</p>
-            </div>
+    <div id="site-footer"></div>
 
-            <nav aria-label="Enlaces legales y ayuda" class="footer-nav">
-                <ul>
-                    <li><a href="#">Contáctanos</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                </ul>
-            </nav>
-            
-            <p class="footer-copyright">2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <nav aria-label="Navegación móvil" class="mobile-nav">
-        <a href="index.html" class="mobile-nav-item active">
-            <span class="material-symbols-outlined">explore</span>
-            <span>Inicio</span>
-        </a>
-        <a href="pages/buscarCuidadores.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">search</span>
-            <span>Buscar</span>
-        </a>
-        <a href="pages/servicios.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">pets</span>
-            <span>Servicios</span>
-        </a>
-        <a href="pages/misReservas.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span>Reservas</span>
-        </a>
-        <a href="pages/login.html" class="mobile-nav-item" aria-label="Iniciar sesión">
-            <span class="material-symbols-outlined">person</span>
-            <span>Cuenta</span>
-        </a>
-    </nav>
+    <div id="site-mobile-nav"></div>
 </body>
 </html>

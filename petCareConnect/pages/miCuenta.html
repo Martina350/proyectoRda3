@@ -11,36 +11,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/account.js" defer></script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container navbar-container">
-            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
-
-            <form role="search" action="buscarCuidadores.html" method="GET" class="search-form">
-                <div class="form-group search-group">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <label for="search-sitters" class="sr-only">Buscar cuidadores</label>
-                    <input type="search" id="search-sitters" name="q" placeholder="Buscar cuidadores..." class="search-input">
-                    <button type="submit" class="button button-primary sr-only">Buscar</button>
-                </div>
-            </form>
-
-            <nav aria-label="Navegación principal" class="main-nav">
-                <ul>
-                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
-                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
-                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
-                    <li><a href="misReservas.html" class="nav-link">Reservas</a></li>
-                    <li><a href="miCuenta.html" class="nav-link active">Mi Cuenta</a></li>
-                </ul>
-            </nav>
-            
-            <a href="buscarCuidadores.html?intent=reservar" class="button button-accent">Reservar ahora</a>
-        </div>
-    </header>
+    <div id="site-header"></div>
 
     <main class="container account-page-wrapper">
 
@@ -50,17 +27,17 @@
                 <div class="account-user-avatar" id="headerUserAvatar">AM</div>
                 <div class="account-user-info">
                     <h1 id="user-name-title">
-                        <span id="headerUserName">Alejandro Martínez</span>
+                        <span id="headerUserName">Gabriel Flor</span>
                         <span class="account-verified-tag">
                             <span class="material-symbols-outlined" style="font-size: 14px;">verified</span>
                             Verificado
                         </span>
                     </h1>
-                    <p id="headerUserEmail">alejandro.martinez@ejemplo.com</p>
+                    <p id="headerUserEmail">gabriel.flor@gmail.com</p>
                     <div class="account-user-meta">
-                        <span id="headerUserLocation">Chamberí, Madrid</span>
+                        <span id="headerUserLocation">Quito, Ecuador</span>
                         <span>•</span>
-                        <span id="headerUserMember">Miembro desde Marzo 2024</span>
+                        <span id="headerUserMember">Miembro desde Julio 2026</span>
                     </div>
                 </div>
             </div>
@@ -93,7 +70,6 @@
             </button>
         </nav>
 
-        <!-- CONTENIDO PESTAÑA 1: MIS MASCOTAS -->
         <section id="tab-mascotas" class="account-tab-pane active" aria-labelledby="mascotas-heading">
             <div class="pets-section-header">
                 <div>
@@ -107,11 +83,11 @@
             </div>
 
             <div class="pets-grid" id="petsGridContainer">
-                <!-- Se rellena dinámicamente con JS -->
+
             </div>
         </section>
 
-        <!-- CONTENIDO PESTAÑA 2: DATOS PERSONALES -->
+
         <section id="tab-datos" class="account-tab-pane" aria-labelledby="datos-heading">
             <div class="account-card-box">
                 <h2 id="datos-heading" class="account-box-title">Información Personal</h2>
@@ -147,7 +123,6 @@
             </div>
         </section>
 
-        <!-- CONTENIDO PESTAÑA 3: MÉTODOS DE PAGO -->
         <section id="tab-pagos" class="account-tab-pane" aria-labelledby="pagos-heading">
             <div class="account-card-box">
                 <h2 id="pagos-heading" class="account-box-title">Tarjetas y Métodos de Pago</h2>
@@ -229,7 +204,6 @@
 
     </main>
 
-    <!-- MODAL: AÑADIR MASCOTA -->
     <div id="addPetModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="addPetModalTitle">
         <div class="modal-card">
             <div class="modal-header">
@@ -284,7 +258,7 @@
 
                     <div class="login-form-item">
                         <label for="petNotesInput">Observaciones, medicación o alergias</label>
-                        <textarea id="petNotesInput" class="login-input" style="padding-left: 0.85rem; height: 80px; resize: vertical;" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés."></textarea>
+                        <textarea id="petNotesInput" class="login-input" style="padding-left: 0.85rem; min-height: 64px; height: auto; resize: vertical;" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés."></textarea>
                     </div>
                 </div>
 
@@ -321,328 +295,7 @@
         </div>
     </div>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <h2>Pet CareConnect</h2>
-                <p>Cuidando a los que más quieres.</p>
-            </div>
-
-            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
-                <ul>
-                    <li><a href="#">Contáctanos</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                </ul>
-            </nav>
-            
-            <p class="footer-copyright">2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        </div>
-    </footer>
-
-    <nav aria-label="Navegación móvil" class="mobile-nav">
-        <a href="../index.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">explore</span>
-            <span>Inicio</span>
-        </a>
-        <a href="buscarCuidadores.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">search</span>
-            <span>Buscar</span>
-        </a>
-        <a href="servicios.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">pets</span>
-            <span>Servicios</span>
-        </a>
-        <a href="misReservas.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span>Reservas</span>
-        </a>
-        <a href="miCuenta.html" class="mobile-nav-item active" aria-label="Mi Cuenta">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-            <span>Cuenta</span>
-        </a>
-    </nav>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Cargar datos de usuario
-            function renderUserData() {
-                const user = PCC_AUTH.getUser();
-                document.getElementById('headerUserName').textContent = user.name || 'Usuario';
-                document.getElementById('headerUserEmail').textContent = user.email || '';
-                document.getElementById('headerUserLocation').textContent = user.location || 'Madrid, España';
-                document.getElementById('headerUserMember').textContent = `Miembro desde ${user.memberSince || '2024'}`;
-                document.getElementById('headerUserAvatar').textContent = user.avatar || 'US';
-
-                // Campos de formulario
-                document.getElementById('profileName').value = user.name || '';
-                document.getElementById('profileEmail').value = user.email || '';
-                document.getElementById('profilePhone').value = user.phone || '';
-                document.getElementById('profileLocation').value = user.location || '';
-            }
-
-            // Render de Mascotas
-            function renderPets() {
-                const pets = PCC_AUTH.getPets();
-                const container = document.getElementById('petsGridContainer');
-                document.getElementById('tabPetsCount').textContent = pets.length;
-
-                let html = '';
-
-                pets.forEach(pet => {
-                    html += `
-                        <article class="pet-card" id="${pet.id}">
-                            <div class="pet-card-top">
-                                <div class="pet-avatar-icon">
-                                    <span class="material-symbols-outlined">pets</span>
-                                </div>
-                                <div class="pet-card-title">
-                                    <h3>${pet.name}</h3>
-                                    <p>${pet.type} · ${pet.breed}</p>
-                                </div>
-                            </div>
-                            
-                            <div class="pet-specs-list">
-                                <span class="pet-spec-pill">${pet.age}</span>
-                                <span class="pet-spec-pill">${pet.weight}</span>
-                                <span class="pet-spec-pill">${pet.gender}</span>
-                            </div>
-
-                            <div class="pet-notes-box">
-                                <strong>Notas de cuidado:</strong><br>
-                                ${pet.notes}
-                            </div>
-
-                            <div class="pet-card-actions">
-                                <button type="button" class="pet-btn-delete" data-pet-id="${pet.id}" data-pet-name="${pet.name}">
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
-                                    Eliminar
-                                </button>
-                            </div>
-                        </article>
-                    `;
-                });
-
-                // Card para añadir
-                html += `
-                    <div class="add-pet-dash-card" id="btnDashAddPet" role="button" tabindex="0" aria-label="Añadir nueva mascota">
-                        <div class="add-pet-icon">
-                            <span class="material-symbols-outlined">add</span>
-                        </div>
-                        <span class="add-title">+ Añadir otra mascota</span>
-                        <span class="add-desc">Registra el perfil médico y hábitos</span>
-                    </div>
-                `;
-
-                container.innerHTML = html;
-
-                // Eventos de eliminar
-                container.querySelectorAll('.pet-btn-delete').forEach(btn => {
-                    btn.addEventListener('click', () => {
-                        const id = btn.getAttribute('data-pet-id');
-                        const name = btn.getAttribute('data-pet-name');
-                        PCC_AUTH.deletePet(id);
-                        renderPets();
-                        if (window.showToast) {
-                            window.showToast(`${name} ha sido eliminado de tus mascotas`, 'info');
-                        }
-                    });
-                });
-
-                // Evento en card dash
-                const dashAdd = document.getElementById('btnDashAddPet');
-                if (dashAdd) {
-                    dashAdd.addEventListener('click', openAddPetModal);
-                    dashAdd.addEventListener('keydown', (e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                            e.preventDefault();
-                            openAddPetModal();
-                        }
-                    });
-                }
-            }
-
-            renderUserData();
-            renderPets();
-
-            // Tabs Switcher
-            const tabButtons = document.querySelectorAll('.account-tab-btn');
-            const tabPanes = document.querySelectorAll('.account-tab-pane');
-
-            tabButtons.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    tabButtons.forEach(b => b.classList.remove('active'));
-                    tabPanes.forEach(p => p.classList.remove('active'));
-
-                    btn.classList.add('active');
-                    const targetId = btn.getAttribute('data-tab');
-                    const pane = document.getElementById(targetId);
-                    if (pane) pane.classList.add('active');
-                });
-            });
-
-            // Guardar Datos Personales
-            const profileForm = document.getElementById('userDataForm');
-            profileForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const saveBtn = document.getElementById('btnSaveProfile');
-                saveBtn.classList.add('is-loading');
-
-                setTimeout(() => {
-                    saveBtn.classList.remove('is-loading');
-                    const updated = PCC_AUTH.updateUser({
-                        name: document.getElementById('profileName').value.trim(),
-                        email: document.getElementById('profileEmail').value.trim(),
-                        phone: document.getElementById('profilePhone').value.trim(),
-                        location: document.getElementById('profileLocation').value.trim()
-                    });
-                    renderUserData();
-                    if (window.showToast) {
-                        window.showToast('Información personal guardada con éxito', 'success');
-                    }
-                }, 500);
-            });
-
-            // Cambiar contraseña
-            const passForm = document.getElementById('changePasswordForm');
-            passForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const current = document.getElementById('currentPass').value;
-                const newP = document.getElementById('newPass').value;
-                const confirmP = document.getElementById('confirmNewPass').value;
-
-                if (!current) {
-                    window.showToast('Introduce tu contraseña actual', 'error');
-                    return;
-                }
-                if (!newP || newP.length < 8) {
-                    window.showToast('La nueva contraseña debe tener al menos 8 caracteres', 'error');
-                    return;
-                }
-                if (newP !== confirmP) {
-                    window.showToast('Las contraseñas no coinciden', 'error');
-                    return;
-                }
-
-                const btn = document.getElementById('btnUpdatePass');
-                btn.classList.add('is-loading');
-                btn.textContent = 'Actualizando...';
-
-                setTimeout(() => {
-                    btn.classList.remove('is-loading');
-                    btn.textContent = 'Actualizar Contraseña';
-                    passForm.reset();
-                    if (window.showToast) {
-                        window.showToast('Contraseña actualizada correctamente', 'success');
-                    }
-                }, 600);
-            });
-
-            // Modal Añadir Mascota
-            const addPetModal = document.getElementById('addPetModal');
-            const btnOpenAddPet = document.getElementById('btnOpenAddPetModal');
-            const btnCloseAddPet = document.getElementById('btnCloseAddPetModal');
-            const btnCancelAddPet = document.getElementById('btnCancelAddPet');
-            const addPetForm = document.getElementById('addPetForm');
-            const petNameInput = document.getElementById('petNameInput');
-            const petNameError = document.getElementById('petNameError');
-
-            function openAddPetModal() {
-                addPetForm.reset();
-                petNameError.classList.remove('is-visible');
-                petNameInput.classList.remove('is-invalid');
-                addPetModal.classList.add('is-open');
-                petNameInput.focus();
-            }
-
-            function closeAddPetModal() {
-                addPetModal.classList.remove('is-open');
-            }
-
-            if (btnOpenAddPet) btnOpenAddPet.addEventListener('click', openAddPetModal);
-            if (btnCloseAddPet) btnCloseAddPet.addEventListener('click', closeAddPetModal);
-            if (btnCancelAddPet) btnCancelAddPet.addEventListener('click', closeAddPetModal);
-
-            addPetForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const name = petNameInput.value.trim();
-                if (!name) {
-                    petNameInput.classList.add('is-invalid');
-                    petNameError.classList.add('is-visible');
-                    petNameInput.focus();
-                    return;
-                }
-
-                const newPet = PCC_AUTH.addPet({
-                    name: name,
-                    type: document.getElementById('petTypeSelect').value,
-                    breed: document.getElementById('petBreedInput').value || 'Mestizo',
-                    age: document.getElementById('petAgeInput').value || '1 año',
-                    weight: document.getElementById('petWeightInput').value || '10 kg',
-                    gender: document.getElementById('petGenderSelect').value,
-                    notes: document.getElementById('petNotesInput').value || 'Sin observaciones especiales.'
-                });
-
-                closeAddPetModal();
-                renderPets();
-                if (window.showToast) {
-                    window.showToast(`¡${newPet.name} ha sido añadido a tu lista de mascotas!`, 'success');
-                }
-            });
-
-            // Modal Cerrar Sesión
-            const logoutModal = document.getElementById('logoutModal');
-            const btnOpenLogout = document.getElementById('btnOpenLogoutModal');
-            const btnDangerLogout = document.getElementById('btnDangerLogout');
-            const btnCloseLogout = document.getElementById('btnCloseLogoutModal');
-            const btnCancelLogout = document.getElementById('btnCancelLogout');
-            const btnConfirmLogout = document.getElementById('btnConfirmLogout');
-
-            function openLogoutModal() {
-                logoutModal.classList.add('is-open');
-            }
-            function closeLogoutModal() {
-                logoutModal.classList.remove('is-open');
-            }
-
-            if (btnOpenLogout) btnOpenLogout.addEventListener('click', openLogoutModal);
-            if (btnDangerLogout) btnDangerLogout.addEventListener('click', openLogoutModal);
-            if (btnCloseLogout) btnCloseLogout.addEventListener('click', closeLogoutModal);
-            if (btnCancelLogout) btnCancelLogout.addEventListener('click', closeLogoutModal);
-
-            btnConfirmLogout.addEventListener('click', () => {
-                btnConfirmLogout.classList.add('is-loading');
-                btnConfirmLogout.textContent = 'Cerrando...';
-
-                setTimeout(() => {
-                    PCC_AUTH.logout();
-                    if (window.showToast) {
-                        window.showToast('Has cerrado sesión correctamente', 'info');
-                    }
-                    setTimeout(() => {
-                        window.location.href = 'login.html';
-                    }, 500);
-                }, 600);
-            });
-
-            // Cerrar modales con Escape o clic en overlay
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeAddPetModal();
-                    closeLogoutModal();
-                }
-            });
-
-            [addPetModal, logoutModal].forEach(modal => {
-                modal.addEventListener('click', (e) => {
-                    if (e.target === modal) {
-                        closeAddPetModal();
-                        closeLogoutModal();
-                    }
-                });
-            });
-        });
-    </script>
+    <div id="site-footer"></div>
+    <div id="site-mobile-nav"></div>
 </body>
 </html>
