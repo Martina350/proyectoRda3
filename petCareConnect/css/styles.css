@@ -52,6 +52,11 @@ body {
     display: flex;
     flex-direction: column;
     padding-top: var(--header-h);
+    padding-bottom: 70px;
+}
+
+body.login-page-body {
+    padding-bottom: 0;
 }
 
 a {
@@ -331,14 +336,27 @@ ul {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 1rem;
+    gap: 0.75rem;
+    min-width: 0;
 }
 
 .brand-name {
-    font-size: 1.5rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--primary);
     letter-spacing: -0.02em;
+    white-space: nowrap;
+}
+
+.navbar .button-accent {
+    flex-shrink: 0;
+    padding: 0.5rem 0.85rem;
+    font-size: 0.8rem;
+}
+
+.main-nav,
+.search-form {
+    display: none;
 }
 
 .search-form {
@@ -409,11 +427,17 @@ main.container {
     background: linear-gradient(90deg, rgba(0, 22, 78, 0.82) 0%, rgba(0, 35, 111, 0.55) 50%, rgba(0, 35, 111, 0.15) 100%);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    min-height: 380px;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2.5rem;
+    padding: 1.5rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -423,7 +447,7 @@ main.container {
 }
 
 .hero-content h1 {
-    font-size: 2.1rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #fff;
     line-height: 1.2;
@@ -434,6 +458,17 @@ main.container {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .hero-card {
+        min-height: 380px;
+        padding: 2.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.1rem;
+    }
 }
 
 .hero-actions {
@@ -529,6 +564,8 @@ main.container {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
     margin-bottom: 1.5rem;
 }
 
@@ -550,8 +587,20 @@ main.container {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .service-card {
@@ -673,20 +722,31 @@ main.container {
     padding: 0 1rem;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1024px) {
+    .brand-name {
+        font-size: 1.5rem;
+    }
+
+    .navbar .button-accent {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
+    }
+
+    .main-nav {
+        display: block;
+    }
+
+    .search-form {
+        display: block;
+        min-width: 0;
+    }
+
     .mobile-nav {
         display: none;
     }
-}
 
-@media (max-width: 767px) {
     body {
-        padding-bottom: 60px;
-    }
-
-    .main-nav,
-    .search-form {
-        display: none;
+        padding-bottom: 0;
     }
 }
 
@@ -741,49 +801,23 @@ main.container {
     margin-bottom: 3.5rem;
 }
 
-.catalog-table {
-    width: 100%;
-    border: none !important;
-    border-collapse: collapse;
-    display: block;
-}
-
-.catalog-grid-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    width: 100%;
-}
-
-.catalog-grid-row {
+.catalog-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     width: 100%;
 }
 
 @media (min-width: 640px) {
-    .catalog-grid-row {
+    .catalog-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media (min-width: 1024px) {
-    .catalog-grid-body {
-        display: grid;
+    .catalog-grid {
         grid-template-columns: repeat(4, 1fr);
     }
-
-    .catalog-grid-row {
-        display: contents;
-    }
-}
-
-.catalog-cell {
-    display: block;
-    width: 100%;
-    padding: 0 !important;
-    border: none !important;
 }
 
 .catalog-card {
@@ -810,6 +844,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .catalog-card-title-row h3 {
@@ -817,6 +853,8 @@ main.container {
     font-weight: 700;
     color: var(--primary);
     margin: 0;
+    min-width: 0;
+    flex: 1;
 }
 
 .badge-popular {
@@ -839,6 +877,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
     padding-top: 1rem;
     border-top: 1px solid var(--border);
     margin-top: 1.25rem;
@@ -949,6 +989,8 @@ main.container {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    min-width: 0;
+    width: 100%;
     background: var(--surface);
     padding: 0.4rem 0.85rem;
     border-radius: var(--radius-md);
@@ -959,25 +1001,34 @@ main.container {
 .filter-icon {
     font-size: 1.15rem;
     color: var(--text-muted);
+    flex-shrink: 0;
 }
 
 .filter-label {
     font-weight: 600;
     color: var(--text-main);
     font-size: 0.875rem;
+    flex-shrink: 0;
 }
 
 .search-input {
     flex: 1;
 }
 
+.filter-pill .form-control,
 .filter-input,
 .filter-select {
+    width: auto;
+    flex: 1;
+    min-width: 0;
     cursor: pointer;
 }
 
 .button-more-filters {
-    margin-left: auto;
+    margin-left: 0;
+    width: 100%;
+    justify-content: center;
+    padding: 0.5rem 0;
     background: transparent;
     border: none;
     color: var(--primary);
@@ -993,6 +1044,20 @@ main.container {
 
 .button-more-filters:hover {
     text-decoration: underline;
+}
+
+@media (min-width: 640px) {
+    .filter-pill {
+        width: auto;
+        flex: 1 1 200px;
+    }
+
+    .button-more-filters {
+        margin-left: auto;
+        width: auto;
+        flex: 0 0 auto;
+        padding: 0;
+    }
 }
 
 .sitters-section {
@@ -1107,6 +1172,13 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 0.75rem;
+    min-width: 0;
+}
+
+.sitter-header-row > div:first-child {
+    min-width: 0;
+    flex: 1;
 }
 
 .sitter-header-row h3 {
@@ -1114,11 +1186,13 @@ main.container {
     font-weight: 700;
     color: var(--primary);
     margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .rating-block {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 4px;
     margin-top: 4px;
 }
@@ -1142,6 +1216,7 @@ main.container {
 }
 
 .price-block {
+    flex-shrink: 0;
     text-align: right;
 }
 
@@ -1215,7 +1290,8 @@ main.container {
 .sitter-card-actions {
     display: flex;
     gap: 8px;
-    margin-top: 0.25rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
 }
 
 .action-btn {
@@ -1272,27 +1348,13 @@ main.container {
     color: var(--text-main);
 }
 
-.mobile-nav ul {
-    display: flex;
-    width: 100%;
-    justify-content: space-around;
-    align-items: center;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
 /* ==========================================================================
    Estilos Daysi Mis Reservas 
    ========================================================================== */
 
 .bookings-main {
-    flex: 1;
-    padding-top: 2.5rem;
-    padding-bottom: 3.5rem;
-    display: flex;
-    flex-direction: column;
     gap: 2rem;
+    padding-bottom: 3.5rem;
 }
 
 .bookings-header-section {
@@ -1315,12 +1377,18 @@ main.container {
 
 .bookings-columns-grid {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: 1fr;
     gap: 1.5rem;
     align-items: start;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 640px) {
+    .bookings-columns-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
     .bookings-columns-grid {
         grid-template-columns: repeat(3, 1fr);
     }
@@ -1413,6 +1481,7 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    flex-wrap: wrap;
     gap: 0.5rem;
 }
 
@@ -1420,6 +1489,8 @@ main.container {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    min-width: 0;
+    flex: 1 1 12rem;
 }
 
 .avatar-circle {
@@ -1469,6 +1540,7 @@ main.container {
 .provider-text {
     display: flex;
     flex-direction: column;
+    min-width: 0;
 }
 
 .card-service-title {
@@ -1477,6 +1549,7 @@ main.container {
     color: var(--text-main);
     line-height: 1.3;
     margin: 0;
+    overflow-wrap: anywhere;
 }
 
 .card-service-title.text-muted {
@@ -1623,7 +1696,13 @@ main.container {
 }
 
 .card-actions-grid.two-cols {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
+}
+
+@media (min-width: 400px) {
+    .card-actions-grid.two-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }
 
 .card-actions-grid.full-width {
@@ -1675,6 +1754,7 @@ main.container {
     justify-content: center;
     background-color: var(--bg-main);
     padding-top: 0;
+    padding-bottom: 0;
 }
 
 .login-main-container {
@@ -1735,11 +1815,17 @@ main.container {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
-    padding: 2rem;
+    padding: 1.25rem;
     box-shadow: 0 4px 16px rgba(0, 35, 111, 0.05);
     width: 100%;
     margin-top: 1.25rem;
     text-align: left;
+}
+
+@media (min-width: 480px) {
+    .login-card-container {
+        padding: 2rem;
+    }
 }
 
 .login-fieldset {
@@ -1768,6 +1854,8 @@ main.container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 0.25rem 0.75rem;
 }
 
 .forgot-password-link {
@@ -1932,12 +2020,6 @@ main.container {
     align-items: start;
 }
 
-@media (min-width: 992px) {
-    .profile-layout-grid {
-        grid-template-columns: 8fr 4fr;
-    }
-}
-
 .profile-main-content {
     display: flex;
     flex-direction: column;
@@ -1948,6 +2030,17 @@ main.container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+    order: -1;
+}
+
+@media (min-width: 1024px) {
+    .profile-layout-grid {
+        grid-template-columns: 8fr 4fr;
+    }
+
+    .profile-sidebar-content {
+        order: 0;
+    }
 }
 
 /* Header Card de Perfil */
@@ -2106,6 +2199,8 @@ main.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
     margin-bottom: 1rem;
 }
 
@@ -2114,6 +2209,7 @@ main.container {
     font-weight: 700;
     color: var(--primary);
     margin: 0;
+    min-width: 0;
 }
 
 .profile-bio-text {
@@ -2184,6 +2280,7 @@ main.container {
 .reviews-sort-form {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 0.5rem;
     margin: 0;
 }
@@ -2229,12 +2326,15 @@ main.container {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
 }
 
 .review-user-info {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    min-width: 0;
 }
 
 .review-avatar {
@@ -2302,12 +2402,18 @@ main.container {
 
 /* Sidebar: Card de Reserva Sticky */
 .booking-sticky-card {
-    position: sticky;
-    top: 80px;
+    position: static;
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 1024px) {
+    .booking-sticky-card {
+        position: sticky;
+        top: 80px;
+    }
 }
 
 .booking-price-row {
@@ -2483,7 +2589,8 @@ main.container {
 .service-title-row {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: baseline;
+    gap: 0.5rem;
 }
 
 .service-name {
@@ -2491,6 +2598,7 @@ main.container {
     font-weight: 700;
     color: var(--text-main);
     margin: 0;
+    min-width: 0;
 }
 
 .service-price {
