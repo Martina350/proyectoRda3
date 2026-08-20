@@ -427,11 +427,17 @@ main.container {
     background: linear-gradient(90deg, rgba(0, 22, 78, 0.82) 0%, rgba(0, 35, 111, 0.55) 50%, rgba(0, 35, 111, 0.15) 100%);
     border: 1px solid var(--border);
     box-shadow: var(--shadow-sm);
-    min-height: 380px;
+    min-height: 280px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    padding: 2.5rem;
+    padding: 1.5rem;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
 }
 
 .hero-content {
@@ -441,7 +447,7 @@ main.container {
 }
 
 .hero-content h1 {
-    font-size: 2.1rem;
+    font-size: 1.6rem;
     font-weight: 700;
     color: #fff;
     line-height: 1.2;
@@ -452,6 +458,17 @@ main.container {
     font-size: 1rem;
     color: rgba(255, 255, 255, 0.9);
     margin-bottom: 1.5rem;
+}
+
+@media (min-width: 768px) {
+    .hero-card {
+        min-height: 380px;
+        padding: 2.5rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.1rem;
+    }
 }
 
 .hero-actions {
@@ -547,6 +564,8 @@ main.container {
     display: flex;
     align-items: baseline;
     justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
     margin-bottom: 1.5rem;
 }
 
@@ -568,8 +587,20 @@ main.container {
 
 .services-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    grid-template-columns: 1fr;
     gap: 1rem;
+}
+
+@media (min-width: 640px) {
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (min-width: 1024px) {
+    .services-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .service-card {
