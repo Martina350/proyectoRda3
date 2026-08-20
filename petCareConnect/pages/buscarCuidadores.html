@@ -17,24 +17,24 @@
         <div class="container navbar-container">
             <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
 
-            <form role="search" class="search-form">
+            <form role="search" action="buscarCuidadores.html" method="GET" class="search-form">
                 <div class="form-group search-group">
                     <span class="material-symbols-outlined search-icon">search</span>
-                    <label for="location-search" class="sr-only">Buscar por ciudad o código postal</label>
-                    <input type="search" id="location-search" class="form-control search-input" name="location" placeholder="Buscar por ciudad o código postal...">
+                    <label for="location-search" class="sr-only">Buscar cuidadores</label>
+                    <input type="search" id="location-search" class="form-control search-input" name="q" placeholder="Buscar cuidadores...">
                     <button type="submit" class="button button-primary sr-only">Buscar</button>
                 </div>
             </form>
 
             <nav aria-label="Navegación principal" class="main-nav">
                 <ul>
+                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
                     <li><a href="buscarCuidadores.html" class="nav-link active">Buscar</a></li>
-                    <li><a href="misReservas.html" class="nav-link">Mis Reservas</a></li>
-                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="misReservas.html" class="nav-link">Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Iniciar sesión</a></li>
                 </ul>
             </nav>
-            
-            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
         </div>
     </header>
 
@@ -132,7 +132,7 @@
                         
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn">Contactar</button>
-                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                            <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
                 </article>
@@ -180,7 +180,7 @@
                         
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn">Contactar</button>
-                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                            <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
                 </article>
@@ -228,7 +228,7 @@
                         
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn">Contactar</button>
-                            <a href="#" class="button button-outline action-btn">Ver Perfil</a>
+                            <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
                 </article>
@@ -248,8 +248,8 @@
     <footer class="footer">
         <div class="container footer-container">
             <div class="footer-brand">
-                <h2>PetCareConnect</h2>
-                <p>© 2026 PetCareConnect Inc. Todos los derechos reservados.</p>
+                <h2>Pet CareConnect</h2>
+                <p>© 2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
             </div>
 
             <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
@@ -270,7 +270,7 @@
         </a>
         <a href="buscarCuidadores.html" class="mobile-nav-item active">
             <span class="material-symbols-outlined">search</span>
-            <span>Explorar</span>
+            <span>Buscar</span>
         </a>
         <a href="servicios.html" class="mobile-nav-item">
             <span class="material-symbols-outlined">pets</span>
@@ -280,9 +280,9 @@
             <span class="material-symbols-outlined">calendar_month</span>
             <span>Reservas</span>
         </a>
-        <a href="login.html" class="mobile-nav-item">
+        <a href="login.html" class="mobile-nav-item" aria-label="Iniciar sesión">
             <span class="material-symbols-outlined">person</span>
-            <span>Perfil</span>
+            <span>Cuenta</span>
         </a>
     </nav>
 </body>

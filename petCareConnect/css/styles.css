@@ -368,13 +368,14 @@ ul {
 .main-nav ul {
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 1rem;
 }
 
 .nav-link {
     color: var(--text-muted);
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    white-space: nowrap;
     position: relative;
     transition: var(--transition);
 }
@@ -610,6 +611,7 @@ main.container {
     text-align: center;
     cursor: pointer;
     margin-bottom: 0;
+    color: inherit;
 }
 
 .service-card:hover {
@@ -826,6 +828,7 @@ main.container {
     justify-content: space-between;
     min-height: 250px;
     height: 100%;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 
 .catalog-card:hover {
@@ -1783,12 +1786,25 @@ main.container {
     align-items: center;
 }
 
+.login-back-link {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.75rem;
+}
+
+.login-back-link:hover {
+    text-decoration: underline;
+}
+
+.login-brand-link,
 .login-logo-title-row {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 0.35rem;
+    color: inherit;
 }
 
 .login-logo-icon {
@@ -2024,6 +2040,10 @@ main.container {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
+}
+
+.profile-back-row {
+    margin: 0;
 }
 
 .profile-sidebar-content {

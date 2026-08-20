@@ -29,19 +29,23 @@
             <nav aria-label="Navegación principal" class="main-nav">
                 <ul>
                     <li><a href="../index.html" class="nav-link">Inicio</a></li>
-                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
+                    <li><a href="buscarCuidadores.html" class="nav-link active">Buscar</a></li>
                     <li><a href="servicios.html" class="nav-link">Servicios</a></li>
-                    <li><a href="misReservas.html" class="nav-link">Mis Reservas</a></li>
-                    <li><a href="login.html" class="nav-link active">Perfil</a></li>
+                    <li><a href="misReservas.html" class="nav-link">Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Iniciar sesión</a></li>
                 </ul>
             </nav>
             
-            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+            <a href="buscarCuidadores.html?intent=reservar" class="button button-accent">Reservar ahora</a>
         </div>
     </header>
 
     <div class="container profile-page-wrapper profile-layout-grid">
         <main class="profile-main-content">
+
+            <p class="profile-back-row">
+                <a href="buscarCuidadores.html" class="see-all-link profile-back-link">← Volver a buscar</a>
+            </p>
 
             <section aria-labelledby="profile-name" class="card-surface card-padding profile-header-card">
                 <div class="profile-header-layout">
@@ -303,9 +307,9 @@
             <span class="material-symbols-outlined">explore</span>
             <span>Inicio</span>
         </a>
-        <a href="buscarCuidadores.html" class="mobile-nav-item">
+        <a href="buscarCuidadores.html" class="mobile-nav-item active">
             <span class="material-symbols-outlined">search</span>
-            <span>Explorar</span>
+            <span>Buscar</span>
         </a>
         <a href="servicios.html" class="mobile-nav-item">
             <span class="material-symbols-outlined">pets</span>
@@ -315,9 +319,9 @@
             <span class="material-symbols-outlined">calendar_month</span>
             <span>Reservas</span>
         </a>
-        <a href="login.html" class="mobile-nav-item active">
+        <a href="login.html" class="mobile-nav-item" aria-label="Iniciar sesión">
             <span class="material-symbols-outlined">person</span>
-            <span>Perfil</span>
+            <span>Cuenta</span>
         </a>
     </nav>
 </body>

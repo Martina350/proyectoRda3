@@ -17,11 +17,11 @@
         <div class="container navbar-container">
             <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
 
-            <form role="search" action="misReservas.html" method="GET" class="search-form">
+            <form role="search" action="buscarCuidadores.html" method="GET" class="search-form">
                 <div class="form-group search-group">
                     <span class="material-symbols-outlined search-icon">search</span>
-                    <label for="search-bookings" class="sr-only">Buscar reservas</label>
-                    <input type="search" id="search-bookings" name="q" placeholder="Buscar reservas..." class="form-control search-input">
+                    <label for="search-sitters" class="sr-only">Buscar cuidadores</label>
+                    <input type="search" id="search-sitters" name="q" placeholder="Buscar cuidadores..." class="form-control search-input">
                     <button type="submit" class="button button-primary sr-only">Buscar</button>
                 </div>
             </form>
@@ -31,12 +31,12 @@
                     <li><a href="../index.html" class="nav-link">Inicio</a></li>
                     <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
                     <li><a href="servicios.html" class="nav-link">Servicios</a></li>
-                    <li><a href="misReservas.html" class="nav-link active">Mis Reservas</a></li>
-                    <li><a href="login.html" class="nav-link">Perfil</a></li>
+                    <li><a href="misReservas.html" class="nav-link active">Reservas</a></li>
+                    <li><a href="login.html" class="nav-link">Iniciar sesión</a></li>
                 </ul>
             </nav>
             
-            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
+            <a href="buscarCuidadores.html?intent=reservar" class="button button-accent">Reservar ahora</a>
         </div>
     </header>
 
@@ -221,7 +221,7 @@
         </a>
         <a href="buscarCuidadores.html" class="mobile-nav-item">
             <span class="material-symbols-outlined">search</span>
-            <span>Explorar</span>
+            <span>Buscar</span>
         </a>
         <a href="servicios.html" class="mobile-nav-item">
             <span class="material-symbols-outlined">pets</span>
@@ -231,9 +231,9 @@
             <span class="material-symbols-outlined">calendar_month</span>
             <span>Reservas</span>
         </a>
-        <a href="login.html" class="mobile-nav-item">
+        <a href="login.html" class="mobile-nav-item" aria-label="Iniciar sesión">
             <span class="material-symbols-outlined">person</span>
-            <span>Perfil</span>
+            <span>Cuenta</span>
         </a>
     </nav>
 
