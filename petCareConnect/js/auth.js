@@ -47,7 +47,7 @@ const PCC_AUTH = {
             localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(this.DEFAULT_PETS));
         }
         if (localStorage.getItem(this.STORAGE_KEYS.SESSION) === null) {
-            // Por defecto en prototipo el usuario tiene sesión activa, salvo que cierre sesión
+
             localStorage.setItem(this.STORAGE_KEYS.SESSION, 'true');
         }
 
@@ -80,7 +80,7 @@ const PCC_AUTH = {
     login(email, password, remember = true) {
         let user = this.getUser();
         if (!user || user.email !== email) {
-            // Si entra con otro email, se actualiza el perfil con ese correo
+
             const nameFromEmail = email.split('@')[0];
             const formattedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
             user = {
@@ -169,7 +169,6 @@ const PCC_AUTH = {
         const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/pages/');
         const prefix = isRoot ? 'pages/' : '';
 
-        // Buscar enlaces de auth/cuenta en la barra de navegación desktop
         const navLinks = document.querySelectorAll('.main-nav a, .navbar a');
         navLinks.forEach(link => {
             const href = link.getAttribute('href') || '';
@@ -190,7 +189,6 @@ const PCC_AUTH = {
             }
         });
 
-        // Buscar enlaces en navegación móvil
         const mobileLinks = document.querySelectorAll('.mobile-nav-item');
         mobileLinks.forEach(link => {
             const href = link.getAttribute('href') || '';
@@ -215,7 +213,6 @@ const PCC_AUTH = {
     }
 };
 
-// Auto-inicializar cuando cargue el DOM
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => PCC_AUTH.init());
 } else {

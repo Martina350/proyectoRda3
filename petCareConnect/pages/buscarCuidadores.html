@@ -29,7 +29,7 @@
             <form class="filter-form">
                 <fieldset class="filter-fieldset">
                     <legend class="sr-only">Filtros de búsqueda</legend>
-                    
+
                     <div class="filter-pills-row">
                         <div class="filter-pill">
                             <span class="material-symbols-outlined filter-icon">calendar_month</span>
@@ -73,7 +73,7 @@
                         <div class="sitter-media-placeholder">
                             <span class="material-symbols-outlined sitter-media-icon">person</span>
                         </div>
-                        <!-- Slot preparado para imagen: <img src="" alt="Elena Martínez" class="sitter-card-img"> -->
+
                         <button type="button" class="favorite-btn" data-sitter-name="Elena Martínez" aria-label="Añadir Elena Martínez a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
@@ -102,7 +102,7 @@
                         </div>
 
                         <p class="sitter-bio">Amante de los perros con 5 años de experiencia en cuidado doméstico y paseos. Especialista en razas grandes.</p>
-                        
+
                         <div class="availability-block">
                             <span class="availability-title">Disponibilidad próxima</span>
                             <div class="availability-days">
@@ -113,7 +113,7 @@
                                 <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
                             </div>
                         </div>
-                        
+
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Elena Martínez">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
@@ -126,7 +126,7 @@
                         <div class="sitter-media-placeholder">
                             <span class="material-symbols-outlined sitter-media-icon">person</span>
                         </div>
-                        <!-- Slot preparado para imagen: <img src="" alt="Javier Ruiz" class="sitter-card-img"> -->
+
                         <button type="button" class="favorite-btn" data-sitter-name="Javier Ruiz" aria-label="Añadir Javier Ruiz a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
@@ -154,7 +154,7 @@
                         </div>
 
                         <p class="sitter-bio">Auxiliar técnico veterinario. Ofrezco paseos educativos y administración de medicación si es necesario.</p>
-                        
+
                         <div class="availability-block">
                             <span class="availability-title">Disponibilidad próxima</span>
                             <div class="availability-days">
@@ -165,7 +165,7 @@
                                 <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
                             </div>
                         </div>
-                        
+
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Javier Ruiz">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
@@ -178,7 +178,7 @@
                         <div class="sitter-media-placeholder">
                             <span class="material-symbols-outlined sitter-media-icon">person</span>
                         </div>
-                        <!-- Slot preparado para imagen: <img src="" alt="Sofía Castro" class="sitter-card-img"> -->
+
                         <button type="button" class="favorite-btn" data-sitter-name="Sofía Castro" aria-label="Añadir Sofía Castro a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
@@ -206,7 +206,7 @@
                         </div>
 
                         <p class="sitter-bio">Especialista en comportamiento felino. Tu gato se sentirá como en un spa mientras tú no estás.</p>
-                        
+
                         <div class="availability-block">
                             <span class="availability-title">Disponibilidad próxima</span>
                             <div class="availability-days">
@@ -217,7 +217,7 @@
                                 <div class="day-pill active"><span class="day-label">V</span><span class="day-dot"></span></div>
                             </div>
                         </div>
-                        
+
                         <div class="sitter-card-actions">
                             <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Sofía Castro">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
@@ -241,7 +241,6 @@
 
     <div id="site-mobile-nav"></div>
 
-    <!-- Modal Más Filtros -->
     <div id="filters-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="filters-modal-title">
         <div class="modal-card">
             <div class="modal-header">
@@ -253,7 +252,7 @@
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-            
+
             <div class="modal-body">
                 <div class="filters-modal-grid">
                     <label class="checkbox-group-option">
@@ -282,7 +281,6 @@
         </div>
     </div>
 
-    <!-- Modal Contactar -->
     <div id="contact-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="contact-modal-title">
         <div class="modal-card">
             <div class="modal-header">
@@ -294,7 +292,7 @@
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-            
+
             <form id="contact-sitter-form">
                 <div class="modal-body">
                     <div class="form-group" style="display:flex; flex-direction:column; gap:0.5rem;">
@@ -311,10 +309,9 @@
         </div>
     </div>
 
-    <!-- Script de Interactividad Fase C -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // Modal Más Filtros
+
             const moreFiltersBtn = document.querySelector('.button-more-filters');
             const filtersModal = document.getElementById('filters-modal-overlay');
             const closeFiltersBtn = document.getElementById('close-filters-modal');
@@ -323,12 +320,12 @@
 
             if (moreFiltersBtn && filtersModal) {
                 moreFiltersBtn.addEventListener('click', () => {
-                    filtersModal.classList.add('is-active');
+                    filtersModal.classList.add('is-open');
                     filtersModal.setAttribute('aria-hidden', 'false');
                 });
 
                 const closeFModal = () => {
-                    filtersModal.classList.remove('is-active');
+                    filtersModal.classList.remove('is-open');
                     filtersModal.setAttribute('aria-hidden', 'true');
                 };
 
@@ -344,7 +341,6 @@
                 }
             }
 
-            // Modal Contactar
             const contactBtns = document.querySelectorAll('.contact-sitter-btn');
             const contactModal = document.getElementById('contact-modal-overlay');
             const closeContactBtn = document.getElementById('close-contact-modal');
@@ -359,7 +355,7 @@
                     currentSitter = btn.dataset.sitterName || 'Cuidador';
                     if (contactNameTitle) contactNameTitle.textContent = currentSitter;
                     if (contactModal) {
-                        contactModal.classList.add('is-active');
+                        contactModal.classList.add('is-open');
                         contactModal.setAttribute('aria-hidden', 'false');
                     }
                 });
@@ -367,7 +363,7 @@
 
             const closeCModal = () => {
                 if (contactModal) {
-                    contactModal.classList.remove('is-active');
+                    contactModal.classList.remove('is-open');
                     contactModal.setAttribute('aria-hidden', 'true');
                 }
             };
@@ -385,7 +381,6 @@
                 });
             }
 
-            // Paginación feedback
             const prevBtn = document.querySelector('.pagination-prev-btn');
             const nextBtn = document.querySelector('.pagination-next-btn');
 

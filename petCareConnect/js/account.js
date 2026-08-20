@@ -7,13 +7,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function openModal(modal) {
         if (!modal) return;
-        modal.classList.add('is-open', 'is-active');
+        modal.classList.add('is-open');
         modal.setAttribute('aria-hidden', 'false');
     }
 
     function closeModal(modal) {
         if (!modal) return;
-        modal.classList.remove('is-open', 'is-active');
+        modal.classList.remove('is-open');
         modal.setAttribute('aria-hidden', 'true');
     }
 
@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                     <div class="pet-card-actions">
                         <button type="button" class="pet-btn-delete" data-pet-id="${pet.id}" data-pet-name="${pet.name}">
-                            <span class="material-symbols-outlined" style="font-size: 16px;">delete</span>
+                            <span class="material-symbols-outlined">delete</span>
                             Eliminar
                         </button>
                     </div>

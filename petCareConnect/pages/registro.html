@@ -26,23 +26,22 @@
                 </a>
                 <p>Crea tu cuenta gratis y encuentra el mejor cuidado para tu mascota.</p>
 
-                <div class="login-card-container">
+                <div class="card-surface login-card-container">
                     <form action="#" method="POST" id="registerForm" novalidate>
                         <fieldset class="login-fieldset">
                             <legend class="sr-only">Formulario de registro de usuario</legend>
-                            
-                            <!-- Nombre -->
+
                             <div class="login-form-item">
                                 <label for="reg-name">Nombre y apellidos</label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">person</span>
-                                    <input 
-                                        type="text" 
-                                        id="reg-name" 
-                                        class="login-input" 
-                                        name="name" 
-                                        placeholder="p. ej. Alejandro Martínez" 
-                                        autocomplete="name" 
+                                    <input
+                                        type="text"
+                                        id="reg-name"
+                                        class="login-input"
+                                        name="name"
+                                        placeholder="p. ej. Alejandro Martínez"
+                                        autocomplete="name"
                                         required
                                         aria-invalid="false"
                                         aria-describedby="name-error">
@@ -53,18 +52,17 @@
                                 </div>
                             </div>
 
-                            <!-- Correo electrónico -->
                             <div class="login-form-item">
                                 <label for="reg-email">Correo electrónico</label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">mail</span>
-                                    <input 
-                                        type="email" 
-                                        id="reg-email" 
-                                        class="login-input" 
-                                        name="email" 
-                                        placeholder="tu@ejemplo.com" 
-                                        autocomplete="email" 
+                                    <input
+                                        type="email"
+                                        id="reg-email"
+                                        class="login-input"
+                                        name="email"
+                                        placeholder="tu@ejemplo.com"
+                                        autocomplete="email"
                                         required
                                         aria-invalid="false"
                                         aria-describedby="email-error">
@@ -75,33 +73,31 @@
                                 </div>
                             </div>
 
-                            <!-- Teléfono opcional -->
                             <div class="login-form-item">
                                 <label for="reg-phone">Teléfono <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">phone</span>
-                                    <input 
-                                        type="tel" 
-                                        id="reg-phone" 
-                                        class="login-input" 
-                                        name="phone" 
-                                        placeholder="+593 96 931 7653" 
+                                    <input
+                                        type="tel"
+                                        id="reg-phone"
+                                        class="login-input"
+                                        name="phone"
+                                        placeholder="+593 96 931 7653"
                                         autocomplete="tel">
                                 </div>
                             </div>
-                            
-                            <!-- Contraseña con fortaleza -->
+
                             <div class="login-form-item">
                                 <label for="reg-password">Contraseña</label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">lock</span>
-                                    <input 
-                                        type="password" 
-                                        id="reg-password" 
-                                        class="login-input" 
-                                        name="password" 
-                                        placeholder="Mínimo 8 caracteres" 
-                                        autocomplete="new-password" 
+                                    <input
+                                        type="password"
+                                        id="reg-password"
+                                        class="login-input"
+                                        name="password"
+                                        placeholder="Mínimo 8 caracteres"
+                                        autocomplete="new-password"
                                         required
                                         aria-invalid="false"
                                         aria-describedby="pass-error">
@@ -110,7 +106,6 @@
                                     </button>
                                 </div>
 
-                                <!-- Medidor de fortaleza -->
                                 <div class="password-strength-container" id="strengthContainer" aria-live="polite">
                                     <div class="password-strength-bars">
                                         <div class="strength-bar-segment segment-1"></div>
@@ -125,8 +120,7 @@
                                     <span>La contraseña debe tener al menos 8 caracteres</span>
                                 </div>
                             </div>
-                            
-                            <!-- Términos -->
+
                             <div class="auth-terms-item">
                                 <input type="checkbox" id="reg-terms" name="terms" required aria-describedby="terms-error">
                                 <label for="reg-terms">
@@ -137,8 +131,7 @@
                                 <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
                                 <span>Debes aceptar los términos para continuar</span>
                             </div>
-                            
-                            <!-- Botón submit -->
+
                             <button type="submit" class="login-submit-btn" id="regSubmitBtn">
                                 <span>Crear mi cuenta</span>
                                 <span class="material-symbols-outlined">person_add</span>
@@ -321,7 +314,6 @@
                     return;
                 }
 
-                // Estado de carga
                 submitBtn.classList.add('is-loading');
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = `

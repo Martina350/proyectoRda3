@@ -33,7 +33,7 @@
                         </div>
                         <span class="material-symbols-outlined profile-verified-badge" title="Cuidadora verificada">verified</span>
                     </div>
-                    
+
                     <div class="profile-header-info">
                         <div class="profile-name-rating-row">
                             <div>
@@ -45,9 +45,9 @@
                                 <span class="rating-text">4.9 (124 reseñas)</span>
                             </div>
                         </div>
-                        
+
                         <p class="sr-only">Cuidadora verificada</p>
-                        
+
                         <ul class="profile-tags-list">
                             <li class="profile-tag-pill">Cuidadora verificada</li>
                             <li class="profile-tag-pill">Amante de los perros grandes</li>
@@ -70,17 +70,17 @@
                 </div>
                 <div class="environment-grid-placeholder">
                     <div class="env-placeholder-item env-living">
-                        <!-- Slot preparado para imagen: <img src="" alt="Salón amplio" class="env-img"> -->
+
                         <span class="material-symbols-outlined">deck</span>
                         <span class="env-label">Salón amplio</span>
                     </div>
                     <div class="env-placeholder-item env-terrace">
-                        <!-- Slot preparado para imagen: <img src="" alt="Terraza segura" class="env-img"> -->
+
                         <span class="material-symbols-outlined">nature</span>
                         <span class="env-label">Terraza</span>
                     </div>
                     <div class="env-placeholder-item env-kitchen">
-                        <!-- Slot preparado para imagen: <img src="" alt="Zona limpia" class="env-img"> -->
+
                         <span class="material-symbols-outlined">soup_kitchen</span>
                         <span class="env-label">Zona limpia</span>
                     </div>
@@ -94,7 +94,7 @@
             <section aria-labelledby="reviews-title" class="card-surface card-padding profile-section">
                 <div class="profile-section-header">
                     <h2 id="reviews-title" class="profile-section-title">Reseñas de Usuarios</h2>
-                    
+
                     <form class="reviews-sort-form">
                         <label for="review-sort" class="sort-label">Ordenar por:</label>
                         <select id="review-sort" name="sort" class="sort-select">
@@ -153,7 +153,6 @@
 
         </main>
 
-        <!-- Aside de Reserva -->
         <aside aria-labelledby="booking-card-title" class="profile-sidebar-content">
             <section class="card-surface card-padding booking-sticky-card">
                 <div class="booking-header">
@@ -163,11 +162,11 @@
                         <span class="booking-price-unit">/ noche</span>
                     </div>
                 </div>
-                
+
                 <form action="reservaConfirmada.html" method="GET" class="booking-form">
                     <fieldset class="booking-fieldset">
                         <legend class="sr-only">Configurar reserva</legend>
-                        
+
                         <div class="booking-inputs-stack">
                             <div class="booking-input-group">
                                 <div class="input-text-block">
@@ -176,7 +175,7 @@
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
-                            
+
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="check-out" class="input-label">Salida</label>
@@ -184,7 +183,7 @@
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
-                            
+
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="pet-quantity" class="input-label">Mascota</label>
@@ -217,7 +216,7 @@
 
             <section aria-labelledby="services-details-title" class="card-surface card-padding services-sidebar-card">
                 <h2 id="services-details-title" class="sidebar-section-title">Servicios ofrecidos</h2>
-                
+
                 <div class="services-list">
                     <article class="service-detail-item">
                         <div class="service-icon-box">
@@ -273,7 +272,7 @@
                     </li>
                 </ul>
             </section>
-            
+
         </aside>
     </div>
 
@@ -281,7 +280,6 @@
 
     <div id="site-mobile-nav"></div>
 
-    <!-- Modal de Confirmación de Reserva -->
     <div id="booking-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-booking-title">
         <div class="modal-card">
             <div class="modal-header">
@@ -293,7 +291,7 @@
                     <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-            
+
             <div class="modal-body">
                 <div class="confirmation-summary-list">
                     <div class="summary-item">
@@ -335,7 +333,6 @@
         </div>
     </div>
 
-    <!-- Script de cálculo en vivo y validación de reserva -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const checkInInput = document.getElementById('check-in');
@@ -343,7 +340,7 @@
             const petSelect = document.getElementById('pet-quantity');
             const bookingForm = document.querySelector('.booking-form');
             const submitBtn = document.querySelector('.booking-submit-btn');
-            
+
             const costBreakdown = document.querySelector('.booking-cost-breakdown');
             const modalOverlay = document.getElementById('booking-modal-overlay');
             const closeModalBtn = document.getElementById('close-modal-btn');
@@ -352,7 +349,6 @@
             const pricePerNight = 25;
             const fee = 5;
 
-            // Cargar mascotas del usuario si están disponibles
             if (window.PCC_AUTH && petSelect) {
                 const userPets = PCC_AUTH.getPets();
                 if (userPets && userPets.length > 0) {
@@ -362,7 +358,7 @@
 
             function updatePrice() {
                 if (!checkInInput || !checkOutInput || !petSelect) return;
-                
+
                 const d1 = new Date(checkInInput.value);
                 const d2 = new Date(checkOutInput.value);
 
@@ -403,7 +399,6 @@
                     </div>
                 `;
 
-                // Update modal strings
                 const modalIn = document.getElementById('modal-checkin-val');
                 const modalOut = document.getElementById('modal-checkout-val');
                 const modalPet = document.getElementById('modal-pet-val');
@@ -428,13 +423,13 @@
                 bookingForm.addEventListener('submit', (e) => {
                     e.preventDefault();
                     if (submitBtn.disabled) return;
-                    modalOverlay.classList.add('is-active');
+                    modalOverlay.classList.add('is-open');
                     modalOverlay.setAttribute('aria-hidden', 'false');
                 });
             }
 
             function closeModal() {
-                modalOverlay.classList.remove('is-active');
+                modalOverlay.classList.remove('is-open');
                 modalOverlay.setAttribute('aria-hidden', 'true');
             }
 

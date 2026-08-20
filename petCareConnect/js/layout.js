@@ -1,10 +1,3 @@
-/**
- * Componentes reutilizables: header, footer y navegación móvil.
- * Las páginas con chrome completo usan:
- *   <div id="site-header"></div>
- *   <div id="site-footer"></div>
- *   <div id="site-mobile-nav"></div>
- */
 const PCC_LAYOUT = {
     getContext() {
         const path = window.location.pathname.replace(/\\/g, '/');
@@ -100,7 +93,7 @@ const PCC_LAYOUT = {
         const accountHref = prefix + (loggedIn ? 'miCuenta.html' : 'login.html');
         const accountLabel = loggedIn ? 'Cuenta' : 'Entrar';
         const accountAria = loggedIn ? 'Mi Cuenta' : 'Iniciar sesión';
-        const fill = page === 'cuenta' ? ` style="font-variation-settings: 'FILL' 1;"` : '';
+        const fillClass = page === 'cuenta' ? ' icon-filled' : '';
 
         return `
     <nav aria-label="Navegación móvil" class="mobile-nav">
@@ -121,7 +114,7 @@ const PCC_LAYOUT = {
             <span>Reservas</span>
         </a>
         <a href="${accountHref}" class="mobile-nav-item${page === 'cuenta' ? ' active' : ''}" aria-label="${accountAria}">
-            <span class="material-symbols-outlined"${fill}>person</span>
+            <span class="material-symbols-outlined${fillClass}">person</span>
             <span>${accountLabel}</span>
         </a>
     </nav>`;

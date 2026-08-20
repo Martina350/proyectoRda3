@@ -1,6 +1,3 @@
-/**
- * Sistema global de Toasts para Pet CareConnect (Fase C)
- */
 window.showToast = function(message, type = 'success', duration = 4000) {
     let container = document.getElementById('global-toast-container');
     if (!container) {
@@ -42,7 +39,6 @@ window.showToast = function(message, type = 'success', duration = 4000) {
     }, duration);
 };
 
-// Inicializador de favoritos interactivos
 document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', (e) => {
         const favBtn = e.target.closest('.favorite-btn');
