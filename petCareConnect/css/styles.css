@@ -2063,7 +2063,7 @@ main.container {
     }
 }
 
-/* Header Card de Perfil */
+
 .profile-header-card {
     position: relative;
     background: var(--surface);
@@ -2207,7 +2207,7 @@ main.container {
     border: 1px solid rgba(197, 197, 211, 0.3);
 }
 
-/* Secciones estándar en Perfil */
+
 .profile-section {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -2243,7 +2243,7 @@ main.container {
     margin-bottom: 0;
 }
 
-/* Galería Mi Entorno (Bento Grid Placeholder) */
+
 .environment-grid-placeholder {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -2296,7 +2296,7 @@ main.container {
     font-weight: 700;
 }
 
-/* Reseñas de usuarios */
+
 .reviews-sort-form {
     display: flex;
     align-items: center;
@@ -2420,7 +2420,7 @@ main.container {
     margin-top: 0.5rem;
 }
 
-/* Sidebar: Card de Reserva Sticky */
+
 .booking-sticky-card {
     position: static;
     background: var(--surface);
@@ -2553,7 +2553,7 @@ main.container {
     margin: 0;
 }
 
-/* Sidebar: Servicios Ofrecidos */
+
 .services-sidebar-card {
     background: var(--surface);
     border: 1px solid var(--border);
@@ -2634,7 +2634,7 @@ main.container {
     line-height: 1.3;
 }
 
-/* Sidebar: Estadísticas */
+
 .stats-sidebar-section {
     width: 100%;
 }
@@ -2676,9 +2676,7 @@ main.container {
     margin-top: 2px;
 }
 
-/* ==========================================================================
-   Modales y Toasts
-   ========================================================================== */
+
 
 .modal-overlay {
     position: fixed;
@@ -2810,7 +2808,7 @@ main.container {
     border-left: 3px solid var(--primary);
 }
 
-/* Sistema de Toast Feedback */
+
 .toast-container {
     position: fixed;
     bottom: 80px;
@@ -2862,7 +2860,7 @@ main.container {
     }
 }
 
-/* Estilos Página Reserva Confirmada */
+
 .confirmation-page-container {
     max-width: 680px;
     margin: 0 auto;
@@ -2935,6 +2933,181 @@ main.container {
     min-width: 160px;
     text-align: center;
 }
+
+
+.toast-info {
+    background: var(--surface-high);
+    color: var(--text-main);
+    border: 1px solid var(--border);
+}
+
+.toast-close-btn {
+    background: transparent;
+    border: none;
+    color: inherit;
+    font-size: 1.1rem;
+    cursor: pointer;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    opacity: 0.8;
+}
+
+.toast-close-btn:hover {
+    opacity: 1;
+}
+
+
+.favorite-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    color: var(--text-muted);
+    transition: transform 0.15s ease, color 0.15s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.35rem;
+    border-radius: 50%;
+}
+
+.favorite-btn:hover {
+    background: rgba(253, 118, 26, 0.1);
+    color: var(--secondary);
+}
+
+.favorite-btn.is-favorite {
+    color: var(--secondary);
+}
+
+.favorite-btn.is-favorite .material-symbols-outlined {
+    font-variation-settings: 'FILL' 1;
+    transform: scale(1.15);
+}
+
+
+.inpage-alert-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--warning-bg, #ffdbca);
+    color: var(--warning, #783200);
+    padding: 0.85rem 1.25rem;
+    border-radius: var(--radius-lg);
+    margin-bottom: 1.5rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+    border: 1px solid rgba(120, 50, 0, 0.15);
+}
+
+.inpage-alert-content {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.inpage-alert-content .material-symbols-outlined {
+    font-size: 24px;
+    color: var(--secondary);
+}
+
+
+.empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 3.5rem 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    gap: 1.25rem;
+    width: 100%;
+}
+
+.empty-state-icon {
+    font-size: 64px;
+    color: var(--text-muted);
+    background: var(--surface-low);
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.empty-state-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.empty-state-desc {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    max-width: 420px;
+    margin: 0;
+    line-height: 1.5;
+}
+
+
+.skeleton-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.skeleton-box {
+    background: var(--surface-high);
+    border-radius: var(--radius-sm);
+    animation: skeletonPulse 1.5s infinite ease-in-out;
+}
+
+@keyframes skeletonPulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}
+
+
+.filters-modal-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+}
+
+@media (min-width: 480px) {
+    .filters-modal-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.checkbox-group-option {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: var(--text-main);
+    cursor: pointer;
+}
+
+.checkbox-group-option input {
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
 
 
 

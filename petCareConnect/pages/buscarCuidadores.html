@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
 </head>
 <body>
 
@@ -90,7 +91,7 @@
             <div class="sitters-grid">
                 <article class="card-surface sitter-card">
                     <div class="sitter-card-media">
-                        <button type="button" class="favorite-btn" aria-label="Añadir Elena Martínez a favoritos">
+                        <button type="button" class="favorite-btn" data-sitter-name="Elena Martínez" aria-label="Añadir Elena Martínez a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
                         <span class="verified-badge">VERIFICADO</span>
@@ -131,7 +132,7 @@
                         </div>
                         
                         <div class="sitter-card-actions">
-                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Elena Martínez">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
@@ -139,7 +140,7 @@
 
                 <article class="card-surface sitter-card">
                     <div class="sitter-card-media">
-                        <button type="button" class="favorite-btn" aria-label="Añadir Javier Ruiz a favoritos">
+                        <button type="button" class="favorite-btn" data-sitter-name="Javier Ruiz" aria-label="Añadir Javier Ruiz a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
                     </div>
@@ -179,7 +180,7 @@
                         </div>
                         
                         <div class="sitter-card-actions">
-                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Javier Ruiz">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
@@ -187,7 +188,7 @@
 
                 <article class="card-surface sitter-card">
                     <div class="sitter-card-media">
-                        <button type="button" class="favorite-btn" aria-label="Añadir Sofía Castro a favoritos">
+                        <button type="button" class="favorite-btn" data-sitter-name="Sofía Castro" aria-label="Añadir Sofía Castro a favoritos">
                             <span class="material-symbols-outlined favorite-icon">favorite</span>
                         </button>
                     </div>
@@ -227,7 +228,7 @@
                         </div>
                         
                         <div class="sitter-card-actions">
-                            <button type="button" class="button button-primary action-btn">Contactar</button>
+                            <button type="button" class="button button-primary action-btn contact-sitter-btn" data-sitter-name="Sofía Castro">Contactar</button>
                             <a href="perfilCuidador.html" class="button button-outline action-btn">Ver Perfil</a>
                         </div>
                     </div>
@@ -237,9 +238,9 @@
 
         <nav aria-label="Paginación" class="pagination-nav">
             <ul class="pagination-list">
-                <li><a href="#" aria-label="Página anterior" class="pagination-btn"><span class="material-symbols-outlined">chevron_left</span></a></li>
+                <li><a href="#" aria-label="Página anterior" class="pagination-btn pagination-prev-btn"><span class="material-symbols-outlined">chevron_left</span></a></li>
                 <li><span class="pagination-info">Página 1 de 12</span></li>
-                <li><a href="#" aria-label="Página siguiente" class="pagination-btn"><span class="material-symbols-outlined">chevron_right</span></a></li>
+                <li><a href="#" aria-label="Página siguiente" class="pagination-btn pagination-next-btn"><span class="material-symbols-outlined">chevron_right</span></a></li>
             </ul>
         </nav>
 
@@ -285,5 +286,168 @@
             <span>Cuenta</span>
         </a>
     </nav>
+
+    <!-- Modal Más Filtros -->
+    <div id="filters-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="filters-modal-title">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="filters-modal-title" class="modal-title">
+                    <span class="material-symbols-outlined">tune</span>
+                    Filtros Avanzados
+                </h3>
+                <button type="button" id="close-filters-modal" class="modal-close-btn" aria-label="Cerrar modal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <div class="modal-body">
+                <div class="filters-modal-grid">
+                    <label class="checkbox-group-option">
+                        <input type="checkbox" name="has_yard" checked>
+                        <span>Casa con jardín</span>
+                    </label>
+                    <label class="checkbox-group-option">
+                        <input type="checkbox" name="no_other_pets">
+                        <span>Sin otras mascotas</span>
+                    </label>
+                    <label class="checkbox-group-option">
+                        <input type="checkbox" name="gives_meds" checked>
+                        <span>Administra medicación</span>
+                    </label>
+                    <label class="checkbox-group-option">
+                        <input type="checkbox" name="24h_supervision">
+                        <span>Supervisión 24/7</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" id="cancel-filters-btn" class="button button-outline">Cancelar</button>
+                <button type="button" id="apply-filters-btn" class="button button-primary">Aplicar Filtros</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Contactar -->
+    <div id="contact-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="contact-modal-title">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="contact-modal-title" class="modal-title">
+                    <span class="material-symbols-outlined">mail</span>
+                    Contactar a <span id="contact-sitter-name-title">Elena Martínez</span>
+                </h3>
+                <button type="button" id="close-contact-modal" class="modal-close-btn" aria-label="Cerrar modal">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <form id="contact-sitter-form">
+                <div class="modal-body">
+                    <div class="form-group" style="display:flex; flex-direction:column; gap:0.5rem;">
+                        <label for="contact-msg" class="input-label" style="font-weight:700;">Mensaje</label>
+                        <textarea id="contact-msg" rows="4" maxlength="500" required placeholder="Escribe tu mensaje o consulta sobre las fechas..." class="form-control" style="width:100%; border:1px solid var(--border); border-radius:var(--radius-md); padding:0.6rem; font-family:inherit;"></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" id="cancel-contact-btn" class="button button-outline">Cancelar</button>
+                    <button type="submit" class="button button-primary">Enviar Mensaje</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Script de Interactividad Fase C -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Modal Más Filtros
+            const moreFiltersBtn = document.querySelector('.button-more-filters');
+            const filtersModal = document.getElementById('filters-modal-overlay');
+            const closeFiltersBtn = document.getElementById('close-filters-modal');
+            const cancelFiltersBtn = document.getElementById('cancel-filters-btn');
+            const applyFiltersBtn = document.getElementById('apply-filters-btn');
+
+            if (moreFiltersBtn && filtersModal) {
+                moreFiltersBtn.addEventListener('click', () => {
+                    filtersModal.classList.add('is-active');
+                    filtersModal.setAttribute('aria-hidden', 'false');
+                });
+
+                const closeFModal = () => {
+                    filtersModal.classList.remove('is-active');
+                    filtersModal.setAttribute('aria-hidden', 'true');
+                };
+
+                if (closeFiltersBtn) closeFiltersBtn.addEventListener('click', closeFModal);
+                if (cancelFiltersBtn) cancelFiltersBtn.addEventListener('click', closeFModal);
+                filtersModal.addEventListener('click', (e) => { if (e.target === filtersModal) closeFModal(); });
+
+                if (applyFiltersBtn) {
+                    applyFiltersBtn.addEventListener('click', () => {
+                        closeFModal();
+                        window.showToast('Filtros avanzados aplicados correctamente', 'info');
+                    });
+                }
+            }
+
+            // Modal Contactar
+            const contactBtns = document.querySelectorAll('.contact-sitter-btn');
+            const contactModal = document.getElementById('contact-modal-overlay');
+            const closeContactBtn = document.getElementById('close-contact-modal');
+            const cancelContactBtn = document.getElementById('cancel-contact-btn');
+            const contactForm = document.getElementById('contact-sitter-form');
+            const contactNameTitle = document.getElementById('contact-sitter-name-title');
+
+            let currentSitter = 'Elena Martínez';
+
+            contactBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    currentSitter = btn.dataset.sitterName || 'Cuidador';
+                    if (contactNameTitle) contactNameTitle.textContent = currentSitter;
+                    if (contactModal) {
+                        contactModal.classList.add('is-active');
+                        contactModal.setAttribute('aria-hidden', 'false');
+                    }
+                });
+            });
+
+            const closeCModal = () => {
+                if (contactModal) {
+                    contactModal.classList.remove('is-active');
+                    contactModal.setAttribute('aria-hidden', 'true');
+                }
+            };
+
+            if (closeContactBtn) closeContactBtn.addEventListener('click', closeCModal);
+            if (cancelContactBtn) cancelContactBtn.addEventListener('click', closeCModal);
+            if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeCModal(); });
+
+            if (contactForm) {
+                contactForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    closeCModal();
+                    window.showToast(`Mensaje enviado a ${currentSitter}. Te responderá pronto.`, 'success');
+                    contactForm.reset();
+                });
+            }
+
+            // Paginación feedback
+            const prevBtn = document.querySelector('.pagination-prev-btn');
+            const nextBtn = document.querySelector('.pagination-next-btn');
+
+            if (prevBtn) {
+                prevBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('Ya estás en la primera página', 'info');
+                });
+            }
+            if (nextBtn) {
+                nextBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('Cargando más cuidadores...', 'info');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

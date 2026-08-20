@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
 </head>
 <body>
 
@@ -41,6 +42,14 @@
     </header>
 
     <main class="container bookings-main">
+
+        <div class="inpage-alert-banner">
+            <div class="inpage-alert-content">
+                <span class="material-symbols-outlined">directions_walk</span>
+                <span>Bruno está en un paseo activo con Ana Martínez (14:00 - 15:00)</span>
+            </div>
+            <button type="button" class="button button-outline btn-alert-seguimiento" style="padding:0.4rem 0.85rem; font-size:0.85rem;">Ver seguimiento</button>
+        </div>
 
         <section aria-labelledby="page-title" class="bookings-header-section">
             <h1 id="page-title" class="bookings-title">Mis Reservas</h1>
@@ -237,5 +246,48 @@
         </a>
     </nav>
 
+    <!-- Script de feedback interactivo Fase C -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnSeguimiento = document.querySelectorAll('.btn-seguimiento, .btn-alert-seguimiento');
+            const btnContacto = document.querySelectorAll('.btn-contacto');
+            const btnReagendar = document.querySelectorAll('.btn-reagendar');
+            const btnInforme = document.querySelectorAll('.btn-informe');
+            const btnReembolso = document.querySelectorAll('.btn-reembolso');
+
+            btnSeguimiento.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('El rastreo GPS en tiempo real estará activo durante el recorrido del paseo.', 'info');
+                });
+            });
+
+            btnContacto.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    window.showToast('Abriendo canal directo de mensaje con la cuidadora Ana Martínez...', 'info');
+                });
+            });
+
+            btnReagendar.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    window.showToast('Selecciona la nueva fecha para solicitar la reprogramación.', 'info');
+                });
+            });
+
+            btnInforme.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('Descargando informe clínico y reporte de consulta...', 'info');
+                });
+            });
+
+            btnReembolso.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('El reembolso de $25 ha sido procesado a tu método original de pago.', 'success');
+                });
+            });
+        });
+    </script>
 </body>
 </html>
