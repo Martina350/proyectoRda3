@@ -17,6 +17,10 @@
 
     --success: #15803d;
     --success-bg: #dcfce7;
+    --error: #ba1a1a;
+    --error-bg: #ffdad6;
+    --warning: #783200;
+    --warning-bg: #ffdbca;
 
     --font: 'Inter', system-ui, -apple-system, sans-serif;
     --max-width: 1200px;
@@ -3108,7 +3112,655 @@ main.container {
     height: 16px;
 }
 
+/* ==========================================================================
+   Fase D: Auth Realista, Validaciones, Mi Cuenta y Mascotas
+   ========================================================================== */
 
+/* 1. Accesibilidad & Foco */
+:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
 
+/* 2. Estados de Validación de Formularios */
+.field-error {
+    font-size: 0.75rem;
+    color: var(--error);
+    display: none;
+    align-items: center;
+    gap: 0.25rem;
+    margin-top: 0.25rem;
+    font-weight: 500;
+}
 
+.field-error.is-visible {
+    display: flex;
+}
 
+.login-input.is-invalid,
+.form-control.is-invalid {
+    border-color: var(--error) !important;
+    background-color: #fffbfa !important;
+    box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.12) !important;
+}
+
+.login-input.is-valid,
+.form-control.is-valid {
+    border-color: var(--success) !important;
+}
+
+/* Spinner en botones con estado is-loading */
+.button.is-loading,
+.btn.is-loading,
+.login-submit-btn.is-loading {
+    pointer-events: none;
+    opacity: 0.85;
+    position: relative;
+    cursor: wait;
+}
+
+.btn-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    border-radius: 50%;
+    border-top-color: #ffffff;
+    animation: btnSpin 0.75s linear infinite;
+}
+
+@keyframes btnSpin {
+    to { transform: rotate(360deg); }
+}
+
+/* 3. Medidor de Fortaleza de Contraseña */
+.password-strength-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    margin-top: 0.35rem;
+    width: 100%;
+}
+
+.password-strength-bars {
+    display: flex;
+    gap: 0.35rem;
+    width: 100%;
+}
+
+.strength-bar-segment {
+    flex: 1;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--surface-high);
+    transition: background-color 0.25s ease;
+}
+
+.strength-level-weak .segment-1 {
+    background-color: var(--error);
+}
+
+.strength-level-medium .segment-1,
+.strength-level-medium .segment-2 {
+    background-color: var(--secondary-bright);
+}
+
+.strength-level-strong .segment-1,
+.strength-level-strong .segment-2,
+.strength-level-strong .segment-3 {
+    background-color: var(--success);
+}
+
+.password-strength-text {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+/* 4. Auth Extras (Términos, Recovery Success) */
+.auth-terms-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-top: 0.25rem;
+}
+
+.auth-terms-item input[type="checkbox"] {
+    margin-top: 2px;
+    accent-color: var(--primary);
+    width: 16px;
+    height: 16px;
+}
+
+.auth-terms-item a {
+    color: var(--secondary-bright);
+    text-decoration: underline;
+    font-weight: 600;
+}
+
+.recovery-success-box {
+    text-align: center;
+    padding: 1.5rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.recovery-success-icon {
+    font-size: 48px;
+    color: var(--success);
+    font-variation-settings: 'FILL' 1;
+}
+
+/* 5. Página Mi Cuenta (`miCuenta.html`) */
+.account-page-wrapper {
+    flex: 1;
+    padding-top: 1.5rem;
+    padding-bottom: 4rem;
+}
+
+.account-header-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1.5rem;
+}
+
+@media (min-width: 640px) {
+    .account-header-card {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        padding: 2rem;
+    }
+}
+
+.account-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.account-user-avatar {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    box-shadow: 0 4px 12px rgba(0, 35, 111, 0.2);
+    flex-shrink: 0;
+}
+
+.account-user-info h1 {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+}
+
+.account-user-info p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin: 0.2rem 0;
+}
+
+.account-user-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-light);
+    margin-top: 0.35rem;
+}
+
+.account-verified-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: var(--success-bg);
+    color: var(--success);
+    padding: 0.15rem 0.5rem;
+    border-radius: 9999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+}
+
+/* Tabs de navegación en Mi Cuenta */
+.account-tabs-nav {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 1.5rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -webkit-overflow-scrolling: touch;
+}
+
+.account-tab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 1.15rem;
+    border-radius: var(--radius-md);
+    background: transparent;
+    border: none;
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: var(--transition);
+}
+
+.account-tab-btn:hover {
+    color: var(--primary);
+    background: var(--surface-low);
+}
+
+.account-tab-btn.active {
+    color: var(--primary);
+    background: var(--primary-alpha);
+    font-weight: 700;
+}
+
+.account-tab-btn .material-symbols-outlined {
+    font-size: 1.2rem;
+}
+
+.account-tab-pane {
+    display: none;
+}
+
+.account-tab-pane.active {
+    display: block;
+    animation: fadeInTab 0.2s ease;
+}
+
+@keyframes fadeInTab {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Mascotas Grid */
+.pets-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.pets-section-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.pets-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .pets-grid {
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    }
+}
+
+.pet-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.35rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    position: relative;
+    transition: var(--transition);
+}
+
+.pet-card:hover {
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 35, 111, 0.2);
+    transform: translateY(-2px);
+}
+
+.pet-card-top {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pet-avatar-icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    background: var(--surface-low);
+    color: var(--secondary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.pet-card-title h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.pet-card-title p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.pet-specs-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.pet-spec-pill {
+    background: var(--surface-low);
+    border: 1px solid var(--border);
+    border-radius: 9999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.pet-notes-box {
+    background: #fdfaf8;
+    border-left: 3px solid var(--secondary-bright);
+    padding: 0.6rem 0.75rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    color: var(--text-main);
+    line-height: 1.4;
+}
+
+.pet-card-actions {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: auto;
+    padding-top: 0.5rem;
+    border-top: 1px solid var(--surface-low);
+}
+
+.pet-btn-delete {
+    background: transparent;
+    border: none;
+    color: var(--error);
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0.35rem 0.5rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.pet-btn-delete:hover {
+    background: var(--error-bg);
+}
+
+/* Card para agregar mascota */
+.add-pet-dash-card {
+    border: 2px dashed var(--border);
+    background: transparent;
+    border-radius: var(--radius-xl);
+    padding: 2rem 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    transition: var(--transition);
+    min-height: 220px;
+}
+
+.add-pet-dash-card:hover {
+    border-color: var(--secondary-bright);
+    background: rgba(253, 118, 26, 0.04);
+}
+
+.add-pet-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--primary-alpha);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.add-pet-dash-card span.add-title {
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.add-pet-dash-card span.add-desc {
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Formularios de Mi Cuenta */
+.account-card-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+@media (min-width: 640px) {
+    .account-card-box {
+        padding: 2rem;
+    }
+}
+
+.account-box-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.account-box-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+}
+
+.account-form-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .account-form-grid.two-cols {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.account-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 1.5rem;
+}
+
+/* Métodos de Pago Card */
+.payment-methods-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.payment-card-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    background: var(--surface-low);
+    gap: 1rem;
+}
+
+.payment-card-left {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.payment-card-left .material-symbols-outlined {
+    font-size: 28px;
+    color: var(--primary);
+}
+
+.payment-card-details strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.payment-card-details span {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+/* Modal Global de Pet CareConnect */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 35, 111, 0.45);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    z-index: 10000;
+}
+
+.modal-overlay.is-open {
+    display: flex;
+    animation: modalFadeIn 0.2s ease;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-card {
+    background: var(--surface);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 20px 40px rgba(0, 35, 111, 0.2);
+    width: 100%;
+    max-width: 520px;
+    border: 1px solid var(--border);
+    overflow: hidden;
+    animation: modalPop 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalPop {
+    from { opacity: 0; transform: scale(0.96) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.modal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin: 0;
+}
+
+.modal-close-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-light);
+    cursor: pointer;
+    font-size: 1.5rem;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+    border-radius: var(--radius-sm);
+    transition: var(--transition);
+}
+
+.modal-close-btn:hover {
+    color: var(--primary);
+    background: var(--surface-low);
+}
+
+.modal-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-height: 75vh;
+    overflow-y: auto;
+}
+
+.modal-footer {
+    padding: 1rem 1.5rem;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    background: var(--surface-low);
+}

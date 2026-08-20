@@ -1,0 +1,221 @@
+/**
+ * Pet CareConnect - Módulo de Autenticación y Gestión de Usuario (Fase D)
+ */
+
+const PCC_AUTH = {
+    STORAGE_KEYS: {
+        USER: 'pcc_user',
+        SESSION: 'pcc_logged_in',
+        PETS: 'pcc_pets'
+    },
+
+    DEFAULT_USER: {
+        name: 'Alejandro Martínez',
+        email: 'alejandro.martinez@ejemplo.com',
+        phone: '+34 612 345 678',
+        location: 'Chamberí, Madrid, España',
+        memberSince: 'Marzo 2024',
+        avatar: 'AM'
+    },
+
+    DEFAULT_PETS: [
+        {
+            id: 'pet-1',
+            name: 'Bruno',
+            type: 'Perro',
+            breed: 'Beagle',
+            age: '3 años',
+            weight: '14 kg',
+            gender: 'Macho',
+            notes: 'Medicación: gotas para ojos por la mañana. Alérgico al pollo. Muy amigable y enérgico.',
+            icon: 'pets'
+        },
+        {
+            id: 'pet-2',
+            name: 'Luna',
+            type: 'Gato',
+            breed: 'Persa',
+            age: '2 años',
+            weight: '4.2 kg',
+            gender: 'Hembra',
+            notes: 'Tranquila y mimosa. Cepillado de pelaje diario necesario.',
+            icon: 'pets'
+        }
+    ],
+
+    init() {
+        if (!localStorage.getItem(this.STORAGE_KEYS.USER)) {
+            localStorage.setItem(this.STORAGE_KEYS.USER, JSON.stringify(this.DEFAULT_USER));
+        }
+        if (!localStorage.getItem(this.STORAGE_KEYS.PETS)) {
+            localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(this.DEFAULT_PETS));
+        }
+        if (localStorage.getItem(this.STORAGE_KEYS.SESSION) === null) {
+            // Por defecto en prototipo el usuario tiene sesión activa, salvo que cierre sesión
+            localStorage.setItem(this.STORAGE_KEYS.SESSION, 'true');
+        }
+
+        this.syncNav();
+    },
+
+    isLoggedIn() {
+        return localStorage.getItem(this.STORAGE_KEYS.SESSION) === 'true';
+    },
+
+    getUser() {
+        try {
+            const data = localStorage.getItem(this.STORAGE_KEYS.USER);
+            return data ? JSON.parse(data) : this.DEFAULT_USER;
+        } catch (e) {
+            return this.DEFAULT_USER;
+        }
+    },
+
+    updateUser(updates) {
+        const current = this.getUser();
+        const updated = { ...current, ...updates };
+        localStorage.setItem(this.STORAGE_KEYS.USER, JSON.stringify(updated));
+        return updated;
+    },
+
+    login(email, password, remember = true) {
+        let user = this.getUser();
+        if (!user || user.email !== email) {
+            // Si entra con otro email, se actualiza el perfil con ese correo
+            const nameFromEmail = email.split('@')[0];
+            const formattedName = nameFromEmail.charAt(0).toUpperCase() + nameFromEmail.slice(1);
+            user = {
+                name: formattedName,
+                email: email,
+                phone: '+34 600 000 000',
+                location: 'Madrid, España',
+                memberSince: 'Hoy',
+                avatar: formattedName.substring(0, 2).toUpperCase()
+            };
+            localStorage.setItem(this.STORAGE_KEYS.USER, JSON.stringify(user));
+        }
+        localStorage.setItem(this.STORAGE_KEYS.SESSION, 'true');
+        this.syncNav();
+        return user;
+    },
+
+    register(name, email, phone, password) {
+        const initials = name
+            .split(' ')
+            .map(n => n.charAt(0))
+            .join('')
+            .substring(0, 2)
+            .toUpperCase() || 'US';
+
+        const newUser = {
+            name: name.trim(),
+            email: email.trim().toLowerCase(),
+            phone: phone ? phone.trim() : '+34 600 000 000',
+            location: 'Madrid, España',
+            memberSince: '2026',
+            avatar: initials
+        };
+
+        localStorage.setItem(this.STORAGE_KEYS.USER, JSON.stringify(newUser));
+        localStorage.setItem(this.STORAGE_KEYS.SESSION, 'true');
+        this.syncNav();
+        return newUser;
+    },
+
+    logout() {
+        localStorage.setItem(this.STORAGE_KEYS.SESSION, 'false');
+        this.syncNav();
+    },
+
+    getPets() {
+        try {
+            const data = localStorage.getItem(this.STORAGE_KEYS.PETS);
+            return data ? JSON.parse(data) : this.DEFAULT_PETS;
+        } catch (e) {
+            return this.DEFAULT_PETS;
+        }
+    },
+
+    addPet(pet) {
+        const pets = this.getPets();
+        const newPet = {
+            id: 'pet-' + Date.now(),
+            name: pet.name.trim(),
+            type: pet.type || 'Perro',
+            breed: pet.breed ? pet.breed.trim() : 'Mestizo',
+            age: pet.age ? pet.age.trim() : '1 año',
+            weight: pet.weight ? pet.weight.trim() : '10 kg',
+            gender: pet.gender || 'Macho',
+            notes: pet.notes ? pet.notes.trim() : 'Sin observaciones especiales.',
+            icon: 'pets'
+        };
+        pets.push(newPet);
+        localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(pets));
+        return newPet;
+    },
+
+    deletePet(id) {
+        let pets = this.getPets();
+        pets = pets.filter(p => p.id !== id);
+        localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(pets));
+        return pets;
+    },
+
+    syncNav() {
+        const loggedIn = this.isLoggedIn();
+        const user = this.getUser();
+        const isRoot = window.location.pathname.endsWith('index.html') || window.location.pathname.endsWith('/') || !window.location.pathname.includes('/pages/');
+        const prefix = isRoot ? 'pages/' : '';
+
+        // Buscar enlaces de auth/cuenta en la barra de navegación desktop
+        const navLinks = document.querySelectorAll('.main-nav a, .navbar a');
+        navLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            if (href.includes('login.html') || href.includes('miCuenta.html')) {
+                if (loggedIn) {
+                    link.href = prefix + 'miCuenta.html';
+                    link.textContent = 'Mi Cuenta';
+                    if (window.location.pathname.includes('miCuenta.html')) {
+                        link.classList.add('active');
+                    }
+                } else {
+                    link.href = prefix + 'login.html';
+                    link.textContent = 'Iniciar sesión';
+                    if (window.location.pathname.includes('login.html')) {
+                        link.classList.add('active');
+                    }
+                }
+            }
+        });
+
+        // Buscar enlaces en navegación móvil
+        const mobileLinks = document.querySelectorAll('.mobile-nav-item');
+        mobileLinks.forEach(link => {
+            const href = link.getAttribute('href') || '';
+            if (href.includes('login.html') || href.includes('miCuenta.html')) {
+                if (loggedIn) {
+                    link.href = prefix + 'miCuenta.html';
+                    const spanText = link.querySelector('span:not(.material-symbols-outlined)');
+                    if (spanText) spanText.textContent = 'Cuenta';
+                    if (window.location.pathname.includes('miCuenta.html')) {
+                        link.classList.add('active');
+                    }
+                } else {
+                    link.href = prefix + 'login.html';
+                    const spanText = link.querySelector('span:not(.material-symbols-outlined)');
+                    if (spanText) spanText.textContent = 'Entrar';
+                    if (window.location.pathname.includes('login.html')) {
+                        link.classList.add('active');
+                    }
+                }
+            }
+        });
+    }
+};
+
+// Auto-inicializar cuando cargue el DOM
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => PCC_AUTH.init());
+} else {
+    PCC_AUTH.init();
+}
