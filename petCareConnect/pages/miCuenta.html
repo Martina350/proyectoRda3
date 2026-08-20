@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Gestiona tus datos personales, tus mascotas y la seguridad de tu cuenta en Pet CareConnect.">
+    <title>Mi Cuenta - Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/account.js" defer></script>
+</head>
+<body>
+
+    <div id="site-header"></div>
+
+    <main class="container account-page-wrapper">
+
+        <section aria-labelledby="user-name-title" class="card-surface card-padding account-header-card">
+            <div class="account-user-profile">
+                <div class="account-user-avatar" id="headerUserAvatar">AM</div>
+                <div class="account-user-info">
+                    <h1 id="user-name-title">
+                        <span id="headerUserName">Gabriel Flor</span>
+                        <span class="account-verified-tag">
+                            <span class="material-symbols-outlined">verified</span>
+                            Verificado
+                        </span>
+                    </h1>
+                    <p id="headerUserEmail">gabriel.flor@gmail.com</p>
+                    <div class="account-user-meta">
+                        <span id="headerUserLocation">Quito, Ecuador</span>
+                        <span>•</span>
+                        <span id="headerUserMember">Miembro desde Julio 2026</span>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" class="button button-outline button-danger" id="btnOpenLogoutModal">
+                    <span class="material-symbols-outlined">logout</span>
+                    Cerrar sesión
+                </button>
+            </div>
+        </section>
+
+        <nav class="account-tabs-nav" aria-label="Pestañas de la cuenta">
+            <button type="button" class="account-tab-btn active" data-tab="tab-mascotas">
+                <span class="material-symbols-outlined">pets</span>
+                Mis Mascotas (<span id="tabPetsCount">2</span>)
+            </button>
+            <button type="button" class="account-tab-btn" data-tab="tab-datos">
+                <span class="material-symbols-outlined">person</span>
+                Datos Personales
+            </button>
+            <button type="button" class="account-tab-btn" data-tab="tab-pagos">
+                <span class="material-symbols-outlined">credit_card</span>
+                Métodos de Pago
+            </button>
+            <button type="button" class="account-tab-btn" data-tab="tab-seguridad">
+                <span class="material-symbols-outlined">security</span>
+                Seguridad & Acceso
+            </button>
+        </nav>
+
+        <section id="tab-mascotas" class="account-tab-pane active" aria-labelledby="mascotas-heading">
+            <div class="pets-section-header">
+                <div>
+                    <h2 id="mascotas-heading">Mis Mascotas</h2>
+                    <p class="text-small text-muted">Fichas médicas y datos para asignar rápidamente en tus reservas.</p>
+                </div>
+                <button type="button" class="button button-primary" id="btnOpenAddPetModal">
+                    <span class="material-symbols-outlined">add_circle</span>
+                    Añadir Mascota
+                </button>
+            </div>
+
+            <div class="pets-grid" id="petsGridContainer">
+
+            </div>
+        </section>
+
+        <section id="tab-datos" class="account-tab-pane" aria-labelledby="datos-heading">
+            <div class="card-surface card-padding account-card-box">
+                <h2 id="datos-heading" class="account-box-title">Información Personal</h2>
+                <p class="account-box-desc">Actualiza tus datos de contacto y ubicación para tus servicios de cuidado.</p>
+
+                <form id="userDataForm" novalidate>
+                    <div class="account-form-grid two-cols">
+                        <div class="login-form-item">
+                            <label for="profileName">Nombre y apellidos</label>
+                            <input type="text" id="profileName" class="input" required>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="profileEmail">Correo electrónico</label>
+                            <input type="email" id="profileEmail" class="input" required>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="profilePhone">Teléfono de contacto</label>
+                            <input type="tel" id="profilePhone" class="input">
+                        </div>
+                        <div class="login-form-item">
+                            <label for="profileLocation">Dirección / Zona habitual</label>
+                            <input type="text" id="profileLocation" class="input">
+                        </div>
+                    </div>
+
+                    <div class="account-form-actions">
+                        <button type="submit" class="button button-primary" id="btnSaveProfile">
+                            <span class="material-symbols-outlined">save</span>
+                            Guardar Cambios
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="tab-pagos" class="account-tab-pane" aria-labelledby="pagos-heading">
+            <div class="card-surface card-padding account-card-box">
+                <h2 id="pagos-heading" class="account-box-title">Tarjetas y Métodos de Pago</h2>
+                <p class="account-box-desc">Gestiona tus métodos de pago seguros para confirmaciones de reservas.</p>
+
+                <div class="payment-methods-list">
+                    <div class="payment-card-item">
+                        <div class="payment-card-left">
+                            <span class="material-symbols-outlined">credit_card</span>
+                            <div class="payment-card-details">
+                                <strong>Visa terminada en •••• 4242</strong>
+                                <span>Caduca: 08/2028 · Débito</span>
+                            </div>
+                        </div>
+                        <span class="badge badge-success">Predeterminada</span>
+                    </div>
+
+                    <div class="payment-card-item">
+                        <div class="payment-card-left">
+                            <span class="material-symbols-outlined">credit_card</span>
+                            <div class="payment-card-details">
+                                <strong>Mastercard terminada en •••• 8819</strong>
+                                <span>Caduca: 11/2027 · Crédito</span>
+                            </div>
+                        </div>
+                        <button type="button" class="button button-outline button-sm" onclick="window.showToast('Tarjeta cambiada a predeterminada', 'info');">
+                            Establecer principal
+                        </button>
+                    </div>
+                </div>
+
+                <button type="button" class="button button-outline" onclick="window.showToast('Módulo de pasarela de pago segura encriptada.', 'info');">
+                    <span class="material-symbols-outlined">add_card</span>
+                    Añadir Nuevo Método de Pago
+                </button>
+            </div>
+        </section>
+
+        <section id="tab-seguridad" class="account-tab-pane" aria-labelledby="seguridad-heading">
+            <div class="card-surface card-padding account-card-box">
+                <h2 id="seguridad-heading" class="account-box-title">Contraseña y Seguridad</h2>
+                <p class="account-box-desc">Mantén tu cuenta protegida actualizando tu clave periódicamente.</p>
+
+                <form id="changePasswordForm" class="form-narrow" novalidate>
+                    <div class="login-fieldset">
+                        <div class="login-form-item">
+                            <label for="currentPass">Contraseña actual</label>
+                            <input type="password" id="currentPass" class="input" placeholder="••••••••" required>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="newPass">Nueva contraseña (mínimo 8 caracteres)</label>
+                            <input type="password" id="newPass" class="input" placeholder="••••••••" required>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="confirmNewPass">Confirmar nueva contraseña</label>
+                            <input type="password" id="confirmNewPass" class="input" placeholder="••••••••" required>
+                        </div>
+
+                        <div>
+                            <button type="submit" class="button button-primary" id="btnUpdatePass">
+                                Actualizar Contraseña
+                            </button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="divider">
+
+                <div>
+                    <h3 class="heading-danger">Zona de Sesión</h3>
+                    <p class="text-small text-muted mb-md">Cierra la sesión activa en este navegador.</p>
+                    <button type="button" class="button button-outline button-danger-strong" id="btnDangerLogout">
+                        Cerrar sesión ahora
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="addPetModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="addPetModalTitle">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="addPetModalTitle">Añadir Nueva Mascota</h3>
+                <button type="button" class="modal-close-btn" id="btnCloseAddPetModal" aria-label="Cerrar ventana">&times;</button>
+            </div>
+            <form id="addPetForm" novalidate>
+                <div class="modal-body">
+                    <div class="login-form-item">
+                        <label for="petNameInput">Nombre de la mascota *</label>
+                        <input type="text" id="petNameInput" class="input" placeholder="p. ej. Toby" required>
+                        <div id="petNameError" class="field-error">
+                            <span>Introduce el nombre de la mascota</span>
+                        </div>
+                    </div>
+
+                    <div class="account-form-grid two-cols">
+                        <div class="login-form-item">
+                            <label for="petTypeSelect">Tipo de mascota *</label>
+                            <select id="petTypeSelect" class="input">
+                                <option value="Perro">Perro</option>
+                                <option value="Gato">Gato</option>
+                                <option value="Ave">Ave</option>
+                                <option value="Conejo">Conejo</option>
+                                <option value="Otro">Otro</option>
+                            </select>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="petBreedInput">Raza / Tipo</label>
+                            <input type="text" id="petBreedInput" class="input" placeholder="p. ej. Golden Retriever">
+                        </div>
+                    </div>
+
+                    <div class="account-form-grid two-cols">
+                        <div class="login-form-item">
+                            <label for="petAgeInput">Edad</label>
+                            <input type="text" id="petAgeInput" class="input" placeholder="p. ej. 2 años">
+                        </div>
+                        <div class="login-form-item">
+                            <label for="petWeightInput">Peso aproximado</label>
+                            <input type="text" id="petWeightInput" class="input" placeholder="p. ej. 12 kg">
+                        </div>
+                    </div>
+
+                    <div class="login-form-item">
+                        <label for="petGenderSelect">Sexo</label>
+                        <select id="petGenderSelect" class="input">
+                            <option value="Macho">Macho</option>
+                            <option value="Hembra">Hembra</option>
+                        </select>
+                    </div>
+
+                    <div class="login-form-item">
+                        <label for="petNotesInput">Observaciones, medicación o alergias</label>
+                        <textarea id="petNotesInput" class="input" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés."></textarea>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="button button-outline" id="btnCancelAddPet">Cancelar</button>
+                    <button type="submit" class="button button-primary" id="btnSubmitPet">Guardar Mascota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="logoutModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="logoutModalTitle">
+        <div class="modal-card modal-card-sm">
+            <div class="modal-header">
+                <h3 id="logoutModalTitle">Cerrar Sesión</h3>
+                <button type="button" class="modal-close-btn" id="btnCloseLogoutModal" aria-label="Cerrar">&times;</button>
+            </div>
+            <div class="modal-body modal-body-center">
+                <span class="material-symbols-outlined modal-status-icon">logout</span>
+                <p class="modal-lead">
+                    ¿Estás seguro de que deseas cerrar sesión?
+                </p>
+                <p class="modal-hint">
+                    Tendrás que volver a identificarte para gestionar tus reservas y mascotas.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button button-outline" id="btnCancelLogout">Cancelar</button>
+                <button type="button" class="button button-primary button-danger" id="btnConfirmLogout">
+                    Cerrar Sesión
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+    <div id="site-mobile-nav"></div>
+</body>
+</html>

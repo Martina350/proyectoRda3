@@ -10,35 +10,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container navbar-container">
-            <span class="brand-logo"><a href="../index.html" class="brand-name">Pet CareConnect</a></span>
-
-            <form role="search" action="misReservas.html" method="GET" class="search-form">
-                <div class="form-group search-group">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <label for="search-bookings" class="sr-only">Buscar reservas</label>
-                    <input type="search" id="search-bookings" name="q" placeholder="Buscar reservas..." class="form-control search-input">
-                    <button type="submit" class="button button-primary sr-only">Buscar</button>
-                </div>
-            </form>
-
-            <nav aria-label="Navegación principal" class="main-nav">
-                <ul>
-                    <li><a href="../index.html" class="nav-link">Inicio</a></li>
-                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
-                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
-                    <li><a href="misReservas.html" class="nav-link active">Mis Reservas</a></li>
-                    <li><a href="login.html" class="nav-link">Perfil</a></li>
-                </ul>
-            </nav>
-            
-            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
-        </div>
-    </header>
+    <div id="site-header"></div>
 
     <main class="container bookings-main">
 
@@ -48,7 +26,7 @@
         </section>
 
         <div class="bookings-columns-grid">
-            <!-- COLUMN: ACTIVAS -->
+
             <section aria-labelledby="activas-title" class="bookings-column">
                 <div class="column-header">
                     <h2 id="activas-title" class="column-title">
@@ -68,7 +46,7 @@
                             </div>
                             <p class="status-badge badge-en-progreso"><strong>Estado:</strong> En progreso</p>
                         </div>
-                        
+
                         <div class="card-details-list">
                             <p class="detail-item detail-fecha"><strong>Fecha:</strong> Hoy, 14:00 - 15:00</p>
                             <p class="detail-item detail-mascota"><strong>Mascota:</strong> "Bruno" (Beagle)</p>
@@ -91,7 +69,7 @@
                             </div>
                             <p class="status-badge badge-manana"><strong>Estado:</strong> Mañana</p>
                         </div>
-                        
+
                         <div class="card-details-list">
                             <p class="detail-item detail-fecha"><strong>Fecha:</strong> Mañana, 10:30 AM</p>
                             <p class="detail-item detail-mascota"><strong>Mascota:</strong> "Luna" (Persa)</p>
@@ -104,7 +82,6 @@
                 </div>
             </section>
 
-            <!-- COLUMN: PASADAS -->
             <section aria-labelledby="pasadas-title" class="bookings-column">
                 <div class="column-header">
                     <h2 id="pasadas-title" class="column-title">
@@ -123,9 +100,9 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card-details-list">
-                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> 15 Oct, 2024</p>
+                            <p class="detail-item detail-fecha"><strong>Fecha:</strong> 15 Oct, 2026</p>
                             <div class="detail-rating-row">
                                 <p class="detail-item detail-rating"><strong>Calificación:</strong> 5.0 estrellas</p>
                                 <p class="detail-item detail-estado-completada"><strong>Estado:</strong> Completada</p>
@@ -147,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card-details-list">
                             <p class="detail-item detail-fecha"><strong>Fecha:</strong> 12 Oct, 2026</p>
                         </div>
@@ -159,7 +136,6 @@
                 </div>
             </section>
 
-            <!-- COLUMN: CANCELADAS -->
             <section aria-labelledby="canceladas-title" class="bookings-column">
                 <div class="column-header">
                     <h2 id="canceladas-title" class="column-title column-title-muted">
@@ -178,7 +154,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="card-details-list">
                             <p class="detail-item detail-cancelada"><strong>Estado:</strong> Cancelada por el usuario</p>
                             <p class="detail-item detail-estaba-para"><strong>Estaba para:</strong> 20 Oct</p>
@@ -194,48 +170,51 @@
 
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <h2>Pet CareConnect</h2>
-                <p>Cuidando a los que más quieres.</p>
-            </div>
+    <div id="site-footer"></div>
 
-            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
-                <ul>
-                    <li><a href="#">Contáctanos</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                </ul>
-            </nav>
+    <div id="site-mobile-nav"></div>
 
-            <p class="footer-copyright">2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
-        </div>
-    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const btnSeguimiento = document.querySelectorAll('.btn-seguimiento, .btn-alert-seguimiento');
+            const btnContacto = document.querySelectorAll('.btn-contacto');
+            const btnReagendar = document.querySelectorAll('.btn-reagendar');
+            const btnInforme = document.querySelectorAll('.btn-informe');
+            const btnReembolso = document.querySelectorAll('.btn-reembolso');
 
-    <nav aria-label="Navegación móvil" class="mobile-nav">
-        <a href="../index.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">explore</span>
-            <span>Inicio</span>
-        </a>
-        <a href="buscarCuidadores.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">search</span>
-            <span>Explorar</span>
-        </a>
-        <a href="servicios.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">pets</span>
-            <span>Servicios</span>
-        </a>
-        <a href="misReservas.html" class="mobile-nav-item active">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span>Reservas</span>
-        </a>
-        <a href="login.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">person</span>
-            <span>Perfil</span>
-        </a>
-    </nav>
+            btnSeguimiento.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('El rastreo GPS en tiempo real estará activo durante el recorrido del paseo.', 'info');
+                });
+            });
 
+            btnContacto.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    window.showToast('Abriendo canal directo de mensaje con la cuidadora Ana Martínez...', 'info');
+                });
+            });
+
+            btnReagendar.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    window.showToast('Selecciona la nueva fecha para solicitar la reprogramación.', 'info');
+                });
+            });
+
+            btnInforme.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('Descargando informe clínico y reporte de consulta...', 'info');
+                });
+            });
+
+            btnReembolso.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    window.showToast('El reembolso de $25 ha sido procesado a tu método original de pago.', 'success');
+                });
+            });
+        });
+    </script>
 </body>
 </html>

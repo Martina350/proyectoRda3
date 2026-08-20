@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reserva confirmada con éxito en Pet CareConnect.">
+    <title>Reserva Confirmada - Pet CareConnect</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+</head>
+<body>
+
+    <div id="site-header"></div>
+
+    <main class="container">
+        <div class="confirmation-page-container">
+            <article class="card-surface card-padding confirmation-card">
+                <div class="confirmation-icon-circle">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+
+                <div>
+                    <h1 class="bookings-title">¡Reserva Solicitada con Éxito!</h1>
+                    <p class="bookings-subtitle">Hemos registrado tu solicitud y enviado el comprobante a tu correo.</p>
+                </div>
+
+                <div class="confirmation-details-box">
+                    <div class="confirmation-code-row">
+                        <span class="detail-item"><strong>Código de Reserva:</strong></span>
+                        <span class="code-badge">#PCC-2026-849</span>
+                    </div>
+
+                    <div class="summary-item">
+                        <span>Cuidador asignado:</span>
+                        <strong>Elena Martínez</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Servicio:</span>
+                        <strong>Alojamiento en casa</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Fechas:</span>
+                        <strong id="confirm-dates-str">12 Oct, 2026 - 15 Oct, 2026</strong>
+                    </div>
+                    <div class="summary-item">
+                        <span>Mascota:</span>
+                        <strong id="confirm-pet-str">1 Perro ("Bruno")</strong>
+                    </div>
+                    <div class="summary-item summary-total">
+                        <span>Total abonado:</span>
+                        <strong id="confirm-total-str">$80</strong>
+                    </div>
+                </div>
+
+                <div class="modal-policy-note">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">verified_user</span>
+                    <span>Cancelación gratuita disponible hasta 24 horas antes del inicio del servicio.</span>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="misReservas.html" class="button button-primary">Ver Mis Reservas</a>
+                    <a href="buscarCuidadores.html" class="button button-outline">Explorar Más</a>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <div id="site-footer"></div>
+
+    <div id="site-mobile-nav"></div>
+</body>
+</html>

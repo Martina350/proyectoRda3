@@ -3,38 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Servicios profesionales para el cuidado de mascotas en PetCareConnect.">
-    <title>Servicios - PetCareConnect</title>
+    <meta name="description" content="Servicios profesionales para el cuidado de mascotas en Pet CareConnect.">
+    <title>Servicios - Pet CareConnect</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
 </head>
 <body>
 
-    <header class="navbar">
-        <div class="container navbar-container">
-            <span class="brand-logo"><a href="../index.html" class="brand-name">PetCareConnect</a></span>
-
-            <nav aria-label="Navegación principal" class="main-nav">
-                <ul>
-                    <li><a href="buscarCuidadores.html" class="nav-link">Buscar</a></li>
-                    <li><a href="servicios.html" class="nav-link active">Servicios</a></li>
-                    <li><a href="misReservas.html" class="nav-link">Mis Reservas</a></li>
-                    <li><a href="login.html" class="nav-link">Perfil</a></li>
-                </ul>
-            </nav>
-            
-            <a href="buscarCuidadores.html" class="button button-accent">Reservar Ahora</a>
-        </div>
-    </header>
+    <div id="site-header"></div>
 
     <main>
         <section aria-labelledby="servicios-title" class="services-hero-banner">
             <div class="container">
                 <div class="hero-text-block">
-                    <h1 id="servicios-title">Nuestros Servicios Profesionales</h1>
+                    <h1 id="servicios-title" class="heading-display">Nuestros Servicios Profesionales</h1>
                     <p>Soluciones confiables y personalizadas para el cuidado integral de tu mascota. Desde paseos diarios hasta estancias completas en un ambiente seguro.</p>
                 </div>
             </div>
@@ -42,9 +30,9 @@
 
         <section aria-labelledby="catalogo-title" class="catalog-section container">
             <h2 id="catalogo-title" class="sr-only">Catálogo de servicios</h2>
-            
+
             <div class="catalog-grid">
-                <article class="card-surface catalog-card card-padding">
+                <article id="guarderia" class="card-surface catalog-card card-padding card-hover-effect">
                     <div class="catalog-card-header">
                         <div class="catalog-card-title-row">
                             <h3>Guardería por horas</h3>
@@ -54,11 +42,11 @@
                     </div>
                     <div class="catalog-card-footer">
                         <span class="catalog-price">Desde $8/h</span>
-                        <a href="buscarCuidadores.html" class="button button-primary catalog-btn">Reservar</a>
+                        <a href="buscarCuidadores.html?intent=reservar" class="button button-primary catalog-btn">Reservar</a>
                     </div>
                 </article>
 
-                <article class="card-surface catalog-card card-padding">
+                <article id="estancia" class="card-surface catalog-card card-padding card-hover-effect">
                     <div class="catalog-card-header">
                         <div class="catalog-card-title-row">
                             <h3>Estancia completa</h3>
@@ -67,11 +55,11 @@
                     </div>
                     <div class="catalog-card-footer">
                         <span class="catalog-price">Desde $25/día</span>
-                        <a href="buscarCuidadores.html" class="button button-primary catalog-btn">Reservar</a>
+                        <a href="buscarCuidadores.html?intent=reservar" class="button button-primary catalog-btn">Reservar</a>
                     </div>
                 </article>
 
-                <article class="card-surface catalog-card card-padding">
+                <article id="paseos" class="card-surface catalog-card card-padding card-hover-effect">
                     <div class="catalog-card-header">
                         <div class="catalog-card-title-row">
                             <h3>Paseos</h3>
@@ -80,30 +68,30 @@
                     </div>
                     <div class="catalog-card-footer">
                         <span class="catalog-price">Desde $12/sesión</span>
-                        <a href="buscarCuidadores.html" class="button button-primary catalog-btn">Reservar</a>
+                        <a href="buscarCuidadores.html?intent=reservar" class="button button-primary catalog-btn">Reservar</a>
                     </div>
                 </article>
 
-                <article class="card-surface catalog-card card-padding">
+                <article id="otros" class="card-surface catalog-card card-padding card-hover-effect">
                     <div class="catalog-card-header">
                         <div class="catalog-card-title-row">
                             <h3>Otros servicios</h3>
                         </div>
-                        <p class="catalog-card-desc">Peluquería, transporte de mascotas y administración de medicamentos bajo prescripción.</p>
+                        <p class="catalog-card-desc">Peluquería, transporte de mascotas y administración de medicamentos bajo prescripción médica.</p>
                     </div>
                     <div class="catalog-card-footer">
                         <span class="catalog-price">Consultar precio</span>
-                        <a href="buscarCuidadores.html" class="button button-primary catalog-btn">Contactar</a>
+                        <a href="buscarCuidadores.html?intent=reservar" class="button button-primary catalog-btn">Contactar</a>
                     </div>
                 </article>
             </div>
         </section>
 
-        <section aria-labelledby="garantias-title" class="guarantees-section container">
+        <section aria-labelledby="garantias-title" class="guarantees-section container" style="margin-top: 3rem;">
             <h2 id="garantias-title" class="guarantees-main-title">Garantías de nuestro servicio</h2>
-            
+
             <div class="guarantees-grid">
-                <article class="card guarantee-card">
+                <article class="card guarantee-card card-hover-effect">
                     <div class="guarantee-icon-box">
                         <span class="material-symbols-outlined">verified_user</span>
                     </div>
@@ -111,7 +99,7 @@
                     <p>Todas nuestras estancias cuentan con seguro de responsabilidad civil.</p>
                 </article>
 
-                <article class="card guarantee-card">
+                <article class="card guarantee-card card-hover-effect">
                     <div class="guarantee-icon-box">
                         <span class="material-symbols-outlined">location_on</span>
                     </div>
@@ -119,7 +107,7 @@
                     <p>Monitoriza los paseos de tu perro en tiempo real desde la app.</p>
                 </article>
 
-                <article class="card guarantee-card">
+                <article class="card guarantee-card card-hover-effect">
                     <div class="guarantee-icon-box">
                         <span class="material-symbols-outlined">support_agent</span>
                     </div>
@@ -131,45 +119,8 @@
 
     </main>
 
-    <footer class="footer">
-        <div class="container footer-container">
-            <div class="footer-brand">
-                <h2>PetCareConnect</h2>
-                <p>© 2026 PetCareConnect Inc. Todos los derechos reservados.</p>
-            </div>
+    <div id="site-footer"></div>
 
-            <nav aria-label="Enlaces legales y de ayuda" class="footer-nav">
-                <ul>
-                    <li><a href="#">Contáctanos</a></li>
-                    <li><a href="#">Política de Privacidad</a></li>
-                    <li><a href="#">Términos de Servicio</a></li>
-                    <li><a href="#">Preguntas Frecuentes</a></li>
-                </ul>
-            </nav>
-        </div>
-    </footer>
-
-    <nav aria-label="Navegación móvil" class="mobile-nav">
-        <a href="../index.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">explore</span>
-            <span>Inicio</span>
-        </a>
-        <a href="buscarCuidadores.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">search</span>
-            <span>Explorar</span>
-        </a>
-        <a href="servicios.html" class="mobile-nav-item active">
-            <span class="material-symbols-outlined">pets</span>
-            <span>Servicios</span>
-        </a>
-        <a href="misReservas.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">calendar_month</span>
-            <span>Reservas</span>
-        </a>
-        <a href="login.html" class="mobile-nav-item">
-            <span class="material-symbols-outlined">person</span>
-            <span>Perfil</span>
-        </a>
-    </nav>
+    <div id="site-mobile-nav"></div>
 </body>
 </html>

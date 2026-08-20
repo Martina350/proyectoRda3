@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Regístrate gratis en Pet CareConnect para encontrar cuidadores de confianza y gestionar tus reservas.">
+    <title>Pet CareConnect - Crear Cuenta</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+</head>
+<body class="login-page-body">
+
+    <main class="login-main-container">
+
+        <div class="login-wrapper">
+            <section aria-labelledby="register-page-title" class="login-header-block">
+                <a href="../index.html" class="login-back-link">← Volver al inicio</a>
+                <a href="../index.html" class="login-brand-link">
+                    <span class="material-symbols-outlined login-logo-icon">pets</span>
+                    <h1 id="register-page-title">Pet CareConnect</h1>
+                </a>
+                <p>Crea tu cuenta gratis y encuentra el mejor cuidado para tu mascota.</p>
+
+                <div class="card-surface login-card-container">
+                    <form action="#" method="POST" id="registerForm" novalidate>
+                        <fieldset class="login-fieldset">
+                            <legend class="sr-only">Formulario de registro de usuario</legend>
+
+                            <div class="login-form-item">
+                                <label for="reg-name">Nombre y apellidos</label>
+                                <div class="input-icon-wrapper">
+                                    <span class="material-symbols-outlined input-left-icon">person</span>
+                                    <input
+                                        type="text"
+                                        id="reg-name"
+                                        class="login-input"
+                                        name="name"
+                                        placeholder="p. ej. Alejandro Martínez"
+                                        autocomplete="name"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="name-error">
+                                </div>
+                                <div id="name-error" class="field-error" role="alert">
+                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                    <span>Introduce tu nombre completo (mínimo 2 caracteres)</span>
+                                </div>
+                            </div>
+
+                            <div class="login-form-item">
+                                <label for="reg-email">Correo electrónico</label>
+                                <div class="input-icon-wrapper">
+                                    <span class="material-symbols-outlined input-left-icon">mail</span>
+                                    <input
+                                        type="email"
+                                        id="reg-email"
+                                        class="login-input"
+                                        name="email"
+                                        placeholder="tu@ejemplo.com"
+                                        autocomplete="email"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="email-error">
+                                </div>
+                                <div id="email-error" class="field-error" role="alert">
+                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                    <span>Introduce un correo electrónico válido</span>
+                                </div>
+                            </div>
+
+                            <div class="login-form-item">
+                                <label for="reg-phone">Teléfono <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
+                                <div class="input-icon-wrapper">
+                                    <span class="material-symbols-outlined input-left-icon">phone</span>
+                                    <input
+                                        type="tel"
+                                        id="reg-phone"
+                                        class="login-input"
+                                        name="phone"
+                                        placeholder="+593 96 931 7653"
+                                        autocomplete="tel">
+                                </div>
+                            </div>
+
+                            <div class="login-form-item">
+                                <label for="reg-password">Contraseña</label>
+                                <div class="input-icon-wrapper">
+                                    <span class="material-symbols-outlined input-left-icon">lock</span>
+                                    <input
+                                        type="password"
+                                        id="reg-password"
+                                        class="login-input"
+                                        name="password"
+                                        placeholder="Mínimo 8 caracteres"
+                                        autocomplete="new-password"
+                                        required
+                                        aria-invalid="false"
+                                        aria-describedby="pass-error">
+                                    <button type="button" class="toggle-password-btn" aria-controls="reg-password" aria-label="Mostrar u ocultar contraseña" onclick="togglePassword()">
+                                        <span class="material-symbols-outlined" id="passwordIcon">visibility</span>
+                                    </button>
+                                </div>
+
+                                <div class="password-strength-container" id="strengthContainer" aria-live="polite">
+                                    <div class="password-strength-bars">
+                                        <div class="strength-bar-segment segment-1"></div>
+                                        <div class="strength-bar-segment segment-2"></div>
+                                        <div class="strength-bar-segment segment-3"></div>
+                                    </div>
+                                    <div class="password-strength-text" id="strengthText">Seguridad: pendiente</div>
+                                </div>
+
+                                <div id="pass-error" class="field-error" role="alert">
+                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                    <span>La contraseña debe tener al menos 8 caracteres</span>
+                                </div>
+                            </div>
+
+                            <div class="auth-terms-item">
+                                <input type="checkbox" id="reg-terms" name="terms" required aria-describedby="terms-error">
+                                <label for="reg-terms">
+                                    Acepto los <a href="#" onclick="event.preventDefault(); window.showToast('Términos de servicio de Pet CareConnect aplicados', 'info');">Términos de Servicio</a> y la <a href="#" onclick="event.preventDefault(); window.showToast('Política de privacidad conforme al RGPD', 'info');">Política de Privacidad</a>.
+                                </label>
+                            </div>
+                            <div id="terms-error" class="field-error" role="alert" style="margin-left: 1.5rem;">
+                                <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                <span>Debes aceptar los términos para continuar</span>
+                            </div>
+
+                            <button type="submit" class="login-submit-btn" id="regSubmitBtn">
+                                <span>Crear mi cuenta</span>
+                                <span class="material-symbols-outlined">person_add</span>
+                            </button>
+                        </fieldset>
+                    </form>
+                </div>
+            </section>
+
+            <section aria-labelledby="already-account-title" class="register-prompt-section">
+                <h2 id="already-account-title">¿Ya tienes una cuenta?</h2>
+                <a href="login.html">Inicia sesión</a>
+            </section>
+        </div>
+
+    </main>
+
+    <footer class="login-footer">
+        <p>© 2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
+    </footer>
+
+    <script>
+        function togglePassword() {
+            const passInput = document.getElementById('reg-password');
+            const passIcon = document.getElementById('passwordIcon');
+            if (passInput.type === 'password') {
+                passInput.type = 'text';
+                passIcon.innerText = 'visibility_off';
+            } else {
+                passInput.type = 'password';
+                passIcon.innerText = 'visibility';
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('registerForm');
+            const nameInput = document.getElementById('reg-name');
+            const emailInput = document.getElementById('reg-email');
+            const phoneInput = document.getElementById('reg-phone');
+            const passInput = document.getElementById('reg-password');
+            const termsInput = document.getElementById('reg-terms');
+
+            const nameError = document.getElementById('name-error');
+            const emailError = document.getElementById('email-error');
+            const passError = document.getElementById('pass-error');
+            const termsError = document.getElementById('terms-error');
+
+            const strengthContainer = document.getElementById('strengthContainer');
+            const strengthText = document.getElementById('strengthText');
+            const submitBtn = document.getElementById('regSubmitBtn');
+
+            const rfcEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            function evaluateStrength(pass) {
+                if (!pass || pass.length === 0) {
+                    strengthContainer.className = 'password-strength-container';
+                    strengthText.textContent = 'Seguridad: pendiente';
+                    strengthText.style.color = 'var(--text-muted)';
+                    return 0;
+                }
+
+                let score = 0;
+                if (pass.length >= 8) score++;
+                if (/[A-Z]/.test(pass) && /[0-9]/.test(pass)) score++;
+                if (pass.length >= 10 && /[^A-Za-z0-9]/.test(pass)) score++;
+
+                strengthContainer.className = 'password-strength-container';
+                if (score === 0 || (score === 1 && pass.length < 8)) {
+                    strengthContainer.classList.add('strength-level-weak');
+                    strengthText.textContent = 'Seguridad: Débil (mínimo 8 caracteres)';
+                    strengthText.style.color = 'var(--error)';
+                } else if (score === 1 || score === 2) {
+                    strengthContainer.classList.add('strength-level-medium');
+                    strengthText.textContent = 'Seguridad: Media (buen nivel)';
+                    strengthText.style.color = 'var(--secondary-bright)';
+                } else {
+                    strengthContainer.classList.add('strength-level-strong');
+                    strengthText.textContent = 'Seguridad: Fuerte (excelente)';
+                    strengthText.style.color = 'var(--success)';
+                }
+
+                return score;
+            }
+
+            function validateName() {
+                const val = nameInput.value.trim();
+                if (!val || val.length < 2) {
+                    nameInput.classList.add('is-invalid');
+                    nameInput.setAttribute('aria-invalid', 'true');
+                    nameError.classList.add('is-visible');
+                    return false;
+                } else {
+                    nameInput.classList.remove('is-invalid');
+                    nameInput.setAttribute('aria-invalid', 'false');
+                    nameError.classList.remove('is-visible');
+                    return true;
+                }
+            }
+
+            function validateEmail() {
+                const val = emailInput.value.trim();
+                if (!val || !rfcEmailRegex.test(val)) {
+                    emailInput.classList.add('is-invalid');
+                    emailInput.setAttribute('aria-invalid', 'true');
+                    emailError.classList.add('is-visible');
+                    return false;
+                } else {
+                    emailInput.classList.remove('is-invalid');
+                    emailInput.setAttribute('aria-invalid', 'false');
+                    emailError.classList.remove('is-visible');
+                    return true;
+                }
+            }
+
+            function validatePassword() {
+                const val = passInput.value;
+                if (!val || val.length < 8) {
+                    passInput.classList.add('is-invalid');
+                    passInput.setAttribute('aria-invalid', 'true');
+                    passError.classList.add('is-visible');
+                    return false;
+                } else {
+                    passInput.classList.remove('is-invalid');
+                    passInput.setAttribute('aria-invalid', 'false');
+                    passError.classList.remove('is-visible');
+                    return true;
+                }
+            }
+
+            function validateTerms() {
+                if (!termsInput.checked) {
+                    termsError.classList.add('is-visible');
+                    return false;
+                } else {
+                    termsError.classList.remove('is-visible');
+                    return true;
+                }
+            }
+
+            nameInput.addEventListener('input', () => {
+                if (nameInput.classList.contains('is-invalid')) validateName();
+            });
+            nameInput.addEventListener('blur', validateName);
+
+            emailInput.addEventListener('input', () => {
+                if (emailInput.classList.contains('is-invalid')) validateEmail();
+            });
+            emailInput.addEventListener('blur', validateEmail);
+
+            passInput.addEventListener('input', () => {
+                evaluateStrength(passInput.value);
+                if (passInput.classList.contains('is-invalid')) validatePassword();
+            });
+            passInput.addEventListener('blur', validatePassword);
+
+            termsInput.addEventListener('change', validateTerms);
+
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const isNameValid = validateName();
+                const isEmailValid = validateEmail();
+                const isPassValid = validatePassword();
+                const isTermsValid = validateTerms();
+
+                if (!isNameValid) {
+                    nameInput.focus();
+                    return;
+                }
+                if (!isEmailValid) {
+                    emailInput.focus();
+                    return;
+                }
+                if (!isPassValid) {
+                    passInput.focus();
+                    return;
+                }
+                if (!isTermsValid) {
+                    termsInput.focus();
+                    return;
+                }
+
+                submitBtn.classList.add('is-loading');
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = `
+                    <span class="btn-spinner"></span>
+                    <span>Creando tu cuenta...</span>
+                `;
+
+                setTimeout(() => {
+                    const user = PCC_AUTH.register(
+                        nameInput.value,
+                        emailInput.value,
+                        phoneInput.value,
+                        passInput.value
+                    );
+
+                    if (window.showToast) {
+                        window.showToast(`¡Cuenta creada con éxito! Bienvenido, ${user.name}`, 'success');
+                    }
+
+                    const params = new URLSearchParams(window.location.search);
+                    const nextUrl = params.get('next') || 'miCuenta.html';
+
+                    setTimeout(() => {
+                        window.location.href = nextUrl;
+                    }, 600);
+                }, 800);
+            });
+        });
+    </script>
+</body>
+</html>
