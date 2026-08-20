@@ -90,13 +90,28 @@
             <section aria-labelledby="environment-title" class="card-surface card-padding profile-section">
                 <div class="profile-section-header">
                     <h2 id="environment-title" class="profile-section-title">Mi Entorno</h2>
-                    <a href="#" class="see-all-link">Ver todas las fotos</a>
+                    <button type="button" class="see-all-link btn-view-gallery" style="background: none; border: none; font-family: inherit; font-size: 0.9rem; cursor: pointer; color: var(--secondary-bright);">Ver todas las fotos (11)</button>
                 </div>
                 <div class="environment-grid-placeholder">
-                    <div class="env-placeholder-item env-living"><span class="material-symbols-outlined">deck</span><span class="env-label">Salón amplio</span></div>
-                    <div class="env-placeholder-item env-terrace"><span class="material-symbols-outlined">nature</span><span class="env-label">Terraza</span></div>
-                    <div class="env-placeholder-item env-kitchen"><span class="material-symbols-outlined">soup_kitchen</span><span class="env-label">Zona limpia</span></div>
-                    <div class="env-placeholder-item env-more"><span class="more-count">+8</span></div>
+                    <div class="env-placeholder-item env-living">
+                        <!-- Slot preparado para imagen: <img src="" alt="Salón amplio" class="env-img"> -->
+                        <span class="material-symbols-outlined">deck</span>
+                        <span class="env-label">Salón amplio</span>
+                    </div>
+                    <div class="env-placeholder-item env-terrace">
+                        <!-- Slot preparado para imagen: <img src="" alt="Terraza segura" class="env-img"> -->
+                        <span class="material-symbols-outlined">nature</span>
+                        <span class="env-label">Terraza</span>
+                    </div>
+                    <div class="env-placeholder-item env-kitchen">
+                        <!-- Slot preparado para imagen: <img src="" alt="Zona limpia" class="env-img"> -->
+                        <span class="material-symbols-outlined">soup_kitchen</span>
+                        <span class="env-label">Zona limpia</span>
+                    </div>
+                    <div class="env-placeholder-item env-more btn-view-gallery" style="cursor: pointer;" role="button" tabindex="0" aria-label="Ver 8 fotos más del entorno">
+                        <span class="more-count">+8</span>
+                        <span class="env-label">fotos</span>
+                    </div>
                 </div>
             </section>
 
@@ -162,12 +177,12 @@
 
         </main>
 
-        <aside aria-labelledby="booking-title" class="profile-sidebar-content">
-            
-            <section aria-labelledby="booking-title" class="card-surface card-padding booking-sticky-card">
-                <div class="booking-card-header">
-                    <h2 id="booking-title" class="sr-only">Detalles de la Reserva</h2>
-                    <div class="booking-price-row">
+        <!-- Aside de Reserva -->
+        <aside aria-labelledby="booking-card-title" class="profile-sidebar-content">
+            <section class="card-surface card-padding booking-sticky-card">
+                <div class="booking-header">
+                    <h2 id="booking-card-title" class="booking-header-title">Reserva con Lucía</h2>
+                    <div class="booking-price-tag">
                         <span class="booking-price-val">Desde $25</span>
                         <span class="booking-price-unit">/ noche</span>
                     </div>
@@ -218,7 +233,7 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="button button-hero-accent booking-submit-btn">Reservar ahora</button>
+                        <button type="submit" class="button button-accent booking-submit-btn">Reservar ahora</button>
                         <p class="booking-guarantee-note">Revisa y confirma en el siguiente paso</p>
                     </fieldset>
                 </form>
@@ -235,7 +250,7 @@
                         <div class="service-text-content">
                             <div class="service-title-row">
                                 <h3 class="service-name">Alojamiento</h3>
-                                <span class="service-price">25$</span>
+                                <span class="service-price">$25</span>
                             </div>
                             <p class="service-desc">Tu mascota se queda en mi casa a dormir.</p>
                         </div>
@@ -248,7 +263,7 @@
                         <div class="service-text-content">
                             <div class="service-title-row">
                                 <h3 class="service-name">Cuidado de día</h3>
-                                <span class="service-price">18$</span>
+                                <span class="service-price">$18</span>
                             </div>
                             <p class="service-desc">Cuidado durante el horario laboral (8h).</p>
                         </div>
@@ -261,7 +276,7 @@
                         <div class="service-text-content">
                             <div class="service-title-row">
                                 <h3 class="service-name">Paseos</h3>
-                                <span class="service-price">12$</span>
+                                <span class="service-price">$12</span>
                             </div>
                             <p class="service-desc">Paseo individualizado de 45 min.</p>
                         </div>
@@ -491,6 +506,16 @@
                     if (e.target === modalOverlay) closeModal();
                 });
             }
+
+            const galleryBtns = document.querySelectorAll('.btn-view-gallery');
+            galleryBtns.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    if (window.showToast) {
+                        window.showToast('Galería con 11 fotos del hogar e instalaciones de Lucía.', 'info');
+                    }
+                });
+            });
         });
     </script>
 </body>
