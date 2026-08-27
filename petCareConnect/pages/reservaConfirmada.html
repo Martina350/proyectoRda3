@@ -15,6 +15,7 @@
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/bookings.js" defer></script>
+    <script src="../js/reservaConfirmada.js" defer></script>
 </head>
 <body>
 
@@ -22,7 +23,9 @@
 
     <main class="container">
         <div class="confirmation-page-container">
-            <article class="card-surface card-padding confirmation-card">
+
+            <!-- Vista 1: Confirmación de Reserva Exitosa -->
+            <article id="confirmation-success-view" class="card-surface card-padding confirmation-card" style="display: none;">
                 <div class="confirmation-icon-circle">
                     <span class="material-symbols-outlined">check_circle</span>
                 </div>
@@ -35,16 +38,16 @@
                 <div class="confirmation-details-box">
                     <div class="confirmation-code-row">
                         <span class="detail-item"><strong>Código de Reserva:</strong></span>
-                        <span class="code-badge">#PCC-2026-849</span>
+                        <span id="confirm-code" class="code-badge">#PCC-2026-849</span>
                     </div>
 
                     <div class="summary-item">
                         <span>Cuidador asignado:</span>
-                        <strong>Elena Martínez</strong>
+                        <strong id="confirm-sitter">Elena Martínez</strong>
                     </div>
                     <div class="summary-item">
                         <span>Servicio:</span>
-                        <strong>Alojamiento en casa</strong>
+                        <strong id="confirm-service">Alojamiento en casa</strong>
                     </div>
                     <div class="summary-item">
                         <span>Fechas:</span>
@@ -56,7 +59,7 @@
                     </div>
                     <div class="summary-item summary-total">
                         <span>Total abonado:</span>
-                        <strong id="confirm-total-str">$80</strong>
+                        <strong id="confirm-total-str">$80.00</strong>
                     </div>
                 </div>
 
@@ -70,11 +73,37 @@
                     <a href="buscarCuidadores.html" class="button button-outline">Explorar Más</a>
                 </div>
             </article>
+
+            <!-- Vista 2: Sin Reserva Reciente (No finge éxito) -->
+            <article id="confirmation-empty-view" class="card-surface card-padding confirmation-card confirmation-empty-card" style="display: none;">
+                <div class="confirmation-icon-circle empty-circle">
+                    <span class="material-symbols-outlined">event_busy</span>
+                </div>
+
+                <div>
+                    <h1 class="bookings-title">No hay reservas recientes</h1>
+                    <p class="bookings-subtitle">No hemos encontrado ninguna confirmación de reserva reciente en tu sesión actual.</p>
+                </div>
+
+                <div class="confirmation-empty-details">
+                    <p class="empty-info-p">Puedes crear una nueva reserva eligiendo el cuidador y las fechas que prefieras para tu mascota.</p>
+                </div>
+
+                <div class="confirmation-actions">
+                    <a href="nuevaReserva.html" class="button button-accent">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        Hacer una Reserva
+                    </a>
+                    <a href="buscarCuidadores.html" class="button button-outline">Buscar Cuidadores</a>
+                </div>
+            </article>
+
         </div>
     </main>
 
     <div id="site-footer"></div>
 
     <div id="site-mobile-nav"></div>
+
 </body>
 </html>

@@ -607,6 +607,35 @@ const PCC_BOOKINGS = {
             console.error('Error al persistir la reserva en localStorage:', e);
             throw new Error('No se pudo guardar la reserva en el almacenamiento local: ' + (e.message || 'Error de cuota'));
         }
+    },
+
+    /**
+     * Cancela una reserva por su ID o código
+     */
+    cancelBooking(idOrCode) {
+        const bookings = this.getBookings();
+        const index = bookings.findIndex(b => b.id === idOrCode || b.code === idOrCode);
+        if (index !== -1) {
+            bookings[index].status = 'cancelada';
+            bookings[index].statusLabel = 'Cancelada por el usuario';
+            bookings[index].statusCategory = 'cancelled';
+            localStorage.setItem(this.STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+            
+            // Si la última reserva fue la cancelada, actualizarla también
+            const last = this.getLastBooking();
+            if (last && (last.id === idOrCode || last.code === idOrCode)) {
+                localStorage.setItem(this.STORAGE_KEYS.LAST_BOOKING, JSON.stringify(bookings[index]));
+            }
+            return bookings[index];
+        }
+        return null;
+    },
+
+    /**
+     * Elimina el registro de la última reserva
+     */
+    clearLastBooking() {
+        localStorage.removeItem(this.STORAGE_KEYS.LAST_BOOKING);
     }
 };
 
@@ -615,6 +644,7 @@ window.PCC_BOOKINGS = PCC_BOOKINGS;
 window.getBookings = () => PCC_BOOKINGS.getBookings();
 window.addBooking = (data) => PCC_BOOKINGS.addBooking(data);
 window.getLastBooking = () => PCC_BOOKINGS.getLastBooking();
+window.cancelBooking = (id) => PCC_BOOKINGS.cancelBooking(id);
 window.getBookingQuote = (params) => PCC_BOOKINGS.quote(params);
 
 // Auto-inicializar cuando cargue el script
