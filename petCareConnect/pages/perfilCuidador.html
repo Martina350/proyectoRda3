@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/toast.js" defer></script>
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/bookings.js" defer></script>
 </head>
+
 <body>
 
     <div id="site-header"></div>
@@ -32,14 +36,16 @@
                         <div class="profile-avatar-circle">
                             <span class="material-symbols-outlined avatar-icon">person</span>
                         </div>
-                        <span class="material-symbols-outlined profile-verified-badge" title="Cuidadora verificada">verified</span>
+                        <span class="material-symbols-outlined profile-verified-badge"
+                            title="Cuidadora verificada">verified</span>
                     </div>
 
                     <div class="profile-header-info">
                         <div class="profile-name-rating-row">
                             <div>
                                 <h1 id="profile-name" class="profile-name-title">Lucía Fernández</h1>
-                                <p class="profile-location"><span class="material-symbols-outlined icon">location_on</span> Madrid, Chamberí</p>
+                                <p class="profile-location"><span
+                                        class="material-symbols-outlined icon">location_on</span> Madrid, Chamberí</p>
                             </div>
                             <div class="profile-rating-badge">
                                 <span class="material-symbols-outlined star-icon">star</span>
@@ -60,14 +66,21 @@
 
             <section aria-labelledby="about-title" class="card-surface card-padding profile-section">
                 <h2 id="about-title" class="profile-section-title mb-md">Sobre mí</h2>
-                <p class="profile-bio-text">¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención constante y personalizada.</p>
-                <p class="profile-bio-text">Me especializo en perros con ansiedad por separación y gatos que necesitan un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo mientras no estás.</p>
+                <p class="profile-bio-text">¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de
+                    experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu
+                    mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención
+                    constante y personalizada.</p>
+                <p class="profile-bio-text">Me especializo en perros con ansiedad por separación y gatos que necesitan
+                    un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo
+                    mientras no estás.</p>
             </section>
 
             <section aria-labelledby="environment-title" class="card-surface card-padding profile-section">
                 <div class="profile-section-header">
                     <h2 id="environment-title" class="profile-section-title">Mi Entorno</h2>
-                    <button type="button" class="see-all-link btn-view-gallery" style="background: none; border: none; font-family: inherit; font-size: 0.9rem; cursor: pointer; color: var(--secondary-bright);">Ver todas las fotos (11)</button>
+                    <button type="button" class="see-all-link btn-view-gallery"
+                        style="background: none; border: none; font-family: inherit; font-size: 0.9rem; cursor: pointer; color: var(--secondary-bright);">Ver
+                        todas las fotos (11)</button>
                 </div>
                 <div class="environment-grid-placeholder">
                     <div class="env-placeholder-item env-living">
@@ -85,7 +98,8 @@
                         <span class="material-symbols-outlined">soup_kitchen</span>
                         <span class="env-label">Zona limpia</span>
                     </div>
-                    <div class="env-placeholder-item env-more btn-view-gallery" style="cursor: pointer;" role="button" tabindex="0" aria-label="Ver 8 fotos más del entorno">
+                    <div class="env-placeholder-item env-more btn-view-gallery" style="cursor: pointer;" role="button"
+                        tabindex="0" aria-label="Ver 8 fotos más del entorno">
                         <span class="more-count">+8</span>
                         <span class="env-label">fotos</span>
                     </div>
@@ -124,7 +138,8 @@
                                 <span class="sr-only">Valoración: 5 estrellas</span>
                             </div>
                         </div>
-                        <p class="review-comment">Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
+                        <p class="review-comment">Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana
+                            y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
                     </article>
 
                     <article class="review-item">
@@ -145,7 +160,8 @@
                                 <span class="sr-only">Valoración: 4 estrellas</span>
                             </div>
                         </div>
-                        <p class="review-comment">Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos. Repetiré sin duda.</p>
+                        <p class="review-comment">Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos.
+                            Repetiré sin duda.</p>
                     </article>
                 </div>
 
@@ -164,7 +180,8 @@
                     </div>
                 </div>
 
-                <form action="reservaConfirmada.html" method="GET" class="booking-form">
+                <form action="nuevaReserva.html" method="GET" class="booking-form">
+                    <input type="hidden" name="sitter" value="lucia-fernandez">
                     <fieldset class="booking-fieldset">
                         <legend class="sr-only">Configurar reserva</legend>
 
@@ -172,7 +189,8 @@
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="check-in" class="input-label">Entrada</label>
-                                    <input type="date" id="check-in" name="check-in" value="2026-10-12" required class="booking-date-input">
+                                    <input type="date" id="check-in" name="check-in" value="2026-10-12" required
+                                        class="booking-date-input">
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
@@ -180,7 +198,8 @@
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="check-out" class="input-label">Salida</label>
-                                    <input type="date" id="check-out" name="check-out" value="2026-10-15" required class="booking-date-input">
+                                    <input type="date" id="check-out" name="check-out" value="2026-10-15" required
+                                        class="booking-date-input">
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
@@ -281,7 +300,8 @@
 
     <div id="site-mobile-nav"></div>
 
-    <div id="booking-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-booking-title">
+    <div id="booking-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog"
+        aria-labelledby="modal-booking-title">
         <div class="modal-card">
             <div class="modal-header">
                 <h3 id="modal-booking-title" class="modal-title">
@@ -329,7 +349,8 @@
 
             <div class="modal-footer">
                 <button type="button" id="cancel-booking-btn" class="button button-outline">Cancelar</button>
-                <a href="reservaConfirmada.html" id="confirm-booking-btn" class="button button-hero-accent">Confirmar Reserva</a>
+                <a href="reservaConfirmada.html" id="confirm-booking-btn" class="button button-hero-accent">Confirmar
+                    Reserva</a>
             </div>
         </div>
     </div>
@@ -454,4 +475,5 @@
         });
     </script>
 </body>
+
 </html>

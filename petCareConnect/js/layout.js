@@ -14,7 +14,7 @@ const PCC_LAYOUT = {
         if (path.endsWith('/') || path.endsWith('index.html')) return 'inicio';
         if (path.includes('buscarCuidadores') || path.includes('perfilCuidador')) return 'buscar';
         if (path.includes('servicios')) return 'servicios';
-        if (path.includes('misReservas') || path.includes('reservaConfirmada')) return 'reservas';
+        if (path.includes('misReservas') || path.includes('reservaConfirmada') || path.includes('nuevaReserva')) return 'reservas';
         if (path.includes('miCuenta')) return 'cuenta';
         return '';
     },
@@ -58,7 +58,7 @@ const PCC_LAYOUT = {
                 </ul>
             </nav>
 
-            <a href="${prefix}buscarCuidadores.html?intent=reservar" class="button button-accent">Reservar ahora</a>
+            <a href="${prefix}nuevaReserva.html" class="button button-accent">Reservar ahora</a>
         </div>
     </header>`;
     },

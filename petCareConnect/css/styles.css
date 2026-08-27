@@ -338,8 +338,8 @@ ul {
     transform: none !important;
 }
 
-.button > .material-symbols-outlined,
-.btn > .material-symbols-outlined {
+.button>.material-symbols-outlined,
+.btn>.material-symbols-outlined {
     font-size: 18px;
     margin-right: 0.35rem;
 }
@@ -1299,7 +1299,7 @@ main.container {
     min-width: 0;
 }
 
-.sitter-header-row > div:first-child {
+.sitter-header-row>div:first-child {
     min-width: 0;
     flex: 1;
 }
@@ -2812,7 +2812,7 @@ textarea.login-input {
     overflow: hidden;
 }
 
-.modal-card > form {
+.modal-card>form {
     display: flex;
     flex-direction: column;
     flex: 1;
@@ -3002,6 +3002,7 @@ textarea.login-input {
         opacity: 0;
         transform: translateY(10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -3217,9 +3218,17 @@ textarea.login-input {
 }
 
 @keyframes skeletonPulse {
-    0% { opacity: 0.6; }
-    50% { opacity: 1; }
-    100% { opacity: 0.6; }
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
 }
 
 .filters-modal-grid {
@@ -3306,7 +3315,9 @@ textarea.login-input {
 }
 
 @keyframes btnSpin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .password-strength-container {
@@ -3528,8 +3539,15 @@ textarea.login-input {
 }
 
 @keyframes fadeInTab {
-    from { opacity: 0; transform: translateY(4px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .pets-section-header {
@@ -3749,4 +3767,773 @@ textarea.login-input {
 .payment-card-details span {
     font-size: 0.8rem;
     color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Flujo de Reserva y Nueva Reserva (nuevaReserva.html)
+   ========================================================================== */
+
+.nueva-reserva-page-container {
+    padding-top: 1.5rem;
+    padding-bottom: 3rem;
+}
+
+.nueva-reserva-header {
+    margin-bottom: 2rem;
+}
+
+.booking-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.booking-back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    transition: var(--transition);
+}
+
+.booking-back-link:hover {
+    color: var(--secondary-bright);
+    transform: translateX(-3px);
+}
+
+.booking-secure-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--success);
+    background: var(--success-bg);
+    padding: 0.35rem 0.75rem;
+    border-radius: 999px;
+}
+
+.booking-secure-badge .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.booking-title-row {
+    margin-bottom: 1.5rem;
+}
+
+.booking-title-row .heading-xl {
+    margin-bottom: 0.35rem;
+}
+
+/* Stepper de Pasos */
+.booking-steps-nav {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.booking-steps-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.booking-step-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.step-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--surface-high);
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: var(--transition);
+}
+
+.booking-step-item.active .step-badge {
+    background: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 0 0 3px rgba(0, 35, 111, 0.15);
+}
+
+.step-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.step-number-label {
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.step-name {
+    font-size: 0.92rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.booking-step-connector {
+    flex: 1;
+    height: 2px;
+    background: var(--surface-high);
+    margin: 0 0.5rem;
+    transition: var(--transition);
+}
+
+.booking-step-connector.active {
+    background: var(--primary);
+    opacity: 0.5;
+}
+
+@media (max-width: 767px) {
+    .step-text {
+        display: none;
+    }
+
+    .booking-steps-nav {
+        padding: 0.75rem 1rem;
+    }
+}
+
+/* Layout en Dos Columnas */
+.nueva-reserva-layout {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    align-items: start;
+}
+
+@media (min-width: 1024px) {
+    .nueva-reserva-layout {
+        grid-template-columns: 1fr 390px;
+        gap: 2rem;
+    }
+}
+
+.nueva-reserva-main-col {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+/* Bloques de Formulario */
+.booking-block-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.block-section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--surface-low);
+}
+
+.block-number-circle {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.1rem;
+    font-weight: 800;
+    box-shadow: 0 2px 8px rgba(0, 35, 111, 0.2);
+}
+
+.block-section-title {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1.2;
+    margin-bottom: 0.25rem;
+}
+
+.block-section-desc {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================================================
+   Selector de Cuidadores (Tarjetas con Radio Buttons)
+   ========================================================================== */
+
+.sitter-selection-fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sitters-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+}
+
+.sitter-radio-card-wrapper {
+    position: relative;
+}
+
+.sitter-radio-input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+.sitter-radio-card {
+    display: block;
+    background: var(--surface);
+    border: 2px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 1.1rem;
+    cursor: pointer;
+    transition: var(--transition);
+    user-select: none;
+}
+
+.sitter-radio-card:hover {
+    border-color: rgba(0, 35, 111, 0.4);
+    background: var(--surface-low);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+}
+
+.sitter-radio-card:focus-visible,
+.sitter-radio-card:focus-within {
+    outline: 2px solid var(--secondary-bright);
+    outline-offset: 2px;
+}
+
+/* Estado SELECCIONADO del radio */
+.sitter-radio-input:checked+.sitter-radio-card {
+    border-color: var(--primary);
+    background: rgba(0, 35, 111, 0.03);
+    box-shadow: 0 4px 14px rgba(0, 35, 111, 0.12);
+}
+
+.sitter-card-body {
+    display: flex;
+    align-items: center;
+    gap: 1.25rem;
+    flex-wrap: wrap;
+}
+
+.sitter-card-avatar-box {
+    position: relative;
+    width: 60px;
+    height: 60px;
+    min-width: 60px;
+}
+
+.sitter-card-avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary), #1a4da3);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.verified-badge-icon {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    color: var(--secondary-bright);
+    background: #ffffff;
+    border-radius: 50%;
+    font-size: 18px;
+    font-variation-settings: 'FILL' 1;
+}
+
+.sitter-card-content-col {
+    flex: 1;
+    min-width: 220px;
+}
+
+.sitter-card-header-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+.sitter-card-name {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.sitter-rating-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.2rem;
+    background: rgba(253, 118, 26, 0.1);
+    color: var(--secondary);
+    padding: 0.15rem 0.45rem;
+    border-radius: var(--radius-sm);
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.sitter-rating-pill .star-icon {
+    font-size: 15px;
+    color: var(--secondary-bright);
+    font-variation-settings: 'FILL' 1;
+}
+
+.rating-reviews {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.sitter-card-specialty {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+}
+
+.sitter-card-location {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 0.35rem;
+}
+
+.sitter-card-location .loc-icon {
+    font-size: 15px;
+    color: var(--text-light);
+}
+
+.sitter-card-bio-snippet {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.sitter-card-rate-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 0.5rem;
+    min-width: 100px;
+}
+
+.sitter-rate-badge {
+    text-align: right;
+}
+
+.rate-prefix {
+    display: block;
+    font-size: 0.72rem;
+    color: var(--text-light);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.rate-val {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+.rate-unit {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.sitter-radio-select-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--text-light);
+    background: var(--surface-low);
+    padding: 0.25rem 0.6rem;
+    border-radius: 999px;
+    transition: var(--transition);
+}
+
+.sitter-radio-select-indicator .checkmark {
+    font-size: 16px;
+}
+
+.sitter-radio-input:checked+.sitter-radio-card .sitter-radio-select-indicator {
+    background: var(--primary);
+    color: #ffffff;
+}
+
+.sitter-radio-input:checked+.sitter-radio-card .sitter-radio-select-indicator .checkmark {
+    font-variation-settings: 'FILL' 1;
+}
+
+/* ==========================================================================
+   Campos del Bloque 2 (Servicios, Fechas, Mascota)
+   ========================================================================== */
+
+.booking-fields-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+}
+
+@media (min-width: 640px) {
+    .booking-fields-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.full-span {
+    grid-column: 1 / -1;
+}
+
+.half-span {
+    grid-column: span 1;
+}
+
+.booking-field-label {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 0.45rem;
+}
+
+.booking-field-label .label-icon {
+    font-size: 18px;
+    color: var(--primary);
+}
+
+.required-star {
+    color: var(--error);
+}
+
+.optional-label {
+    font-size: 0.8rem;
+    font-weight: normal;
+    color: var(--text-light);
+}
+
+.booking-select,
+.booking-date-input,
+.booking-textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    font-family: var(--font);
+    font-size: 0.95rem;
+    color: var(--text-main);
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-md);
+    transition: var(--transition);
+}
+
+.booking-select:focus,
+.booking-date-input:focus,
+.booking-textarea:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 35, 111, 0.12);
+}
+
+.booking-date-input.input-invalid,
+.booking-select.input-invalid {
+    border-color: var(--error);
+    background-color: #fff9f9;
+}
+
+.booking-textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Alerta de Error de Fechas */
+.date-error-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    background: var(--error-bg);
+    color: var(--error);
+    border: 1px solid rgba(186, 26, 26, 0.3);
+    border-radius: var(--radius-md);
+    font-size: 0.88rem;
+    font-weight: 600;
+    animation: fadeIn 0.2s ease;
+}
+
+.date-error-banner .material-symbols-outlined {
+    font-size: 20px;
+    color: var(--error);
+}
+
+/* ==========================================================================
+   Bloque 3: Resumen y Confirmar (Sidebar Sticky)
+   ========================================================================== */
+
+.nueva-reserva-sidebar-col {
+    position: sticky;
+    top: calc(var(--header-h) + 1rem);
+}
+
+.booking-summary-card {
+    background: var(--surface);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.summary-card-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.85rem;
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.85rem;
+    border-bottom: 1px solid var(--surface-low);
+}
+
+.summary-card-title {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--primary);
+    margin-bottom: 0.15rem;
+}
+
+.summary-card-subtitle {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+}
+
+.summary-sitter-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.85rem;
+    padding: 0.85rem;
+    background: var(--surface-low);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+}
+
+.summary-sitter-avatar {
+    width: 44px;
+    height: 44px;
+    min-width: 44px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 1rem;
+}
+
+.summary-sitter-info strong {
+    display: block;
+    font-size: 0.95rem;
+    color: var(--text-main);
+}
+
+.summary-sitter-loc {
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.summary-sitter-loc .icon {
+    font-size: 14px;
+}
+
+.summary-details-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+    margin-bottom: 1rem;
+}
+
+.summary-detail-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.88rem;
+}
+
+.summary-detail-row .detail-label {
+    color: var(--text-muted);
+}
+
+.summary-detail-row .detail-value {
+    color: var(--text-main);
+    font-weight: 600;
+    text-align: right;
+}
+
+.summary-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 1rem 0;
+}
+
+/* Desglose de Precios */
+.summary-pricing-table {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+    margin-bottom: 1.25rem;
+}
+
+.price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    color: var(--text-muted);
+}
+
+.price-row-total {
+    padding-top: 0.6rem;
+    border-top: 1.5px dashed var(--border);
+    font-size: 1.05rem;
+    color: var(--text-main);
+    font-weight: 700;
+}
+
+.total-amount {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--primary);
+}
+
+/* Botón de Confirmación */
+.button-confirm-submit {
+    width: 100%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 800;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(253, 118, 26, 0.35);
+    transition: var(--transition);
+}
+
+.button-confirm-submit:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(253, 118, 26, 0.45);
+}
+
+.button-confirm-submit:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Alerta de Error de Envío */
+.booking-submit-error-box {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.65rem 0.85rem;
+    background: var(--error-bg);
+    color: var(--error);
+    border: 1px solid rgba(186, 26, 26, 0.3);
+    border-radius: var(--radius-sm);
+    font-size: 0.82rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    animation: fadeIn 0.2s ease;
+}
+
+.booking-submit-error-box .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--error);
+}
+
+/* Garantías */
+.summary-guarantees {
+    margin-top: 1.25rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--surface-low);
+    display: flex;
+    flex-direction: column;
+    gap: 0.55rem;
+}
+
+.guarantee-badge-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.45rem;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    line-height: 1.3;
+}
+
+.icon-guarantee {
+    font-size: 16px;
+    color: var(--success);
+    margin-top: 1px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }

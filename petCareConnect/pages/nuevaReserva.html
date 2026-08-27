@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Completa y confirma tu reserva de cuidado para mascotas en Pet CareConnect de manera rápida y segura.">
+    <title>Nueva Reserva | Pet CareConnect</title>
+    <link rel="icon" href="../assets/images/paw.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/bookings.js" defer></script>
+    <script src="../js/nuevaReserva.js" defer></script>
+</head>
+<body>
+
+    <div id="site-header"></div>
+
+    <main class="container nueva-reserva-page-container">
+
+        <!-- Encabezado de página y Barra de Pasos -->
+        <header class="nueva-reserva-header">
+            <div class="booking-header-top">
+                <a href="buscarCuidadores.html" class="see-all-link booking-back-link">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span>Volver a buscar cuidadores</span>
+                </a>
+                <span class="booking-secure-badge">
+                    <span class="material-symbols-outlined">lock</span>
+                    Reserva 100% Segura y Garantizada
+                </span>
+            </div>
+
+            <div class="booking-title-row">
+                <h1 class="heading-xl">Nueva Reserva de Cuidado</h1>
+                <p class="text-body text-muted">Configura el servicio ideal para tu mascota en 3 sencillos pasos.</p>
+            </div>
+
+            <!-- Stepper visual de pasos -->
+            <nav aria-label="Pasos de la reserva" class="booking-steps-nav">
+                <ol class="booking-steps-list">
+                    <li class="booking-step-item active" id="step-nav-1">
+                        <span class="step-badge">1</span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 1</span>
+                            <strong class="step-name">Elegir Cuidador</strong>
+                        </div>
+                    </li>
+                    <li class="booking-step-connector active"></li>
+                    <li class="booking-step-item active" id="step-nav-2">
+                        <span class="step-badge">2</span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 2</span>
+                            <strong class="step-name">Servicio y Fechas</strong>
+                        </div>
+                    </li>
+                    <li class="booking-step-connector active"></li>
+                    <li class="booking-step-item active" id="step-nav-3">
+                        <span class="step-badge">3</span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 3</span>
+                            <strong class="step-name">Resumen y Confirmar</strong>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </header>
+
+        <!-- Formulario principal en 3 bloques -->
+        <form id="booking-reservation-form" class="nueva-reserva-layout" novalidate>
+
+            <div class="nueva-reserva-main-col">
+
+                <!-- BLOQUE 1: Elegir Cuidador -->
+                <section aria-labelledby="block1-title" class="card-surface card-padding booking-block-section" id="block-sitter-selection">
+                    <div class="block-section-header">
+                        <div class="block-number-circle">1</div>
+                        <div>
+                            <h2 id="block1-title" class="block-section-title">Elige a tu Cuidador</h2>
+                            <p class="block-section-desc">Selecciona el profesional verificado que cuidará de tu mascota.</p>
+                        </div>
+                    </div>
+
+                    <fieldset class="sitter-selection-fieldset">
+                        <legend class="sr-only">Seleccionar cuidador para la reserva</legend>
+                        <div id="sitters-cards-grid" class="sitters-cards-grid" role="radiogroup" aria-label="Lista de cuidadores disponibles">
+                            <!-- Inyectado dinámicamente por js/nuevaReserva.js -->
+                        </div>
+                    </fieldset>
+                    <div id="sitter-error-msg" class="field-error-message" style="display: none;" role="alert"></div>
+                </section>
+
+                <!-- BLOQUE 2: Servicio, Fechas y Mascota -->
+                <section aria-labelledby="block2-title" class="card-surface card-padding booking-block-section" id="block-service-details">
+                    <div class="block-section-header">
+                        <div class="block-number-circle">2</div>
+                        <div>
+                            <h2 id="block2-title" class="block-section-title">Servicio, Fechas y Mascota</h2>
+                            <p class="block-section-desc">Define la modalidad de cuidado, el periodo y los datos de tu mascota.</p>
+                        </div>
+                    </div>
+
+                    <div class="booking-fields-grid">
+
+                        <!-- Selección de Servicio -->
+                        <div class="form-group full-span">
+                            <label for="service-selector" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">room_service</span>
+                                <span>Tipo de Servicio <span class="required-star">*</span></span>
+                            </label>
+                            <div class="custom-select-wrapper">
+                                <select id="service-selector" name="serviceId" class="form-control booking-select" required aria-required="true">
+                                    <option value="" disabled>Selecciona un servicio...</option>
+                                    <!-- Inyectado por JS -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Selector de Fechas (Entrada y Salida) -->
+                        <div class="form-group half-span">
+                            <label for="booking-start-date" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">calendar_today</span>
+                                <span>Fecha de Entrada / Inicio <span class="required-star">*</span></span>
+                            </label>
+                            <input type="date" id="booking-start-date" name="startDate" class="form-control booking-date-input" required aria-required="true">
+                        </div>
+
+                        <div class="form-group half-span">
+                            <label for="booking-end-date" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">event_available</span>
+                                <span>Fecha de Salida / Fin <span class="required-star">*</span></span>
+                            </label>
+                            <input type="date" id="booking-end-date" name="endDate" class="form-control booking-date-input" required aria-required="true">
+                        </div>
+
+                        <!-- Alerta inline para fechas inválidas -->
+                        <div id="dates-error-box" class="date-error-banner full-span" style="display: none;" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <span id="dates-error-text">La fecha de salida debe ser igual o posterior a la fecha de entrada.</span>
+                        </div>
+
+                        <!-- Selector de Mascota -->
+                        <div class="form-group half-span">
+                            <label for="booking-pet-selector" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">pets</span>
+                                <span>Mascota a cuidar <span class="required-star">*</span></span>
+                            </label>
+                            <div class="custom-select-wrapper">
+                                <select id="booking-pet-selector" name="petId" class="form-control booking-select" required aria-required="true">
+                                    <!-- Se llena con las mascotas del usuario registrado -->
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Cantidad de Mascotas -->
+                        <div class="form-group half-span">
+                            <label for="booking-pet-count" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">format_list_numbered</span>
+                                <span>Cantidad de Mascotas <span class="required-star">*</span></span>
+                            </label>
+                            <select id="booking-pet-count" name="petCount" class="form-control booking-select" required aria-required="true">
+                                <option value="1" selected>1 Mascota</option>
+                                <option value="2">2 Mascotas</option>
+                                <option value="3">3 Mascotas</option>
+                            </select>
+                        </div>
+
+                        <!-- Observaciones / Instrucciones especiales -->
+                        <div class="form-group full-span">
+                            <label for="booking-notes" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">notes</span>
+                                <span>Instrucciones o notas especiales para el cuidador <span class="optional-label">(Opcional)</span></span>
+                            </label>
+                            <textarea id="booking-notes" name="notes" rows="3" class="form-control booking-textarea" placeholder="Ej: Horarios de paseo, tipo de alimento, medicación, alergias o juguetes favoritos..."></textarea>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- BLOQUE 3: Resumen y Confirmar (Columna Lateral / Resumen) -->
+            <aside aria-labelledby="block3-title" class="nueva-reserva-sidebar-col">
+                <section class="card-surface card-padding booking-summary-card" id="block-summary-confirm">
+                    <div class="summary-card-header">
+                        <div class="block-number-circle">3</div>
+                        <div>
+                            <h2 id="block3-title" class="summary-card-title">Resumen y Confirmar</h2>
+                            <p class="summary-card-subtitle">Revisa el desglose antes de formalizar.</p>
+                        </div>
+                    </div>
+
+                    <!-- Resumen del Cuidador Seleccionado -->
+                    <div class="summary-sitter-preview" id="summary-sitter-box">
+                        <div class="summary-sitter-avatar" id="summary-sitter-avatar">EM</div>
+                        <div class="summary-sitter-info">
+                            <strong class="summary-sitter-name" id="summary-sitter-name">Elena Martínez</strong>
+                            <p class="summary-sitter-loc" id="summary-sitter-loc">
+                                <span class="material-symbols-outlined icon">location_on</span>
+                                <span id="summary-sitter-loc-text">Madrid, Chamberí</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Detalles seleccionados -->
+                    <div class="summary-details-list">
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Servicio:</span>
+                            <strong class="detail-value" id="summary-service-name">Alojamiento en casa</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Fechas:</span>
+                            <strong class="detail-value" id="summary-dates-range">12 Oct - 15 Oct, 2026</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Duración:</span>
+                            <strong class="detail-value" id="summary-duration-text">3 noches</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Mascota:</span>
+                            <strong class="detail-value" id="summary-pet-name">Bruno (Perro)</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    <!-- Desglose Financiero -->
+                    <div class="summary-pricing-table">
+                        <div class="price-row">
+                            <span id="summary-calc-breakdown">$25 × 3 noches</span>
+                            <span id="summary-subtotal-val">$75.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Tarifa de gestión y seguro</span>
+                            <span id="summary-fee-val">$5.00</span>
+                        </div>
+                        <div class="price-row price-row-total">
+                            <span>Total estimado</span>
+                            <strong class="total-amount" id="summary-total-val">$80.00</strong>
+                        </div>
+                    </div>
+
+                    <!-- Mensajes de Error de Validación en Pantalla -->
+                    <div id="booking-submit-error-alert" class="booking-submit-error-box" style="display: none;" role="alert">
+                        <span class="material-symbols-outlined">error</span>
+                        <span id="booking-submit-error-text">Por favor completa todos los campos requeridos.</span>
+                    </div>
+
+                    <!-- Botón Principal de Confirmación -->
+                    <div class="summary-actions">
+                        <button type="submit" id="btn-confirm-booking" class="button button-accent button-confirm-submit">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Confirmar Reserva</span>
+                        </button>
+                    </div>
+
+                    <!-- Garantías y Políticas -->
+                    <div class="summary-guarantees">
+                        <div class="guarantee-badge-item">
+                            <span class="material-symbols-outlined icon-guarantee">verified_user</span>
+                            <span>Cancelación gratuita hasta 24h antes del inicio.</span>
+                        </div>
+                        <div class="guarantee-badge-item">
+                            <span class="material-symbols-outlined icon-guarantee">security</span>
+                            <span>Cobertura veterinaria y seguro PetCare incluidos.</span>
+                        </div>
+                    </div>
+
+                </section>
+            </aside>
+
+        </form>
+
+    </main>
+
+    <div id="site-footer"></div>
+
+    <div id="site-mobile-nav"></div>
+
+</body>
+</html>
