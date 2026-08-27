@@ -7,7 +7,8 @@
 const PCC_BOOKINGS = {
     STORAGE_KEYS: {
         BOOKINGS: 'pcc_bookings',
-        LAST_BOOKING: 'pcc_last_booking'
+        LAST_BOOKING: 'pcc_last_booking',
+        TOUR_SEEN: 'pcc_booking_tour_seen'
     },
 
     // Catálogo oficial de cuidadores
@@ -636,6 +637,27 @@ const PCC_BOOKINGS = {
      */
     clearLastBooking() {
         localStorage.removeItem(this.STORAGE_KEYS.LAST_BOOKING);
+    },
+
+    /**
+     * Consulta si el usuario ya ha visto el tour de nueva reserva
+     */
+    isTourSeen() {
+        return localStorage.getItem(this.STORAGE_KEYS.TOUR_SEEN) === 'true';
+    },
+
+    /**
+     * Marca el tour de nueva reserva como visto
+     */
+    setTourSeen() {
+        localStorage.setItem(this.STORAGE_KEYS.TOUR_SEEN, 'true');
+    },
+
+    /**
+     * Reinicia el estado del tour para permitir mostrarlo de nuevo
+     */
+    resetTour() {
+        localStorage.removeItem(this.STORAGE_KEYS.TOUR_SEEN);
     }
 };
 
@@ -646,6 +668,8 @@ window.addBooking = (data) => PCC_BOOKINGS.addBooking(data);
 window.getLastBooking = () => PCC_BOOKINGS.getLastBooking();
 window.cancelBooking = (id) => PCC_BOOKINGS.cancelBooking(id);
 window.getBookingQuote = (params) => PCC_BOOKINGS.quote(params);
+window.isBookingTourSeen = () => PCC_BOOKINGS.isTourSeen();
+window.setBookingTourSeen = () => PCC_BOOKINGS.setTourSeen();
 
 // Auto-inicializar cuando cargue el script
 if (document.readyState === 'loading') {

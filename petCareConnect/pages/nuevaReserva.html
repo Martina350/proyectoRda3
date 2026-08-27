@@ -32,10 +32,16 @@
                     <span class="material-symbols-outlined">arrow_back</span>
                     <span>Volver a buscar cuidadores</span>
                 </a>
-                <span class="booking-secure-badge">
-                    <span class="material-symbols-outlined">lock</span>
-                    Reserva 100% Segura y Garantizada
-                </span>
+                <div class="booking-header-actions">
+                    <button type="button" id="btn-open-booking-tour" class="button button-ghost button-sm tour-launch-btn">
+                        <span class="material-symbols-outlined">help</span>
+                        <span>Guía de reserva</span>
+                    </button>
+                    <span class="booking-secure-badge">
+                        <span class="material-symbols-outlined">lock</span>
+                        Reserva 100% Segura
+                    </span>
+                </div>
             </div>
 
             <div class="booking-title-row">
@@ -43,30 +49,36 @@
                 <p class="text-body text-muted">Configura el servicio ideal para tu mascota en 3 sencillos pasos.</p>
             </div>
 
-            <!-- Stepper visual de pasos -->
+            <!-- Stepper visual de pasos con iconos -->
             <nav aria-label="Pasos de la reserva" class="booking-steps-nav">
                 <ol class="booking-steps-list">
                     <li class="booking-step-item active" id="step-nav-1">
-                        <span class="step-badge">1</span>
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">person_check</span>
+                        </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 1</span>
-                            <strong class="step-name">Elegir Cuidador</strong>
+                            <strong class="step-name">1. Cuidador</strong>
                         </div>
                     </li>
                     <li class="booking-step-connector active"></li>
                     <li class="booking-step-item active" id="step-nav-2">
-                        <span class="step-badge">2</span>
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">calendar_month</span>
+                        </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 2</span>
-                            <strong class="step-name">Servicio y Fechas</strong>
+                            <strong class="step-name">2. Servicio y fechas</strong>
                         </div>
                     </li>
                     <li class="booking-step-connector active"></li>
                     <li class="booking-step-item active" id="step-nav-3">
-                        <span class="step-badge">3</span>
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">receipt_long</span>
+                        </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 3</span>
-                            <strong class="step-name">Resumen y Confirmar</strong>
+                            <strong class="step-name">3. Resumen y pago</strong>
                         </div>
                     </li>
                 </ol>
@@ -83,7 +95,7 @@
                     <div class="block-section-header">
                         <div class="block-number-circle">1</div>
                         <div>
-                            <h2 id="block1-title" class="block-section-title">Elige a tu Cuidador <span class="required-mark" aria-hidden="true">*</span></h2>
+                            <h2 id="block1-title" class="block-section-title">Elige un cuidador <span class="required-mark" aria-hidden="true">*</span></h2>
                             <p class="block-section-desc">Selecciona el profesional verificado que cuidará de tu mascota.</p>
                         </div>
                     </div>
@@ -102,7 +114,7 @@
                     <div class="block-section-header">
                         <div class="block-number-circle">2</div>
                         <div>
-                            <h2 id="block2-title" class="block-section-title">Servicio, Fechas y Mascota</h2>
+                            <h2 id="block2-title" class="block-section-title">Servicio, fechas y mascota</h2>
                             <p class="block-section-desc">Define la modalidad de cuidado, el periodo y los datos de tu mascota.</p>
                         </div>
                     </div>
@@ -193,7 +205,7 @@
                     <div class="summary-card-header">
                         <div class="block-number-circle">3</div>
                         <div>
-                            <h2 id="block3-title" class="summary-card-title">Resumen y Confirmar</h2>
+                            <h2 id="block3-title" class="summary-card-title">Resumen y confirmar</h2>
                             <p class="summary-card-subtitle">Revisa el desglose antes de formalizar.</p>
                         </div>
                     </div>
@@ -280,6 +292,44 @@
         </form>
 
     </main>
+
+    <!-- Modal Onboarding / Tour Guiado de Reserva -->
+    <div id="bookingTourModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tourStepTitle">
+        <div class="modal-card booking-tour-card">
+            <div class="modal-header booking-tour-header">
+                <div class="tour-header-progress">
+                    <span class="material-symbols-outlined tour-sparkle-icon">auto_awesome</span>
+                    <span class="tour-step-badge" id="tourStepBadge">Paso 1 de 3</span>
+                </div>
+                <button type="button" class="modal-close-btn" id="btnCloseTourModal" aria-label="Cerrar guía">&times;</button>
+            </div>
+
+            <div class="modal-body booking-tour-body">
+                <div class="tour-illustration-box">
+                    <span class="material-symbols-outlined tour-step-icon" id="tourStepIcon">person_search</span>
+                </div>
+                <h3 id="tourStepTitle" class="tour-step-heading">1. Elige un cuidador verificado</h3>
+                <p id="tourStepDesc" class="tour-step-text">
+                    Explora las fichas de cuidadores disponibles, revisa sus valoraciones y selecciona el profesional ideal para tu mascota.
+                </p>
+
+                <!-- Indicadores de puntos -->
+                <div class="tour-dots-indicator" aria-hidden="true">
+                    <span class="tour-dot active" id="tourDot1"></span>
+                    <span class="tour-dot" id="tourDot2"></span>
+                    <span class="tour-dot" id="tourDot3"></span>
+                </div>
+            </div>
+
+            <div class="modal-footer booking-tour-footer">
+                <button type="button" class="button button-ghost" id="btnTourSkip">Saltar guía</button>
+                <div class="tour-nav-btns">
+                    <button type="button" class="button button-outline" id="btnTourPrev" style="display: none;">Anterior</button>
+                    <button type="button" class="button button-primary" id="btnTourNext">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <div id="site-footer"></div>
 

@@ -491,4 +491,170 @@ document.addEventListener('DOMContentLoaded', () => {
         const d = new Date(str + 'T00:00:00');
         return !isNaN(d.getTime());
     }
+
+    /* ==========================================================================
+       Tour Guiado de Onboarding (Fase 6)
+       ========================================================================== */
+    const TOUR_STEPS = [
+        {
+            step: 1,
+            badge: 'Paso 1 de 3',
+            icon: 'person_search',
+            title: '1. Elige un cuidador verificado',
+            desc: 'Explora las tarjetas de los cuidadores disponibles, revisa sus valoraciones y selecciona el profesional ideal para tu mascota.',
+            targetId: 'block-sitter-selection'
+        },
+        {
+            step: 2,
+            badge: 'Paso 2 de 3',
+            icon: 'calendar_month',
+            title: '2. Configura fechas y mascota',
+            desc: 'Elige la modalidad de servicio, indica las fechas de inicio y fin, y selecciona cuál de tus mascotas disfrutará de la estancia.',
+            targetId: 'block-service-details'
+        },
+        {
+            step: 3,
+            badge: 'Paso 3 de 3',
+            icon: 'receipt_long',
+            title: '3. Revisa y confirma',
+            desc: 'Comprueba el cálculo transparente en tiempo real y confirma la reserva con total garantía y cobertura veterinaria incluida.',
+            targetId: 'block-summary-confirm'
+        }
+    ];
+
+    const tourModal = document.getElementById('bookingTourModal');
+    const tourStepBadge = document.getElementById('tourStepBadge');
+    const tourStepIcon = document.getElementById('tourStepIcon');
+    const tourStepTitle = document.getElementById('tourStepTitle');
+    const tourStepDesc = document.getElementById('tourStepDesc');
+    const btnTourSkip = document.getElementById('btnTourSkip');
+    const btnTourPrev = document.getElementById('btnTourPrev');
+    const btnTourNext = document.getElementById('btnTourNext');
+    const btnCloseTourModal = document.getElementById('btnCloseTourModal');
+    const btnOpenBookingTour = document.getElementById('btn-open-booking-tour');
+
+    let currentTourIndex = 0;
+
+    function clearTourHighlights() {
+        document.querySelectorAll('.tour-target-highlight').forEach(el => {
+            el.classList.remove('tour-target-highlight');
+        });
+    }
+
+    function renderTourStep(index) {
+        if (index < 0 || index >= TOUR_STEPS.length) return;
+        currentTourIndex = index;
+        const currentData = TOUR_STEPS[index];
+
+        if (tourStepBadge) tourStepBadge.textContent = currentData.badge;
+        if (tourStepIcon) tourStepIcon.textContent = currentData.icon;
+        if (tourStepTitle) tourStepTitle.textContent = currentData.title;
+        if (tourStepDesc) tourStepDesc.textContent = currentData.desc;
+
+        // Actualizar puntos
+        for (let i = 1; i <= 3; i++) {
+            const dot = document.getElementById(`tourDot${i}`);
+            if (dot) {
+                if (i === index + 1) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            }
+        }
+
+        // Configurar botones
+        if (btnTourPrev) {
+            btnTourPrev.style.display = index > 0 ? 'inline-flex' : 'none';
+        }
+        if (btnTourNext) {
+            btnTourNext.textContent = index === TOUR_STEPS.length - 1 ? 'Comenzar reserva' : 'Siguiente';
+        }
+
+        // Resaltar sección asociada
+        clearTourHighlights();
+        const targetSection = document.getElementById(currentData.targetId);
+        if (targetSection) {
+            targetSection.classList.add('tour-target-highlight');
+        }
+    }
+
+    function openBookingTour(triggerEl = null) {
+        if (!tourModal) return;
+        renderTourStep(0);
+        if (window.PCC_UI) {
+            PCC_UI.openModal(tourModal, triggerEl);
+        } else {
+            tourModal.classList.add('is-open');
+            tourModal.setAttribute('aria-hidden', 'false');
+        }
+    }
+
+    function closeBookingTour(markAsSeen = true) {
+        clearTourHighlights();
+        if (markAsSeen && window.PCC_BOOKINGS && typeof PCC_BOOKINGS.setTourSeen === 'function') {
+            PCC_BOOKINGS.setTourSeen();
+        }
+        if (tourModal) {
+            if (window.PCC_UI) {
+                PCC_UI.closeModal(tourModal);
+            } else {
+                tourModal.classList.remove('is-open');
+                tourModal.setAttribute('aria-hidden', 'true');
+            }
+        }
+    }
+
+    if (btnTourNext) {
+        btnTourNext.addEventListener('click', () => {
+            if (currentTourIndex < TOUR_STEPS.length - 1) {
+                renderTourStep(currentTourIndex + 1);
+            } else {
+                closeBookingTour(true);
+                if (window.showToast) {
+                    window.showToast('¡Guía completada! Ya puedes configurar tu reserva.', 'success');
+                }
+            }
+        });
+    }
+
+    if (btnTourPrev) {
+        btnTourPrev.addEventListener('click', () => {
+            if (currentTourIndex > 0) {
+                renderTourStep(currentTourIndex - 1);
+            }
+        });
+    }
+
+    if (btnTourSkip) {
+        btnTourSkip.addEventListener('click', () => {
+            closeBookingTour(true);
+            if (window.showToast) {
+                window.showToast('Guía omitida. Puedes abrirla en cualquier momento desde el encabezado.', 'info');
+            }
+        });
+    }
+
+    if (btnCloseTourModal) {
+        btnCloseTourModal.addEventListener('click', () => {
+            closeBookingTour(true);
+        });
+    }
+
+    if (btnOpenBookingTour) {
+        btnOpenBookingTour.addEventListener('click', () => {
+            openBookingTour(btnOpenBookingTour);
+        });
+    }
+
+    // Auto-mostrar en la primera visita
+    const isTourSeen = window.PCC_BOOKINGS && typeof PCC_BOOKINGS.isTourSeen === 'function' 
+        ? PCC_BOOKINGS.isTourSeen() 
+        : localStorage.getItem('pcc_booking_tour_seen') === 'true';
+
+    if (!isTourSeen) {
+        setTimeout(() => {
+            openBookingTour(null);
+        }, 400);
+    }
 });
