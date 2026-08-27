@@ -17,6 +17,7 @@
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/bookings.js" defer></script>
+    <script src="../js/ui.js" defer></script>
 </head>
 
 <body>
@@ -371,13 +372,21 @@
             }
 
             const galleryBtns = document.querySelectorAll('.btn-view-gallery');
+            const showGalleryFeedback = () => {
+                if (window.showToast) {
+                    window.showToast('Galería con 11 fotos del hogar e instalaciones de Lucía.', 'info');
+                }
+            };
+
             galleryBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    if (window.showToast) {
-                        window.showToast('Galería con 11 fotos del hogar e instalaciones de Lucía.', 'info');
-                    }
+                    showGalleryFeedback();
                 });
+
+                if (window.PCC_UI && btn.getAttribute('role') === 'button') {
+                    PCC_UI.makeKeyboardAccessible(btn, () => showGalleryFeedback());
+                }
             });
         });
     </script>

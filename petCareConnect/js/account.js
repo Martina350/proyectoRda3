@@ -5,35 +5,41 @@ document.addEventListener('DOMContentLoaded', () => {
     const petNameInput = document.getElementById('petNameInput');
     const petNameError = document.getElementById('petNameError');
 
-    function openModal(modal) {
+    function openModal(modal, trigger = null) {
         if (!modal) return;
-        modal.classList.add('is-open');
-        modal.setAttribute('aria-hidden', 'false');
+        if (window.PCC_UI) {
+            PCC_UI.openModal(modal, trigger);
+        } else {
+            modal.classList.add('is-open');
+            modal.setAttribute('aria-hidden', 'false');
+        }
     }
 
     function closeModal(modal) {
         if (!modal) return;
-        modal.classList.remove('is-open');
-        modal.setAttribute('aria-hidden', 'true');
+        if (window.PCC_UI) {
+            PCC_UI.closeModal(modal);
+        } else {
+            modal.classList.remove('is-open');
+            modal.setAttribute('aria-hidden', 'true');
+        }
     }
 
-    function openAddPetModal() {
+    function openAddPetModal(trigger = null) {
         if (!addPetForm || !addPetModal) return;
         addPetForm.reset();
-        if (petNameError) petNameError.classList.remove('is-visible');
-        if (petNameInput) {
-            petNameInput.classList.remove('is-invalid');
-            petNameInput.focus();
+        if (window.PCC_FORMS) {
+            PCC_FORMS.clearFormErrors(addPetForm);
         }
-        openModal(addPetModal);
+        openModal(addPetModal, trigger);
     }
 
     function closeAddPetModal() {
         closeModal(addPetModal);
     }
 
-    function openLogoutModal() {
-        openModal(logoutModal);
+    function openLogoutModal(trigger = null) {
+        openModal(logoutModal, trigger);
     }
 
     function closeLogoutModal() {
@@ -118,18 +124,20 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.addEventListener('click', (e) => {
-        if (e.target.closest('#btnOpenAddPetModal')) {
+        const addBtn = e.target.closest('#btnOpenAddPetModal');
+        if (addBtn) {
             e.preventDefault();
-            openAddPetModal();
+            openAddPetModal(addBtn);
             return;
         }
         if (e.target.closest('#btnCloseAddPetModal, #btnCancelAddPet')) {
             closeAddPetModal();
             return;
         }
-        if (e.target.closest('#btnOpenLogoutModal, #btnDangerLogout')) {
+        const logoutBtn = e.target.closest('#btnOpenLogoutModal, #btnDangerLogout');
+        if (logoutBtn) {
             e.preventDefault();
-            openLogoutModal();
+            openLogoutModal(logoutBtn);
             return;
         }
         if (e.target.closest('#btnCloseLogoutModal, #btnCancelLogout')) {
@@ -162,23 +170,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.showToast(`${name} ha sido eliminado de tus mascotas`, 'info');
             }
         }
-    });
-
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeAddPetModal();
-            closeLogoutModal();
-        }
-    });
-
-    [addPetModal, logoutModal].forEach((modal) => {
-        if (!modal) return;
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeAddPetModal();
-                closeLogoutModal();
-            }
-        });
     });
 
     if (addPetForm && window.PCC_FORMS) {

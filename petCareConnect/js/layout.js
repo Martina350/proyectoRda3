@@ -50,11 +50,11 @@ const PCC_LAYOUT = {
 
             <nav aria-label="Navegación principal" class="main-nav">
                 <ul>
-                    <li><a href="${home}" class="nav-link${page === 'inicio' ? ' active' : ''}">Inicio</a></li>
-                    <li><a href="${prefix}buscarCuidadores.html" class="nav-link${page === 'buscar' ? ' active' : ''}">Buscar</a></li>
-                    <li><a href="${prefix}servicios.html" class="nav-link${page === 'servicios' ? ' active' : ''}">Servicios</a></li>
-                    <li><a href="${prefix}misReservas.html" class="nav-link${page === 'reservas' ? ' active' : ''}">Mis reservas</a></li>
-                    <li><a href="${accountHref}" class="nav-link${accountActive}">${accountLabel}</a></li>
+                    <li><a href="${home}" class="nav-link${page === 'inicio' ? ' active' : ''}"${page === 'inicio' ? ' aria-current="page"' : ''}>Inicio</a></li>
+                    <li><a href="${prefix}buscarCuidadores.html" class="nav-link${page === 'buscar' ? ' active' : ''}"${page === 'buscar' ? ' aria-current="page"' : ''}>Buscar</a></li>
+                    <li><a href="${prefix}servicios.html" class="nav-link${page === 'servicios' ? ' active' : ''}"${page === 'servicios' ? ' aria-current="page"' : ''}>Servicios</a></li>
+                    <li><a href="${prefix}misReservas.html" class="nav-link${page === 'reservas' ? ' active' : ''}"${page === 'reservas' ? ' aria-current="page"' : ''}>Mis reservas</a></li>
+                    <li><a href="${accountHref}" class="nav-link${accountActive}"${page === 'cuenta' ? ' aria-current="page"' : ''}>${accountLabel}</a></li>
                 </ul>
             </nav>
 
@@ -97,23 +97,23 @@ const PCC_LAYOUT = {
 
         return `
     <nav aria-label="Navegación móvil" class="mobile-nav">
-        <a href="${home}" class="mobile-nav-item${page === 'inicio' ? ' active' : ''}">
+        <a href="${home}" class="mobile-nav-item${page === 'inicio' ? ' active' : ''}"${page === 'inicio' ? ' aria-current="page"' : ''}>
             <span class="material-symbols-outlined">explore</span>
             <span>Inicio</span>
         </a>
-        <a href="${prefix}buscarCuidadores.html" class="mobile-nav-item${page === 'buscar' ? ' active' : ''}">
+        <a href="${prefix}buscarCuidadores.html" class="mobile-nav-item${page === 'buscar' ? ' active' : ''}"${page === 'buscar' ? ' aria-current="page"' : ''}>
             <span class="material-symbols-outlined">search</span>
             <span>Buscar</span>
         </a>
-        <a href="${prefix}servicios.html" class="mobile-nav-item${page === 'servicios' ? ' active' : ''}">
+        <a href="${prefix}servicios.html" class="mobile-nav-item${page === 'servicios' ? ' active' : ''}"${page === 'servicios' ? ' aria-current="page"' : ''}>
             <span class="material-symbols-outlined">pets</span>
             <span>Servicios</span>
         </a>
-        <a href="${prefix}misReservas.html" class="mobile-nav-item${page === 'reservas' ? ' active' : ''}">
+        <a href="${prefix}misReservas.html" class="mobile-nav-item${page === 'reservas' ? ' active' : ''}"${page === 'reservas' ? ' aria-current="page"' : ''}>
             <span class="material-symbols-outlined">calendar_month</span>
             <span>Mis reservas</span>
         </a>
-        <a href="${accountHref}" class="mobile-nav-item${page === 'cuenta' ? ' active' : ''}" aria-label="${accountAria}">
+        <a href="${accountHref}" class="mobile-nav-item${page === 'cuenta' ? ' active' : ''}" aria-label="${accountAria}"${page === 'cuenta' ? ' aria-current="page"' : ''}>
             <span class="material-symbols-outlined${fillClass}">person</span>
             <span>${accountLabel}</span>
         </a>

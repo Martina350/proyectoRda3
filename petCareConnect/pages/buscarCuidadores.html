@@ -16,6 +16,7 @@
     <script src="../js/auth.js" defer></script>
     <script src="../js/bookings.js" defer></script>
     <script src="../js/forms.js" defer></script>
+    <script src="../js/ui.js" defer></script>
 </head>
 <body>
 
@@ -384,18 +385,25 @@
 
             if (moreFiltersBtn && filtersModal) {
                 moreFiltersBtn.addEventListener('click', () => {
-                    filtersModal.classList.add('is-open');
-                    filtersModal.setAttribute('aria-hidden', 'false');
+                    if (window.PCC_UI) {
+                        PCC_UI.openModal(filtersModal, moreFiltersBtn);
+                    } else {
+                        filtersModal.classList.add('is-open');
+                        filtersModal.setAttribute('aria-hidden', 'false');
+                    }
                 });
 
                 const closeFModal = () => {
-                    filtersModal.classList.remove('is-open');
-                    filtersModal.setAttribute('aria-hidden', 'true');
+                    if (window.PCC_UI) {
+                        PCC_UI.closeModal(filtersModal);
+                    } else {
+                        filtersModal.classList.remove('is-open');
+                        filtersModal.setAttribute('aria-hidden', 'true');
+                    }
                 };
 
                 if (closeFiltersBtn) closeFiltersBtn.addEventListener('click', closeFModal);
                 if (cancelFiltersBtn) cancelFiltersBtn.addEventListener('click', closeFModal);
-                filtersModal.addEventListener('click', (e) => { if (e.target === filtersModal) closeFModal(); });
 
                 if (applyFiltersBtn) {
                     applyFiltersBtn.addEventListener('click', () => {
@@ -423,8 +431,12 @@
                         PCC_FORMS.clearError(contactMsgInput);
                     }
                     if (contactModal) {
-                        contactModal.classList.add('is-open');
-                        contactModal.setAttribute('aria-hidden', 'false');
+                        if (window.PCC_UI) {
+                            PCC_UI.openModal(contactModal, btn);
+                        } else {
+                            contactModal.classList.add('is-open');
+                            contactModal.setAttribute('aria-hidden', 'false');
+                        }
                         if (contactMsgInput) contactMsgInput.focus();
                     }
                 });
@@ -432,14 +444,17 @@
 
             const closeCModal = () => {
                 if (contactModal) {
-                    contactModal.classList.remove('is-open');
-                    contactModal.setAttribute('aria-hidden', 'true');
+                    if (window.PCC_UI) {
+                        PCC_UI.closeModal(contactModal);
+                    } else {
+                        contactModal.classList.remove('is-open');
+                        contactModal.setAttribute('aria-hidden', 'true');
+                    }
                 }
             };
 
             if (closeContactBtn) closeContactBtn.addEventListener('click', closeCModal);
             if (cancelContactBtn) cancelContactBtn.addEventListener('click', closeCModal);
-            if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeCModal(); });
 
             if (contactMsgInput) {
                 contactMsgInput.addEventListener('input', () => {
