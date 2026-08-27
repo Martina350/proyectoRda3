@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Completa y confirma tu reserva de cuidado para mascotas en Pet CareConnect de manera rápida y segura.">
+    <title>Nueva Reserva | Pet CareConnect</title>
+    <link rel="icon" href="../assets/images/paw.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/bookings.js" defer></script>
+    <script src="../js/forms.js" defer></script>
+    <script src="../js/ui.js" defer></script>
+    <script src="../js/confirmacionModal.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
+    <script src="../js/nuevaReserva.js" defer></script>
+</head>
+<body>
+
+    <div id="site-header"></div>
+
+    <main class="container nueva-reserva-page-container">
+
+        
+        <header class="nueva-reserva-header">
+            <div class="booking-header-top">
+                <a href="buscarCuidadores.html" class="see-all-link booking-back-link">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                    <span>Volver a buscar cuidadores</span>
+                </a>
+                <div class="booking-header-actions">
+                    <button type="button" id="btn-open-booking-tour" class="button button-ghost button-sm tour-launch-btn">
+                        <span class="material-symbols-outlined">help</span>
+                        <span>Guía de reserva</span>
+                    </button>
+                    <span class="booking-secure-badge">
+                        <span class="material-symbols-outlined">lock</span>
+                        Reserva 100% Segura
+                    </span>
+                </div>
+            </div>
+
+            <div class="booking-title-row">
+                <h1 class="heading-xl">Nueva Reserva de Cuidado</h1>
+                <p class="text-body text-muted">Configura el servicio ideal para tu mascota en 3 sencillos pasos.</p>
+            </div>
+
+            
+            <nav aria-label="Pasos de la reserva" class="booking-steps-nav">
+                <ol class="booking-steps-list">
+                    <li class="booking-step-item is-current" id="step-nav-1" data-step-target="1">
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">person_check</span>
+                        </span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 1</span>
+                            <strong class="step-name">Cuidador</strong>
+                        </div>
+                    </li>
+                    <li class="booking-step-connector" id="step-conn-1" aria-hidden="true"></li>
+                    <li class="booking-step-item" id="step-nav-2" data-step-target="2">
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">calendar_month</span>
+                        </span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 2</span>
+                            <strong class="step-name">Servicio y fechas</strong>
+                        </div>
+                    </li>
+                    <li class="booking-step-connector" id="step-conn-2" aria-hidden="true"></li>
+                    <li class="booking-step-item" id="step-nav-3" data-step-target="3">
+                        <span class="step-badge">
+                            <span class="material-symbols-outlined step-icon-inline">receipt_long</span>
+                        </span>
+                        <div class="step-text">
+                            <span class="step-number-label">Paso 3</span>
+                            <strong class="step-name">Resumen y pago</strong>
+                        </div>
+                    </li>
+                </ol>
+            </nav>
+        </header>
+
+        
+        <form id="booking-reservation-form" class="nueva-reserva-layout" novalidate>
+
+            <div class="nueva-reserva-main-col">
+
+                
+                <section aria-labelledby="block1-title" class="card-surface card-padding booking-block-section" id="block-sitter-selection" data-booking-step="1">
+                    <div class="block-section-header">
+                        <div class="block-number-circle">1</div>
+                        <div>
+                            <h2 id="block1-title" class="block-section-title">Elige un cuidador <span class="required-mark" aria-hidden="true">*</span></h2>
+                            <p class="block-section-desc">Selecciona el profesional verificado que cuidará de tu mascota.</p>
+                        </div>
+                    </div>
+
+                    <fieldset class="sitter-selection-fieldset">
+                        <legend class="sr-only">Seleccionar cuidador para la reserva</legend>
+                        <div id="sitters-cards-grid" class="sitters-cards-grid" role="radiogroup" aria-label="Lista de cuidadores disponibles">
+                            
+                        </div>
+                    </fieldset>
+                    <div id="sitter-error-msg" class="field-error booking-inline-error" style="display: none;" role="alert"></div>
+
+                    
+                    <div class="booking-mobile-step-bar" id="booking-mobile-step-bar" hidden>
+                        <button type="button" class="button button-outline booking-mobile-back" id="booking-step-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            <span>Atrás</span>
+                        </button>
+                        <button type="button" class="button button-primary booking-mobile-next" id="booking-step-next">
+                            <span>Continuar</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </section>
+
+                
+                <section aria-labelledby="block2-title" class="card-surface card-padding booking-block-section" id="block-service-details" data-booking-step="2">
+                    <div class="block-section-header">
+                        <div class="block-number-circle">2</div>
+                        <div>
+                            <h2 id="block2-title" class="block-section-title">Servicio, fechas y mascota</h2>
+                            <p class="block-section-desc">Define la modalidad de cuidado, el periodo y los datos de tu mascota.</p>
+                        </div>
+                    </div>
+
+                    <div class="booking-fields-grid">
+
+                        
+                        <div class="form-group full-span">
+                            <label for="service-selector" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">room_service</span>
+                                <span>Tipo de Servicio <span class="required-mark" aria-hidden="true">*</span></span>
+                            </label>
+                            <div class="custom-select-wrapper">
+                                <select id="service-selector" name="serviceId" class="form-control booking-select" required aria-required="true">
+                                    <option value="" disabled>Selecciona un servicio...</option>
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group half-span">
+                            <label for="booking-start-date" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">calendar_today</span>
+                                <span>Fecha de Entrada / Inicio <span class="required-mark" aria-hidden="true">*</span></span>
+                            </label>
+                            <input type="date" id="booking-start-date" name="startDate" class="form-control booking-date-input" required aria-required="true">
+                        </div>
+
+                        <div class="form-group half-span">
+                            <label for="booking-end-date" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">event_available</span>
+                                <span>Fecha de Salida / Fin <span class="required-mark" aria-hidden="true">*</span></span>
+                            </label>
+                            <input type="date" id="booking-end-date" name="endDate" class="form-control booking-date-input" required aria-required="true">
+                        </div>
+
+                        
+                        <div id="dates-error-box" class="date-error-banner full-span" style="display: none;" role="alert">
+                            <span class="material-symbols-outlined">error</span>
+                            <span id="dates-error-text">La fecha de salida debe ser igual o posterior a la fecha de entrada.</span>
+                        </div>
+
+                        
+                        <div class="form-group half-span">
+                            <label for="booking-pet-selector" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">pets</span>
+                                <span>Mascota a cuidar <span class="required-mark" aria-hidden="true">*</span></span>
+                            </label>
+                            <div class="custom-select-wrapper">
+                                <select id="booking-pet-selector" name="petId" class="form-control booking-select" required aria-required="true">
+                                    
+                                </select>
+                            </div>
+                        </div>
+
+                        
+                        <div class="form-group half-span">
+                            <label for="booking-pet-count" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">format_list_numbered</span>
+                                <span>Cantidad de Mascotas <span class="required-mark" aria-hidden="true">*</span></span>
+                            </label>
+                            <select id="booking-pet-count" name="petCount" class="form-control booking-select" required aria-required="true">
+                                <option value="1" selected>1 Mascota</option>
+                                <option value="2">2 Mascotas</option>
+                                <option value="3">3 Mascotas</option>
+                            </select>
+                        </div>
+
+                        
+                        <div class="form-group full-span">
+                            <label for="booking-notes" class="booking-field-label">
+                                <span class="material-symbols-outlined label-icon">notes</span>
+                                <span>Instrucciones o notas especiales para el cuidador <span class="optional-label">(opcional)</span></span>
+                            </label>
+                            <textarea id="booking-notes" name="notes" rows="3" class="form-control booking-textarea" placeholder="Ej: Horarios de paseo, tipo de alimento, medicación, alergias o juguetes favoritos..."></textarea>
+                            <span class="input-hint">Información médica, hábitos o indicaciones para la estancia</span>
+                        </div>
+
+                    </div>
+                </section>
+
+            </div>
+
+            
+            <aside aria-labelledby="block3-title" class="nueva-reserva-sidebar-col" data-booking-step="3">
+                <section class="card-surface card-padding booking-summary-card" id="block-summary-confirm">
+                    <div class="summary-card-header">
+                        <div class="block-number-circle">3</div>
+                        <div>
+                            <h2 id="block3-title" class="summary-card-title">Resumen y confirmar</h2>
+                            <p class="summary-card-subtitle">Revisa el desglose antes de formalizar.</p>
+                        </div>
+                    </div>
+
+                    
+                    <div class="summary-sitter-preview" id="summary-sitter-box" aria-live="polite">
+                        <div class="summary-sitter-avatar" id="summary-sitter-avatar">EM</div>
+                        <div class="summary-sitter-info">
+                            <strong class="summary-sitter-name" id="summary-sitter-name">Elena Martínez</strong>
+                            <p class="summary-sitter-loc" id="summary-sitter-loc">
+                                <span class="material-symbols-outlined icon">location_on</span>
+                                <span id="summary-sitter-loc-text">Quito, La Carolina · Ecuador</span>
+                            </p>
+                        </div>
+                    </div>
+
+                    
+                    <div class="summary-details-list" aria-live="polite">
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Servicio:</span>
+                            <strong class="detail-value" id="summary-service-name">Alojamiento en casa</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Fechas:</span>
+                            <strong class="detail-value" id="summary-dates-range">12 Oct - 15 Oct, 2026</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Duración:</span>
+                            <strong class="detail-value" id="summary-duration-text">3 noches</strong>
+                        </div>
+                        <div class="summary-detail-row">
+                            <span class="detail-label">Mascota:</span>
+                            <strong class="detail-value" id="summary-pet-name">Bruno · Perro · Beagle</strong>
+                        </div>
+                    </div>
+
+                    <div class="summary-divider"></div>
+
+                    
+                    <div class="summary-pricing-table" aria-live="polite" id="summary-pricing-table">
+                        <div class="price-row">
+                            <span id="summary-calc-breakdown">$25 × 3 noches</span>
+                            <span id="summary-subtotal-val">$75.00</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Tarifa de gestión y seguro</span>
+                            <span id="summary-fee-val">$5.00</span>
+                        </div>
+                        <div class="price-row price-row-total">
+                            <span>Total estimado</span>
+                            <strong class="total-amount" id="summary-total-val">$80.00</strong>
+                        </div>
+                    </div>
+
+                    
+                    <div id="booking-submit-error-alert" class="booking-submit-error-box" style="display: none;" role="alert">
+                        <span class="material-symbols-outlined">error</span>
+                        <span id="booking-submit-error-text">Por favor completa todos los campos requeridos.</span>
+                    </div>
+
+                    
+                    <div class="summary-actions">
+                        <button type="submit" id="btn-confirm-booking" class="button button-accent button-confirm-submit">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            <span>Confirmar Reserva</span>
+                        </button>
+                    </div>
+
+                    
+                    <div class="summary-guarantees">
+                        <div class="guarantee-badge-item">
+                            <span class="material-symbols-outlined icon-guarantee">verified_user</span>
+                            <span>Cancelación gratuita hasta 24h antes del inicio.</span>
+                        </div>
+                        <div class="guarantee-badge-item">
+                            <span class="material-symbols-outlined icon-guarantee">security</span>
+                            <span>Cobertura veterinaria y seguro PetCare incluidos.</span>
+                        </div>
+                    </div>
+
+                </section>
+            </aside>
+
+        </form>
+
+    </main>
+
+    
+    <div id="bookingTourModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="tourStepTitle">
+        <div class="modal-card booking-tour-card">
+            <div class="modal-header booking-tour-header">
+                <div class="tour-header-progress">
+                    <span class="material-symbols-outlined tour-sparkle-icon">auto_awesome</span>
+                    <span class="tour-step-badge" id="tourStepBadge">Paso 1 de 3</span>
+                </div>
+                <button type="button" class="modal-close-btn" id="btnCloseTourModal" aria-label="Cerrar guía">&times;</button>
+            </div>
+
+            <div class="modal-body booking-tour-body">
+                <div class="tour-illustration-box">
+                    <span class="material-symbols-outlined tour-step-icon" id="tourStepIcon">person_search</span>
+                </div>
+                <h3 id="tourStepTitle" class="tour-step-heading">1. Elige un cuidador verificado</h3>
+                <p id="tourStepDesc" class="tour-step-text">
+                    Explora las fichas de cuidadores disponibles, revisa sus valoraciones y selecciona el profesional ideal para tu mascota.
+                </p>
+
+                
+                <div class="tour-dots-indicator" aria-hidden="true">
+                    <span class="tour-dot active" id="tourDot1"></span>
+                    <span class="tour-dot" id="tourDot2"></span>
+                    <span class="tour-dot" id="tourDot3"></span>
+                </div>
+            </div>
+
+            <div class="modal-footer booking-tour-footer">
+                <button type="button" class="button button-ghost" id="btnTourSkip">Saltar guía</button>
+                <div class="tour-nav-btns">
+                    <button type="button" class="button button-outline" id="btnTourPrev" style="display: none;">Anterior</button>
+                    <button type="button" class="button button-primary" id="btnTourNext">Siguiente</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="site-footer"></div>
+
+    <div id="site-mobile-nav"></div>
+
+</body>
+</html>

@@ -12,7 +12,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/forms.js" defer></script>
+    <script src="../js/registro.js" defer></script>
 </head>
 <body class="login-page-body">
 
@@ -25,7 +28,7 @@
                     <span class="material-symbols-outlined login-logo-icon">pets</span>
                     <h1 id="register-page-title">Pet CareConnect</h1>
                 </a>
-                <p>Crea tu cuenta gratis y encuentra el mejor cuidado para tu mascota.</p>
+                <p>Crea tu cuenta de propietario para encontrar el mejor cuidado.</p>
 
                 <div class="card-surface login-card-container">
                     <form action="#" method="POST" id="registerForm" novalidate>
@@ -33,7 +36,7 @@
                             <legend class="sr-only">Formulario de registro de usuario</legend>
 
                             <div class="login-form-item">
-                                <label for="reg-name">Nombre y apellidos</label>
+                                <label for="reg-name">Nombre y apellidos <span class="required-mark" aria-hidden="true">*</span></label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">person</span>
                                     <input
@@ -43,18 +46,18 @@
                                         name="name"
                                         placeholder="p. ej. Alejandro Martínez"
                                         autocomplete="name"
+                                        minlength="2"
                                         required
+                                        aria-required="true"
                                         aria-invalid="false"
                                         aria-describedby="name-error">
                                 </div>
-                                <div id="name-error" class="field-error" role="alert">
-                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
-                                    <span>Introduce tu nombre completo (mínimo 2 caracteres)</span>
-                                </div>
+                                <span class="input-hint">Tu nombre tal como aparecerá en tus reservas</span>
+                                <div id="name-error" class="field-error" role="alert"></div>
                             </div>
 
                             <div class="login-form-item">
-                                <label for="reg-email">Correo electrónico</label>
+                                <label for="reg-email">Correo electrónico <span class="required-mark" aria-hidden="true">*</span></label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">mail</span>
                                     <input
@@ -65,13 +68,12 @@
                                         placeholder="tu@ejemplo.com"
                                         autocomplete="email"
                                         required
+                                        aria-required="true"
                                         aria-invalid="false"
                                         aria-describedby="email-error">
                                 </div>
-                                <div id="email-error" class="field-error" role="alert">
-                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
-                                    <span>Introduce un correo electrónico válido</span>
-                                </div>
+                                <span class="input-hint">Enviaremos tus confirmaciones a este correo</span>
+                                <div id="email-error" class="field-error" role="alert"></div>
                             </div>
 
                             <div class="login-form-item">
@@ -84,12 +86,16 @@
                                         class="login-input"
                                         name="phone"
                                         placeholder="+593 96 931 7653"
-                                        autocomplete="tel">
+                                        autocomplete="tel"
+                                        aria-invalid="false"
+                                        aria-describedby="phone-error">
                                 </div>
+                                <span class="input-hint">Para contacto directo con el cuidador si es necesario</span>
+                                <div id="phone-error" class="field-error" role="alert"></div>
                             </div>
 
                             <div class="login-form-item">
-                                <label for="reg-password">Contraseña</label>
+                                <label for="reg-password">Contraseña <span class="required-mark" aria-hidden="true">*</span></label>
                                 <div class="input-icon-wrapper">
                                     <span class="material-symbols-outlined input-left-icon">lock</span>
                                     <input
@@ -99,10 +105,12 @@
                                         name="password"
                                         placeholder="Mínimo 8 caracteres"
                                         autocomplete="new-password"
+                                        minlength="8"
                                         required
+                                        aria-required="true"
                                         aria-invalid="false"
                                         aria-describedby="pass-error">
-                                    <button type="button" class="toggle-password-btn" aria-controls="reg-password" aria-label="Mostrar u ocultar contraseña" onclick="togglePassword()">
+                                    <button type="button" class="toggle-password-btn" aria-controls="reg-password" aria-label="Mostrar u ocultar contraseña">
                                         <span class="material-symbols-outlined" id="passwordIcon">visibility</span>
                                     </button>
                                 </div>
@@ -116,22 +124,16 @@
                                     <div class="password-strength-text" id="strengthText">Seguridad: pendiente</div>
                                 </div>
 
-                                <div id="pass-error" class="field-error" role="alert">
-                                    <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
-                                    <span>La contraseña debe tener al menos 8 caracteres</span>
-                                </div>
+                                <div id="pass-error" class="field-error" role="alert"></div>
                             </div>
 
                             <div class="auth-terms-item">
-                                <input type="checkbox" id="reg-terms" name="terms" required aria-describedby="terms-error">
+                                <input type="checkbox" id="reg-terms" name="terms" required aria-required="true" aria-describedby="terms-error">
                                 <label for="reg-terms">
-                                    Acepto los <a href="#" onclick="event.preventDefault(); window.showToast('Términos de servicio de Pet CareConnect aplicados', 'info');">Términos de Servicio</a> y la <a href="#" onclick="event.preventDefault(); window.showToast('Política de privacidad conforme al RGPD', 'info');">Política de Privacidad</a>.
+                                    Acepto los <a href="#footer-terms" data-footer-modal="terms">Términos de Servicio</a> y la <a href="#footer-privacy" data-footer-modal="privacy">Política de Privacidad</a>. <span class="required-mark" aria-hidden="true">*</span>
                                 </label>
                             </div>
-                            <div id="terms-error" class="field-error" role="alert" style="margin-left: 1.5rem;">
-                                <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
-                                <span>Debes aceptar los términos para continuar</span>
-                            </div>
+                            <div id="terms-error" class="field-error" role="alert" style="margin-left: 1.5rem;"></div>
 
                             <button type="submit" class="login-submit-btn" id="regSubmitBtn">
                                 <span>Crear mi cuenta</span>
@@ -154,195 +156,5 @@
         <p>© 2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
     </footer>
 
-    <script>
-        function togglePassword() {
-            const passInput = document.getElementById('reg-password');
-            const passIcon = document.getElementById('passwordIcon');
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                passIcon.innerText = 'visibility_off';
-            } else {
-                passInput.type = 'password';
-                passIcon.innerText = 'visibility';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('registerForm');
-            const nameInput = document.getElementById('reg-name');
-            const emailInput = document.getElementById('reg-email');
-            const phoneInput = document.getElementById('reg-phone');
-            const passInput = document.getElementById('reg-password');
-            const termsInput = document.getElementById('reg-terms');
-
-            const nameError = document.getElementById('name-error');
-            const emailError = document.getElementById('email-error');
-            const passError = document.getElementById('pass-error');
-            const termsError = document.getElementById('terms-error');
-
-            const strengthContainer = document.getElementById('strengthContainer');
-            const strengthText = document.getElementById('strengthText');
-            const submitBtn = document.getElementById('regSubmitBtn');
-
-            const rfcEmailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-
-            function evaluateStrength(pass) {
-                if (!pass || pass.length === 0) {
-                    strengthContainer.className = 'password-strength-container';
-                    strengthText.textContent = 'Seguridad: pendiente';
-                    strengthText.style.color = 'var(--text-muted)';
-                    return 0;
-                }
-
-                let score = 0;
-                if (pass.length >= 8) score++;
-                if (/[A-Z]/.test(pass) && /[0-9]/.test(pass)) score++;
-                if (pass.length >= 10 && /[^A-Za-z0-9]/.test(pass)) score++;
-
-                strengthContainer.className = 'password-strength-container';
-                if (score === 0 || (score === 1 && pass.length < 8)) {
-                    strengthContainer.classList.add('strength-level-weak');
-                    strengthText.textContent = 'Seguridad: Débil (mínimo 8 caracteres)';
-                    strengthText.style.color = 'var(--error)';
-                } else if (score === 1 || score === 2) {
-                    strengthContainer.classList.add('strength-level-medium');
-                    strengthText.textContent = 'Seguridad: Media (buen nivel)';
-                    strengthText.style.color = 'var(--secondary-bright)';
-                } else {
-                    strengthContainer.classList.add('strength-level-strong');
-                    strengthText.textContent = 'Seguridad: Fuerte (excelente)';
-                    strengthText.style.color = 'var(--success)';
-                }
-
-                return score;
-            }
-
-            function validateName() {
-                const val = nameInput.value.trim();
-                if (!val || val.length < 2) {
-                    nameInput.classList.add('is-invalid');
-                    nameInput.setAttribute('aria-invalid', 'true');
-                    nameError.classList.add('is-visible');
-                    return false;
-                } else {
-                    nameInput.classList.remove('is-invalid');
-                    nameInput.setAttribute('aria-invalid', 'false');
-                    nameError.classList.remove('is-visible');
-                    return true;
-                }
-            }
-
-            function validateEmail() {
-                const val = emailInput.value.trim();
-                if (!val || !rfcEmailRegex.test(val)) {
-                    emailInput.classList.add('is-invalid');
-                    emailInput.setAttribute('aria-invalid', 'true');
-                    emailError.classList.add('is-visible');
-                    return false;
-                } else {
-                    emailInput.classList.remove('is-invalid');
-                    emailInput.setAttribute('aria-invalid', 'false');
-                    emailError.classList.remove('is-visible');
-                    return true;
-                }
-            }
-
-            function validatePassword() {
-                const val = passInput.value;
-                if (!val || val.length < 8) {
-                    passInput.classList.add('is-invalid');
-                    passInput.setAttribute('aria-invalid', 'true');
-                    passError.classList.add('is-visible');
-                    return false;
-                } else {
-                    passInput.classList.remove('is-invalid');
-                    passInput.setAttribute('aria-invalid', 'false');
-                    passError.classList.remove('is-visible');
-                    return true;
-                }
-            }
-
-            function validateTerms() {
-                if (!termsInput.checked) {
-                    termsError.classList.add('is-visible');
-                    return false;
-                } else {
-                    termsError.classList.remove('is-visible');
-                    return true;
-                }
-            }
-
-            nameInput.addEventListener('input', () => {
-                if (nameInput.classList.contains('is-invalid')) validateName();
-            });
-            nameInput.addEventListener('blur', validateName);
-
-            emailInput.addEventListener('input', () => {
-                if (emailInput.classList.contains('is-invalid')) validateEmail();
-            });
-            emailInput.addEventListener('blur', validateEmail);
-
-            passInput.addEventListener('input', () => {
-                evaluateStrength(passInput.value);
-                if (passInput.classList.contains('is-invalid')) validatePassword();
-            });
-            passInput.addEventListener('blur', validatePassword);
-
-            termsInput.addEventListener('change', validateTerms);
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const isNameValid = validateName();
-                const isEmailValid = validateEmail();
-                const isPassValid = validatePassword();
-                const isTermsValid = validateTerms();
-
-                if (!isNameValid) {
-                    nameInput.focus();
-                    return;
-                }
-                if (!isEmailValid) {
-                    emailInput.focus();
-                    return;
-                }
-                if (!isPassValid) {
-                    passInput.focus();
-                    return;
-                }
-                if (!isTermsValid) {
-                    termsInput.focus();
-                    return;
-                }
-
-                submitBtn.classList.add('is-loading');
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = `
-                    <span class="btn-spinner"></span>
-                    <span>Creando tu cuenta...</span>
-                `;
-
-                setTimeout(() => {
-                    const user = PCC_AUTH.register(
-                        nameInput.value,
-                        emailInput.value,
-                        phoneInput.value,
-                        passInput.value
-                    );
-
-                    if (window.showToast) {
-                        window.showToast(`¡Cuenta creada con éxito! Bienvenido, ${user.name}`, 'success');
-                    }
-
-                    const params = new URLSearchParams(window.location.search);
-                    const nextUrl = params.get('next') || 'miCuenta.html';
-
-                    setTimeout(() => {
-                        window.location.href = nextUrl;
-                    }, 600);
-                }, 800);
-            });
-        });
-    </script>
 </body>
 </html>

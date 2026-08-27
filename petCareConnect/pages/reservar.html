@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reserva servicios profesionales de cuidado, paseos y alojamiento para tu mascota en Pet CareConnect.">
+    <title>Reservar Servicio | Pet CareConnect</title>
+    <link rel="icon" href="../assets/images/paw.png" type="image/png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
+    <script src="../js/auth.js" defer></script>
+    <script src="../js/ui.js" defer></script>
+    <script src="../js/confirmacionModal.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
+    <script src="../js/reservar.js" defer></script>
+</head>
+<body>
+
+    <div id="site-header"></div>
+
+    <main class="container booking-flow-wrapper" id="main-content">
+
+        <aside class="onboarding-guide-banner" id="onboardingBanner" aria-labelledby="onboarding-heading">
+            <div class="onboarding-content">
+                <div class="onboarding-icon-box" aria-hidden="true">
+                    <span class="material-symbols-outlined">lightbulb</span>
+                </div>
+                <div class="onboarding-text">
+                    <h2 id="onboarding-heading" class="onboarding-title">¿Primera vez reservando en Pet CareConnect?</h2>
+                    <p class="onboarding-desc">Completa tu reserva en 3 sencillos pasos: selecciona tu cuidador de confianza, define las fechas y personaliza los cuidados para tu mascota.</p>
+                </div>
+            </div>
+            <button type="button" class="onboarding-dismiss-btn" id="btnDismissOnboarding" aria-label="Cerrar guía de inicio rápido">
+                <span class="material-symbols-outlined" aria-hidden="true">close</span>
+            </button>
+        </aside>
+
+        <header class="booking-page-header">
+            <div class="booking-page-title-row">
+                <div>
+                    <h1 class="heading-xl">Nueva Reserva de Cuidado</h1>
+                    <p class="text-body text-muted">Configura tu solicitud de servicio con cuidadores verificados y seguro incluido.</p>
+                </div>
+                <div class="required-legend" aria-hidden="true">
+                    <span><strong class="required-asterisk">*</strong> Campos obligatorios</span>
+                </div>
+            </div>
+
+            <nav aria-label="Progreso de la reserva" class="booking-stepper-nav">
+                <ol class="booking-stepper-list">
+                    <li class="stepper-step is-active" id="step-nav-1" aria-current="step">
+                        <div class="step-circle"><span class="step-num">1</span></div>
+                        <span class="step-label">Cuidador & Servicio</span>
+                    </li>
+                    <li class="stepper-step" id="step-nav-2">
+                        <div class="step-circle"><span class="step-num">2</span></div>
+                        <span class="step-label">Fechas & Mascota</span>
+                    </li>
+                    <li class="stepper-step" id="step-nav-3">
+                        <div class="step-circle"><span class="step-num">3</span></div>
+                        <span class="step-label">Confirmación</span>
+                    </li>
+                </ol>
+            </nav>
+        </header>
+
+        <form id="reservationForm" class="booking-main-grid" novalidate>
+
+            <div class="booking-form-sections">
+
+                <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-sitter-title">
+                    <div class="section-title-header">
+                        <div class="section-title-left">
+                            <span class="material-symbols-outlined section-icon" aria-hidden="true">person_search</span>
+                            <h2 id="sec-sitter-title" class="section-heading">1. Selecciona a tu Cuidador <span class="required-asterisk" title="Obligatorio">*</span></h2>
+                        </div>
+                        <a href="buscarCuidadores.html" class="see-all-link" style="font-size: 0.85rem;">Ver todos los perfiles</a>
+                    </div>
+                    <p class="text-small text-muted mb-md">Elige al profesional certificado que mejor se adapte a las necesidades de tu mascota:</p>
+
+                    <fieldset class="sitter-selector-fieldset">
+                        <legend class="sr-only">Cuidadores disponibles para reserva directa</legend>
+                        <div class="sitter-cards-grid" role="radiogroup" aria-labelledby="sec-sitter-title" id="sitterRadioGroup">
+
+                            <label class="sitter-select-card is-selected" for="sitter-elena">
+                                <input type="radio" name="selected_sitter" id="sitter-elena" value="Elena Martínez" data-price="25" data-rating="4.9" data-reviews="48" data-specialty="Especialista en razas grandes y paseos" checked class="sitter-radio-input" aria-required="true">
+                                <div class="sitter-card-body">
+                                    <div class="sitter-card-top">
+                                        <div class="sitter-avatar-wrap">
+                                            <span class="material-symbols-outlined sitter-avatar-icon" aria-hidden="true">person</span>
+                                            <span class="verified-mini-badge" title="Verificado"><span class="material-symbols-outlined">verified</span></span>
+                                        </div>
+                                        <div class="sitter-info-text">
+                                            <span class="sitter-name-title">Elena Martínez</span>
+                                            <div class="sitter-meta-badges">
+                                                <span class="sitter-rating-pill"><span class="material-symbols-outlined star-icon">star</span> 4.9 (48)</span>
+                                                <span class="sitter-price-tag">$25 / noche</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="sitter-brief">5 años de experiencia. Hogar amplio con patio y atención 24/7.</p>
+                                    <div class="sitter-selected-indicator" aria-hidden="true">
+                                        <span class="material-symbols-outlined check-icon">check_circle</span>
+                                        <span>Seleccionada</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="sitter-select-card" for="sitter-javier">
+                                <input type="radio" name="selected_sitter" id="sitter-javier" value="Javier Ruiz" data-price="20" data-rating="4.8" data-reviews="32" data-specialty="Auxiliar veterinario y medicación" class="sitter-radio-input" aria-required="true">
+                                <div class="sitter-card-body">
+                                    <div class="sitter-card-top">
+                                        <div class="sitter-avatar-wrap">
+                                            <span class="material-symbols-outlined sitter-avatar-icon" aria-hidden="true">person</span>
+                                            <span class="verified-mini-badge" title="Verificado"><span class="material-symbols-outlined">verified</span></span>
+                                        </div>
+                                        <div class="sitter-info-text">
+                                            <span class="sitter-name-title">Javier Ruiz</span>
+                                            <div class="sitter-meta-badges">
+                                                <span class="sitter-rating-pill"><span class="material-symbols-outlined star-icon">star</span> 4.8 (32)</span>
+                                                <span class="sitter-price-tag">$20 / noche</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="sitter-brief">Auxiliar técnico veterinario. Ideal para mascotas que requieren medicación.</p>
+                                    <div class="sitter-selected-indicator" aria-hidden="true">
+                                        <span class="material-symbols-outlined check-icon">check_circle</span>
+                                        <span>Seleccionado</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="sitter-select-card" for="sitter-sofia">
+                                <input type="radio" name="selected_sitter" id="sitter-sofia" value="Sofía Castro" data-price="28" data-rating="5.0" data-reviews="112" data-specialty="Experta en gatos y cuidado felino" class="sitter-radio-input" aria-required="true">
+                                <div class="sitter-card-body">
+                                    <div class="sitter-card-top">
+                                        <div class="sitter-avatar-wrap">
+                                            <span class="material-symbols-outlined sitter-avatar-icon" aria-hidden="true">person</span>
+                                            <span class="verified-mini-badge" title="Verificado"><span class="material-symbols-outlined">verified</span></span>
+                                        </div>
+                                        <div class="sitter-info-text">
+                                            <span class="sitter-name-title">Sofía Castro</span>
+                                            <div class="sitter-meta-badges">
+                                                <span class="sitter-rating-pill"><span class="material-symbols-outlined star-icon">star</span> 5.0 (112)</span>
+                                                <span class="sitter-price-tag">$28 / noche</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="sitter-brief">Especialista felina. Ambiente tranquilo sin ruidos ni otras especies.</p>
+                                    <div class="sitter-selected-indicator" aria-hidden="true">
+                                        <span class="material-symbols-outlined check-icon">check_circle</span>
+                                        <span>Seleccionada</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                            <label class="sitter-select-card" for="sitter-lucia">
+                                <input type="radio" name="selected_sitter" id="sitter-lucia" value="Lucía Fernández" data-price="25" data-rating="4.9" data-reviews="124" data-specialty="Ansiedad por separación y cachorros" class="sitter-radio-input" aria-required="true">
+                                <div class="sitter-card-body">
+                                    <div class="sitter-card-top">
+                                        <div class="sitter-avatar-wrap">
+                                            <span class="material-symbols-outlined sitter-avatar-icon" aria-hidden="true">person</span>
+                                            <span class="verified-mini-badge" title="Verificado"><span class="material-symbols-outlined">verified</span></span>
+                                        </div>
+                                        <div class="sitter-info-text">
+                                            <span class="sitter-name-title">Lucía Fernández</span>
+                                            <div class="sitter-meta-badges">
+                                                <span class="sitter-rating-pill"><span class="material-symbols-outlined star-icon">star</span> 4.9 (124)</span>
+                                                <span class="sitter-price-tag">$25 / noche</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="sitter-brief">Trabajo remoto 100%. Salón amplio y paseos personalizados diarios.</p>
+                                    <div class="sitter-selected-indicator" aria-hidden="true">
+                                        <span class="material-symbols-outlined check-icon">check_circle</span>
+                                        <span>Seleccionada</span>
+                                    </div>
+                                </div>
+                            </label>
+
+                        </div>
+                    </fieldset>
+                </section>
+
+                <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-service-title">
+                    <div class="section-title-left mb-md">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">event_available</span>
+                        <h2 id="sec-service-title" class="section-heading">2. Servicio y Fechas <span class="required-asterisk" title="Obligatorio">*</span></h2>
+                    </div>
+
+                    <div class="booking-form-row two-cols">
+
+                        <div class="form-group">
+                            <label for="booking-service" class="input-label">
+                                Tipo de Servicio <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="input-icon-wrapper">
+                                <span class="material-symbols-outlined input-left-icon" aria-hidden="true">home_work</span>
+                                <select id="booking-service" name="service" class="form-control select-with-icon" required aria-required="true" aria-describedby="service-desc">
+                                    <option value="Alojamiento en casa" data-multiplier="1" selected>Alojamiento en casa de cuidador</option>
+                                    <option value="Paseos diarios" data-multiplier="0.6">Paseos diarios (45 min)</option>
+                                    <option value="Guardería de día" data-multiplier="0.8">Guardería de día (8h)</option>
+                                    <option value="Cuidado a domicilio" data-multiplier="1.1">Cuidado en mi domicilio</option>
+                                    <option value="Peluquería y Spa" data-multiplier="1.2">Peluquería & Spa de mascotas</option>
+                                </select>
+                            </div>
+                            <span id="service-desc" class="text-hint">Incluye supervisión y cobertura de seguro.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking-pets-count" class="input-label">
+                                Cantidad de mascotas <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="input-icon-wrapper">
+                                <span class="material-symbols-outlined input-left-icon" aria-hidden="true">pets</span>
+                                <select id="booking-pets-count" name="pets_count" class="form-control select-with-icon" required aria-required="true">
+                                    <option value="1" selected>1 Mascota</option>
+                                    <option value="2">2 Mascotas (+50% desc. en 2da)</option>
+                                    <option value="3">3 Mascotas</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="booking-form-row two-cols mt-md">
+
+                        <div class="form-group">
+                            <label for="booking-date-start" class="input-label">
+                                Fecha de Entrada <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="input-icon-wrapper">
+                                <span class="material-symbols-outlined input-left-icon" aria-hidden="true">calendar_month</span>
+                                <input type="date" id="booking-date-start" name="date_start" class="form-control input-with-icon" required aria-required="true" aria-describedby="date-start-error">
+                            </div>
+                            <div id="date-start-error" class="field-error" role="alert">
+                                <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                <span>Selecciona una fecha válida a partir de hoy</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="booking-date-end" class="input-label">
+                                Fecha de Salida <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="input-icon-wrapper">
+                                <span class="material-symbols-outlined input-left-icon" aria-hidden="true">event</span>
+                                <input type="date" id="booking-date-end" name="date_end" class="form-control input-with-icon" required aria-required="true" aria-describedby="date-end-error">
+                            </div>
+                            <div id="date-end-error" class="field-error" role="alert">
+                                <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                                <span>La fecha de salida debe ser posterior a la de entrada</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-pet-title">
+                    <div class="section-title-left mb-md">
+                        <span class="material-symbols-outlined section-icon" aria-hidden="true">cruelty_free</span>
+                        <h2 id="sec-pet-title" class="section-heading">3. Datos de la Mascota y Cuidados Especiales <span class="required-asterisk" title="Obligatorio">*</span></h2>
+                    </div>
+
+                    <div class="booking-form-row two-cols">
+
+                        <div class="form-group">
+                            <label for="booking-pet-select" class="input-label">
+                                Selecciona Mascota <span class="required-asterisk">*</span>
+                            </label>
+                            <div class="input-icon-wrapper">
+                                <span class="material-symbols-outlined input-left-icon" aria-hidden="true">sound_detection_dog_barking</span>
+                                <select id="booking-pet-select" name="pet_id" class="form-control select-with-icon" required aria-required="true">
+
+                                    <option value="Bruno (Perro - Beagle, 3 años)">Bruno (Perro - Beagle, 3 años)</option>
+                                    <option value="Luna (Gato - Persa, 2 años)">Luna (Gato - Persa, 2 años)</option>
+                                    <option value="otro">+ Ingresar otra mascota</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="customPetGroup" style="display: none;">
+                            <label for="booking-custom-pet" class="input-label">
+                                Nombre y tipo de mascota <span class="required-asterisk">*</span>
+                            </label>
+                            <input type="text" id="booking-custom-pet" name="custom_pet" class="form-control" placeholder="p. ej. Rocky (Golden Retriever)">
+                        </div>
+                    </div>
+
+                    <div class="form-group mt-md">
+                        <div class="label-with-tooltip-row">
+                            <label for="booking-special-instructions" class="input-label">
+                                Instrucciones de cuidado, horarios y medicación <span class="text-muted" style="font-weight: 400;">(Opcional)</span>
+                            </label>
+                            <span class="char-counter" id="charCounter">0 / 400</span>
+                        </div>
+                        <textarea id="booking-special-instructions" name="special_instructions" rows="3" maxlength="400" class="form-control textarea-field" placeholder="p. ej. Dar medicación a las 09:00 AM, pasear con arnés reforzado, no darle comida que contenga pollo."></textarea>
+                        <span class="text-hint">El cuidador recibirá estas instrucciones de forma prioritaria en su panel.</span>
+                    </div>
+
+                    <div class="booking-terms-block mt-md">
+                        <label class="checkbox-custom-label" for="booking-accept-policy">
+                            <input type="checkbox" id="booking-accept-policy" name="accept_policy" required aria-required="true" aria-describedby="policy-error">
+                            <span class="checkbox-label-text">
+                                Acepto la política de cancelación (gratuita hasta 24h antes) y los términos de seguridad de Pet CareConnect. <span class="required-asterisk">*</span>
+                            </span>
+                        </label>
+                        <div id="policy-error" class="field-error" role="alert">
+                            <span class="material-symbols-outlined" style="font-size: 14px;">error</span>
+                            <span>Debes aceptar las políticas del servicio para confirmar la reserva</span>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <aside class="booking-summary-sidebar" aria-labelledby="summary-title">
+                <div class="card-surface card-padding booking-summary-card">
+                    <h2 id="summary-title" class="summary-heading">
+                        <span class="material-symbols-outlined" aria-hidden="true">receipt_long</span>
+                        Resumen de la Reserva
+                    </h2>
+
+                    <div class="summary-sitter-preview" id="summarySitterBox">
+                        <div class="preview-avatar">
+                            <span class="material-symbols-outlined" aria-hidden="true">person</span>
+                        </div>
+                        <div class="preview-text">
+                            <strong id="sum-sitter-name">Elena Martínez</strong>
+                            <span id="sum-sitter-specialty" class="text-small text-muted">Especialista en razas grandes</span>
+                            <div class="preview-rating">
+                                <span class="material-symbols-outlined star-icon" aria-hidden="true">star</span>
+                                <span id="sum-sitter-rating">4.9 (48 reseñas)</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="summary-divider" aria-hidden="true">
+
+                    <dl class="summary-details-list">
+                        <div class="summary-row">
+                            <dt>Servicio:</dt>
+                            <dd><strong id="sum-service-name">Alojamiento en casa</strong></dd>
+                        </div>
+                        <div class="summary-row">
+                            <dt>Mascota:</dt>
+                            <dd><strong id="sum-pet-name">Bruno (Beagle)</strong></dd>
+                        </div>
+                        <div class="summary-row">
+                            <dt>Fechas:</dt>
+                            <dd><span id="sum-dates-range">Selecciona fechas</span></dd>
+                        </div>
+                        <div class="summary-row">
+                            <dt>Duración:</dt>
+                            <dd><strong id="sum-duration-days">0 noches</strong></dd>
+                        </div>
+                    </dl>
+
+                    <hr class="summary-divider" aria-hidden="true">
+
+                    <div class="summary-pricing-breakdown" aria-live="polite" id="pricingBreakdown">
+                        <div class="price-row">
+                            <span id="sum-rate-calc">Tarifa base ($25 x 0 noches):</span>
+                            <span id="sum-subtotal-val">$0</span>
+                        </div>
+                        <div class="price-row">
+                            <span>Gastos de gestión y seguro:</span>
+                            <span id="sum-fee-val">$5</span>
+                        </div>
+                        <div class="price-row price-total-row">
+                            <span>Total a pagar:</span>
+                            <strong id="sum-total-val" class="price-highlight">$5</strong>
+                        </div>
+                    </div>
+
+                    <div class="booking-guarantees-mini">
+                        <div class="guarantee-item">
+                            <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
+                            <span>Seguro veterinario de hasta $1,000 incluido</span>
+                        </div>
+                        <div class="guarantee-item">
+                            <span class="material-symbols-outlined" aria-hidden="true">replay</span>
+                            <span>Cancelación 100% gratuita hasta 24h antes</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="button button-accent button-confirm-reservation" id="btnSubmitBooking">
+                        <span class="btn-text">Confirmar y Solicitar Reserva</span>
+                        <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>
+                    </button>
+
+                    <p class="summary-safe-note text-center text-small text-muted mt-sm">
+                        <span class="material-symbols-outlined" style="font-size:14px; vertical-align:middle;">lock</span>
+                        Pago seguro y encriptado. No se te cobrará hasta que el cuidador acepte.
+                    </p>
+                </div>
+            </aside>
+
+        </form>
+
+    </main>
+
+    <div id="site-footer"></div>
+    <div id="site-mobile-nav"></div>
+</body>
+</html>

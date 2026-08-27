@@ -14,6 +14,9 @@
     <script src="../js/toast.js" defer></script>
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/forms.js" defer></script>
+    <script src="../js/ui.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
     <script src="../js/account.js" defer></script>
 </head>
 <body>
@@ -21,36 +24,37 @@
     <div id="site-header"></div>
 
     <main class="container account-page-wrapper">
+        <div class="account-shell">
 
-        <section aria-labelledby="user-name-title" class="card-surface card-padding account-header-card">
+        <section aria-labelledby="user-name-title" class="card-surface account-header-card">
             <div class="account-user-profile">
-                <div class="account-user-avatar" id="headerUserAvatar">AM</div>
-                <div class="account-user-info">
-                    <h1 id="user-name-title">
-                        <span id="headerUserName">Gabriel Flor</span>
-                        <span class="account-verified-tag">
-                            <span class="material-symbols-outlined">verified</span>
-                            Verificado
-                        </span>
-                    </h1>
-                    <p id="headerUserEmail">gabriel.flor@gmail.com</p>
-                    <div class="account-user-meta">
-                        <span id="headerUserLocation">Quito, Ecuador</span>
-                        <span>•</span>
-                        <span id="headerUserMember">Miembro desde Julio 2026</span>
+                <div class="account-user-identity">
+                    <div class="account-user-avatar" id="headerUserAvatar" aria-hidden="true">AM</div>
+                    <div class="account-user-info">
+                        <p class="account-eyebrow">Tu cuenta</p>
+                        <h1 id="user-name-title">
+                            <span id="headerUserName">Gabriel Flor</span>
+                        </h1>
                     </div>
                 </div>
-            </div>
-
-            <div>
-                <button type="button" class="button button-outline button-danger" id="btnOpenLogoutModal">
-                    <span class="material-symbols-outlined">logout</span>
-                    Cerrar sesión
-                </button>
+                <ul class="account-user-meta" aria-label="Datos de perfil">
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+                        <span id="headerUserEmail">gabriel.flor@ejemplo.com</span>
+                    </li>
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+                        <span id="headerUserLocation">Quito, Ecuador</span>
+                    </li>
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+                        <span id="headerUserMember">Miembro desde 2026</span>
+                    </li>
+                </ul>
             </div>
         </section>
 
-        <nav class="account-tabs-nav" aria-label="Pestañas de la cuenta">
+        <nav class="account-tabs-nav" aria-label="Secciones de la cuenta">
             <button type="button" class="account-tab-btn active" data-tab="tab-mascotas">
                 <span class="material-symbols-outlined">pets</span>
                 Mis Mascotas (<span id="tabPetsCount">2</span>)
@@ -69,20 +73,21 @@
             </button>
         </nav>
 
+        <div class="account-content">
         <section id="tab-mascotas" class="account-tab-pane active" aria-labelledby="mascotas-heading">
-            <div class="pets-section-header">
-                <div>
-                    <h2 id="mascotas-heading">Mis Mascotas</h2>
-                    <p class="text-small text-muted">Fichas médicas y datos para asignar rápidamente en tus reservas.</p>
+            <div class="account-panel card-surface">
+                <div class="pets-section-header">
+                    <div class="pets-section-copy">
+                        <h2 id="mascotas-heading">Mis Mascotas</h2>
+                        <p class="text-small text-muted">Fichas médicas y datos para asignar rápidamente en tus reservas.</p>
+                    </div>
+                    <button type="button" class="button button-primary" id="btnOpenAddPetModal">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        Añadir Mascota
+                    </button>
                 </div>
-                <button type="button" class="button button-primary" id="btnOpenAddPetModal">
-                    <span class="material-symbols-outlined">add_circle</span>
-                    Añadir Mascota
-                </button>
-            </div>
 
-            <div class="pets-grid" id="petsGridContainer">
-
+                <div class="pets-grid" id="petsGridContainer"></div>
             </div>
         </section>
 
@@ -94,19 +99,22 @@
                 <form id="userDataForm" novalidate>
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="profileName">Nombre y apellidos</label>
-                            <input type="text" id="profileName" class="input" required>
+                            <label for="profileName">Nombre y apellidos <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="text" id="profileName" class="input" required aria-required="true">
+                            <div id="profileName-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profileEmail">Correo electrónico</label>
-                            <input type="email" id="profileEmail" class="input" required>
+                            <label for="profileEmail">Correo electrónico <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="email" id="profileEmail" class="input" required aria-required="true">
+                            <div id="profileEmail-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profilePhone">Teléfono de contacto</label>
+                            <label for="profilePhone">Teléfono de contacto <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="tel" id="profilePhone" class="input">
+                            <div id="profilePhone-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profileLocation">Dirección / Zona habitual</label>
+                            <label for="profileLocation">Dirección / Zona habitual <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="text" id="profileLocation" class="input">
                         </div>
                     </div>
@@ -126,33 +134,9 @@
                 <h2 id="pagos-heading" class="account-box-title">Tarjetas y Métodos de Pago</h2>
                 <p class="account-box-desc">Gestiona tus métodos de pago seguros para confirmaciones de reservas.</p>
 
-                <div class="payment-methods-list">
-                    <div class="payment-card-item">
-                        <div class="payment-card-left">
-                            <span class="material-symbols-outlined">credit_card</span>
-                            <div class="payment-card-details">
-                                <strong>Visa terminada en •••• 4242</strong>
-                                <span>Caduca: 08/2028 · Débito</span>
-                            </div>
-                        </div>
-                        <span class="badge badge-success">Predeterminada</span>
-                    </div>
+                <div class="payment-methods-list" id="paymentMethodsList"></div>
 
-                    <div class="payment-card-item">
-                        <div class="payment-card-left">
-                            <span class="material-symbols-outlined">credit_card</span>
-                            <div class="payment-card-details">
-                                <strong>Mastercard terminada en •••• 8819</strong>
-                                <span>Caduca: 11/2027 · Crédito</span>
-                            </div>
-                        </div>
-                        <button type="button" class="button button-outline button-sm" onclick="window.showToast('Tarjeta cambiada a predeterminada', 'info');">
-                            Establecer principal
-                        </button>
-                    </div>
-                </div>
-
-                <button type="button" class="button button-outline" onclick="window.showToast('Módulo de pasarela de pago segura encriptada.', 'info');">
+                <button type="button" class="button button-outline" id="btnOpenAddPaymentModal">
                     <span class="material-symbols-outlined">add_card</span>
                     Añadir Nuevo Método de Pago
                 </button>
@@ -167,16 +151,19 @@
                 <form id="changePasswordForm" class="form-narrow" novalidate>
                     <div class="login-fieldset">
                         <div class="login-form-item">
-                            <label for="currentPass">Contraseña actual</label>
-                            <input type="password" id="currentPass" class="input" placeholder="••••••••" required>
+                            <label for="currentPass">Contraseña actual <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="currentPass" class="input" placeholder="••••••••" required aria-required="true">
+                            <div id="currentPass-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="newPass">Nueva contraseña (mínimo 8 caracteres)</label>
-                            <input type="password" id="newPass" class="input" placeholder="••••••••" required>
+                            <label for="newPass">Nueva contraseña (mínimo 8 caracteres) <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="newPass" class="input" placeholder="••••••••" minlength="8" required aria-required="true">
+                            <div id="newPass-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="confirmNewPass">Confirmar nueva contraseña</label>
-                            <input type="password" id="confirmNewPass" class="input" placeholder="••••••••" required>
+                            <label for="confirmNewPass">Confirmar nueva contraseña <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="confirmNewPass" class="input" placeholder="••••••••" minlength="8" required aria-required="true" data-match-field="newPass">
+                            <div id="confirmNewPass-error" class="field-error" role="alert"></div>
                         </div>
 
                         <div>
@@ -190,14 +177,15 @@
                 <hr class="divider">
 
                 <div>
-                    <h3 class="heading-danger">Zona de Sesión</h3>
-                    <p class="text-small text-muted mb-md">Cierra la sesión activa en este navegador.</p>
                     <button type="button" class="button button-outline button-danger-strong" id="btnDangerLogout">
                         Cerrar sesión ahora
                     </button>
                 </div>
             </div>
         </section>
+
+        </div>
+        </div>
 
     </main>
 
@@ -210,58 +198,130 @@
             <form id="addPetForm" novalidate>
                 <div class="modal-body">
                     <div class="login-form-item">
-                        <label for="petNameInput">Nombre de la mascota *</label>
-                        <input type="text" id="petNameInput" class="input" placeholder="p. ej. Toby" required>
-                        <div id="petNameError" class="field-error">
-                            <span>Introduce el nombre de la mascota</span>
-                        </div>
+                        <label for="petNameInput">Nombre de la mascota <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input type="text" id="petNameInput" class="input" placeholder="p. ej. Toby" required aria-required="true" minlength="2" data-error-required="Por favor ingresa el nombre de tu mascota.">
+                        <div id="petNameInput-error" class="field-error" role="alert"></div>
                     </div>
 
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="petTypeSelect">Tipo de mascota *</label>
-                            <select id="petTypeSelect" class="input">
+                            <label for="petTypeSelect">Tipo de mascota <span class="required-mark" aria-hidden="true">*</span></label>
+                            <select id="petTypeSelect" class="input" required aria-required="true" data-error-required="Por favor selecciona el tipo de mascota.">
+                                <option value="" disabled selected>Selecciona un tipo</option>
                                 <option value="Perro">Perro</option>
                                 <option value="Gato">Gato</option>
                                 <option value="Ave">Ave</option>
                                 <option value="Conejo">Conejo</option>
                                 <option value="Otro">Otro</option>
                             </select>
+                            <div id="petTypeSelect-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="petBreedInput">Raza / Tipo</label>
-                            <input type="text" id="petBreedInput" class="input" placeholder="p. ej. Golden Retriever">
+                            <label for="petBreedInput">Raza / Tipo <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="text" id="petBreedInput" class="input" placeholder="p. ej. Golden Retriever" required aria-required="true" minlength="2" data-error-required="Por favor ingresa la raza o tipo.">
+                            <div id="petBreedInput-error" class="field-error" role="alert"></div>
                         </div>
                     </div>
 
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="petAgeInput">Edad</label>
-                            <input type="text" id="petAgeInput" class="input" placeholder="p. ej. 2 años">
+                            <label for="petAgeInput">Edad <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="text" id="petAgeInput" class="input" placeholder="p. ej. 2 años" required aria-required="true" data-error-required="Por favor indica la edad de la mascota.">
+                            <div id="petAgeInput-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="petWeightInput">Peso aproximado</label>
-                            <input type="text" id="petWeightInput" class="input" placeholder="p. ej. 12 kg">
+                            <label for="petWeightInput">Peso aproximado <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="text" id="petWeightInput" class="input" placeholder="p. ej. 12 kg" required aria-required="true" data-error-required="Por favor indica el peso aproximado.">
+                            <div id="petWeightInput-error" class="field-error" role="alert"></div>
                         </div>
                     </div>
 
                     <div class="login-form-item">
-                        <label for="petGenderSelect">Sexo</label>
-                        <select id="petGenderSelect" class="input">
+                        <label for="petGenderSelect">Sexo <span class="required-mark" aria-hidden="true">*</span></label>
+                        <select id="petGenderSelect" class="input" required aria-required="true" data-error-required="Por favor selecciona el sexo de la mascota.">
+                            <option value="" disabled selected>Selecciona el sexo</option>
                             <option value="Macho">Macho</option>
                             <option value="Hembra">Hembra</option>
                         </select>
+                        <div id="petGenderSelect-error" class="field-error" role="alert"></div>
                     </div>
 
                     <div class="login-form-item">
-                        <label for="petNotesInput">Observaciones, medicación o alergias</label>
-                        <textarea id="petNotesInput" class="input" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés."></textarea>
+                        <label for="petNotesInput">Observaciones, medicación o alergias <span class="required-mark" aria-hidden="true">*</span></label>
+                        <textarea id="petNotesInput" class="input" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés." required aria-required="true" minlength="5" data-error-required="Por favor indica observaciones, medicación o alergias. Si no hay, escribe «Ninguna»."></textarea>
+                        <div id="petNotesInput-error" class="field-error" role="alert"></div>
                     </div>
                 </div>
 
                 <div class="modal-footer">
                     <button type="button" class="button button-outline" id="btnCancelAddPet">Cancelar</button>
                     <button type="submit" class="button button-primary" id="btnSubmitPet">Guardar Mascota</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="addPaymentModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="addPaymentModalTitle">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3 id="addPaymentModalTitle">Añadir Método de Pago</h3>
+                <button type="button" class="modal-close-btn" id="btnCloseAddPaymentModal" aria-label="Cerrar ventana">&times;</button>
+            </div>
+            <form id="addPaymentForm" novalidate>
+                <div class="modal-body">
+                    <div class="login-form-item">
+                        <label for="payHolderInput">Nombre del titular <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input type="text" id="payHolderInput" class="input" placeholder="Como aparece en la tarjeta" required aria-required="true" minlength="3" data-error-required="Por favor ingresa el nombre del titular.">
+                        <div id="payHolderInput-error" class="field-error" role="alert"></div>
+                    </div>
+
+                    <div class="login-form-item">
+                        <label for="payNumberInput">Número de tarjeta <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input type="text" id="payNumberInput" class="input" inputmode="numeric" autocomplete="cc-number" placeholder="•••• •••• •••• ••••" required aria-required="true" data-validate="card-number" data-error-required="Por favor ingresa el número de la tarjeta." maxlength="23">
+                        <div id="payNumberInput-error" class="field-error" role="alert"></div>
+                    </div>
+
+                    <div class="account-form-grid two-cols">
+                        <div class="login-form-item">
+                            <label for="payBrandSelect">Marca <span class="required-mark" aria-hidden="true">*</span></label>
+                            <select id="payBrandSelect" class="input" required aria-required="true" data-error-required="Por favor selecciona la marca de la tarjeta.">
+                                <option value="" disabled selected>Selecciona</option>
+                                <option value="Visa">Visa</option>
+                                <option value="Mastercard">Mastercard</option>
+                                <option value="American Express">American Express</option>
+                                <option value="Diners">Diners</option>
+                                <option value="Otra">Otra</option>
+                            </select>
+                            <div id="payBrandSelect-error" class="field-error" role="alert"></div>
+                        </div>
+                        <div class="login-form-item">
+                            <label for="payTypeSelect">Tipo <span class="required-mark" aria-hidden="true">*</span></label>
+                            <select id="payTypeSelect" class="input" required aria-required="true" data-error-required="Por favor selecciona el tipo de tarjeta.">
+                                <option value="" disabled selected>Selecciona</option>
+                                <option value="Débito">Débito</option>
+                                <option value="Crédito">Crédito</option>
+                            </select>
+                            <div id="payTypeSelect-error" class="field-error" role="alert"></div>
+                        </div>
+                    </div>
+
+                    <div class="login-form-item">
+                        <label for="payExpiryInput">Caducidad (MM/AAAA) <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input type="text" id="payExpiryInput" class="input" inputmode="numeric" autocomplete="cc-exp" placeholder="08/2028" required aria-required="true" data-validate="card-expiry" data-error-required="Por favor indica la fecha de caducidad." maxlength="7">
+                        <div id="payExpiryInput-error" class="field-error" role="alert"></div>
+                    </div>
+
+                    <div class="login-form-item payment-default-check">
+                        <label class="checkbox-label" for="payDefaultCheck">
+                            <input type="checkbox" id="payDefaultCheck">
+                            Establecer como método de pago predeterminado
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="button button-outline" id="btnCancelAddPayment">Cancelar</button>
+                    <button type="submit" class="button button-primary" id="btnSubmitPayment">Guardar Tarjeta</button>
                 </div>
             </form>
         </div>

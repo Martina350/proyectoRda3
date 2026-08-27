@@ -2,7 +2,8 @@ const PCC_AUTH = {
     STORAGE_KEYS: {
         USER: 'pcc_user',
         SESSION: 'pcc_logged_in',
-        PETS: 'pcc_pets'
+        PETS: 'pcc_pets',
+        PAYMENTS: 'pcc_payments'
     },
 
     DEFAULT_USER: {
@@ -39,12 +40,36 @@ const PCC_AUTH = {
         }
     ],
 
+    DEFAULT_PAYMENTS: [
+        {
+            id: 'pay-1',
+            brand: 'Visa',
+            last4: '4242',
+            expiry: '08/2028',
+            cardType: 'Débito',
+            holder: 'Gabriel Flor',
+            isDefault: true
+        },
+        {
+            id: 'pay-2',
+            brand: 'Mastercard',
+            last4: '8819',
+            expiry: '11/2027',
+            cardType: 'Crédito',
+            holder: 'Gabriel Flor',
+            isDefault: false
+        }
+    ],
+
     init() {
         if (!localStorage.getItem(this.STORAGE_KEYS.USER)) {
             localStorage.setItem(this.STORAGE_KEYS.USER, JSON.stringify(this.DEFAULT_USER));
         }
         if (!localStorage.getItem(this.STORAGE_KEYS.PETS)) {
             localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(this.DEFAULT_PETS));
+        }
+        if (!localStorage.getItem(this.STORAGE_KEYS.PAYMENTS)) {
+            localStorage.setItem(this.STORAGE_KEYS.PAYMENTS, JSON.stringify(this.DEFAULT_PAYMENTS));
         }
         if (localStorage.getItem(this.STORAGE_KEYS.SESSION) === null) {
 
@@ -156,11 +181,86 @@ const PCC_AUTH = {
         return newPet;
     },
 
+    updatePet(id, data) {
+        const pets = this.getPets();
+        const index = pets.findIndex((p) => p.id === id);
+        if (index === -1) return null;
+
+        pets[index] = {
+            ...pets[index],
+            name: data.name.trim(),
+            type: data.type || pets[index].type,
+            breed: data.breed ? data.breed.trim() : pets[index].breed,
+            age: data.age ? data.age.trim() : pets[index].age,
+            weight: data.weight ? data.weight.trim() : pets[index].weight,
+            gender: data.gender || pets[index].gender,
+            notes: data.notes ? data.notes.trim() : pets[index].notes
+        };
+        localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(pets));
+        return pets[index];
+    },
+
+    getPetById(id) {
+        return this.getPets().find((p) => p.id === id) || null;
+    },
+
     deletePet(id) {
         let pets = this.getPets();
         pets = pets.filter(p => p.id !== id);
         localStorage.setItem(this.STORAGE_KEYS.PETS, JSON.stringify(pets));
         return pets;
+    },
+
+    getPayments() {
+        try {
+            const data = localStorage.getItem(this.STORAGE_KEYS.PAYMENTS);
+            return data ? JSON.parse(data) : this.DEFAULT_PAYMENTS;
+        } catch (e) {
+            return this.DEFAULT_PAYMENTS;
+        }
+    },
+
+    addPayment(payment) {
+        const payments = this.getPayments();
+        const makeDefault = Boolean(payment.isDefault) || payments.length === 0;
+        if (makeDefault) {
+            payments.forEach((p) => { p.isDefault = false; });
+        }
+        const newPayment = {
+            id: 'pay-' + Date.now(),
+            brand: payment.brand,
+            last4: String(payment.last4).slice(-4),
+            expiry: payment.expiry,
+            cardType: payment.cardType,
+            holder: payment.holder ? payment.holder.trim() : '',
+            isDefault: makeDefault
+        };
+        payments.push(newPayment);
+        localStorage.setItem(this.STORAGE_KEYS.PAYMENTS, JSON.stringify(payments));
+        return newPayment;
+    },
+
+    setDefaultPayment(id) {
+        const payments = this.getPayments();
+        let found = false;
+        payments.forEach((p) => {
+            p.isDefault = p.id === id;
+            if (p.isDefault) found = true;
+        });
+        if (!found) return null;
+        localStorage.setItem(this.STORAGE_KEYS.PAYMENTS, JSON.stringify(payments));
+        return payments;
+    },
+
+    deletePayment(id) {
+        let payments = this.getPayments();
+        const wasDefault = payments.some((p) => p.id === id && p.isDefault);
+        payments = payments.filter((p) => p.id !== id);
+        if (wasDefault && payments.length > 0) {
+            payments[0].isDefault = true;
+        }
+        localStorage.setItem(this.STORAGE_KEYS.PAYMENTS, JSON.stringify(payments));
+        return payments;
     },
 
     syncNav() {

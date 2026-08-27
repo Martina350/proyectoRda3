@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/toast.js" defer></script>
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/bookings.js" defer></script>
+    <script src="../js/ui.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
+    <script src="../js/perfilCuidador.js" defer></script>
 </head>
+
 <body>
 
     <div id="site-header"></div>
@@ -32,14 +39,16 @@
                         <div class="profile-avatar-circle">
                             <span class="material-symbols-outlined avatar-icon">person</span>
                         </div>
-                        <span class="material-symbols-outlined profile-verified-badge" title="Cuidadora verificada">verified</span>
+                        <span class="material-symbols-outlined profile-verified-badge"
+                            title="Cuidadora verificada">verified</span>
                     </div>
 
                     <div class="profile-header-info">
                         <div class="profile-name-rating-row">
                             <div>
                                 <h1 id="profile-name" class="profile-name-title">Lucía Fernández</h1>
-                                <p class="profile-location"><span class="material-symbols-outlined icon">location_on</span> Madrid, Chamberí</p>
+                                <p class="profile-location"><span
+                                        class="material-symbols-outlined icon">location_on</span> Quito, Cumbayá · Ecuador</p>
                             </div>
                             <div class="profile-rating-badge">
                                 <span class="material-symbols-outlined star-icon">star</span>
@@ -51,6 +60,7 @@
 
                         <ul class="profile-tags-list">
                             <li class="profile-tag-pill">Cuidadora verificada</li>
+                            <li class="profile-tag-pill">Ecuatoriana</li>
                             <li class="profile-tag-pill">Amante de los perros grandes</li>
                             <li class="profile-tag-pill">Espacio sin humo</li>
                         </ul>
@@ -60,35 +70,40 @@
 
             <section aria-labelledby="about-title" class="card-surface card-padding profile-section">
                 <h2 id="about-title" class="profile-section-title mb-md">Sobre mí</h2>
-                <p class="profile-bio-text">¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención constante y personalizada.</p>
-                <p class="profile-bio-text">Me especializo en perros con ansiedad por separación y gatos que necesitan un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo mientras no estás.</p>
+                <p class="profile-bio-text">¡Hola! Soy Lucía, una apasionada de los animales con más de 6 años de
+                    experiencia cuidando mascotas de todo tipo. Mi hogar es un espacio seguro y lleno de amor donde tu
+                    mejor amigo se sentirá como en casa. Trabajo desde casa, lo que me permite brindar atención
+                    constante y personalizada.</p>
+                <p class="profile-bio-text">Me especializo en perros con ansiedad por separación y gatos que necesitan
+                    un poco más de tiempo para confiar. Siempre envío fotos y vídeos diarios para que estés tranquilo
+                    mientras no estás.</p>
             </section>
 
             <section aria-labelledby="environment-title" class="card-surface card-padding profile-section">
                 <div class="profile-section-header">
                     <h2 id="environment-title" class="profile-section-title">Mi Entorno</h2>
-                    <button type="button" class="see-all-link btn-view-gallery" style="background: none; border: none; font-family: inherit; font-size: 0.9rem; cursor: pointer; color: var(--secondary-bright);">Ver todas las fotos (11)</button>
+                    <button type="button" class="see-all-link btn-view-gallery">Ver todas las fotos (11)</button>
                 </div>
                 <div class="environment-grid-placeholder">
-                    <div class="env-placeholder-item env-living">
-
-                        <span class="material-symbols-outlined">deck</span>
-                        <span class="env-label">Salón amplio</span>
-                    </div>
-                    <div class="env-placeholder-item env-terrace">
-
-                        <span class="material-symbols-outlined">nature</span>
-                        <span class="env-label">Terraza</span>
-                    </div>
-                    <div class="env-placeholder-item env-kitchen">
-
-                        <span class="material-symbols-outlined">soup_kitchen</span>
-                        <span class="env-label">Zona limpia</span>
-                    </div>
-                    <div class="env-placeholder-item env-more btn-view-gallery" style="cursor: pointer;" role="button" tabindex="0" aria-label="Ver 8 fotos más del entorno">
-                        <span class="more-count">+8</span>
-                        <span class="env-label">fotos</span>
-                    </div>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/salon_amplio.jpg" alt="Salón amplio con espacio para mascotas" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Salón amplio</figcaption>
+                    </figure>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/terraza.jpg" alt="Terraza segura con vista a la ciudad" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Terraza</figcaption>
+                    </figure>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/zona_limpia.jpg" alt="Zona limpia de alimentación para mascotas" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Zona limpia</figcaption>
+                    </figure>
+                    <button type="button" class="env-placeholder-item env-more btn-view-gallery" aria-label="Ver 8 fotos más del entorno">
+                        <img src="../assets/images/mas.jpg" alt="" class="env-photo-img" width="400" height="400" aria-hidden="true">
+                        <span class="env-more-overlay">
+                            <span class="more-count">+8</span>
+                            <span class="env-label">fotos</span>
+                        </span>
+                    </button>
                 </div>
             </section>
 
@@ -124,7 +139,8 @@
                                 <span class="sr-only">Valoración: 5 estrellas</span>
                             </div>
                         </div>
-                        <p class="review-comment">Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
+                        <p class="review-comment">Lucía es increíble. Cuidó de mi Golden, Max, durante un fin de semana
+                            y no pudo estar en mejores manos. Recibí actualizaciones constantes y Max volvió feliz.</p>
                     </article>
 
                     <article class="review-item">
@@ -145,7 +161,8 @@
                                 <span class="sr-only">Valoración: 4 estrellas</span>
                             </div>
                         </div>
-                        <p class="review-comment">Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos. Repetiré sin duda.</p>
+                        <p class="review-comment">Muy profesional y atenta. Se nota que sabe tratar con gatos tímidos.
+                            Repetiré sin duda.</p>
                     </article>
                 </div>
 
@@ -164,7 +181,8 @@
                     </div>
                 </div>
 
-                <form action="reservaConfirmada.html" method="GET" class="booking-form">
+                <form action="nuevaReserva.html" method="GET" class="booking-form">
+                    <input type="hidden" name="sitter" value="lucia-fernandez">
                     <fieldset class="booking-fieldset">
                         <legend class="sr-only">Configurar reserva</legend>
 
@@ -172,7 +190,8 @@
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="check-in" class="input-label">Entrada</label>
-                                    <input type="date" id="check-in" name="check-in" value="2026-10-12" required class="booking-date-input">
+                                    <input type="date" id="check-in" name="check-in" value="2026-10-12" required
+                                        class="booking-date-input">
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
@@ -180,7 +199,8 @@
                             <div class="booking-input-group">
                                 <div class="input-text-block">
                                     <label for="check-out" class="input-label">Salida</label>
-                                    <input type="date" id="check-out" name="check-out" value="2026-10-15" required class="booking-date-input">
+                                    <input type="date" id="check-out" name="check-out" value="2026-10-15" required
+                                        class="booking-date-input">
                                 </div>
                                 <span class="material-symbols-outlined input-icon">calendar_month</span>
                             </div>
@@ -209,8 +229,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="button button-accent booking-submit-btn">Reservar ahora</button>
-                        <p class="booking-guarantee-note">Revisa y confirma en el siguiente paso</p>
+                        <button type="submit" class="button button-accent booking-submit-btn">Continuar a la reserva</button>
+                        <p class="booking-guarantee-note">Revisa y confirma los detalles en el siguiente paso</p>
                     </fieldset>
                 </form>
             </section>
@@ -281,177 +301,6 @@
 
     <div id="site-mobile-nav"></div>
 
-    <div id="booking-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="modal-booking-title">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="modal-booking-title" class="modal-title">
-                    <span class="material-symbols-outlined">event_available</span>
-                    Revisar y Confirmar Reserva
-                </h3>
-                <button type="button" id="close-modal-btn" class="modal-close-btn" aria-label="Cerrar modal">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="confirmation-summary-list">
-                    <div class="summary-item">
-                        <span>Cuidador:</span>
-                        <strong>Elena Martínez</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Servicio:</span>
-                        <strong>Alojamiento en casa</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Entrada:</span>
-                        <strong id="modal-checkin-val">12 Oct, 2026</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Salida:</span>
-                        <strong id="modal-checkout-val">15 Oct, 2026</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Mascota:</span>
-                        <strong id="modal-pet-val">1 Perro</strong>
-                    </div>
-                    <div class="summary-item summary-total">
-                        <span>Total a pagar:</span>
-                        <strong id="modal-total-val">$80</strong>
-                    </div>
-                </div>
-
-                <div class="modal-policy-note">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">verified_user</span>
-                    <span>Cancelación gratuita disponible hasta 24 horas antes del inicio del servicio.</span>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" id="cancel-booking-btn" class="button button-outline">Cancelar</button>
-                <a href="reservaConfirmada.html" id="confirm-booking-btn" class="button button-hero-accent">Confirmar Reserva</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const checkInInput = document.getElementById('check-in');
-            const checkOutInput = document.getElementById('check-out');
-            const petSelect = document.getElementById('pet-quantity');
-            const bookingForm = document.querySelector('.booking-form');
-            const submitBtn = document.querySelector('.booking-submit-btn');
-
-            const costBreakdown = document.querySelector('.booking-cost-breakdown');
-            const modalOverlay = document.getElementById('booking-modal-overlay');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const cancelBookingBtn = document.getElementById('cancel-booking-btn');
-
-            const pricePerNight = 25;
-            const fee = 5;
-
-            if (window.PCC_AUTH && petSelect) {
-                const userPets = PCC_AUTH.getPets();
-                if (userPets && userPets.length > 0) {
-                    petSelect.innerHTML = userPets.map((p, idx) => `<option value="${idx + 1}">${p.name} (${p.breed || p.type})</option>`).join('') + '<option value="2">2 Mascotas</option>';
-                }
-            }
-
-            function updatePrice() {
-                if (!checkInInput || !checkOutInput || !petSelect) return;
-
-                const d1 = new Date(checkInInput.value);
-                const d2 = new Date(checkOutInput.value);
-
-                if (isNaN(d1.getTime()) || isNaN(d2.getTime())) return;
-
-                const timeDiff = d2.getTime() - d1.getTime();
-                const nights = Math.ceil(timeDiff / (1000 * 3600 * 24));
-                const petsCount = parseInt(petSelect.value, 10) || 1;
-
-                if (nights <= 0) {
-                    costBreakdown.innerHTML = `
-                        <div class="cost-row" style="color: var(--error, #ba1a1a); font-weight: 600;">
-                            <span>La fecha de salida debe ser posterior a la de entrada.</span>
-                        </div>
-                    `;
-                    submitBtn.disabled = true;
-                    submitBtn.style.opacity = '0.5';
-                    submitBtn.style.cursor = 'not-allowed';
-                    return;
-                }
-
-                submitBtn.disabled = false;
-                submitBtn.style.opacity = '1';
-                submitBtn.style.cursor = 'pointer';
-
-                const subtotal = pricePerNight * nights * petsCount;
-                const total = subtotal + fee;
-
-                costBreakdown.innerHTML = `
-                    <div class="cost-row">
-                        <span>$${pricePerNight} x ${nights} noche${nights > 1 ? 's' : ''}${petsCount > 1 ? ' (' + petsCount + ' mascotas)' : ''}: $${subtotal}</span>
-                    </div>
-                    <div class="cost-row">
-                        <span>Gastos de gestión: $${fee}</span>
-                    </div>
-                    <div class="cost-row cost-total">
-                        <span>Total: $${total}</span>
-                    </div>
-                `;
-
-                const modalIn = document.getElementById('modal-checkin-val');
-                const modalOut = document.getElementById('modal-checkout-val');
-                const modalPet = document.getElementById('modal-pet-val');
-                const modalTot = document.getElementById('modal-total-val');
-
-                if (modalIn) modalIn.textContent = checkInInput.value;
-                if (modalOut) modalOut.textContent = checkOutInput.value;
-                if (modalPet && petSelect.options[petSelect.selectedIndex]) {
-                    modalPet.textContent = petSelect.options[petSelect.selectedIndex].text;
-                }
-                if (modalTot) modalTot.textContent = '$' + total;
-            }
-
-            if (checkInInput && checkOutInput && petSelect) {
-                checkInInput.addEventListener('change', updatePrice);
-                checkOutInput.addEventListener('change', updatePrice);
-                petSelect.addEventListener('change', updatePrice);
-                updatePrice();
-            }
-
-            if (bookingForm) {
-                bookingForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    if (submitBtn.disabled) return;
-                    modalOverlay.classList.add('is-open');
-                    modalOverlay.setAttribute('aria-hidden', 'false');
-                });
-            }
-
-            function closeModal() {
-                modalOverlay.classList.remove('is-open');
-                modalOverlay.setAttribute('aria-hidden', 'true');
-            }
-
-            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-            if (cancelBookingBtn) cancelBookingBtn.addEventListener('click', closeModal);
-            if (modalOverlay) {
-                modalOverlay.addEventListener('click', (e) => {
-                    if (e.target === modalOverlay) closeModal();
-                });
-            }
-
-            const galleryBtns = document.querySelectorAll('.btn-view-gallery');
-            galleryBtns.forEach(btn => {
-                btn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    if (window.showToast) {
-                        window.showToast('Galería con 11 fotos del hogar e instalaciones de Lucía.', 'info');
-                    }
-                });
-            });
-        });
-    </script>
 </body>
+
 </html>
