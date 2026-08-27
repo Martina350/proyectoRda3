@@ -53,7 +53,7 @@
             <!-- Stepper visual de pasos con iconos -->
             <nav aria-label="Pasos de la reserva" class="booking-steps-nav">
                 <ol class="booking-steps-list">
-                    <li class="booking-step-item active" id="step-nav-1">
+                    <li class="booking-step-item is-current" id="step-nav-1" data-step-target="1">
                         <span class="step-badge">
                             <span class="material-symbols-outlined step-icon-inline">person_check</span>
                         </span>
@@ -62,8 +62,8 @@
                             <strong class="step-name">Cuidador</strong>
                         </div>
                     </li>
-                    <li class="booking-step-connector active" aria-hidden="true"></li>
-                    <li class="booking-step-item active" id="step-nav-2">
+                    <li class="booking-step-connector" id="step-conn-1" aria-hidden="true"></li>
+                    <li class="booking-step-item" id="step-nav-2" data-step-target="2">
                         <span class="step-badge">
                             <span class="material-symbols-outlined step-icon-inline">calendar_month</span>
                         </span>
@@ -72,8 +72,8 @@
                             <strong class="step-name">Servicio y fechas</strong>
                         </div>
                     </li>
-                    <li class="booking-step-connector active" aria-hidden="true"></li>
-                    <li class="booking-step-item active" id="step-nav-3">
+                    <li class="booking-step-connector" id="step-conn-2" aria-hidden="true"></li>
+                    <li class="booking-step-item" id="step-nav-3" data-step-target="3">
                         <span class="step-badge">
                             <span class="material-symbols-outlined step-icon-inline">receipt_long</span>
                         </span>
@@ -92,7 +92,7 @@
             <div class="nueva-reserva-main-col">
 
                 <!-- BLOQUE 1: Elegir Cuidador -->
-                <section aria-labelledby="block1-title" class="card-surface card-padding booking-block-section" id="block-sitter-selection">
+                <section aria-labelledby="block1-title" class="card-surface card-padding booking-block-section" id="block-sitter-selection" data-booking-step="1">
                     <div class="block-section-header">
                         <div class="block-number-circle">1</div>
                         <div>
@@ -107,11 +107,23 @@
                             <!-- Inyectado dinámicamente por js/nuevaReserva.js -->
                         </div>
                     </fieldset>
-                    <div id="sitter-error-msg" class="field-error-message" style="display: none;" role="alert"></div>
+                    <div id="sitter-error-msg" class="field-error booking-inline-error" style="display: none;" role="alert"></div>
+
+                    <!-- Navegación por etapas (móvil): se reubica en la etapa activa vía JS -->
+                    <div class="booking-mobile-step-bar" id="booking-mobile-step-bar" hidden>
+                        <button type="button" class="button button-outline booking-mobile-back" id="booking-step-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            <span>Atrás</span>
+                        </button>
+                        <button type="button" class="button button-primary booking-mobile-next" id="booking-step-next">
+                            <span>Continuar</span>
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
                 </section>
 
                 <!-- BLOQUE 2: Servicio, Fechas y Mascota -->
-                <section aria-labelledby="block2-title" class="card-surface card-padding booking-block-section" id="block-service-details">
+                <section aria-labelledby="block2-title" class="card-surface card-padding booking-block-section" id="block-service-details" data-booking-step="2">
                     <div class="block-section-header">
                         <div class="block-number-circle">2</div>
                         <div>
@@ -201,7 +213,7 @@
             </div>
 
             <!-- BLOQUE 3: Resumen y Confirmar (Columna Lateral / Resumen) -->
-            <aside aria-labelledby="block3-title" class="nueva-reserva-sidebar-col">
+            <aside aria-labelledby="block3-title" class="nueva-reserva-sidebar-col" data-booking-step="3">
                 <section class="card-surface card-padding booking-summary-card" id="block-summary-confirm">
                     <div class="summary-card-header">
                         <div class="block-number-circle">3</div>

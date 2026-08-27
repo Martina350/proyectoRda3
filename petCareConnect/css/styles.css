@@ -3866,13 +3866,22 @@ textarea.login-input {
     flex: 1;
     padding-top: 1.5rem;
     padding-bottom: 4rem;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-x: hidden;
 }
 
 .account-header-card {
     display: flex;
     flex-direction: column;
     gap: 1.25rem;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow: hidden;
 }
 
 @media (min-width: 640px) {
@@ -3887,7 +3896,9 @@ textarea.login-input {
 .account-user-profile {
     display: flex;
     align-items: center;
-    gap: 1.25rem;
+    gap: 1rem;
+    width: 100%;
+    min-width: 0;
 }
 
 .account-user-avatar {
@@ -3906,6 +3917,12 @@ textarea.login-input {
     flex-shrink: 0;
 }
 
+.account-user-info {
+    min-width: 0;
+    flex: 1;
+    overflow-wrap: anywhere;
+}
+
 .account-user-info h1 {
     font-size: 1.45rem;
     font-weight: 700;
@@ -3915,6 +3932,7 @@ textarea.login-input {
     align-items: center;
     gap: 0.5rem;
     flex-wrap: wrap;
+    word-break: break-word;
 }
 
 .account-user-info p {
@@ -3925,11 +3943,20 @@ textarea.login-input {
 
 .account-user-meta {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
-    gap: 0.75rem;
+    gap: 0.25rem 0.5rem;
     font-size: 0.8rem;
     color: var(--text-light);
     margin-top: 0.35rem;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.account-meta-sep {
+    color: var(--text-light);
+    flex-shrink: 0;
 }
 
 .account-verified-tag {
@@ -3952,10 +3979,17 @@ textarea.login-input {
     display: flex;
     gap: 0.5rem;
     border-bottom: 1px solid var(--border);
-    margin-bottom: 1.5rem;
+    margin-bottom: 0;
     overflow-x: auto;
     padding-bottom: 0.5rem;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    width: 100%;
+    max-width: 100%;
+}
+
+.account-tabs-nav::-webkit-scrollbar {
+    display: none;
 }
 
 .account-tab-btn {
@@ -3973,6 +4007,7 @@ textarea.login-input {
     cursor: pointer;
     white-space: nowrap;
     transition: var(--transition);
+    flex-shrink: 0;
 }
 
 .account-tab-btn:hover {
@@ -3981,8 +4016,8 @@ textarea.login-input {
 }
 
 .account-tab-btn.active {
-    color: var(--primary);
-    background: var(--primary-alpha);
+    color: var(--on-primary);
+    background: var(--primary);
     font-weight: 700;
 }
 
@@ -3992,6 +4027,8 @@ textarea.login-input {
 
 .account-tab-pane {
     display: none;
+    width: 100%;
+    min-width: 0;
 }
 
 .account-tab-pane.active {
@@ -4023,6 +4060,8 @@ textarea.login-input {
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.25rem;
+    width: 100%;
+    min-width: 0;
 }
 
 @media (min-width: 640px) {
@@ -4042,12 +4081,17 @@ textarea.login-input {
     gap: 1rem;
     position: relative;
     transition: var(--transition);
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
 }
 
 .pet-card-top {
     display: flex;
     align-items: center;
     gap: 1rem;
+    min-width: 0;
 }
 
 .pet-avatar-icon {
@@ -4063,11 +4107,16 @@ textarea.login-input {
     flex-shrink: 0;
 }
 
+.pet-card-title {
+    min-width: 0;
+}
+
 .pet-card-title h3 {
     font-size: 1.15rem;
     font-weight: 700;
     color: var(--primary);
     margin: 0;
+    word-break: break-word;
 }
 
 .pet-card-title p {
@@ -4090,6 +4139,7 @@ textarea.login-input {
     font-size: 0.8rem;
     color: var(--text-main);
     line-height: 1.4;
+    overflow-wrap: anywhere;
 }
 
 .pet-card-actions {
@@ -4100,6 +4150,7 @@ textarea.login-input {
     margin-top: auto;
     padding-top: 0.5rem;
     border-top: 1px solid var(--surface-low);
+    flex-wrap: wrap;
 }
 
 .pet-btn-edit,
@@ -4138,9 +4189,124 @@ textarea.login-input {
     font-size: 16px;
 }
 
+@media (max-width: 639px) {
+    .account-page-wrapper {
+        padding-top: 1rem;
+        padding-bottom: 1.5rem;
+        gap: 1rem;
+    }
+
+    .account-header-card.card-padding {
+        padding: 1rem 1.1rem;
+    }
+
+    .account-user-avatar {
+        width: 56px;
+        height: 56px;
+        font-size: 1.25rem;
+    }
+
+    .account-user-info h1 {
+        font-size: 1.2rem;
+        line-height: 1.25;
+    }
+
+    .account-user-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.15rem;
+        font-size: 0.78rem;
+        line-height: 1.35;
+    }
+
+    .account-meta-sep {
+        display: none;
+    }
+
+    .account-tabs-nav {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 0.5rem;
+        overflow: visible;
+        padding-bottom: 0;
+        border-bottom: none;
+    }
+
+    .account-tab-btn {
+        justify-content: center;
+        white-space: normal;
+        text-align: center;
+        padding: 0.7rem 0.55rem;
+        font-size: 0.78rem;
+        line-height: 1.2;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-lg);
+        min-height: 2.75rem;
+    }
+
+    .account-tab-btn .material-symbols-outlined {
+        font-size: 1.05rem;
+        flex-shrink: 0;
+    }
+
+    .account-tab-btn.active {
+        color: var(--on-primary);
+        background: var(--primary);
+        border-color: var(--primary);
+    }
+
+    .pets-section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.85rem;
+        margin-bottom: 1rem;
+    }
+
+    .pets-section-header .button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .pets-section-header h2 {
+        font-size: 1.15rem;
+    }
+
+    .pets-section-header p {
+        font-size: 0.85rem;
+    }
+
+    .pet-card {
+        padding: 1.1rem;
+    }
+
+    .account-form-actions {
+        justify-content: stretch;
+    }
+
+    .account-form-actions .button {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .payment-card-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .account-card-box.card-padding {
+        padding: 1.15rem;
+    }
+}
+
 @media (min-width: 640px) {
     .account-card-box {
         padding: 2rem;
+    }
+
+    .account-tab-btn.active {
+        color: var(--on-primary);
+        background: var(--primary);
     }
 }
 
@@ -4357,10 +4523,21 @@ textarea.login-input {
     transition: var(--transition);
 }
 
-.booking-step-item.active .step-badge {
+.booking-step-item.active .step-badge,
+.booking-step-item.is-current .step-badge,
+.booking-step-item.is-complete .step-badge {
     background: var(--primary);
     color: var(--on-primary);
     box-shadow: 0 0 0 3px var(--primary-alpha-10);
+}
+
+.booking-step-item.is-complete .step-badge {
+    background: var(--success);
+    box-shadow: none;
+}
+
+.booking-step-item.is-clickable {
+    cursor: pointer;
 }
 
 .step-text {
@@ -4390,9 +4567,24 @@ textarea.login-input {
     transition: var(--transition);
 }
 
-.booking-step-connector.active {
+.booking-step-connector.active,
+.booking-step-connector.is-complete {
     background: var(--primary);
     opacity: 0.5;
+}
+
+@media (min-width: 768px) {
+    /* Desktop: stepper siempre completo (flujo en una sola vista) */
+    .booking-step-item .step-badge {
+        background: var(--primary);
+        color: var(--on-primary);
+        box-shadow: 0 0 0 3px var(--primary-alpha-10);
+    }
+
+    .booking-step-connector {
+        background: var(--primary);
+        opacity: 0.5;
+    }
 }
 
 @media (max-width: 767px) {
@@ -4403,6 +4595,97 @@ textarea.login-input {
     .booking-steps-nav {
         padding: 0.75rem 1rem;
     }
+
+    .booking-steps-list {
+        justify-content: center;
+        gap: 0.35rem;
+    }
+
+    .booking-step-connector {
+        max-width: 2.5rem;
+        margin: 0 0.15rem;
+    }
+
+    /* --- Wizard móvil por etapas --- */
+    .nueva-reserva-page-container {
+        overflow-x: hidden;
+    }
+
+    .nueva-reserva-layout.is-mobile-wizard {
+        padding-bottom: 0;
+    }
+
+    .nueva-reserva-layout.is-mobile-wizard .nueva-reserva-main-col {
+        gap: 0;
+    }
+
+    .nueva-reserva-layout.is-mobile-wizard [data-booking-step]:not(.is-step-active) {
+        display: none !important;
+    }
+
+    .nueva-reserva-layout.is-mobile-wizard .nueva-reserva-sidebar-col.is-step-active {
+        display: block;
+        width: 100%;
+    }
+
+    .booking-mobile-step-bar {
+        display: flex;
+        align-items: center;
+        justify-content: stretch;
+        gap: 0.65rem;
+        width: 100%;
+        max-width: 100%;
+        margin: 1.25rem 0 0;
+        padding: 1rem 0 0;
+        box-sizing: border-box;
+        background: transparent;
+        border-top: 1px solid var(--border);
+        box-shadow: none;
+        position: static;
+    }
+
+    .booking-mobile-step-bar[hidden] {
+        display: none !important;
+    }
+
+    .booking-mobile-step-bar .button {
+        flex: 1;
+        min-height: 48px;
+        gap: 0.35rem;
+    }
+
+    .booking-mobile-step-bar .booking-mobile-back {
+        flex: 0 0 auto;
+        min-width: 7.5rem;
+    }
+
+    .booking-mobile-step-bar.is-first-step .booking-mobile-back {
+        display: none;
+    }
+
+    .booking-mobile-step-bar.is-last-step .booking-mobile-next {
+        display: none;
+    }
+
+    .booking-mobile-step-bar.is-last-step .booking-mobile-back {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .block-section-header {
+        margin-bottom: 1rem;
+        padding-bottom: 0.75rem;
+    }
+
+    .block-section-desc {
+        font-size: 0.85rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .booking-mobile-step-bar {
+        display: none !important;
+    }
 }
 
 /* Layout en Dos Columnas */
@@ -4411,6 +4694,21 @@ textarea.login-input {
     grid-template-columns: 1fr;
     gap: 1.75rem;
     align-items: start;
+    width: 100%;
+}
+
+.nueva-reserva-layout > * {
+    min-width: 0;
+    max-width: 100%;
+}
+
+@media (max-width: 767px) {
+    .nueva-reserva-main-col,
+    .booking-block-section {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+    }
 }
 
 @media (min-width: 1024px) {
@@ -4480,6 +4778,9 @@ textarea.login-input {
     border: none;
     padding: 0;
     margin: 0;
+    min-width: 0;
+    min-inline-size: 0;
+    width: 100%;
 }
 
 .sitters-cards-grid {
@@ -4573,7 +4874,13 @@ textarea.login-input {
 
 .sitter-card-content-col {
     flex: 1;
-    min-width: 220px;
+    min-width: 0;
+}
+
+@media (min-width: 768px) {
+    .sitter-card-content-col {
+        min-width: 220px;
+    }
 }
 
 .sitter-card-header-line {
@@ -4701,6 +5008,162 @@ textarea.login-input {
 
 .sitter-radio-input:checked+.sitter-radio-card .sitter-radio-select-indicator .checkmark {
     font-variation-settings: 'FILL' 1;
+}
+
+/* Lista horizontal compacta de cuidadores — SOLO MÓVIL */
+@media (max-width: 767px) {
+    #block-sitter-selection.card-padding {
+        padding: 1rem;
+    }
+
+    .sitter-selection-fieldset {
+        min-width: 0;
+        min-inline-size: 0;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .sitters-cards-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        width: 100%;
+    }
+
+    .sitter-radio-card-wrapper {
+        width: 100%;
+    }
+
+    .sitter-radio-card {
+        display: block;
+        width: 100%;
+        padding: 0.75rem 0.85rem;
+        border-width: 1.5px;
+        box-sizing: border-box;
+    }
+
+    .sitter-radio-card:hover {
+        transform: none;
+        box-shadow: none;
+    }
+
+    .sitter-card-body {
+        display: grid;
+        grid-template-columns: 44px minmax(0, 1fr) auto;
+        align-items: center;
+        column-gap: 0.75rem;
+        width: 100%;
+        min-width: 0;
+        flex-wrap: nowrap;
+    }
+
+    .sitter-card-avatar-box {
+        width: 44px;
+        height: 44px;
+        min-width: 44px;
+    }
+
+    .sitter-card-avatar {
+        font-size: 0.85rem;
+    }
+
+    .verified-badge-icon {
+        font-size: 14px;
+    }
+
+    .sitter-card-content-col {
+        min-width: 0;
+        overflow: hidden;
+    }
+
+    .sitter-card-header-line {
+        gap: 0.4rem;
+        margin-bottom: 0.15rem;
+        justify-content: flex-start;
+    }
+
+    .sitter-card-name {
+        font-size: 0.92rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sitter-rating-pill {
+        flex-shrink: 0;
+        padding: 0.1rem 0.35rem;
+        font-size: 0.7rem;
+    }
+
+    .sitter-rating-pill .rating-reviews {
+        display: none;
+    }
+
+    .sitter-card-specialty,
+    .sitter-card-bio-snippet {
+        display: none !important;
+    }
+
+    .sitter-card-location {
+        margin: 0;
+        font-size: 0.72rem;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    .sitter-card-location .loc-icon {
+        font-size: 13px;
+    }
+
+    .sitter-card-rate-col {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 0.4rem;
+        min-width: 0;
+    }
+
+    .sitter-rate-badge {
+        text-align: right;
+        line-height: 1.1;
+    }
+
+    .rate-prefix {
+        display: none !important;
+    }
+
+    .rate-val {
+        font-size: 0.95rem;
+    }
+
+    .rate-unit {
+        display: block;
+        font-size: 0.65rem;
+    }
+
+    .sitter-radio-select-indicator {
+        width: 26px;
+        height: 26px;
+        min-height: 26px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--surface-high);
+    }
+
+    .sitter-radio-select-indicator .select-label-text {
+        display: none !important;
+    }
+
+    .sitter-radio-select-indicator .checkmark {
+        font-size: 16px;
+    }
+
+    .sitter-radio-input:checked+.sitter-radio-card .sitter-radio-select-indicator {
+        background: var(--primary);
+        color: var(--on-primary);
+    }
 }
 
 /* ==========================================================================

@@ -114,10 +114,173 @@ document.addEventListener('DOMContentLoaded', () => {
     // 7. Manejo de envío del formulario
     form.addEventListener('submit', handleFormSubmit);
 
+    // 8. Wizard móvil por etapas (no altera el flujo desktop)
+    initMobileBookingWizard();
+
     // ==========================================
     // FUNCIONES AUXILIARES Y LÓGICA DE NEGOCIO
     // ==========================================
 
+    function initMobileBookingWizard() {
+        const mq = window.matchMedia('(max-width: 767px)');
+        const stepBar = document.getElementById('booking-mobile-step-bar');
+        const btnBack = document.getElementById('booking-step-back');
+        const btnNext = document.getElementById('booking-step-next');
+        const stepPanels = Array.from(document.querySelectorAll('[data-booking-step]'));
+        const stepNavItems = Array.from(document.querySelectorAll('.booking-step-item[data-step-target]'));
+        const connectors = [
+            document.getElementById('step-conn-1'),
+            document.getElementById('step-conn-2')
+        ];
+
+        let mobileStep = 1;
+        const maxStep = 3;
+
+        function isMobile() {
+            return mq.matches;
+        }
+
+        function setMobileStep(step, options = {}) {
+            const nextStep = Math.min(maxStep, Math.max(1, step));
+            mobileStep = nextStep;
+
+            if (!isMobile()) {
+                form.classList.remove('is-mobile-wizard');
+                if (stepBar) stepBar.hidden = true;
+                stepPanels.forEach((panel) => panel.classList.add('is-step-active'));
+                stepNavItems.forEach((item) => {
+                    item.classList.remove('is-current', 'is-complete', 'is-clickable');
+                });
+                connectors.forEach((c) => c && c.classList.remove('is-complete'));
+                return;
+            }
+
+            form.classList.add('is-mobile-wizard');
+
+            stepPanels.forEach((panel) => {
+                const panelStep = Number(panel.getAttribute('data-booking-step'));
+                panel.classList.toggle('is-step-active', panelStep === mobileStep);
+            });
+
+            if (stepBar) {
+                const activePanel = stepPanels.find(
+                    (panel) => Number(panel.getAttribute('data-booking-step')) === mobileStep
+                );
+                const hostCard = activePanel
+                    ? (activePanel.querySelector('.booking-summary-card') || activePanel)
+                    : null;
+                if (hostCard && stepBar.parentElement !== hostCard) {
+                    hostCard.appendChild(stepBar);
+                }
+                stepBar.hidden = false;
+                stepBar.classList.toggle('is-first-step', mobileStep === 1);
+                stepBar.classList.toggle('is-last-step', mobileStep === 3);
+            }
+
+            stepNavItems.forEach((item) => {
+                const itemStep = Number(item.getAttribute('data-step-target'));
+                item.classList.toggle('is-current', itemStep === mobileStep);
+                item.classList.toggle('is-complete', itemStep < mobileStep);
+                item.classList.toggle('is-clickable', itemStep < mobileStep);
+                if (itemStep === mobileStep) {
+                    item.setAttribute('aria-current', 'step');
+                } else {
+                    item.removeAttribute('aria-current');
+                }
+            });
+
+            if (connectors[0]) connectors[0].classList.toggle('is-complete', mobileStep > 1);
+            if (connectors[1]) connectors[1].classList.toggle('is-complete', mobileStep > 2);
+
+            if (!options.skipScroll) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function validateStep(step) {
+            hideSubmitError();
+            if (step === 1) {
+                const checkedRadio = sittersGrid.querySelector('input[name="sitterId"]:checked');
+                if (!checkedRadio) {
+                    if (window.showToast) {
+                        window.showToast('Selecciona un cuidador para continuar.', 'error');
+                    }
+                    const err = document.getElementById('sitter-error-msg');
+                    if (err) {
+                        err.style.display = 'flex';
+                        err.classList.add('is-visible');
+                        err.innerHTML = '<span class="material-symbols-outlined" aria-hidden="true">error</span><span class="field-error-text">Debes elegir un cuidador.</span>';
+                    }
+                    return false;
+                }
+                const err = document.getElementById('sitter-error-msg');
+                if (err) {
+                    err.style.display = 'none';
+                    err.classList.remove('is-visible');
+                    err.innerHTML = '';
+                }
+                return true;
+            }
+
+            if (step === 2) {
+                if (!serviceSelect.value) {
+                    if (window.showToast) window.showToast('Selecciona el tipo de servicio.', 'error');
+                    serviceSelect.focus();
+                    return false;
+                }
+                if (!validateDates()) {
+                    if (window.showToast) {
+                        window.showToast('Revisa las fechas: la salida debe ser igual o posterior a la entrada.', 'error');
+                    }
+                    startDateInput.focus();
+                    return false;
+                }
+                if (!petSelect.value) {
+                    if (window.showToast) window.showToast('Selecciona la mascota para el servicio.', 'error');
+                    petSelect.focus();
+                    return false;
+                }
+                return true;
+            }
+
+            return true;
+        }
+
+        if (btnNext) {
+            btnNext.addEventListener('click', () => {
+                if (!isMobile()) return;
+                if (!validateStep(mobileStep)) return;
+                setMobileStep(mobileStep + 1);
+                updateLiveSummary();
+            });
+        }
+
+        if (btnBack) {
+            btnBack.addEventListener('click', () => {
+                if (!isMobile()) return;
+                setMobileStep(mobileStep - 1);
+            });
+        }
+
+        stepNavItems.forEach((item) => {
+            item.addEventListener('click', () => {
+                if (!isMobile()) return;
+                const target = Number(item.getAttribute('data-step-target'));
+                if (target < mobileStep) {
+                    setMobileStep(target);
+                }
+            });
+        });
+
+        const onViewportChange = () => setMobileStep(isMobile() ? mobileStep : 1, { skipScroll: true });
+        if (typeof mq.addEventListener === 'function') {
+            mq.addEventListener('change', onViewportChange);
+        } else if (typeof mq.addListener === 'function') {
+            mq.addListener(onViewportChange);
+        }
+
+        setMobileStep(1, { skipScroll: true });
+    }
     function renderSitterCards(sittersList, selectedId) {
         sittersGrid.innerHTML = '';
 
@@ -155,7 +318,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="sitter-card-specialty">${sitter.title}</p>
                             <p class="sitter-card-location">
                                 <span class="material-symbols-outlined loc-icon">location_on</span>
-                                <span>${sitter.location} · ${sitter.country || 'Ecuador'}</span>
+                                <span>${sitter.location}</span>
                             </p>
                             <p class="sitter-card-bio-snippet">${sitter.bio}</p>
                         </div>
