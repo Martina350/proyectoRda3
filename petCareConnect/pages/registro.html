@@ -14,6 +14,7 @@
     <script src="../js/toast.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/forms.js" defer></script>
+    <script src="../js/registro.js" defer></script>
 </head>
 <body class="login-page-body">
 
@@ -108,7 +109,7 @@
                                         aria-required="true"
                                         aria-invalid="false"
                                         aria-describedby="pass-error">
-                                    <button type="button" class="toggle-password-btn" aria-controls="reg-password" aria-label="Mostrar u ocultar contraseña" onclick="togglePassword()">
+                                    <button type="button" class="toggle-password-btn" aria-controls="reg-password" aria-label="Mostrar u ocultar contraseña">
                                         <span class="material-symbols-outlined" id="passwordIcon">visibility</span>
                                     </button>
                                 </div>
@@ -128,7 +129,7 @@
                             <div class="auth-terms-item">
                                 <input type="checkbox" id="reg-terms" name="terms" required aria-required="true" aria-describedby="terms-error">
                                 <label for="reg-terms">
-                                    Acepto los <a href="#" onclick="event.preventDefault(); window.showToast('Términos de servicio de Pet CareConnect aplicados', 'info');">Términos de Servicio</a> y la <a href="#" onclick="event.preventDefault(); window.showToast('Política de privacidad conforme al RGPD', 'info');">Política de Privacidad</a>. <span class="required-mark" aria-hidden="true">*</span>
+                                    Acepto los <a href="#" data-toast-info="Términos de servicio de Pet CareConnect aplicados">Términos de Servicio</a> y la <a href="#" data-toast-info="Política de privacidad conforme al RGPD">Política de Privacidad</a>. <span class="required-mark" aria-hidden="true">*</span>
                                 </label>
                             </div>
                             <div id="terms-error" class="field-error" role="alert" style="margin-left: 1.5rem;"></div>
@@ -154,111 +155,5 @@
         <p>© 2026 Pet CareConnect Inc. Todos los derechos reservados.</p>
     </footer>
 
-    <script>
-        function togglePassword() {
-            const passInput = document.getElementById('reg-password');
-            const passIcon = document.getElementById('passwordIcon');
-            if (!passInput) return;
-            if (passInput.type === 'password') {
-                passInput.type = 'text';
-                if (passIcon) passIcon.innerText = 'visibility_off';
-            } else {
-                passInput.type = 'password';
-                if (passIcon) passIcon.innerText = 'visibility';
-            }
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const form = document.getElementById('registerForm');
-            const nameInput = document.getElementById('reg-name');
-            const emailInput = document.getElementById('reg-email');
-            const phoneInput = document.getElementById('reg-phone');
-            const passInput = document.getElementById('reg-password');
-
-            const strengthContainer = document.getElementById('strengthContainer');
-            const strengthText = document.getElementById('strengthText');
-            const submitBtn = document.getElementById('regSubmitBtn');
-
-            function evaluateStrength(pass) {
-                if (!pass || pass.length === 0) {
-                    if (strengthContainer) strengthContainer.className = 'password-strength-container';
-                    if (strengthText) {
-                        strengthText.textContent = 'Seguridad: pendiente';
-                        strengthText.style.color = 'var(--text-muted)';
-                    }
-                    return 0;
-                }
-
-                let score = 0;
-                if (pass.length >= 8) score++;
-                if (/[A-Z]/.test(pass) && /[0-9]/.test(pass)) score++;
-                if (pass.length >= 10 && /[^A-Za-z0-9]/.test(pass)) score++;
-
-                if (strengthContainer) {
-                    strengthContainer.className = 'password-strength-container';
-                    if (score === 0 || (score === 1 && pass.length < 8)) {
-                        strengthContainer.classList.add('strength-level-weak');
-                        if (strengthText) {
-                            strengthText.textContent = 'Seguridad: Débil (mínimo 8 caracteres)';
-                            strengthText.style.color = 'var(--error)';
-                        }
-                    } else if (score === 1 || score === 2) {
-                        strengthContainer.classList.add('strength-level-medium');
-                        if (strengthText) {
-                            strengthText.textContent = 'Seguridad: Media (buen nivel)';
-                            strengthText.style.color = 'var(--secondary-bright)';
-                        }
-                    } else {
-                        strengthContainer.classList.add('strength-level-strong');
-                        if (strengthText) {
-                            strengthText.textContent = 'Seguridad: Fuerte (excelente)';
-                            strengthText.style.color = 'var(--success)';
-                        }
-                    }
-                }
-
-                return score;
-            }
-
-            if (passInput) {
-                passInput.addEventListener('input', () => {
-                    evaluateStrength(passInput.value);
-                });
-            }
-
-            if (window.PCC_FORMS) {
-                PCC_FORMS.setupForm(form, (e) => {
-                    if (submitBtn) {
-                        submitBtn.classList.add('is-loading');
-                        submitBtn.disabled = true;
-                        submitBtn.innerHTML = `
-                            <span class="btn-spinner"></span>
-                            <span>Creando tu cuenta...</span>
-                        `;
-                    }
-
-                    setTimeout(() => {
-                        const user = PCC_AUTH.register(
-                            PCC_FORMS.normalizeName(nameInput.value),
-                            PCC_FORMS.normalizeEmail(emailInput.value),
-                            PCC_FORMS.normalizePhone(phoneInput ? phoneInput.value : ''),
-                            passInput.value
-                        );
-
-                        if (window.showToast) {
-                            window.showToast(`¡Cuenta creada con éxito! Bienvenido, ${user.name}`, 'success');
-                        }
-
-                        const params = new URLSearchParams(window.location.search);
-                        const nextUrl = params.get('next') || 'miCuenta.html';
-
-                        setTimeout(() => {
-                            window.location.href = nextUrl;
-                        }, 500);
-                    }, 600);
-                });
-            }
-        });
-    </script>
 </body>
 </html>

@@ -89,6 +89,19 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function avatarClassForService(b) {
+        const id = (b.serviceId || '').toLowerCase();
+        const name = (b.serviceName || '').toLowerCase();
+        if (id === 'paseos' || name.includes('paseo')) return 'avatar-walker';
+        if (id === 'peluqueria' || name.includes('peluquer')) return 'avatar-grooming';
+        if (id === 'alojamiento' || name.includes('aloj') || name.includes('cuidado en casa') || name.includes('estancia')) return 'avatar-sitter';
+        if (name.includes('veterin') || name.includes('consulta')) return 'avatar-vet';
+        if (name.includes('entren')) return 'avatar-trainer';
+        if (id === 'guarderia' || name.includes('guarder')) return 'avatar-sitter';
+        if (id === 'cuidado_dia' || name.includes('cuidado de día') || name.includes('cuidado de dia')) return 'avatar-sitter';
+        return 'avatar-sitter';
+    }
+
     function renderActiveCard(b) {
         let statusBadgeClass = 'badge-en-progreso';
         let statusText = b.statusLabel || 'Activa';
@@ -101,16 +114,16 @@ document.addEventListener('DOMContentLoaded', () => {
             statusText = 'Programada';
         }
 
-        const avatarText = b.sitterAvatar || (b.sitterName ? b.sitterName.substring(0, 2).toUpperCase() : 'CU');
         const petLabel = b.petName ? `"${b.petName}"` : 'Mascota';
         const petTypeStr = b.petType ? ` (${b.petType})` : '';
         const totalAmount = Number(b.total || 0).toFixed(2);
+        const avatarClass = avatarClassForService(b);
 
         return `
             <article class="card-surface booking-card card-hover-effect" data-booking-id="${b.id || b.code}">
                 <div class="card-top-row">
                     <div class="card-provider-info">
-                        <div class="avatar-circle avatar-walker">${avatarText}</div>
+                        <div class="avatar-circle ${avatarClass}" aria-hidden="true"></div>
                         <div class="provider-text">
                             <h3 class="card-service-title">${b.serviceName || 'Servicio de Cuidado'}</h3>
                             <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
@@ -140,10 +153,10 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPastCard(b) {
-        const avatarText = b.sitterAvatar || (b.sitterName ? b.sitterName.substring(0, 2).toUpperCase() : 'CU');
         const ratingStr = b.rating ? `${b.rating.toFixed(1)} estrellas` : '5.0 estrellas';
         const totalAmount = Number(b.total || 0).toFixed(2);
         const petLabel = b.petName ? `"${b.petName}"` : 'Mascota';
+        const avatarClass = avatarClassForService(b);
 
         const sitterParam = encodeURIComponent(b.sitterId || b.sitterName || '');
         const serviceParam = encodeURIComponent(b.serviceId || 'alojamiento');
@@ -152,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <article class="card-surface booking-card booking-card-past card-hover-effect" data-booking-id="${b.id || b.code}">
                 <div class="card-top-row">
                     <div class="card-provider-info">
-                        <div class="avatar-circle avatar-sitter grayscale">${avatarText}</div>
+                        <div class="avatar-circle ${avatarClass} grayscale" aria-hidden="true"></div>
                         <div class="provider-text">
                             <h3 class="card-service-title text-muted">${b.serviceName || 'Cuidado en Casa'}</h3>
                             <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
@@ -180,14 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderCancelledCard(b) {
-        const avatarText = b.sitterAvatar || (b.sitterName ? b.sitterName.substring(0, 2).toUpperCase() : 'CU');
         const totalAmount = Number(b.total || 0).toFixed(2);
+        const avatarClass = avatarClassForService(b);
 
         return `
             <article class="card-surface booking-card booking-card-cancelled" data-booking-id="${b.id || b.code}">
                 <div class="card-top-row">
                     <div class="card-provider-info">
-                        <div class="avatar-circle avatar-trainer grayscale">${avatarText}</div>
+                        <div class="avatar-circle ${avatarClass} grayscale" aria-hidden="true"></div>
                         <div class="provider-text">
                             <h3 class="card-service-title text-muted">${b.serviceName || 'Servicio'}</h3>
                             <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
