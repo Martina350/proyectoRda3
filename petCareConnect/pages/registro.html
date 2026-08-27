@@ -12,6 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/styles.css">
     <script src="../js/toast.js" defer></script>
+    <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/forms.js" defer></script>
     <script src="../js/registro.js" defer></script>
@@ -129,7 +130,7 @@
                             <div class="auth-terms-item">
                                 <input type="checkbox" id="reg-terms" name="terms" required aria-required="true" aria-describedby="terms-error">
                                 <label for="reg-terms">
-                                    Acepto los <a href="#" data-toast-info="Términos de servicio de Pet CareConnect aplicados">Términos de Servicio</a> y la <a href="#" data-toast-info="Política de privacidad conforme al RGPD">Política de Privacidad</a>. <span class="required-mark" aria-hidden="true">*</span>
+                                    Acepto los <a href="#footer-terms" data-footer-modal="terms">Términos de Servicio</a> y la <a href="#footer-privacy" data-footer-modal="privacy">Política de Privacidad</a>. <span class="required-mark" aria-hidden="true">*</span>
                                 </label>
                             </div>
                             <div id="terms-error" class="field-error" role="alert" style="margin-left: 1.5rem;"></div>

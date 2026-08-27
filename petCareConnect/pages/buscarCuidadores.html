@@ -17,6 +17,7 @@
     <script src="../js/bookings.js" defer></script>
     <script src="../js/forms.js" defer></script>
     <script src="../js/ui.js" defer></script>
+    <script src="../js/buscarCuidadores.js" defer></script>
 </head>
 <body>
 
@@ -29,43 +30,6 @@
                 <h1 id="main-title" class="heading-xl">Encuentra el cuidador perfecto</h1>
                 <p class="text-body text-muted">248 cuidadores disponibles en tu zona para cuidar de tu mascota.</p>
             </div>
-
-            <form class="filter-form">
-                <fieldset class="filter-fieldset">
-                    <legend class="sr-only">Filtros de búsqueda</legend>
-
-                    <div class="filter-pills-row">
-                        <div class="filter-pill">
-                            <span class="material-symbols-outlined filter-icon">calendar_month</span>
-                            <label for="filter-date" class="filter-label">Fechas</label>
-                            <input type="date" id="filter-date" class="form-control filter-input" name="date">
-                        </div>
-
-                        <div class="filter-pill">
-                            <span class="material-symbols-outlined filter-icon">pets</span>
-                            <label for="filter-pet-type" class="filter-label">Tipo de Mascota</label>
-                            <select id="filter-pet-type" class="form-control filter-select" name="pet-type">
-                                <option value="">Seleccionar tipo...</option>
-                                <option value="perro">Perro</option>
-                                <option value="gato">Gato</option>
-                            </select>
-                        </div>
-
-                        <div class="filter-pill">
-                            <span class="material-symbols-outlined filter-icon">payments</span>
-                            <label for="filter-price" class="filter-label">Precio</label>
-                            <select id="filter-price" class="form-control filter-select" name="price">
-                                <option value="">Seleccionar precio...</option>
-                            </select>
-                        </div>
-
-                        <button type="button" class="button-more-filters">
-                            <span class="material-symbols-outlined">tune</span>
-                            <span>Más filtros</span>
-                        </button>
-                    </div>
-                </fieldset>
-            </form>
         </section>
 
         <section aria-labelledby="sitters-title" class="sitters-section">
@@ -88,6 +52,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Elena Martínez</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Quito, La Carolina · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -141,6 +106,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Javier Ruiz</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Guayaquil, Urdesa · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -194,6 +160,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Sofía Castro</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Cuenca, El Centro Histórico · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -248,6 +215,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Lucía Fernández</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Quito, Cumbayá · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -302,6 +270,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Carlos Ruiz</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Guayaquil, Samborondón · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -356,6 +325,7 @@
                         <div class="sitter-header-row">
                             <div>
                                 <h3>Ana Martínez</h3>
+                                <p class="sitter-card-city"><span class="material-symbols-outlined" aria-hidden="true">location_on</span> Cuenca, Yanuncay · Ecuador</p>
                                 <div class="rating-block">
                                     <div class="stars">
                                         <span class="material-symbols-outlined star-icon filled">star</span>
@@ -481,139 +451,5 @@
             </form>
         </div>
     </div>
-
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-
-            const moreFiltersBtn = document.querySelector('.button-more-filters');
-            const filtersModal = document.getElementById('filters-modal-overlay');
-            const closeFiltersBtn = document.getElementById('close-filters-modal');
-            const cancelFiltersBtn = document.getElementById('cancel-filters-btn');
-            const applyFiltersBtn = document.getElementById('apply-filters-btn');
-
-            if (moreFiltersBtn && filtersModal) {
-                moreFiltersBtn.addEventListener('click', () => {
-                    if (window.PCC_UI) {
-                        PCC_UI.openModal(filtersModal, moreFiltersBtn);
-                    } else {
-                        filtersModal.classList.add('is-open');
-                        filtersModal.setAttribute('aria-hidden', 'false');
-                    }
-                });
-
-                const closeFModal = () => {
-                    if (window.PCC_UI) {
-                        PCC_UI.closeModal(filtersModal);
-                    } else {
-                        filtersModal.classList.remove('is-open');
-                        filtersModal.setAttribute('aria-hidden', 'true');
-                    }
-                };
-
-                if (closeFiltersBtn) closeFiltersBtn.addEventListener('click', closeFModal);
-                if (cancelFiltersBtn) cancelFiltersBtn.addEventListener('click', closeFModal);
-
-                if (applyFiltersBtn) {
-                    applyFiltersBtn.addEventListener('click', () => {
-                        closeFModal();
-                        window.showToast('Filtros avanzados aplicados correctamente', 'info');
-                    });
-                }
-            }
-
-            const contactBtns = document.querySelectorAll('.contact-sitter-btn');
-            const contactModal = document.getElementById('contact-modal-overlay');
-            const closeContactBtn = document.getElementById('close-contact-modal');
-            const cancelContactBtn = document.getElementById('cancel-contact-btn');
-            const contactForm = document.getElementById('contact-sitter-form');
-            const contactMsgInput = document.getElementById('contact-msg');
-            const contactNameTitle = document.getElementById('contact-sitter-name-title');
-
-            let currentSitter = 'Elena Martínez';
-
-            contactBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    currentSitter = btn.dataset.sitterName || 'Cuidador';
-                    if (contactNameTitle) contactNameTitle.textContent = currentSitter;
-                    if (contactMsgInput && window.PCC_FORMS) {
-                        PCC_FORMS.clearError(contactMsgInput);
-                    }
-                    if (contactModal) {
-                        if (window.PCC_UI) {
-                            PCC_UI.openModal(contactModal, btn);
-                        } else {
-                            contactModal.classList.add('is-open');
-                            contactModal.setAttribute('aria-hidden', 'false');
-                        }
-                        if (contactMsgInput) contactMsgInput.focus();
-                    }
-                });
-            });
-
-            const closeCModal = () => {
-                if (contactModal) {
-                    if (window.PCC_UI) {
-                        PCC_UI.closeModal(contactModal);
-                    } else {
-                        contactModal.classList.remove('is-open');
-                        contactModal.setAttribute('aria-hidden', 'true');
-                    }
-                }
-            };
-
-            if (closeContactBtn) closeContactBtn.addEventListener('click', closeCModal);
-            if (cancelContactBtn) cancelContactBtn.addEventListener('click', closeCModal);
-
-            if (contactMsgInput) {
-                contactMsgInput.addEventListener('input', () => {
-                    if (contactMsgInput.value.trim().length >= 10 && window.PCC_FORMS) {
-                        PCC_FORMS.clearError(contactMsgInput);
-                    }
-                });
-            }
-
-            if (contactForm) {
-                contactForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const msgVal = (contactMsgInput ? contactMsgInput.value : '').trim();
-                    if (msgVal.length < 10) {
-                        if (window.PCC_FORMS && contactMsgInput) {
-                            PCC_FORMS.showError(contactMsgInput, 'Escribe un mensaje de al menos 10 caracteres para el cuidador.');
-                        }
-                        if (contactMsgInput) contactMsgInput.focus();
-                        if (window.showToast) {
-                            window.showToast('Escribe un mensaje de al menos 10 caracteres para el cuidador.', 'error');
-                        }
-                        return;
-                    }
-
-                    if (window.PCC_FORMS && contactMsgInput) {
-                        PCC_FORMS.clearError(contactMsgInput);
-                    }
-                    closeCModal();
-                    if (window.showToast) {
-                        window.showToast(`Mensaje enviado a ${currentSitter}. Te responderá pronto.`, 'success');
-                    }
-                    contactForm.reset();
-                });
-            }
-
-            const prevBtn = document.querySelector('.pagination-prev-btn');
-            const nextBtn = document.querySelector('.pagination-next-btn');
-
-            if (prevBtn) {
-                prevBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.showToast('Ya estás en la primera página', 'info');
-                });
-            }
-            if (nextBtn) {
-                nextBtn.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    window.showToast('Cargando más cuidadores...', 'info');
-                });
-            }
-        });
-    </script>
 </body>
 </html>

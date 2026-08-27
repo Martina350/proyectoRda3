@@ -17,6 +17,7 @@
     <script src="../js/bookings.js" defer></script>
     <script src="../js/forms.js" defer></script>
     <script src="../js/ui.js" defer></script>
+    <script src="../js/confirmacionModal.js" defer></script>
     <script src="../js/nuevaReserva.js" defer></script>
 </head>
 <body>
@@ -58,27 +59,27 @@
                         </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 1</span>
-                            <strong class="step-name">1. Cuidador</strong>
+                            <strong class="step-name">Cuidador</strong>
                         </div>
                     </li>
-                    <li class="booking-step-connector active"></li>
+                    <li class="booking-step-connector active" aria-hidden="true"></li>
                     <li class="booking-step-item active" id="step-nav-2">
                         <span class="step-badge">
                             <span class="material-symbols-outlined step-icon-inline">calendar_month</span>
                         </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 2</span>
-                            <strong class="step-name">2. Servicio y fechas</strong>
+                            <strong class="step-name">Servicio y fechas</strong>
                         </div>
                     </li>
-                    <li class="booking-step-connector active"></li>
+                    <li class="booking-step-connector active" aria-hidden="true"></li>
                     <li class="booking-step-item active" id="step-nav-3">
                         <span class="step-badge">
                             <span class="material-symbols-outlined step-icon-inline">receipt_long</span>
                         </span>
                         <div class="step-text">
                             <span class="step-number-label">Paso 3</span>
-                            <strong class="step-name">3. Resumen y pago</strong>
+                            <strong class="step-name">Resumen y pago</strong>
                         </div>
                     </li>
                 </ol>
@@ -217,7 +218,7 @@
                             <strong class="summary-sitter-name" id="summary-sitter-name">Elena Martínez</strong>
                             <p class="summary-sitter-loc" id="summary-sitter-loc">
                                 <span class="material-symbols-outlined icon">location_on</span>
-                                <span id="summary-sitter-loc-text">Madrid, Chamberí</span>
+                                <span id="summary-sitter-loc-text">Quito, La Carolina · Ecuador</span>
                             </p>
                         </div>
                     </div>

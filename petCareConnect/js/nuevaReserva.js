@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
                             <p class="sitter-card-specialty">${sitter.title}</p>
                             <p class="sitter-card-location">
                                 <span class="material-symbols-outlined loc-icon">location_on</span>
-                                <span>${sitter.location}</span>
+                                <span>${sitter.location} · ${sitter.country || 'Ecuador'}</span>
                             </p>
                             <p class="sitter-card-bio-snippet">${sitter.bio}</p>
                         </div>
@@ -335,7 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sitter) {
             if (summaryAvatar) summaryAvatar.textContent = sitter.avatar || 'CU';
             if (summarySitterName) summarySitterName.textContent = sitter.name;
-            if (summarySitterLoc) summarySitterLoc.textContent = sitter.location;
+            if (summarySitterLoc) summarySitterLoc.textContent = `${sitter.location} · ${sitter.country || 'Ecuador'}`;
         }
 
         // Actualizar servicio
@@ -447,23 +447,33 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             if (window.showToast) {
-                window.showToast('¡Reserva solicitada con éxito! Redirigiendo...', 'success');
+                window.showToast('¡Reserva solicitada con éxito!', 'success');
             }
 
-            // Deshabilitar botón para evitar doble clic
             const submitBtn = document.getElementById('btn-confirm-booking');
             if (submitBtn) {
                 submitBtn.disabled = true;
                 submitBtn.innerHTML = `
-                    <span class="material-symbols-outlined" style="animation: spin 1s linear infinite;">sync</span>
-                    <span>Procesando...</span>
+                    <span class="material-symbols-outlined">check_circle</span>
+                    <span>Reserva confirmada</span>
                 `;
             }
 
-            // Redirigir a reservaConfirmada.html
-            setTimeout(() => {
+            if (window.PCC_CONFIRMATION) {
+                PCC_CONFIRMATION.show(confirmedBooking, submitBtn);
+            } else {
                 window.location.href = 'reservaConfirmada.html';
-            }, 500);
+            }
+
+            setTimeout(() => {
+                if (submitBtn) {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `
+                        <span class="material-symbols-outlined">check_circle</span>
+                        <span>Confirmar Reserva</span>
+                    `;
+                }
+            }, 1200);
 
         } catch (error) {
             console.error('Error al confirmar la reserva:', error);

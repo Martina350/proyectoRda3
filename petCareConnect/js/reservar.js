@@ -354,10 +354,20 @@ document.addEventListener('DOMContentLoaded', () => {
                 window.showToast(`¡Reserva con ${sitterName} confirmada con éxito!`, 'success');
             }
 
-            const redirectUrl = `reservaConfirmada.html?code=${encodeURIComponent(bookingCode)}&sitter=${encodeURIComponent(sitterName)}&service=${encodeURIComponent(serviceName)}&dates=${encodeURIComponent(datesDisplay)}&pet=${encodeURIComponent(petName)}&total=${encodeURIComponent(totalText)}`;
-            setTimeout(() => {
+            if (window.PCC_CONFIRMATION) {
+                PCC_CONFIRMATION.show(newBooking, submitBtn);
+                if (submitBtn) {
+                    submitBtn.classList.remove('is-loading');
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = `
+                        <span class="btn-text">Confirmar y Solicitar Reserva</span>
+                        <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>
+                    `;
+                }
+            } else {
+                const redirectUrl = `reservaConfirmada.html?code=${encodeURIComponent(bookingCode)}&sitter=${encodeURIComponent(sitterName)}&service=${encodeURIComponent(serviceName)}&dates=${encodeURIComponent(datesDisplay)}&pet=${encodeURIComponent(petName)}&total=${encodeURIComponent(totalText)}`;
                 window.location.href = redirectUrl;
-            }, 600);
-        }, 800);
+            }
+        }, 500);
     });
 });

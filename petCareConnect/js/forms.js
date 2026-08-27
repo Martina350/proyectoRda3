@@ -149,11 +149,17 @@ const PCC_FORMS = {
 
         // 3. Campo vacío obligatorio
         if (isRequired && value.length === 0) {
+            if (input.dataset.errorRequired) {
+                return { valid: false, message: input.dataset.errorRequired };
+            }
             if (type === 'email' || name.toLowerCase().includes('email')) {
                 return { valid: false, message: 'Por favor ingresa tu correo electrónico.' };
             }
             if (type === 'password' || name.toLowerCase().includes('pass')) {
                 return { valid: false, message: 'Por favor ingresa tu contraseña.' };
+            }
+            if (name.toLowerCase().includes('pet') && (name.toLowerCase().includes('name') || name.toLowerCase().includes('nombre'))) {
+                return { valid: false, message: 'Por favor ingresa el nombre de tu mascota.' };
             }
             if (name.toLowerCase().includes('name') || name.toLowerCase().includes('nombre')) {
                 return { valid: false, message: 'Por favor ingresa tu nombre y apellido.' };
@@ -223,6 +229,29 @@ const PCC_FORMS = {
                 if (endDate < startDate) {
                     return { valid: false, message: 'La fecha de salida debe ser igual o posterior a la fecha de entrada.' };
                 }
+            }
+        }
+
+        // 10. Número de tarjeta (solo dígitos, 13–19)
+        if (input.dataset.validate === 'card-number') {
+            const digits = value.replace(/\s+/g, '');
+            if (!/^\d{13,19}$/.test(digits)) {
+                return { valid: false, message: 'Ingresa un número de tarjeta válido (13 a 19 dígitos).' };
+            }
+        }
+
+        // 11. Caducidad MM/AAAA
+        if (input.dataset.validate === 'card-expiry') {
+            const match = value.match(/^(0[1-9]|1[0-2])\/(\d{4})$/);
+            if (!match) {
+                return { valid: false, message: 'Usa el formato MM/AAAA (ejemplo: 08/2028).' };
+            }
+            const month = parseInt(match[1], 10);
+            const year = parseInt(match[2], 10);
+            const now = new Date();
+            const expEnd = new Date(year, month, 0, 23, 59, 59);
+            if (expEnd < now) {
+                return { valid: false, message: 'La tarjeta está caducada. Ingresa una fecha válida.' };
             }
         }
 

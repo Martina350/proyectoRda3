@@ -47,7 +47,7 @@
                             <div>
                                 <h1 id="profile-name" class="profile-name-title">Lucía Fernández</h1>
                                 <p class="profile-location"><span
-                                        class="material-symbols-outlined icon">location_on</span> Madrid, Chamberí</p>
+                                        class="material-symbols-outlined icon">location_on</span> Quito, Cumbayá · Ecuador</p>
                             </div>
                             <div class="profile-rating-badge">
                                 <span class="material-symbols-outlined star-icon">star</span>
@@ -59,6 +59,7 @@
 
                         <ul class="profile-tags-list">
                             <li class="profile-tag-pill">Cuidadora verificada</li>
+                            <li class="profile-tag-pill">Ecuatoriana</li>
                             <li class="profile-tag-pill">Amante de los perros grandes</li>
                             <li class="profile-tag-pill">Espacio sin humo</li>
                         </ul>
@@ -80,31 +81,28 @@
             <section aria-labelledby="environment-title" class="card-surface card-padding profile-section">
                 <div class="profile-section-header">
                     <h2 id="environment-title" class="profile-section-title">Mi Entorno</h2>
-                    <button type="button" class="see-all-link btn-view-gallery"
-                        style="background: none; border: none; font-family: inherit; font-size: 0.9rem; cursor: pointer; color: var(--secondary-bright);">Ver
-                        todas las fotos (11)</button>
+                    <button type="button" class="see-all-link btn-view-gallery">Ver todas las fotos (11)</button>
                 </div>
                 <div class="environment-grid-placeholder">
-                    <div class="env-placeholder-item env-living">
-
-                        <span class="material-symbols-outlined">deck</span>
-                        <span class="env-label">Salón amplio</span>
-                    </div>
-                    <div class="env-placeholder-item env-terrace">
-
-                        <span class="material-symbols-outlined">nature</span>
-                        <span class="env-label">Terraza</span>
-                    </div>
-                    <div class="env-placeholder-item env-kitchen">
-
-                        <span class="material-symbols-outlined">soup_kitchen</span>
-                        <span class="env-label">Zona limpia</span>
-                    </div>
-                    <div class="env-placeholder-item env-more btn-view-gallery" style="cursor: pointer;" role="button"
-                        tabindex="0" aria-label="Ver 8 fotos más del entorno">
-                        <span class="more-count">+8</span>
-                        <span class="env-label">fotos</span>
-                    </div>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/salon_amplio.jpg" alt="Salón amplio con espacio para mascotas" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Salón amplio</figcaption>
+                    </figure>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/terraza.jpg" alt="Terraza segura con vista a la ciudad" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Terraza</figcaption>
+                    </figure>
+                    <figure class="env-placeholder-item env-photo">
+                        <img src="../assets/images/zona_limpia.jpg" alt="Zona limpia de alimentación para mascotas" class="env-photo-img" width="400" height="400">
+                        <figcaption class="env-label">Zona limpia</figcaption>
+                    </figure>
+                    <button type="button" class="env-placeholder-item env-more btn-view-gallery" aria-label="Ver 8 fotos más del entorno">
+                        <img src="../assets/images/mas.jpg" alt="" class="env-photo-img" width="400" height="400" aria-hidden="true">
+                        <span class="env-more-overlay">
+                            <span class="more-count">+8</span>
+                            <span class="env-label">fotos</span>
+                        </span>
+                    </button>
                 </div>
             </section>
 
