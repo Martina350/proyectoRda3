@@ -23,56 +23,76 @@
 
     <main class="container bookings-main">
 
-        <section aria-labelledby="page-title" class="bookings-header-section">
+        <header class="bookings-header-section">
             <div class="bookings-header-content">
                 <div>
                     <h1 id="page-title" class="bookings-title">Mis Reservas</h1>
                     <p class="bookings-subtitle">Gestiona tus citas de cuidado, paseos y estancias para tus mascotas.</p>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <div class="bookings-columns-grid">
+        <nav class="bookings-tabs-nav" role="tablist" aria-label="Filtrar reservas por estado">
+            <button type="button"
+                    class="bookings-tab-btn active"
+                    role="tab"
+                    id="tab-activas"
+                    data-tab="activas"
+                    aria-selected="true"
+                    aria-controls="panel-activas">
+                Activas
+                <span id="badge-count-activas" class="badge-count badge-activas">0</span>
+            </button>
+            <button type="button"
+                    class="bookings-tab-btn"
+                    role="tab"
+                    id="tab-pasadas"
+                    data-tab="pasadas"
+                    aria-selected="false"
+                    aria-controls="panel-pasadas"
+                    tabindex="-1">
+                Pasadas
+                <span id="badge-count-pasadas" class="badge-count badge-pasadas">0</span>
+            </button>
+            <button type="button"
+                    class="bookings-tab-btn"
+                    role="tab"
+                    id="tab-canceladas"
+                    data-tab="canceladas"
+                    aria-selected="false"
+                    aria-controls="panel-canceladas"
+                    tabindex="-1">
+                Canceladas
+                <span id="badge-count-canceladas" class="badge-count badge-canceladas">0</span>
+            </button>
+        </nav>
 
-            <!-- Columna 1: Activas -->
-            <section aria-labelledby="activas-title" class="bookings-column">
-                <div class="column-header">
-                    <h2 id="activas-title" class="column-title">
-                        Activas <span id="badge-count-activas" class="badge-count badge-activas">0</span>
-                    </h2>
-                </div>
-
-                <div id="activas-cards-container" class="column-cards">
-                    <!-- Inyectado dinámicamente por js/misReservas.js -->
-                </div>
+        <div class="bookings-tab-panels">
+            <section id="panel-activas"
+                     class="bookings-tab-panel active"
+                     role="tabpanel"
+                     aria-labelledby="tab-activas"
+                     data-panel="activas">
+                <div id="activas-cards-container" class="bookings-cards-grid"></div>
             </section>
 
-            <!-- Columna 2: Pasadas -->
-            <section aria-labelledby="pasadas-title" class="bookings-column">
-                <div class="column-header">
-                    <h2 id="pasadas-title" class="column-title">
-                        Pasadas <span id="badge-count-pasadas" class="badge-count badge-pasadas">0</span>
-                    </h2>
-                </div>
-
-                <div id="pasadas-cards-container" class="column-cards">
-                    <!-- Inyectado dinámicamente por js/misReservas.js -->
-                </div>
+            <section id="panel-pasadas"
+                     class="bookings-tab-panel"
+                     role="tabpanel"
+                     aria-labelledby="tab-pasadas"
+                     data-panel="pasadas"
+                     hidden>
+                <div id="pasadas-cards-container" class="bookings-cards-grid"></div>
             </section>
 
-            <!-- Columna 3: Canceladas -->
-            <section aria-labelledby="canceladas-title" class="bookings-column">
-                <div class="column-header">
-                    <h2 id="canceladas-title" class="column-title column-title-muted">
-                        Canceladas <span id="badge-count-canceladas" class="badge-count badge-canceladas">0</span>
-                    </h2>
-                </div>
-
-                <div id="canceladas-cards-container" class="column-cards">
-                    <!-- Inyectado dinámicamente por js/misReservas.js -->
-                </div>
+            <section id="panel-canceladas"
+                     class="bookings-tab-panel"
+                     role="tabpanel"
+                     aria-labelledby="tab-canceladas"
+                     data-panel="canceladas"
+                     hidden>
+                <div id="canceladas-cards-container" class="bookings-cards-grid"></div>
             </section>
-
         </div>
 
     </main>

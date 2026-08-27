@@ -1,8 +1,4 @@
-/**
- * Pet CareConnect - Módulo de Gestión de Reservas y Catálogo
- * Maneja el catálogo de cuidadores, catálogo de servicios, persistencia en localStorage,
- * cotización en tiempo real y registro de nuevas reservas.
- */
+
 
 const PCC_BOOKINGS = {
     STORAGE_KEYS: {
@@ -11,7 +7,7 @@ const PCC_BOOKINGS = {
         TOUR_SEEN: 'pcc_booking_tour_seen'
     },
 
-    // Catálogo oficial de cuidadores
+
     SITTERS: [
         {
             id: 'elena-martinez',
@@ -117,7 +113,7 @@ const PCC_BOOKINGS = {
         }
     ],
 
-    // Catálogo oficial de servicios
+
     SERVICES: [
         {
             id: 'alojamiento',
@@ -176,7 +172,7 @@ const PCC_BOOKINGS = {
         }
     ],
 
-    // Semilla inicial de reservas para que el historial no aparezca vacío
+
     DEFAULT_BOOKINGS: [
         {
             id: 'BK-2026-001',
@@ -188,7 +184,8 @@ const PCC_BOOKINGS = {
             sitterAvatar: 'AM',
             petId: 'pet-1',
             petName: 'Bruno',
-            petType: 'Perro (Beagle)',
+            petType: 'Perro',
+            petBreed: 'Beagle',
             startDate: '2026-10-26',
             endDate: '2026-10-26',
             dateFormatted: 'Hoy, 14:00 - 15:00',
@@ -215,7 +212,8 @@ const PCC_BOOKINGS = {
             sitterAvatar: 'LF',
             petId: 'pet-2',
             petName: 'Luna',
-            petType: 'Gato (Persa)',
+            petType: 'Gato',
+            petBreed: 'Persa',
             startDate: '2026-10-27',
             endDate: '2026-10-27',
             dateFormatted: 'Mañana, 10:30 AM',
@@ -242,7 +240,8 @@ const PCC_BOOKINGS = {
             sitterAvatar: 'CR',
             petId: 'pet-1',
             petName: 'Bruno',
-            petType: 'Perro (Beagle)',
+            petType: 'Perro',
+            petBreed: 'Beagle',
             startDate: '2026-10-15',
             endDate: '2026-10-18',
             dateFormatted: '15 Oct - 18 Oct, 2026',
@@ -270,7 +269,8 @@ const PCC_BOOKINGS = {
             sitterAvatar: 'JR',
             petId: 'pet-2',
             petName: 'Luna',
-            petType: 'Gato (Persa)',
+            petType: 'Gato',
+            petBreed: 'Persa',
             startDate: '2026-10-12',
             endDate: '2026-10-12',
             dateFormatted: '12 Oct, 2026',
@@ -297,7 +297,8 @@ const PCC_BOOKINGS = {
             sitterAvatar: 'CR',
             petId: 'pet-1',
             petName: 'Bruno',
-            petType: 'Perro (Beagle)',
+            petType: 'Perro',
+            petBreed: 'Beagle',
             startDate: '2026-10-20',
             endDate: '2026-10-20',
             dateFormatted: '20 Oct, 2026',
@@ -316,9 +317,7 @@ const PCC_BOOKINGS = {
         }
     ],
 
-    /**
-     * Inicializa las semillas de reservas si no existen en localStorage
-     */
+    
     init() {
         if (!localStorage.getItem(this.STORAGE_KEYS.BOOKINGS)) {
             localStorage.setItem(this.STORAGE_KEYS.BOOKINGS, JSON.stringify(this.DEFAULT_BOOKINGS));
@@ -331,16 +330,12 @@ const PCC_BOOKINGS = {
         }
     },
 
-    /**
-     * Obtiene el catálogo de cuidadores
-     */
+    
     getSitters() {
         return this.SITTERS;
     },
 
-    /**
-     * Busca un cuidador por id o coincidencia de nombre
-     */
+    
     getSitterById(idOrSlug) {
         if (!idOrSlug) return null;
         const normalized = String(idOrSlug).toLowerCase().trim().replace(/\s+/g, '-');
@@ -351,25 +346,19 @@ const PCC_BOOKINGS = {
         ) || null;
     },
 
-    /**
-     * Obtiene el catálogo de servicios
-     */
+    
     getServices() {
         return this.SERVICES;
     },
 
-    /**
-     * Busca un servicio por id
-     */
+    
     getServiceById(id) {
         if (!id) return null;
         const normalized = String(id).toLowerCase().trim();
         return this.SERVICES.find(s => s.id === normalized || s.shortName.toLowerCase() === normalized) || null;
     },
 
-    /**
-     * Obtiene todas las reservas almacenadas
-     */
+    
     getBookings() {
         try {
             const data = localStorage.getItem(this.STORAGE_KEYS.BOOKINGS);
@@ -384,17 +373,13 @@ const PCC_BOOKINGS = {
         }
     },
 
-    /**
-     * Obtiene una reserva por su ID o código
-     */
+    
     getBookingById(idOrCode) {
         const bookings = this.getBookings();
         return bookings.find(b => b.id === idOrCode || b.code === idOrCode) || null;
     },
 
-    /**
-     * Obtiene la última reserva confirmada
-     */
+    
     getLast() {
         return this.getLastBooking();
     },
@@ -413,9 +398,44 @@ const PCC_BOOKINGS = {
         }
     },
 
-    /**
-     * Calcula la cotización y desglose de costes en base a los parámetros
-     */
+    
+    formatPetDisplay(fields = {}) {
+        if (typeof fields === 'string') {
+            return fields.trim() || 'Mascota';
+        }
+
+        if (fields.pet && !fields.petName && !fields.name) {
+            return String(fields.pet).trim();
+        }
+
+        const name = String(fields.petName || fields.name || 'Mascota').trim();
+        let type = String(fields.petType || fields.type || '').trim();
+        let breed = String(fields.petBreed || fields.breed || '').trim();
+        const count = Math.max(1, parseInt(fields.petCount || fields.count, 10) || 1);
+
+        const legacyMatch = type.match(/^(.+?)\s*\(([^)]+)\)\s*$/);
+        if (legacyMatch) {
+            type = legacyMatch[1].trim();
+            if (!breed) breed = legacyMatch[2].trim();
+        }
+
+        const details = [];
+        if (type) details.push(type);
+        if (breed && breed.toLowerCase() !== type.toLowerCase()) details.push(breed);
+
+        let label = name;
+        if (details.length) {
+            label += ' · ' + details.join(' · ');
+        }
+
+        if (count > 1) {
+            label = `${count} mascotas — ${name} y ${count - 1} más`;
+        }
+
+        return label;
+    },
+
+    
     quote(params = {}) {
         const {
             sitterId,
@@ -453,7 +473,7 @@ const PCC_BOOKINGS = {
             }
         }
 
-        // Determinar tarifa unitaria por cuidador y servicio
+
         let unitRate = service.basePrice;
         if (sitter) {
             if (service.id === 'alojamiento' && sitter.pricePerNight) {
@@ -466,10 +486,10 @@ const PCC_BOOKINGS = {
         }
 
         const subtotal = unitRate * duration * pets;
-        const serviceFee = 5; // Tarifa fija de gestión y seguro
+        const serviceFee = 5;
         const total = subtotal + serviceFee;
 
-        // Desglose formateado
+
         let breakdownText = `$${unitRate} × ${duration} ${durationUnit}`;
         if (pets > 1) {
             breakdownText += ` × ${pets} mascotas`;
@@ -490,10 +510,7 @@ const PCC_BOOKINGS = {
         };
     },
 
-    /**
-     * Agrega una nueva reserva validando datos y guardando en localStorage
-     * Lanza error explícito si los datos son inválidos o falla el guardado.
-     */
+    
     addBooking(bookingData) {
         if (!bookingData) {
             throw new Error('No se han proporcionado datos para la reserva.');
@@ -507,12 +524,13 @@ const PCC_BOOKINGS = {
             petId,
             petName,
             petType,
+            petBreed,
             petCount = 1,
             notes = '',
             paymentMethod = 'Tarjeta de Crédito / Débito'
         } = bookingData;
 
-        // Validaciones estrictas
+
         if (!sitterId) {
             throw new Error('Debes seleccionar un cuidador para la reserva.');
         }
@@ -554,7 +572,7 @@ const PCC_BOOKINGS = {
             throw new Error('Debes indicar al menos una mascota para el servicio.');
         }
 
-        // Calcular cotización final
+
         const quoteResult = this.quote({
             sitterId: sitter.id,
             serviceId: service.id,
@@ -563,19 +581,20 @@ const PCC_BOOKINGS = {
             petCount
         });
 
-        // Formatear rango de fechas legible
+
         const formatOptions = { day: 'numeric', month: 'short', year: 'numeric' };
         const startStr = dStart.toLocaleDateString('es-ES', formatOptions);
         const endStr = dEnd.toLocaleDateString('es-ES', formatOptions);
         const dateFormatted = startStr === endStr ? startStr : `${startStr} - ${endStr}`;
 
-        // Generar identificadores únicos
+
         const randomNum = Math.floor(100 + Math.random() * 900);
         const uniqueId = `BK-2026-${Date.now().toString().slice(-4)}${randomNum.toString().slice(-2)}`;
         const code = `#PCC-2026-${randomNum}`;
 
         const finalPetName = petName || (petId === 'pet-1' ? 'Bruno' : (petId === 'pet-2' ? 'Luna' : 'Mascota'));
-        const finalPetType = petType || (petId === 'pet-2' ? 'Gato (Persa)' : 'Perro (Beagle)');
+        const finalPetType = petType || (petId === 'pet-2' ? 'Gato' : 'Perro');
+        const finalPetBreed = petBreed || (petId === 'pet-2' ? 'Persa' : (petId === 'pet-1' ? 'Beagle' : ''));
 
         const newBooking = {
             id: uniqueId,
@@ -589,6 +608,7 @@ const PCC_BOOKINGS = {
             petId: petId || 'custom',
             petName: finalPetName,
             petType: finalPetType,
+            petBreed: finalPetBreed,
             petCount: quoteResult.petCount,
             startDate,
             endDate,
@@ -609,7 +629,7 @@ const PCC_BOOKINGS = {
 
         try {
             const bookings = this.getBookings();
-            // Agregar al inicio del arreglo
+
             bookings.unshift(newBooking);
 
             localStorage.setItem(this.STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
@@ -622,9 +642,7 @@ const PCC_BOOKINGS = {
         }
     },
 
-    /**
-     * Cancela una reserva por su ID o código
-     */
+    
     cancelBooking(idOrCode) {
         const bookings = this.getBookings();
         const index = bookings.findIndex(b => b.id === idOrCode || b.code === idOrCode);
@@ -634,7 +652,7 @@ const PCC_BOOKINGS = {
             bookings[index].statusCategory = 'cancelled';
             localStorage.setItem(this.STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
             
-            // Si la última reserva fue la cancelada, actualizarla también
+
             const last = this.getLastBooking();
             if (last && (last.id === idOrCode || last.code === idOrCode)) {
                 localStorage.setItem(this.STORAGE_KEYS.LAST_BOOKING, JSON.stringify(bookings[index]));
@@ -644,36 +662,28 @@ const PCC_BOOKINGS = {
         return null;
     },
 
-    /**
-     * Elimina el registro de la última reserva
-     */
+    
     clearLastBooking() {
         localStorage.removeItem(this.STORAGE_KEYS.LAST_BOOKING);
     },
 
-    /**
-     * Consulta si el usuario ya ha visto el tour de nueva reserva
-     */
+    
     isTourSeen() {
         return localStorage.getItem(this.STORAGE_KEYS.TOUR_SEEN) === 'true';
     },
 
-    /**
-     * Marca el tour de nueva reserva como visto
-     */
+    
     setTourSeen() {
         localStorage.setItem(this.STORAGE_KEYS.TOUR_SEEN, 'true');
     },
 
-    /**
-     * Reinicia el estado del tour para permitir mostrarlo de nuevo
-     */
+    
     resetTour() {
         localStorage.removeItem(this.STORAGE_KEYS.TOUR_SEEN);
     }
 };
 
-// Exposición en el objeto global window
+
 window.PCC_BOOKINGS = PCC_BOOKINGS;
 window.getBookings = () => PCC_BOOKINGS.getBookings();
 window.addBooking = (data) => PCC_BOOKINGS.addBooking(data);
@@ -683,7 +693,7 @@ window.getBookingQuote = (params) => PCC_BOOKINGS.quote(params);
 window.isBookingTourSeen = () => PCC_BOOKINGS.isTourSeen();
 window.setBookingTourSeen = () => PCC_BOOKINGS.setTourSeen();
 
-// Auto-inicializar cuando cargue el script
+
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => PCC_BOOKINGS.init());
 } else {

@@ -16,6 +16,7 @@
     <script src="../js/auth.js" defer></script>
     <script src="../js/forms.js" defer></script>
     <script src="../js/ui.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
     <script src="../js/account.js" defer></script>
 </head>
 <body>
@@ -23,22 +24,33 @@
     <div id="site-header"></div>
 
     <main class="container account-page-wrapper">
+        <div class="account-shell">
 
-        <section aria-labelledby="user-name-title" class="card-surface card-padding account-header-card">
+        <section aria-labelledby="user-name-title" class="card-surface account-header-card">
             <div class="account-user-profile">
-                <div class="account-user-avatar" id="headerUserAvatar">AM</div>
-                <div class="account-user-info">
-                    <h1 id="user-name-title">
-                        <span id="headerUserName">Gabriel Flor</span>
-                    </h1>
-                    <p class="account-user-meta">
-                        <span id="headerUserEmail">gabriel.flor@ejemplo.com</span>
-                        <span class="account-meta-sep" aria-hidden="true">·</span>
-                        <span id="headerUserLocation">Quito, Ecuador</span>
-                        <span class="account-meta-sep" aria-hidden="true">·</span>
-                        <span id="headerUserMember">Miembro desde 2026</span>
-                    </p>
+                <div class="account-user-identity">
+                    <div class="account-user-avatar" id="headerUserAvatar" aria-hidden="true">AM</div>
+                    <div class="account-user-info">
+                        <p class="account-eyebrow">Tu cuenta</p>
+                        <h1 id="user-name-title">
+                            <span id="headerUserName">Gabriel Flor</span>
+                        </h1>
+                    </div>
                 </div>
+                <ul class="account-user-meta" aria-label="Datos de perfil">
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">mail</span>
+                        <span id="headerUserEmail">gabriel.flor@ejemplo.com</span>
+                    </li>
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">location_on</span>
+                        <span id="headerUserLocation">Quito, Ecuador</span>
+                    </li>
+                    <li class="account-meta-item">
+                        <span class="material-symbols-outlined" aria-hidden="true">calendar_month</span>
+                        <span id="headerUserMember">Miembro desde 2026</span>
+                    </li>
+                </ul>
             </div>
         </section>
 
@@ -61,20 +73,21 @@
             </button>
         </nav>
 
+        <div class="account-content">
         <section id="tab-mascotas" class="account-tab-pane active" aria-labelledby="mascotas-heading">
-            <div class="pets-section-header">
-                <div>
-                    <h2 id="mascotas-heading">Mis Mascotas</h2>
-                    <p class="text-small text-muted">Fichas médicas y datos para asignar rápidamente en tus reservas.</p>
+            <div class="account-panel card-surface">
+                <div class="pets-section-header">
+                    <div class="pets-section-copy">
+                        <h2 id="mascotas-heading">Mis Mascotas</h2>
+                        <p class="text-small text-muted">Fichas médicas y datos para asignar rápidamente en tus reservas.</p>
+                    </div>
+                    <button type="button" class="button button-primary" id="btnOpenAddPetModal">
+                        <span class="material-symbols-outlined">add_circle</span>
+                        Añadir Mascota
+                    </button>
                 </div>
-                <button type="button" class="button button-primary" id="btnOpenAddPetModal">
-                    <span class="material-symbols-outlined">add_circle</span>
-                    Añadir Mascota
-                </button>
-            </div>
 
-            <div class="pets-grid" id="petsGridContainer">
-
+                <div class="pets-grid" id="petsGridContainer"></div>
             </div>
         </section>
 
@@ -170,6 +183,9 @@
                 </div>
             </div>
         </section>
+
+        </div>
+        </div>
 
     </main>
 

@@ -16,6 +16,7 @@
     <script src="../js/auth.js" defer></script>
     <script src="../js/ui.js" defer></script>
     <script src="../js/confirmacionModal.js" defer></script>
+    <script src="../js/customSelect.js" defer></script>
     <script src="../js/reservar.js" defer></script>
 </head>
 <body>
@@ -24,7 +25,6 @@
 
     <main class="container booking-flow-wrapper" id="main-content">
 
-        <!-- Banner de Onboarding y Guía Visual para Primerizos -->
         <aside class="onboarding-guide-banner" id="onboardingBanner" aria-labelledby="onboarding-heading">
             <div class="onboarding-content">
                 <div class="onboarding-icon-box" aria-hidden="true">
@@ -40,7 +40,6 @@
             </button>
         </aside>
 
-        <!-- Cabecera de la Vista de Reserva -->
         <header class="booking-page-header">
             <div class="booking-page-title-row">
                 <div>
@@ -52,7 +51,6 @@
                 </div>
             </div>
 
-            <!-- Stepper de Navegación Visual y Accesible -->
             <nav aria-label="Progreso de la reserva" class="booking-stepper-nav">
                 <ol class="booking-stepper-list">
                     <li class="stepper-step is-active" id="step-nav-1" aria-current="step">
@@ -71,13 +69,10 @@
             </nav>
         </header>
 
-        <!-- Formulario Principal con Layout de Dos Columnas -->
         <form id="reservationForm" class="booking-main-grid" novalidate>
-            
-            <!-- Columna Izquierda: Opciones y Datos -->
+
             <div class="booking-form-sections">
 
-                <!-- SECCIÓN 1: Selección de Cuidador -->
                 <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-sitter-title">
                     <div class="section-title-header">
                         <div class="section-title-left">
@@ -91,8 +86,7 @@
                     <fieldset class="sitter-selector-fieldset">
                         <legend class="sr-only">Cuidadores disponibles para reserva directa</legend>
                         <div class="sitter-cards-grid" role="radiogroup" aria-labelledby="sec-sitter-title" id="sitterRadioGroup">
-                            
-                            <!-- Cuidador 1: Elena Martínez -->
+
                             <label class="sitter-select-card is-selected" for="sitter-elena">
                                 <input type="radio" name="selected_sitter" id="sitter-elena" value="Elena Martínez" data-price="25" data-rating="4.9" data-reviews="48" data-specialty="Especialista en razas grandes y paseos" checked class="sitter-radio-input" aria-required="true">
                                 <div class="sitter-card-body">
@@ -117,7 +111,6 @@
                                 </div>
                             </label>
 
-                            <!-- Cuidador 2: Javier Ruiz -->
                             <label class="sitter-select-card" for="sitter-javier">
                                 <input type="radio" name="selected_sitter" id="sitter-javier" value="Javier Ruiz" data-price="20" data-rating="4.8" data-reviews="32" data-specialty="Auxiliar veterinario y medicación" class="sitter-radio-input" aria-required="true">
                                 <div class="sitter-card-body">
@@ -142,7 +135,6 @@
                                 </div>
                             </label>
 
-                            <!-- Cuidador 3: Sofía Castro -->
                             <label class="sitter-select-card" for="sitter-sofia">
                                 <input type="radio" name="selected_sitter" id="sitter-sofia" value="Sofía Castro" data-price="28" data-rating="5.0" data-reviews="112" data-specialty="Experta en gatos y cuidado felino" class="sitter-radio-input" aria-required="true">
                                 <div class="sitter-card-body">
@@ -167,7 +159,6 @@
                                 </div>
                             </label>
 
-                            <!-- Cuidador 4: Lucía Fernández -->
                             <label class="sitter-select-card" for="sitter-lucia">
                                 <input type="radio" name="selected_sitter" id="sitter-lucia" value="Lucía Fernández" data-price="25" data-rating="4.9" data-reviews="124" data-specialty="Ansiedad por separación y cachorros" class="sitter-radio-input" aria-required="true">
                                 <div class="sitter-card-body">
@@ -196,7 +187,6 @@
                     </fieldset>
                 </section>
 
-                <!-- SECCIÓN 2: Tipo de Servicio y Fechas -->
                 <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-service-title">
                     <div class="section-title-left mb-md">
                         <span class="material-symbols-outlined section-icon" aria-hidden="true">event_available</span>
@@ -204,7 +194,7 @@
                     </div>
 
                     <div class="booking-form-row two-cols">
-                        <!-- Selector de Servicio -->
+
                         <div class="form-group">
                             <label for="booking-service" class="input-label">
                                 Tipo de Servicio <span class="required-asterisk">*</span>
@@ -222,7 +212,6 @@
                             <span id="service-desc" class="text-hint">Incluye supervisión y cobertura de seguro.</span>
                         </div>
 
-                        <!-- Número de Mascotas -->
                         <div class="form-group">
                             <label for="booking-pets-count" class="input-label">
                                 Cantidad de mascotas <span class="required-asterisk">*</span>
@@ -239,7 +228,7 @@
                     </div>
 
                     <div class="booking-form-row two-cols mt-md">
-                        <!-- Fecha Entrada -->
+
                         <div class="form-group">
                             <label for="booking-date-start" class="input-label">
                                 Fecha de Entrada <span class="required-asterisk">*</span>
@@ -254,7 +243,6 @@
                             </div>
                         </div>
 
-                        <!-- Fecha Salida -->
                         <div class="form-group">
                             <label for="booking-date-end" class="input-label">
                                 Fecha de Salida <span class="required-asterisk">*</span>
@@ -271,7 +259,6 @@
                     </div>
                 </section>
 
-                <!-- SECCIÓN 3: Datos de la Mascota y Cuidados Especiales -->
                 <section class="card-surface card-padding booking-section-card" aria-labelledby="sec-pet-title">
                     <div class="section-title-left mb-md">
                         <span class="material-symbols-outlined section-icon" aria-hidden="true">cruelty_free</span>
@@ -279,7 +266,7 @@
                     </div>
 
                     <div class="booking-form-row two-cols">
-                        <!-- Selección de Mascota Registrada -->
+
                         <div class="form-group">
                             <label for="booking-pet-select" class="input-label">
                                 Selecciona Mascota <span class="required-asterisk">*</span>
@@ -287,7 +274,7 @@
                             <div class="input-icon-wrapper">
                                 <span class="material-symbols-outlined input-left-icon" aria-hidden="true">sound_detection_dog_barking</span>
                                 <select id="booking-pet-select" name="pet_id" class="form-control select-with-icon" required aria-required="true">
-                                    <!-- Se llenará dinámicamente con las mascotas del usuario -->
+
                                     <option value="Bruno (Perro - Beagle, 3 años)">Bruno (Perro - Beagle, 3 años)</option>
                                     <option value="Luna (Gato - Persa, 2 años)">Luna (Gato - Persa, 2 años)</option>
                                     <option value="otro">+ Ingresar otra mascota</option>
@@ -295,7 +282,6 @@
                             </div>
                         </div>
 
-                        <!-- Nombre o Detalles Adicionales si es otra mascota -->
                         <div class="form-group" id="customPetGroup" style="display: none;">
                             <label for="booking-custom-pet" class="input-label">
                                 Nombre y tipo de mascota <span class="required-asterisk">*</span>
@@ -304,7 +290,6 @@
                         </div>
                     </div>
 
-                    <!-- Indicaciones Especiales y Medicación -->
                     <div class="form-group mt-md">
                         <div class="label-with-tooltip-row">
                             <label for="booking-special-instructions" class="input-label">
@@ -316,7 +301,6 @@
                         <span class="text-hint">El cuidador recibirá estas instrucciones de forma prioritaria en su panel.</span>
                     </div>
 
-                    <!-- Checkbox de Políticas y Términos -->
                     <div class="booking-terms-block mt-md">
                         <label class="checkbox-custom-label" for="booking-accept-policy">
                             <input type="checkbox" id="booking-accept-policy" name="accept_policy" required aria-required="true" aria-describedby="policy-error">
@@ -333,7 +317,6 @@
 
             </div>
 
-            <!-- Columna Derecha: Tarjeta de Resumen y Confirmación Sticky -->
             <aside class="booking-summary-sidebar" aria-labelledby="summary-title">
                 <div class="card-surface card-padding booking-summary-card">
                     <h2 id="summary-title" class="summary-heading">
@@ -341,7 +324,6 @@
                         Resumen de la Reserva
                     </h2>
 
-                    <!-- Ficha del Cuidador Seleccionado en Vivo -->
                     <div class="summary-sitter-preview" id="summarySitterBox">
                         <div class="preview-avatar">
                             <span class="material-symbols-outlined" aria-hidden="true">person</span>
@@ -358,7 +340,6 @@
 
                     <hr class="summary-divider" aria-hidden="true">
 
-                    <!-- Lista de Detalles del Servicio -->
                     <dl class="summary-details-list">
                         <div class="summary-row">
                             <dt>Servicio:</dt>
@@ -380,7 +361,6 @@
 
                     <hr class="summary-divider" aria-hidden="true">
 
-                    <!-- Desglose de Precios Reactivo -->
                     <div class="summary-pricing-breakdown" aria-live="polite" id="pricingBreakdown">
                         <div class="price-row">
                             <span id="sum-rate-calc">Tarifa base ($25 x 0 noches):</span>
@@ -396,7 +376,6 @@
                         </div>
                     </div>
 
-                    <!-- Garantías y Beneficios de Seguridad -->
                     <div class="booking-guarantees-mini">
                         <div class="guarantee-item">
                             <span class="material-symbols-outlined" aria-hidden="true">verified_user</span>
@@ -408,7 +387,6 @@
                         </div>
                     </div>
 
-                    <!-- Botón de Confirmación Principal -->
                     <button type="submit" class="button button-accent button-confirm-reservation" id="btnSubmitBooking">
                         <span class="btn-text">Confirmar y Solicitar Reserva</span>
                         <span class="material-symbols-outlined btn-icon" aria-hidden="true">arrow_forward</span>

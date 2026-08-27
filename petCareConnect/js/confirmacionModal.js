@@ -12,13 +12,18 @@ const PCC_CONFIRMATION = {
             || ((booking.startDate && booking.endDate) ? `${booking.startDate} - ${booking.endDate}` : 'Fechas por confirmar');
 
         let pet = booking.pet || '';
-        if (!pet) {
+        if (!pet && window.PCC_BOOKINGS && typeof PCC_BOOKINGS.formatPetDisplay === 'function') {
+            pet = PCC_BOOKINGS.formatPetDisplay(booking);
+        } else if (!pet) {
             const pCount = booking.petCount || 1;
             const pName = booking.petName || 'Mascota';
-            const pType = booking.petType ? ` (${booking.petType})` : '';
-            pet = pCount > 1
-                ? `${pCount} Mascotas ("${pName}" y acompañantes)`
-                : `1 Mascota ("${pName}"${pType})`;
+            const pType = booking.petType || '';
+            const pBreed = booking.petBreed || '';
+            const details = [pType, pBreed].filter(Boolean).join(' · ');
+            pet = details ? `${pName} · ${details}` : pName;
+            if (pCount > 1) {
+                pet = `${pCount} mascotas — ${pName} y ${pCount - 1} más`;
+            }
         }
 
         let total = booking.total;

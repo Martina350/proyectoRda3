@@ -1,12 +1,7 @@
-/**
- * Pet CareConnect - Lógica de Nueva Reserva (nuevaReserva.js)
- * Controla la lectura de parámetros URL, validación interactiva de fechas,
- * selección de cuidadores en tarjetas de radio, cálculo reactivo de costes
- * y guardado seguro en localStorage con toasts y redirección.
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar módulos de soporte si no se ejecutaron aún
+
     if (window.PCC_BOOKINGS && typeof PCC_BOOKINGS.init === 'function') {
         PCC_BOOKINGS.init();
     }
@@ -27,7 +22,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const submitErrorAlert = document.getElementById('booking-submit-error-alert');
     const submitErrorText = document.getElementById('booking-submit-error-text');
 
-    // Elementos del resumen en vivo
+
     const summaryAvatar = document.getElementById('summary-sitter-avatar');
     const summarySitterName = document.getElementById('summary-sitter-name');
     const summarySitterLoc = document.getElementById('summary-sitter-loc-text');
@@ -45,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    // 1. Leer parámetros URL
+
     const urlParams = new URLSearchParams(window.location.search);
     const paramSitter = urlParams.get('sitter') || urlParams.get('sitterId') || '';
     const paramService = urlParams.get('service') || urlParams.get('serviceId') || '';
@@ -54,11 +49,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const paramPet = urlParams.get('pet') || urlParams.get('petId') || '';
     const paramPetCount = urlParams.get('petCount') || urlParams.get('pet-quantity') || '1';
 
-    // 2. Establecer límites mínimos y fechas por defecto
+
     const today = new Date();
     const todayStr = formatDateISO(today);
     
-    // Por defecto: entrada = mañana, salida = en 4 días
+
     const defaultStart = new Date(today);
     defaultStart.setDate(today.getDate() + 1);
     const defaultEnd = new Date(today);
@@ -70,7 +65,7 @@ document.addEventListener('DOMContentLoaded', () => {
     startDateInput.value = paramStart && isValidDateStr(paramStart) ? paramStart : formatDateISO(defaultStart);
     endDateInput.value = paramEnd && isValidDateStr(paramEnd) ? paramEnd : formatDateISO(defaultEnd);
 
-    // 3. Renderizar opciones de cuidadores en tarjetas de radio
+
     const sitters = PCC_BOOKINGS.getSitters();
     let initialSitterId = sitters[0].id;
 
@@ -81,7 +76,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderSitterCards(sitters, initialSitterId);
 
-    // 4. Renderizar opciones de servicios
+
     const services = PCC_BOOKINGS.getServices();
     let initialServiceId = services[0].id;
 
@@ -92,14 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     renderServicesOptions(services, initialServiceId);
 
-    // 5. Renderizar mascotas del usuario
+
     renderPetOptions(paramPet);
 
     if (paramPetCount && ['1', '2', '3'].includes(paramPetCount)) {
         petCountSelect.value = paramPetCount;
     }
 
-    // 6. Escuchar eventos de cambio para validación y recálculo en vivo
+
     sittersGrid.addEventListener('change', handleFormChange);
     serviceSelect.addEventListener('change', handleFormChange);
     startDateInput.addEventListener('input', handleDateChange);
@@ -108,18 +103,16 @@ document.addEventListener('DOMContentLoaded', () => {
     petCountSelect.addEventListener('change', handleFormChange);
     if (notesInput) notesInput.addEventListener('input', () => hideSubmitError());
 
-    // Primer cálculo inicial
+
     updateLiveSummary();
 
-    // 7. Manejo de envío del formulario
+
     form.addEventListener('submit', handleFormSubmit);
 
-    // 8. Wizard móvil por etapas (no altera el flujo desktop)
+
     initMobileBookingWizard();
 
-    // ==========================================
-    // FUNCIONES AUXILIARES Y LÓGICA DE NEGOCIO
-    // ==========================================
+
 
     function initMobileBookingWizard() {
         const mq = window.matchMedia('(max-width: 767px)');
@@ -337,7 +330,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 </label>
             `;
 
-            // Permitir selección con teclado (Enter / Espacio)
+
             const label = cardWrapper.querySelector('.sitter-radio-card');
             const radio = cardWrapper.querySelector('input[type="radio"]');
             label.addEventListener('keydown', (e) => {
@@ -384,9 +377,11 @@ document.addEventListener('DOMContentLoaded', () => {
         userPets.forEach((pet, index) => {
             const opt = document.createElement('option');
             opt.value = pet.id;
-            opt.textContent = `${pet.name} (${pet.type || 'Mascota'} - ${pet.breed || 'Común'})`;
+            const parts = [pet.name, pet.type, pet.breed].filter(Boolean);
+            opt.textContent = parts.join(' · ');
             opt.dataset.petName = pet.name;
-            opt.dataset.petType = `${pet.type || 'Mascota'} (${pet.breed || 'Común'})`;
+            opt.dataset.petType = pet.type || '';
+            opt.dataset.petBreed = pet.breed || '';
 
             if (selectedPetParam && (selectedPetParam === pet.id || selectedPetParam.toLowerCase() === pet.name.toLowerCase())) {
                 opt.selected = true;
@@ -397,7 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
             petSelect.appendChild(opt);
         });
 
-        // Opción genérica adicional
+
         const customOpt = document.createElement('option');
         customOpt.value = 'custom';
         customOpt.textContent = '+ Otra mascota';
@@ -417,9 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
         hideSubmitError();
     }
 
-    /**
-     * Valida la coherencia de las fechas de entrada y salida
-     */
+    
     function validateDates() {
         const startVal = startDateInput.value;
         const endVal = endDateInput.value;
@@ -444,7 +437,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
 
-        // Si es válido, ocultar errores
+
         hideDateError();
         startDateInput.classList.remove('input-invalid');
         endDateInput.classList.remove('input-invalid');
@@ -480,9 +473,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    /**
-     * Actualiza reactivamente el panel de resumen y cálculo de costes
-     */
+    
     function updateLiveSummary() {
         const checkedRadio = sittersGrid.querySelector('input[name="sitterId"]:checked');
         const selectedSitterId = checkedRadio ? checkedRadio.value : (sitters[0] ? sitters[0].id : null);
@@ -494,26 +485,35 @@ document.addEventListener('DOMContentLoaded', () => {
         const sitter = PCC_BOOKINGS.getSitterById(selectedSitterId) || sitters[0];
         const service = PCC_BOOKINGS.getServiceById(selectedServiceId) || services[0];
 
-        // Actualizar datos del cuidador en el resumen
+
         if (sitter) {
             if (summaryAvatar) summaryAvatar.textContent = sitter.avatar || 'CU';
             if (summarySitterName) summarySitterName.textContent = sitter.name;
             if (summarySitterLoc) summarySitterLoc.textContent = `${sitter.location} · ${sitter.country || 'Ecuador'}`;
         }
 
-        // Actualizar servicio
+
         if (service && summaryServiceName) {
             summaryServiceName.textContent = service.name;
         }
 
-        // Actualizar mascota seleccionada
+
         if (petSelect && summaryPetName) {
             const selectedOpt = petSelect.options[petSelect.selectedIndex];
-            const pName = selectedOpt ? (selectedOpt.dataset.petName || selectedOpt.textContent) : 'Mascota';
-            summaryPetName.textContent = petCountVal > 1 ? `${pName} (+${petCountVal - 1})` : pName;
+            if (selectedOpt && window.PCC_BOOKINGS && typeof PCC_BOOKINGS.formatPetDisplay === 'function') {
+                summaryPetName.textContent = PCC_BOOKINGS.formatPetDisplay({
+                    petName: selectedOpt.dataset.petName || selectedOpt.textContent,
+                    petType: selectedOpt.dataset.petType || '',
+                    petBreed: selectedOpt.dataset.petBreed || '',
+                    petCount: petCountVal
+                });
+            } else {
+                const pName = selectedOpt ? (selectedOpt.dataset.petName || selectedOpt.textContent) : 'Mascota';
+                summaryPetName.textContent = petCountVal > 1 ? `${pName} y ${petCountVal - 1} más` : pName;
+            }
         }
 
-        // Cotización
+
         const quote = PCC_BOOKINGS.quote({
             sitterId: sitter ? sitter.id : null,
             serviceId: service ? service.id : null,
@@ -522,7 +522,7 @@ document.addEventListener('DOMContentLoaded', () => {
             petCount: petCountVal
         });
 
-        // Fechas y duración
+
         if (startVal && endVal && isValidDateStr(startVal) && isValidDateStr(endVal)) {
             const dStart = new Date(startVal + 'T00:00:00');
             const dEnd = new Date(endVal + 'T00:00:00');
@@ -538,21 +538,19 @@ document.addEventListener('DOMContentLoaded', () => {
             summaryDurationText.textContent = `${quote.duration} ${quote.durationUnit}`;
         }
 
-        // Desglose de precios
+
         if (summaryBreakdown) summaryBreakdown.textContent = quote.breakdownText;
         if (summarySubtotal) summarySubtotal.textContent = `$${quote.subtotal.toFixed(2)}`;
         if (summaryFee) summaryFee.textContent = `$${quote.serviceFee.toFixed(2)}`;
         if (summaryTotal) summaryTotal.textContent = `$${quote.total.toFixed(2)}`;
     }
 
-    /**
-     * Procesa la confirmación de la reserva
-     */
+    
     function handleFormSubmit(e) {
         e.preventDefault();
         hideSubmitError();
 
-        // 1. Validar selección de cuidador
+
         const checkedRadio = sittersGrid.querySelector('input[name="sitterId"]:checked');
         if (!checkedRadio) {
             showSubmitError('Por favor selecciona un cuidador en el Paso 1.');
@@ -561,14 +559,14 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 2. Validar selección de servicio
+
         if (!serviceSelect.value) {
             showSubmitError('Por favor selecciona el tipo de servicio deseado.');
             serviceSelect.focus();
             return;
         }
 
-        // 3. Validar fechas (salida >= entrada)
+
         const isDatesValid = validateDates();
         if (!isDatesValid) {
             showSubmitError('Las fechas son inválidas. La fecha de salida debe ser igual o posterior a la de entrada.');
@@ -576,17 +574,18 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // 4. Validar mascota
+
         if (!petSelect.value) {
             showSubmitError('Por favor selecciona la mascota para el servicio.');
             petSelect.focus();
             return;
         }
 
-        // 5. Armar objeto para addBooking
+
         const selectedOpt = petSelect.options[petSelect.selectedIndex];
-        const petName = selectedOpt ? (selectedOpt.dataset.petName || 'Bruno') : 'Bruno';
-        const petType = selectedOpt ? (selectedOpt.dataset.petType || 'Perro (Beagle)') : 'Perro (Beagle)';
+        const petName = selectedOpt ? (selectedOpt.dataset.petName || 'Mascota') : 'Mascota';
+        const petType = selectedOpt ? (selectedOpt.dataset.petType || '') : '';
+        const petBreed = selectedOpt ? (selectedOpt.dataset.petBreed || '') : '';
         const petCount = parseInt(petCountSelect.value, 10) || 1;
 
         const bookingPayload = {
@@ -597,11 +596,12 @@ document.addEventListener('DOMContentLoaded', () => {
             petId: petSelect.value,
             petName: petName,
             petType: petType,
+            petBreed: petBreed,
             petCount: petCount,
             notes: notesInput ? notesInput.value : ''
         };
 
-        // 6. Guardar en localStorage a través del módulo PCC_BOOKINGS
+
         try {
             const confirmedBooking = PCC_BOOKINGS.addBooking(bookingPayload);
 
@@ -665,9 +665,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return !isNaN(d.getTime());
     }
 
-    /* ==========================================================================
-       Tour Guiado de Onboarding (Fase 6)
-       ========================================================================== */
+    
     const TOUR_STEPS = [
         {
             step: 1,
@@ -724,7 +722,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (tourStepTitle) tourStepTitle.textContent = currentData.title;
         if (tourStepDesc) tourStepDesc.textContent = currentData.desc;
 
-        // Actualizar puntos
+
         for (let i = 1; i <= 3; i++) {
             const dot = document.getElementById(`tourDot${i}`);
             if (dot) {
@@ -736,7 +734,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Configurar botones
+
         if (btnTourPrev) {
             btnTourPrev.style.display = index > 0 ? 'inline-flex' : 'none';
         }
@@ -744,7 +742,7 @@ document.addEventListener('DOMContentLoaded', () => {
             btnTourNext.textContent = index === TOUR_STEPS.length - 1 ? 'Comenzar reserva' : 'Siguiente';
         }
 
-        // Resaltar sección asociada
+
         clearTourHighlights();
         const targetSection = document.getElementById(currentData.targetId);
         if (targetSection) {
@@ -820,7 +818,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Auto-mostrar en la primera visita
+
     const isTourSeen = window.PCC_BOOKINGS && typeof PCC_BOOKINGS.isTourSeen === 'function' 
         ? PCC_BOOKINGS.isTourSeen() 
         : localStorage.getItem('pcc_booking_tour_seen') === 'true';

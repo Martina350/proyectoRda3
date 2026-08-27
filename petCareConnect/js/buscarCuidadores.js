@@ -1,7 +1,4 @@
-/**
- * Pet CareConnect - Buscador de cuidadores
- * Modales de filtros y contacto, paginación básica.
- */
+
 document.addEventListener('DOMContentLoaded', () => {
     const moreFiltersBtn = document.querySelector('.button-more-filters');
     const filtersModal = document.getElementById('filters-modal-overlay');

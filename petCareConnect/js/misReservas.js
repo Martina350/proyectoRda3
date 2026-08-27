@@ -1,12 +1,6 @@
-/**
- * Pet CareConnect - Lógica de Mis Reservas (misReservas.js)
- * Renderiza dinámicamente el historial de reservas en las 3 columnas
- * (Activas, Pasadas, Canceladas), calcula contadores, permite "Reservar de nuevo"
- * y gestionar cancelaciones con actualización en tiempo real en localStorage.
- */
+
 
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializar módulo de reservas
     if (window.PCC_BOOKINGS && typeof PCC_BOOKINGS.init === 'function') {
         PCC_BOOKINGS.init();
     }
@@ -19,25 +13,104 @@ document.addEventListener('DOMContentLoaded', () => {
     const badgePasadas = document.getElementById('badge-count-pasadas');
     const badgeCanceladas = document.getElementById('badge-count-canceladas');
 
+    const tabButtons = Array.from(document.querySelectorAll('.bookings-tab-btn[data-tab]'));
+    const tabPanels = Array.from(document.querySelectorAll('.bookings-tab-panel[data-panel]'));
+
     if (!activasContainer || !pasadasContainer || !canceladasContainer) {
-        console.warn('Contenedores de columnas de reservas no encontrados.');
+        console.warn('Contenedores de reservas no encontrados.');
         return;
     }
 
-    // Renderizado principal
-    renderBookings();
+    const TAB_STORAGE_KEY = 'pcc_mis_reservas_tab';
+    let currentTab = 'activas';
 
-    // Eventos interactivos delegados en el documento
+    try {
+        const saved = sessionStorage.getItem(TAB_STORAGE_KEY);
+        if (saved === 'activas' || saved === 'pasadas' || saved === 'canceladas') {
+            currentTab = saved;
+        }
+    } catch (_) {  }
+
+    initTabs();
+    renderBookings();
+    setActiveTab(currentTab, { skipPersist: true });
+
     document.addEventListener('click', handleActionClick);
 
-    function renderBookings() {
-        const allBookings = PCC_BOOKINGS.getBookings();
+    function initTabs() {
+        tabButtons.forEach((btn) => {
+            btn.addEventListener('click', () => {
+                setActiveTab(btn.getAttribute('data-tab'));
+            });
 
+            btn.addEventListener('keydown', (e) => {
+                const order = ['activas', 'pasadas', 'canceladas'];
+                const idx = order.indexOf(btn.getAttribute('data-tab'));
+                let nextIdx = idx;
+
+                if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                    nextIdx = (idx + 1) % order.length;
+                } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                    nextIdx = (idx - 1 + order.length) % order.length;
+                } else if (e.key === 'Home') {
+                    nextIdx = 0;
+                } else if (e.key === 'End') {
+                    nextIdx = order.length - 1;
+                } else {
+                    return;
+                }
+
+                e.preventDefault();
+                setActiveTab(order[nextIdx]);
+                const nextBtn = tabButtons.find((b) => b.getAttribute('data-tab') === order[nextIdx]);
+                if (nextBtn) nextBtn.focus();
+            });
+        });
+    }
+
+    function setActiveTab(tabId, options = {}) {
+        if (!tabId) return;
+        currentTab = tabId;
+
+        tabButtons.forEach((btn) => {
+            const isActive = btn.getAttribute('data-tab') === tabId;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+            btn.tabIndex = isActive ? 0 : -1;
+        });
+
+        tabPanels.forEach((panel) => {
+            const isActive = panel.getAttribute('data-panel') === tabId;
+            panel.classList.toggle('active', isActive);
+            if (isActive) {
+                panel.removeAttribute('hidden');
+            } else {
+                panel.setAttribute('hidden', '');
+            }
+        });
+
+        if (!options.skipPersist) {
+            try {
+                sessionStorage.setItem(TAB_STORAGE_KEY, tabId);
+            } catch (_) {  }
+        }
+    }
+
+    function escapeHtml(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    }
+
+    function categorizeBookings(allBookings) {
         const activas = [];
         const pasadas = [];
         const canceladas = [];
 
-        allBookings.forEach(b => {
+        allBookings.forEach((b) => {
             const status = (b.status || '').toLowerCase();
             const category = (b.statusCategory || '').toLowerCase();
 
@@ -50,43 +123,43 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Actualizar contadores
+        return { activas, pasadas, canceladas };
+    }
+
+    function renderBookings() {
+        const allBookings = PCC_BOOKINGS.getBookings();
+        const { activas, pasadas, canceladas } = categorizeBookings(allBookings);
+
         if (badgeActivas) badgeActivas.textContent = activas.length;
         if (badgePasadas) badgePasadas.textContent = pasadas.length;
         if (badgeCanceladas) badgeCanceladas.textContent = canceladas.length;
 
-        // Renderizar columna de Activas
-        if (activas.length === 0) {
-            activasContainer.innerHTML = renderEmptyState(
+        activasContainer.innerHTML = activas.length
+            ? activas.map((b) => renderActiveCard(b)).join('')
+            : renderEmptyState(
                 'activas',
-                'No tienes reservas activas en este momento.',
+                'Sin reservas activas',
+                'Cuando reserves un servicio, aparecerá aquí para hacer seguimiento.',
                 true
             );
-        } else {
-            activasContainer.innerHTML = activas.map(b => renderActiveCard(b)).join('');
-        }
 
-        // Renderizar columna de Pasadas
-        if (pasadas.length === 0) {
-            pasadasContainer.innerHTML = renderEmptyState(
+        pasadasContainer.innerHTML = pasadas.length
+            ? pasadas.map((b) => renderPastCard(b)).join('')
+            : renderEmptyState(
                 'pasadas',
-                'Aún no tienes servicios de cuidado completados.',
-                false
+                'Sin historial todavía',
+                'Tus servicios completados se guardarán en esta pestaña.',
+                true
             );
-        } else {
-            pasadasContainer.innerHTML = pasadas.map(b => renderPastCard(b)).join('');
-        }
 
-        // Renderizar columna de Canceladas
-        if (canceladas.length === 0) {
-            canceladasContainer.innerHTML = renderEmptyState(
+        canceladasContainer.innerHTML = canceladas.length
+            ? canceladas.map((b) => renderCancelledCard(b)).join('')
+            : renderEmptyState(
                 'canceladas',
+                'Sin cancelaciones',
                 'No tienes reservas canceladas en tu historial.',
                 false
             );
-        } else {
-            canceladasContainer.innerHTML = canceladas.map(b => renderCancelledCard(b)).join('');
-        }
     }
 
     function avatarClassForService(b) {
@@ -102,6 +175,30 @@ document.addEventListener('DOMContentLoaded', () => {
         return 'avatar-sitter';
     }
 
+    function resolveSitterName(b) {
+        if (b.sitterName) return b.sitterName;
+        if (b.sitterId && window.PCC_BOOKINGS && typeof PCC_BOOKINGS.getSitterById === 'function') {
+            const sitter = PCC_BOOKINGS.getSitterById(b.sitterId);
+            if (sitter && sitter.name) return sitter.name;
+        }
+        return 'Cuidador';
+    }
+
+    function formatDate(b) {
+        return b.dateFormatted || [b.startDate, b.endDate].filter(Boolean).join(' – ') || 'Fecha por confirmar';
+    }
+
+    function formatPet(b) {
+        if (window.PCC_BOOKINGS && typeof PCC_BOOKINGS.formatPetDisplay === 'function') {
+            return PCC_BOOKINGS.formatPetDisplay(b);
+        }
+        const name = b.petName || 'Mascota';
+        const type = b.petType || '';
+        const breed = b.petBreed || '';
+        const details = [type, breed].filter(Boolean).join(' · ');
+        return details ? `${name} · ${details}` : name;
+    }
+
     function renderActiveCard(b) {
         let statusBadgeClass = 'badge-en-progreso';
         let statusText = b.statusLabel || 'Activa';
@@ -111,40 +208,46 @@ document.addEventListener('DOMContentLoaded', () => {
             statusText = 'Confirmada';
         } else if (b.status === 'programada') {
             statusBadgeClass = 'badge-manana';
-            statusText = 'Programada';
+            statusText = b.statusLabel || 'Programada';
         }
 
-        const petLabel = b.petName ? `"${b.petName}"` : 'Mascota';
-        const petTypeStr = b.petType ? ` (${b.petType})` : '';
+        const sitterName = resolveSitterName(b);
         const totalAmount = Number(b.total || 0).toFixed(2);
         const avatarClass = avatarClassForService(b);
+        const bookingId = escapeHtml(b.id || b.code || '');
+        const code = escapeHtml(b.code || '');
 
         return `
-            <article class="card-surface booking-card card-hover-effect" data-booking-id="${b.id || b.code}">
-                <div class="card-top-row">
+            <article class="card-surface booking-card card-hover-effect" data-booking-id="${bookingId}">
+                <div class="booking-card-header">
                     <div class="card-provider-info">
                         <div class="avatar-circle ${avatarClass}" aria-hidden="true"></div>
                         <div class="provider-text">
-                            <h3 class="card-service-title">${b.serviceName || 'Servicio de Cuidado'}</h3>
-                            <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
+                            <h3 class="card-service-title">${escapeHtml(b.serviceName || 'Servicio de Cuidado')}</h3>
+                            <p class="card-provider-name">Con ${escapeHtml(sitterName)}</p>
+                            ${code ? `<span class="booking-code">${code}</span>` : ''}
                         </div>
                     </div>
-                    <p class="status-badge ${statusBadgeClass}"><strong>Estado:</strong> ${statusText}</p>
+                    <p class="status-badge ${statusBadgeClass}">${escapeHtml(statusText)}</p>
                 </div>
 
-                <div class="card-details-list">
-                    <p class="detail-item detail-fecha"><strong>Fecha:</strong> ${b.dateFormatted || `${b.startDate} - ${b.endDate}`}</p>
-                    <p class="detail-item detail-mascota"><strong>Mascota:</strong> ${petLabel}${petTypeStr}</p>
-                    <p class="detail-item detail-total"><strong>Total:</strong> $${totalAmount} <span class="detail-code-inline">(${b.code || ''})</span></p>
+                <div class="booking-card-body">
+                    <p class="detail-item detail-fecha">${escapeHtml(formatDate(b))}</p>
+                    <p class="detail-item detail-mascota">${escapeHtml(formatPet(b))}</p>
+                    <p class="detail-item detail-precio"><span class="detail-price-label">Total</span> <strong>$${totalAmount}</strong></p>
                 </div>
 
-                <div class="card-actions-grid two-cols">
-                    <button type="button" class="button button-outline btn-seguimiento" data-sitter="${b.sitterName || 'el cuidador'}">Seguimiento</button>
-                    <button type="button" class="button button-primary btn-contacto" data-sitter="${b.sitterName || 'el cuidador'}">Contacto</button>
-                </div>
-                <div class="card-footer-action">
-                    <button type="button" class="btn-cancel-booking" data-booking-id="${b.id || b.code}">
-                        <span class="material-symbols-outlined">cancel</span>
+                <div class="booking-card-footer">
+                    <div class="card-actions-grid two-cols">
+                        <button type="button" class="button button-outline btn-seguimiento" data-sitter="${escapeHtml(sitterName)}">
+                            Seguimiento
+                        </button>
+                        <button type="button" class="button button-primary btn-contacto" data-sitter="${escapeHtml(sitterName)}">
+                            Contacto
+                        </button>
+                    </div>
+                    <button type="button" class="btn-cancel-booking" data-booking-id="${bookingId}">
+                        <span class="material-symbols-outlined" aria-hidden="true">cancel</span>
                         Cancelar reserva
                     </button>
                 </div>
@@ -153,40 +256,43 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPastCard(b) {
-        const ratingStr = b.rating ? `${b.rating.toFixed(1)} estrellas` : '5.0 estrellas';
+        const ratingStr = b.rating ? `${Number(b.rating).toFixed(1)} estrellas` : '5.0 estrellas';
         const totalAmount = Number(b.total || 0).toFixed(2);
-        const petLabel = b.petName ? `"${b.petName}"` : 'Mascota';
         const avatarClass = avatarClassForService(b);
-
+        const sitterName = resolveSitterName(b);
+        const bookingId = escapeHtml(b.id || b.code || '');
+        const code = escapeHtml(b.code || '');
         const sitterParam = encodeURIComponent(b.sitterId || b.sitterName || '');
         const serviceParam = encodeURIComponent(b.serviceId || 'alojamiento');
 
         return `
-            <article class="card-surface booking-card booking-card-past card-hover-effect" data-booking-id="${b.id || b.code}">
-                <div class="card-top-row">
+            <article class="card-surface booking-card booking-card-past card-hover-effect" data-booking-id="${bookingId}">
+                <div class="booking-card-header">
                     <div class="card-provider-info">
                         <div class="avatar-circle ${avatarClass} grayscale" aria-hidden="true"></div>
                         <div class="provider-text">
-                            <h3 class="card-service-title text-muted">${b.serviceName || 'Cuidado en Casa'}</h3>
-                            <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
+                            <h3 class="card-service-title">${escapeHtml(b.serviceName || 'Cuidado en Casa')}</h3>
+                            <p class="card-provider-name">Con ${escapeHtml(sitterName)}</p>
+                            ${code ? `<span class="booking-code">${code}</span>` : ''}
                         </div>
                     </div>
+                    <p class="status-badge badge-completada">Completada</p>
                 </div>
 
-                <div class="card-details-list">
-                    <p class="detail-item detail-fecha"><strong>Fecha:</strong> ${b.dateFormatted || b.startDate}</p>
-                    <p class="detail-item detail-mascota"><strong>Mascota:</strong> ${petLabel}</p>
-                    <div class="detail-rating-row">
-                        <p class="detail-item detail-rating"><strong>Calificación:</strong> ${ratingStr}</p>
-                        <p class="detail-item detail-estado-completada"><strong>Estado:</strong> Completada</p>
+                <div class="booking-card-body">
+                    <p class="detail-item detail-fecha">${escapeHtml(formatDate(b))}</p>
+                    <p class="detail-item detail-mascota">${escapeHtml(formatPet(b))}</p>
+                    <p class="detail-item detail-precio"><span class="detail-price-label">Total</span> <strong>$${totalAmount}</strong></p>
+                    <p class="detail-item detail-rating">${escapeHtml(ratingStr)}</p>
+                </div>
+
+                <div class="booking-card-footer">
+                    <div class="card-actions-grid full-width">
+                        <a href="nuevaReserva.html?sitter=${sitterParam}&service=${serviceParam}" class="button button-outline btn-reservar-nuevo">
+                            <span class="material-symbols-outlined" aria-hidden="true">replay</span>
+                            Reservar de nuevo
+                        </a>
                     </div>
-                </div>
-
-                <div class="card-actions-grid full-width">
-                    <a href="nuevaReserva.html?sitter=${sitterParam}&service=${serviceParam}" class="button button-outline btn-reservar-nuevo">
-                        <span class="material-symbols-outlined" style="font-size: 16px;">replay</span>
-                        Reservar de nuevo
-                    </a>
                 </div>
             </article>
         `;
@@ -195,56 +301,59 @@ document.addEventListener('DOMContentLoaded', () => {
     function renderCancelledCard(b) {
         const totalAmount = Number(b.total || 0).toFixed(2);
         const avatarClass = avatarClassForService(b);
+        const sitterName = resolveSitterName(b);
+        const bookingId = escapeHtml(b.id || b.code || '');
+        const code = escapeHtml(b.code || '');
+        const statusLabel = b.statusLabel || 'Cancelada por el usuario';
 
         return `
-            <article class="card-surface booking-card booking-card-cancelled" data-booking-id="${b.id || b.code}">
-                <div class="card-top-row">
+            <article class="card-surface booking-card booking-card-cancelled" data-booking-id="${bookingId}">
+                <div class="booking-card-header">
                     <div class="card-provider-info">
                         <div class="avatar-circle ${avatarClass} grayscale" aria-hidden="true"></div>
                         <div class="provider-text">
-                            <h3 class="card-service-title text-muted">${b.serviceName || 'Servicio'}</h3>
-                            <p class="card-provider-name">Con ${b.sitterName || 'Cuidador'}</p>
+                            <h3 class="card-service-title">${escapeHtml(b.serviceName || 'Servicio')}</h3>
+                            <p class="card-provider-name">Con ${escapeHtml(sitterName)}</p>
+                            ${code ? `<span class="booking-code">${code}</span>` : ''}
                         </div>
                     </div>
+                    <p class="status-badge badge-cancelada-status">Cancelada</p>
                 </div>
 
-                <div class="card-details-list">
-                    <p class="detail-item detail-cancelada"><strong>Estado:</strong> Cancelada por el usuario</p>
-                    <p class="detail-item detail-estaba-para"><strong>Estaba para:</strong> ${b.dateFormatted || b.startDate}</p>
+                <div class="booking-card-body">
+                    <p class="detail-item detail-cancelada">${escapeHtml(statusLabel)}</p>
+                    <p class="detail-item detail-fecha">${escapeHtml(formatDate(b))}</p>
+                    <p class="detail-item detail-precio"><span class="detail-price-label">Total</span> <strong>$${totalAmount}</strong></p>
                 </div>
 
-                <div class="card-actions-grid full-width">
-                    <button type="button" class="button button-secondary-dim btn-reembolso" data-total="${totalAmount}">
-                        Detalles del reembolso
-                    </button>
+                <div class="booking-card-footer">
+                    <div class="card-actions-grid full-width">
+                        <button type="button" class="button button-secondary-dim btn-reembolso" data-total="${totalAmount}">
+                            Detalles del reembolso
+                        </button>
+                    </div>
                 </div>
             </article>
         `;
     }
 
-    function renderEmptyState(category, message, showCTA = false) {
+    function renderEmptyState(category, title, message, showCTA = false) {
         let iconName = 'event_available';
-        let title = 'No hay reservas activas';
-
-        if (category === 'pasadas') {
-            iconName = 'history';
-            title = 'Sin historial pasado';
-        } else if (category === 'canceladas') {
-            iconName = 'check_circle';
-            title = 'Sin cancelaciones';
-        }
+        if (category === 'pasadas') iconName = 'history';
+        if (category === 'canceladas') iconName = 'check_circle';
 
         return `
-            <div class="empty-column-box">
-                <div class="empty-column-icon-box">
-                    <span class="material-symbols-outlined empty-column-icon">${iconName}</span>
+            <div class="bookings-empty-state">
+                <div class="bookings-empty-illustration" aria-hidden="true">
+                    <span class="material-symbols-outlined bookings-empty-paw">pets</span>
+                    <span class="material-symbols-outlined bookings-empty-icon">${iconName}</span>
                 </div>
-                <h3 class="empty-column-title">${title}</h3>
-                <p class="empty-column-desc">${message}</p>
+                <h3 class="bookings-empty-title">${escapeHtml(title)}</h3>
+                <p class="bookings-empty-desc">${escapeHtml(message)}</p>
                 ${showCTA ? `
-                    <a href="nuevaReserva.html" class="button button-accent empty-column-btn">
-                        <span class="material-symbols-outlined">add_circle</span>
-                        Hacer una reserva
+                    <a href="servicios.html" class="button button-accent bookings-empty-cta">
+                        <span class="material-symbols-outlined" aria-hidden="true">explore</span>
+                        Explorar servicios
                     </a>
                 ` : ''}
             </div>
@@ -252,7 +361,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function handleActionClick(e) {
-        // Cancelar reserva
         const cancelBtn = e.target.closest('.btn-cancel-booking');
         if (cancelBtn) {
             e.preventDefault();
@@ -265,18 +373,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (window.showToast) {
                         window.showToast('La reserva ha sido cancelada correctamente.', 'info');
                     }
-                    // Re-renderizar columnas
                     renderBookings();
-                } else {
-                    if (window.showToast) {
-                        window.showToast('No se pudo cancelar la reserva.', 'error');
-                    }
+                    setActiveTab('canceladas');
+                } else if (window.showToast) {
+                    window.showToast('No se pudo cancelar la reserva.', 'error');
                 }
             }
             return;
         }
 
-        // Seguimiento
         const segBtn = e.target.closest('.btn-seguimiento');
         if (segBtn) {
             e.preventDefault();
@@ -287,7 +392,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Contacto
         const contactBtn = e.target.closest('.btn-contacto');
         if (contactBtn) {
             e.preventDefault();
@@ -298,7 +402,6 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // Reembolso
         const refundBtn = e.target.closest('.btn-reembolso');
         if (refundBtn) {
             e.preventDefault();
@@ -306,7 +409,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (window.showToast) {
                 window.showToast(`El reembolso de $${total} ha sido procesado a tu método original de pago.`, 'success');
             }
-            return;
         }
     }
 });

@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="pet-spec-pill">${gender}</span>
                     </div>
                     <div class="pet-notes-box">
-                        <strong>Notas de cuidado:</strong><br>
-                        ${notes}
+                        <span class="pet-notes-label">Notas de cuidado</span>
+                        <p class="pet-notes-text">${notes}</p>
                     </div>
                     <div class="pet-card-actions">
                         <button type="button" class="pet-btn-edit" data-pet-id="${id}">
