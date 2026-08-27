@@ -228,8 +228,8 @@
                             </div>
                         </div>
 
-                        <button type="submit" class="button button-accent booking-submit-btn">Reservar ahora</button>
-                        <p class="booking-guarantee-note">Revisa y confirma en el siguiente paso</p>
+                        <button type="submit" class="button button-accent booking-submit-btn">Continuar a la reserva</button>
+                        <p class="booking-guarantee-note">Revisa y confirma los detalles en el siguiente paso</p>
                     </fieldset>
                 </form>
             </section>
@@ -300,61 +300,6 @@
 
     <div id="site-mobile-nav"></div>
 
-    <div id="booking-modal-overlay" class="modal-overlay" aria-hidden="true" role="dialog"
-        aria-labelledby="modal-booking-title">
-        <div class="modal-card">
-            <div class="modal-header">
-                <h3 id="modal-booking-title" class="modal-title">
-                    <span class="material-symbols-outlined">event_available</span>
-                    Revisar y Confirmar Reserva
-                </h3>
-                <button type="button" id="close-modal-btn" class="modal-close-btn" aria-label="Cerrar modal">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
-            </div>
-
-            <div class="modal-body">
-                <div class="confirmation-summary-list">
-                    <div class="summary-item">
-                        <span>Cuidador:</span>
-                        <strong>Elena Martínez</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Servicio:</span>
-                        <strong>Alojamiento en casa</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Entrada:</span>
-                        <strong id="modal-checkin-val">12 Oct, 2026</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Salida:</span>
-                        <strong id="modal-checkout-val">15 Oct, 2026</strong>
-                    </div>
-                    <div class="summary-item">
-                        <span>Mascota:</span>
-                        <strong id="modal-pet-val">1 Perro</strong>
-                    </div>
-                    <div class="summary-item summary-total">
-                        <span>Total a pagar:</span>
-                        <strong id="modal-total-val">$80</strong>
-                    </div>
-                </div>
-
-                <div class="modal-policy-note">
-                    <span class="material-symbols-outlined" style="font-size: 18px;">verified_user</span>
-                    <span>Cancelación gratuita disponible hasta 24 horas antes del inicio del servicio.</span>
-                </div>
-            </div>
-
-            <div class="modal-footer">
-                <button type="button" id="cancel-booking-btn" class="button button-outline">Cancelar</button>
-                <a href="reservaConfirmada.html" id="confirm-booking-btn" class="button button-hero-accent">Confirmar
-                    Reserva</a>
-            </div>
-        </div>
-    </div>
-
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const checkInInput = document.getElementById('check-in');
@@ -362,11 +307,7 @@
             const petSelect = document.getElementById('pet-quantity');
             const bookingForm = document.querySelector('.booking-form');
             const submitBtn = document.querySelector('.booking-submit-btn');
-
             const costBreakdown = document.querySelector('.booking-cost-breakdown');
-            const modalOverlay = document.getElementById('booking-modal-overlay');
-            const closeModalBtn = document.getElementById('close-modal-btn');
-            const cancelBookingBtn = document.getElementById('cancel-booking-btn');
 
             const pricePerNight = 25;
             const fee = 5;
@@ -381,8 +322,8 @@
             function updatePrice() {
                 if (!checkInInput || !checkOutInput || !petSelect) return;
 
-                const d1 = new Date(checkInInput.value);
-                const d2 = new Date(checkOutInput.value);
+                const d1 = new Date(checkInInput.value + 'T00:00:00');
+                const d2 = new Date(checkOutInput.value + 'T00:00:00');
 
                 if (isNaN(d1.getTime()) || isNaN(d2.getTime())) return;
 
@@ -420,18 +361,6 @@
                         <span>Total: $${total}</span>
                     </div>
                 `;
-
-                const modalIn = document.getElementById('modal-checkin-val');
-                const modalOut = document.getElementById('modal-checkout-val');
-                const modalPet = document.getElementById('modal-pet-val');
-                const modalTot = document.getElementById('modal-total-val');
-
-                if (modalIn) modalIn.textContent = checkInInput.value;
-                if (modalOut) modalOut.textContent = checkOutInput.value;
-                if (modalPet && petSelect.options[petSelect.selectedIndex]) {
-                    modalPet.textContent = petSelect.options[petSelect.selectedIndex].text;
-                }
-                if (modalTot) modalTot.textContent = '$' + total;
             }
 
             if (checkInInput && checkOutInput && petSelect) {
@@ -439,28 +368,6 @@
                 checkOutInput.addEventListener('change', updatePrice);
                 petSelect.addEventListener('change', updatePrice);
                 updatePrice();
-            }
-
-            if (bookingForm) {
-                bookingForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    if (submitBtn.disabled) return;
-                    modalOverlay.classList.add('is-open');
-                    modalOverlay.setAttribute('aria-hidden', 'false');
-                });
-            }
-
-            function closeModal() {
-                modalOverlay.classList.remove('is-open');
-                modalOverlay.setAttribute('aria-hidden', 'true');
-            }
-
-            if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
-            if (cancelBookingBtn) cancelBookingBtn.addEventListener('click', closeModal);
-            if (modalOverlay) {
-                modalOverlay.addEventListener('click', (e) => {
-                    if (e.target === modalOverlay) closeModal();
-                });
             }
 
             const galleryBtns = document.querySelectorAll('.btn-view-gallery');

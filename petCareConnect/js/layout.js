@@ -53,7 +53,7 @@ const PCC_LAYOUT = {
                     <li><a href="${home}" class="nav-link${page === 'inicio' ? ' active' : ''}">Inicio</a></li>
                     <li><a href="${prefix}buscarCuidadores.html" class="nav-link${page === 'buscar' ? ' active' : ''}">Buscar</a></li>
                     <li><a href="${prefix}servicios.html" class="nav-link${page === 'servicios' ? ' active' : ''}">Servicios</a></li>
-                    <li><a href="${prefix}misReservas.html" class="nav-link${page === 'reservas' ? ' active' : ''}">Reservas</a></li>
+                    <li><a href="${prefix}misReservas.html" class="nav-link${page === 'reservas' ? ' active' : ''}">Mis reservas</a></li>
                     <li><a href="${accountHref}" class="nav-link${accountActive}">${accountLabel}</a></li>
                 </ul>
             </nav>
@@ -111,7 +111,7 @@ const PCC_LAYOUT = {
         </a>
         <a href="${prefix}misReservas.html" class="mobile-nav-item${page === 'reservas' ? ' active' : ''}">
             <span class="material-symbols-outlined">calendar_month</span>
-            <span>Reservas</span>
+            <span>Mis reservas</span>
         </a>
         <a href="${accountHref}" class="mobile-nav-item${page === 'cuenta' ? ' active' : ''}" aria-label="${accountAria}">
             <span class="material-symbols-outlined${fillClass}">person</span>
