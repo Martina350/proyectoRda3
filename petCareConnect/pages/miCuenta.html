@@ -14,6 +14,7 @@
     <script src="../js/toast.js" defer></script>
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
+    <script src="../js/forms.js" defer></script>
     <script src="../js/account.js" defer></script>
 </head>
 <body>
@@ -28,29 +29,17 @@
                 <div class="account-user-info">
                     <h1 id="user-name-title">
                         <span id="headerUserName">Gabriel Flor</span>
-                        <span class="account-verified-tag">
-                            <span class="material-symbols-outlined">verified</span>
-                            Verificado
-                        </span>
                     </h1>
-                    <p id="headerUserEmail">gabriel.flor@gmail.com</p>
-                    <div class="account-user-meta">
-                        <span id="headerUserLocation">Quito, Ecuador</span>
-                        <span>•</span>
-                        <span id="headerUserMember">Miembro desde Julio 2026</span>
-                    </div>
+                    <p class="account-user-meta">
+                        <span id="headerUserEmail">gabriel.flor@ejemplo.com</span> ·
+                        <span id="headerUserLocation">Quito, Ecuador</span> ·
+                        <span id="headerUserMember">Miembro desde 2026</span>
+                    </p>
                 </div>
-            </div>
-
-            <div>
-                <button type="button" class="button button-outline button-danger" id="btnOpenLogoutModal">
-                    <span class="material-symbols-outlined">logout</span>
-                    Cerrar sesión
-                </button>
             </div>
         </section>
 
-        <nav class="account-tabs-nav" aria-label="Pestañas de la cuenta">
+        <nav class="account-tabs-nav" aria-label="Secciones de la cuenta">
             <button type="button" class="account-tab-btn active" data-tab="tab-mascotas">
                 <span class="material-symbols-outlined">pets</span>
                 Mis Mascotas (<span id="tabPetsCount">2</span>)
@@ -94,19 +83,22 @@
                 <form id="userDataForm" novalidate>
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="profileName">Nombre y apellidos</label>
-                            <input type="text" id="profileName" class="input" required>
+                            <label for="profileName">Nombre y apellidos <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="text" id="profileName" class="input" required aria-required="true">
+                            <div id="profileName-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profileEmail">Correo electrónico</label>
-                            <input type="email" id="profileEmail" class="input" required>
+                            <label for="profileEmail">Correo electrónico <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="email" id="profileEmail" class="input" required aria-required="true">
+                            <div id="profileEmail-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profilePhone">Teléfono de contacto</label>
+                            <label for="profilePhone">Teléfono de contacto <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="tel" id="profilePhone" class="input">
+                            <div id="profilePhone-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="profileLocation">Dirección / Zona habitual</label>
+                            <label for="profileLocation">Dirección / Zona habitual <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="text" id="profileLocation" class="input">
                         </div>
                     </div>
@@ -167,16 +159,19 @@
                 <form id="changePasswordForm" class="form-narrow" novalidate>
                     <div class="login-fieldset">
                         <div class="login-form-item">
-                            <label for="currentPass">Contraseña actual</label>
-                            <input type="password" id="currentPass" class="input" placeholder="••••••••" required>
+                            <label for="currentPass">Contraseña actual <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="currentPass" class="input" placeholder="••••••••" required aria-required="true">
+                            <div id="currentPass-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="newPass">Nueva contraseña (mínimo 8 caracteres)</label>
-                            <input type="password" id="newPass" class="input" placeholder="••••••••" required>
+                            <label for="newPass">Nueva contraseña (mínimo 8 caracteres) <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="newPass" class="input" placeholder="••••••••" minlength="8" required aria-required="true">
+                            <div id="newPass-error" class="field-error" role="alert"></div>
                         </div>
                         <div class="login-form-item">
-                            <label for="confirmNewPass">Confirmar nueva contraseña</label>
-                            <input type="password" id="confirmNewPass" class="input" placeholder="••••••••" required>
+                            <label for="confirmNewPass">Confirmar nueva contraseña <span class="required-mark" aria-hidden="true">*</span></label>
+                            <input type="password" id="confirmNewPass" class="input" placeholder="••••••••" minlength="8" required aria-required="true" data-match-field="newPass">
+                            <div id="confirmNewPass-error" class="field-error" role="alert"></div>
                         </div>
 
                         <div>
@@ -210,17 +205,15 @@
             <form id="addPetForm" novalidate>
                 <div class="modal-body">
                     <div class="login-form-item">
-                        <label for="petNameInput">Nombre de la mascota *</label>
-                        <input type="text" id="petNameInput" class="input" placeholder="p. ej. Toby" required>
-                        <div id="petNameError" class="field-error">
-                            <span>Introduce el nombre de la mascota</span>
-                        </div>
+                        <label for="petNameInput">Nombre de la mascota <span class="required-mark" aria-hidden="true">*</span></label>
+                        <input type="text" id="petNameInput" class="input" placeholder="p. ej. Toby" required aria-required="true">
+                        <div id="petNameError" class="field-error" role="alert"></div>
                     </div>
 
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="petTypeSelect">Tipo de mascota *</label>
-                            <select id="petTypeSelect" class="input">
+                            <label for="petTypeSelect">Tipo de mascota <span class="required-mark" aria-hidden="true">*</span></label>
+                            <select id="petTypeSelect" class="input" required aria-required="true">
                                 <option value="Perro">Perro</option>
                                 <option value="Gato">Gato</option>
                                 <option value="Ave">Ave</option>
@@ -229,24 +222,24 @@
                             </select>
                         </div>
                         <div class="login-form-item">
-                            <label for="petBreedInput">Raza / Tipo</label>
+                            <label for="petBreedInput">Raza / Tipo <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="text" id="petBreedInput" class="input" placeholder="p. ej. Golden Retriever">
                         </div>
                     </div>
 
                     <div class="account-form-grid two-cols">
                         <div class="login-form-item">
-                            <label for="petAgeInput">Edad</label>
+                            <label for="petAgeInput">Edad <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="text" id="petAgeInput" class="input" placeholder="p. ej. 2 años">
                         </div>
                         <div class="login-form-item">
-                            <label for="petWeightInput">Peso aproximado</label>
+                            <label for="petWeightInput">Peso aproximado <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                             <input type="text" id="petWeightInput" class="input" placeholder="p. ej. 12 kg">
                         </div>
                     </div>
 
                     <div class="login-form-item">
-                        <label for="petGenderSelect">Sexo</label>
+                        <label for="petGenderSelect">Sexo <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                         <select id="petGenderSelect" class="input">
                             <option value="Macho">Macho</option>
                             <option value="Hembra">Hembra</option>
@@ -254,7 +247,7 @@
                     </div>
 
                     <div class="login-form-item">
-                        <label for="petNotesInput">Observaciones, medicación o alergias</label>
+                        <label for="petNotesInput">Observaciones, medicación o alergias <span style="font-weight: 400; color: var(--text-light);">(opcional)</span></label>
                         <textarea id="petNotesInput" class="input" placeholder="p. ej. Alérgico al pollo, necesita paseo suave con arnés."></textarea>
                     </div>
                 </div>

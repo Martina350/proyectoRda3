@@ -181,16 +181,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    if (addPetForm) {
-        addPetForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const name = petNameInput ? petNameInput.value.trim() : '';
-            if (!name) {
-                if (petNameInput) petNameInput.classList.add('is-invalid');
-                if (petNameError) petNameError.classList.add('is-visible');
-                if (petNameInput) petNameInput.focus();
-                return;
-            }
+    if (addPetForm && window.PCC_FORMS) {
+        PCC_FORMS.setupForm(addPetForm, () => {
+            const nameInput = document.getElementById('petNameInput');
+            const name = nameInput ? PCC_FORMS.normalizeName(nameInput.value) : '';
 
             const newPet = PCC_AUTH.addPet({
                 name,
@@ -211,18 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const profileForm = document.getElementById('userDataForm');
-    if (profileForm) {
-        profileForm.addEventListener('submit', (e) => {
-            e.preventDefault();
+    if (profileForm && window.PCC_FORMS) {
+        PCC_FORMS.setupForm(profileForm, () => {
             const saveBtn = document.getElementById('btnSaveProfile');
             if (saveBtn) saveBtn.classList.add('is-loading');
 
             setTimeout(() => {
                 if (saveBtn) saveBtn.classList.remove('is-loading');
                 PCC_AUTH.updateUser({
-                    name: document.getElementById('profileName').value.trim(),
-                    email: document.getElementById('profileEmail').value.trim(),
-                    phone: document.getElementById('profilePhone').value.trim(),
+                    name: PCC_FORMS.normalizeName(document.getElementById('profileName').value),
+                    email: PCC_FORMS.normalizeEmail(document.getElementById('profileEmail').value),
+                    phone: PCC_FORMS.normalizePhone(document.getElementById('profilePhone').value),
                     location: document.getElementById('profileLocation').value.trim()
                 });
                 renderUserData();
@@ -234,26 +227,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const passForm = document.getElementById('changePasswordForm');
-    if (passForm) {
-        passForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const current = document.getElementById('currentPass').value;
-            const newP = document.getElementById('newPass').value;
-            const confirmP = document.getElementById('confirmNewPass').value;
-
-            if (!current) {
-                window.showToast('Introduce tu contraseña actual', 'error');
-                return;
-            }
-            if (!newP || newP.length < 8) {
-                window.showToast('La nueva contraseña debe tener al menos 8 caracteres', 'error');
-                return;
-            }
-            if (newP !== confirmP) {
-                window.showToast('Las contraseñas no coinciden', 'error');
-                return;
-            }
-
+    if (passForm && window.PCC_FORMS) {
+        PCC_FORMS.setupForm(passForm, () => {
             const btn = document.getElementById('btnUpdatePass');
             if (btn) {
                 btn.classList.add('is-loading');

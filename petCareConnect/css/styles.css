@@ -4665,4 +4665,65 @@ textarea.login-input {
     font-size: 0.92rem;
     color: var(--text-muted);
     line-height: 1.4;
-}
+}
+
+/* ==========================================================================
+   Fase 4: Estilos de Formularios, Validación Accesible y Pistas
+   ========================================================================== */
+
+.required-mark {
+    color: var(--error);
+    font-weight: 700;
+    margin-left: 0.2rem;
+    display: inline-block;
+}
+
+.input-hint {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    margin-top: 0.25rem;
+    line-height: 1.35;
+}
+
+.field-error {
+    display: none;
+    color: var(--error);
+    font-size: 0.78rem;
+    align-items: center;
+    gap: 0.3rem;
+    margin-top: 0.35rem;
+    font-weight: 500;
+}
+
+.field-error.is-visible {
+    display: flex;
+}
+
+.field-error .material-symbols-outlined {
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+.field-error-text {
+    line-height: 1.3;
+}
+
+.input-invalid,
+.input.is-invalid,
+.login-input.is-invalid,
+.form-control.is-invalid,
+.booking-input-group.is-invalid {
+    border-color: var(--error) !important;
+    background-color: #fffbfa !important;
+    box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.12) !important;
+}
+
+.input-invalid:focus,
+.input.is-invalid:focus,
+.login-input.is-invalid:focus,
+.form-control.is-invalid:focus {
+    border-color: var(--error) !important;
+    box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.2) !important;
+}
+

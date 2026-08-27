@@ -15,6 +15,7 @@
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/bookings.js" defer></script>
+    <script src="../js/forms.js" defer></script>
 </head>
 <body>
 
@@ -352,11 +353,15 @@
                 </button>
             </div>
 
-            <form id="contact-sitter-form">
+            <form id="contact-sitter-form" novalidate>
                 <div class="modal-body">
-                    <div class="form-group" style="display:flex; flex-direction:column; gap:0.5rem;">
-                        <label for="contact-msg" class="input-label" style="font-weight:700;">Mensaje</label>
-                        <textarea id="contact-msg" rows="4" maxlength="500" required placeholder="Escribe tu mensaje o consulta sobre las fechas..." class="form-control" style="width:100%; border:1px solid var(--border); border-radius:var(--radius-md); padding:0.6rem; font-family:inherit;"></textarea>
+                    <div class="form-group" style="display:flex; flex-direction:column; gap:0.4rem;">
+                        <label for="contact-msg" class="input-label" style="font-weight:700;">
+                            Mensaje <span class="required-mark" aria-hidden="true">*</span>
+                        </label>
+                        <textarea id="contact-msg" name="contact-msg" rows="4" maxlength="500" required aria-required="true" data-min-chars="10" placeholder="Escribe tu mensaje o consulta sobre las fechas..." class="form-control" style="width:100%; border:1px solid var(--border); border-radius:var(--radius-md); padding:0.6rem; font-family:inherit;"></textarea>
+                        <span class="input-hint">Escribe al menos 10 caracteres con tus fechas o necesidades</span>
+                        <div id="contact-msg-error" class="field-error" role="alert"></div>
                     </div>
                 </div>
 
@@ -405,6 +410,7 @@
             const closeContactBtn = document.getElementById('close-contact-modal');
             const cancelContactBtn = document.getElementById('cancel-contact-btn');
             const contactForm = document.getElementById('contact-sitter-form');
+            const contactMsgInput = document.getElementById('contact-msg');
             const contactNameTitle = document.getElementById('contact-sitter-name-title');
 
             let currentSitter = 'Elena Martínez';
@@ -413,9 +419,13 @@
                 btn.addEventListener('click', () => {
                     currentSitter = btn.dataset.sitterName || 'Cuidador';
                     if (contactNameTitle) contactNameTitle.textContent = currentSitter;
+                    if (contactMsgInput && window.PCC_FORMS) {
+                        PCC_FORMS.clearError(contactMsgInput);
+                    }
                     if (contactModal) {
                         contactModal.classList.add('is-open');
                         contactModal.setAttribute('aria-hidden', 'false');
+                        if (contactMsgInput) contactMsgInput.focus();
                     }
                 });
             });
@@ -431,11 +441,36 @@
             if (cancelContactBtn) cancelContactBtn.addEventListener('click', closeCModal);
             if (contactModal) contactModal.addEventListener('click', (e) => { if (e.target === contactModal) closeCModal(); });
 
+            if (contactMsgInput) {
+                contactMsgInput.addEventListener('input', () => {
+                    if (contactMsgInput.value.trim().length >= 10 && window.PCC_FORMS) {
+                        PCC_FORMS.clearError(contactMsgInput);
+                    }
+                });
+            }
+
             if (contactForm) {
                 contactForm.addEventListener('submit', (e) => {
                     e.preventDefault();
+                    const msgVal = (contactMsgInput ? contactMsgInput.value : '').trim();
+                    if (msgVal.length < 10) {
+                        if (window.PCC_FORMS && contactMsgInput) {
+                            PCC_FORMS.showError(contactMsgInput, 'Escribe un mensaje de al menos 10 caracteres para el cuidador.');
+                        }
+                        if (contactMsgInput) contactMsgInput.focus();
+                        if (window.showToast) {
+                            window.showToast('Escribe un mensaje de al menos 10 caracteres para el cuidador.', 'error');
+                        }
+                        return;
+                    }
+
+                    if (window.PCC_FORMS && contactMsgInput) {
+                        PCC_FORMS.clearError(contactMsgInput);
+                    }
                     closeCModal();
-                    window.showToast(`Mensaje enviado a ${currentSitter}. Te responderá pronto.`, 'success');
+                    if (window.showToast) {
+                        window.showToast(`Mensaje enviado a ${currentSitter}. Te responderá pronto.`, 'success');
+                    }
                     contactForm.reset();
                 });
             }

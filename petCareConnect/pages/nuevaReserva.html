@@ -15,6 +15,7 @@
     <script src="../js/layout.js" defer></script>
     <script src="../js/auth.js" defer></script>
     <script src="../js/bookings.js" defer></script>
+    <script src="../js/forms.js" defer></script>
     <script src="../js/nuevaReserva.js" defer></script>
 </head>
 <body>
@@ -81,7 +82,7 @@
                     <div class="block-section-header">
                         <div class="block-number-circle">1</div>
                         <div>
-                            <h2 id="block1-title" class="block-section-title">Elige a tu Cuidador</h2>
+                            <h2 id="block1-title" class="block-section-title">Elige a tu Cuidador <span class="required-mark" aria-hidden="true">*</span></h2>
                             <p class="block-section-desc">Selecciona el profesional verificado que cuidará de tu mascota.</p>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
                         <div class="form-group full-span">
                             <label for="service-selector" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">room_service</span>
-                                <span>Tipo de Servicio <span class="required-star">*</span></span>
+                                <span>Tipo de Servicio <span class="required-mark" aria-hidden="true">*</span></span>
                             </label>
                             <div class="custom-select-wrapper">
                                 <select id="service-selector" name="serviceId" class="form-control booking-select" required aria-required="true">
@@ -125,7 +126,7 @@
                         <div class="form-group half-span">
                             <label for="booking-start-date" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">calendar_today</span>
-                                <span>Fecha de Entrada / Inicio <span class="required-star">*</span></span>
+                                <span>Fecha de Entrada / Inicio <span class="required-mark" aria-hidden="true">*</span></span>
                             </label>
                             <input type="date" id="booking-start-date" name="startDate" class="form-control booking-date-input" required aria-required="true">
                         </div>
@@ -133,7 +134,7 @@
                         <div class="form-group half-span">
                             <label for="booking-end-date" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">event_available</span>
-                                <span>Fecha de Salida / Fin <span class="required-star">*</span></span>
+                                <span>Fecha de Salida / Fin <span class="required-mark" aria-hidden="true">*</span></span>
                             </label>
                             <input type="date" id="booking-end-date" name="endDate" class="form-control booking-date-input" required aria-required="true">
                         </div>
@@ -148,7 +149,7 @@
                         <div class="form-group half-span">
                             <label for="booking-pet-selector" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">pets</span>
-                                <span>Mascota a cuidar <span class="required-star">*</span></span>
+                                <span>Mascota a cuidar <span class="required-mark" aria-hidden="true">*</span></span>
                             </label>
                             <div class="custom-select-wrapper">
                                 <select id="booking-pet-selector" name="petId" class="form-control booking-select" required aria-required="true">
@@ -161,7 +162,7 @@
                         <div class="form-group half-span">
                             <label for="booking-pet-count" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">format_list_numbered</span>
-                                <span>Cantidad de Mascotas <span class="required-star">*</span></span>
+                                <span>Cantidad de Mascotas <span class="required-mark" aria-hidden="true">*</span></span>
                             </label>
                             <select id="booking-pet-count" name="petCount" class="form-control booking-select" required aria-required="true">
                                 <option value="1" selected>1 Mascota</option>
@@ -174,9 +175,10 @@
                         <div class="form-group full-span">
                             <label for="booking-notes" class="booking-field-label">
                                 <span class="material-symbols-outlined label-icon">notes</span>
-                                <span>Instrucciones o notas especiales para el cuidador <span class="optional-label">(Opcional)</span></span>
+                                <span>Instrucciones o notas especiales para el cuidador <span class="optional-label">(opcional)</span></span>
                             </label>
                             <textarea id="booking-notes" name="notes" rows="3" class="form-control booking-textarea" placeholder="Ej: Horarios de paseo, tipo de alimento, medicación, alergias o juguetes favoritos..."></textarea>
+                            <span class="input-hint">Información médica, hábitos o indicaciones para la estancia</span>
                         </div>
 
                     </div>
