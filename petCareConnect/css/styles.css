@@ -2404,16 +2404,33 @@ textarea.login-input {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    order: -1;
+}
+
+@media (max-width: 1023px) {
+    .profile-layout-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .profile-main-content,
+    .profile-sidebar-content {
+        display: contents;
+    }
+
+    .profile-back-row { order: 1; }
+    .profile-header-card { order: 2; }
+    section[aria-labelledby="about-title"] { order: 3; }
+    section[aria-labelledby="environment-title"] { order: 4; }
+    .services-sidebar-card { order: 5; }
+    .stats-sidebar-section { order: 6; }
+    section[aria-labelledby="reviews-title"] { order: 7; }
+    .booking-sticky-card { order: 8; }
 }
 
 @media (min-width: 1024px) {
     .profile-layout-grid {
         grid-template-columns: 8fr 4fr;
-    }
-
-    .profile-sidebar-content {
-        order: 0;
     }
 }
 
